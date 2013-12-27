@@ -454,6 +454,7 @@ angular.module('fifoApp')
 
         case 'create':
             status.prompt('Write a comment for the new snapshot:', function(comment) {
+                if (!comment) return;
                 wiggle.vms.save({id: uuid, controller: 'snapshots'}, {comment: comment},
                                 function success(data, h) {
                                     $scope.snapshots[data.uuid] = data
