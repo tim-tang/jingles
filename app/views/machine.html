@@ -91,7 +91,7 @@
     <ul class="nav nav-tabs">
       <li class="active"><a href="#details" data-toggle="tab" translate>Details</a></li>
       <li><a href="#performance" data-toggle="tab" translate>Performance</a></li>
-      <li><a href="#services" data-toggle="tab" ng-show="vm.config.type != 'kvm'" translate>Services</a></li>
+      <li ng-show="vm.config.type == 'zone'"><a href="#services" data-toggle="tab" translate>Services</a></li>
       <li><a href="#snapshots" data-toggle="tab" translate>Snapshots</a></li>
       <li ng-show='has_s3'><a href="#versioning" data-toggle="tab" translate>Versioning</a></li>
       <li><a href="#imaging" data-toggle="tab" translate>Imaging</a></li>
@@ -271,8 +271,13 @@
       </div>
 
       <div class="tab-pane" id="services">
-        <input type="checkbox" ng-model="show_disabled"
-               ng-click="update_show_disabled()">Show disabled services<br>
+        <span class='pull-right'>
+          <input type="checkbox" ng-model="show_disabled"
+                 ng-click="update_show_disabled()" translate>
+           Show disabled services
+        </span>
+        <br/><br/>
+
         <table class="table table-condensed table-hover">
           <tr ng-repeat="service in vm.services | orderBy: service" ng-show="show_disabled || service.state != 'disabled'">
             <td>{{service.service}}</td>
