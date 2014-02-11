@@ -52,7 +52,8 @@ angular.module('fifoApp')
     };
 
     $scope.available_ipranges = function(items) {
-      return items.filter(function(item) {return $scope.network.ipranges.indexOf(item.uuid) < 0})
+      if ($scope.network)
+        return items.filter(function(item) {return $scope.network.ipranges.indexOf(item.uuid) < 0})
     }
 
     var init = function() {
