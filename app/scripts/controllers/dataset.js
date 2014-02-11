@@ -15,7 +15,6 @@ angular.module('fifoApp')
                             {networks: nets},
                             function success(res) {
                                 status.success('Dataset changed')
-                                wiggle.datasets.clearCache(uuid)
                             },
                             function error(er) {
                                 status.error('Could not change dataset')

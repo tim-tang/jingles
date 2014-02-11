@@ -346,7 +346,7 @@
         <div class="tab-pane" id="versioning">
 
           <p class='pull-right'>
-            <span ng-show="vm.state!='stopped' && (vm.state!='stored' || vm.state 1= 'limbo') && (snapshots|hash2array).length>0" class='light' style='padding: 5px;' translate>To rollback, please stop the machine</span>
+            <span ng-show="vm.state!='stopped' && (vm.state!='stored' || vm.state != 'limbo') && (snapshots|hash2array).length>0" class='light' style='padding: 5px;' translate>To rollback, please stop the machine</span>
             <button style='margin-bottom: 10px' ng-click="timelineAction('create', {type: 'backup'})" class="btn btn-default" jq-run='tooltip' title='Take a new backup' permission=['vms','{{vm.uuid}}','backup']>
               <i class='glyphicon glyphicon-cloud-upload'></i> <span translate>Backup</span>
             </button>

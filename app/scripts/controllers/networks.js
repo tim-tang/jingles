@@ -26,16 +26,10 @@ angular.module('fifoApp')
     }
 
     $scope.show = function() {
-
-        wiggle.networks.list(function (ids) {
-
-            ids.forEach(function(uuid) {
-                $scope.networks[uuid] = {uuid: uuid}
-                wiggle.networks.get({id: uuid}, function(res) {
-                    $scope.networks[uuid] = res
-                })
-
-            })
+        wiggle.networks.query(function (networks) {
+          networks.forEach(function(net) {
+            $scope.networks[net.uuid] = net
+          })
         })
     }
 
