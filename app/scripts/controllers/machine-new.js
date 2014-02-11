@@ -193,7 +193,7 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
                 status.error('Please setup a network with an iprange')
                 return $location.path('/configuration/networks')
             }
-            $scope.selectedNetworks = [networks[0]]
+            $scope.selectedNetworks = [$scope.networks[0]]
 
         })
 
