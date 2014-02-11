@@ -61,7 +61,6 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
                 var vmResource = new wiggle.vms(vm)
                 vmResource.config.alias = vmResource.config.alias.replace(match[0], i)
                 vmResource.config.hostname = vmResource.config.alias
-                console.log('saving --> ', vmResource.config.alias)
                 calls.push(vmResource.$save())
             }
 
@@ -149,68 +148,56 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
         /* Get the latest version of a dataset */
         $scope.latestDatasets = {}
 
-        wiggle.datasets.list(function(ids) {
+        wiggle.datasets.query(function(datasets) {
 
-            if (ids.length<1) {
+            if (datasets.length<1) {
                 status.error('Import a dataset first');
                 return $location.path('/datasets')
             }
 
-            ids.forEach(function(id) {
-                wiggle.datasets.get({id: id}, function(res) {
-                    if (res.imported != 1) return;
+            datasets.forEach(function(dataset) {
+                if (dataset.imported != 1) return;
 
-                    if (!$scope.latestDatasets[res.name] || $scope.latestDatasets[res.name] < res.version)
-                        $scope.latestDatasets[res.name] = res.version
+                if (!$scope.latestDatasets[dataset.name] || $scope.latestDatasets[dataset.name] < dataset.version)
+                    $scope.latestDatasets[dataset.name] = dataset.version
 
-                    $scope.datasets.push(res)
-                })
+                $scope.datasets.push(dataset)
             })
         })
 
-        wiggle.packages.list(function(ids) {
+        wiggle.packages.query(function(packages) {
 
-            if (ids.length<1) {
-                status.error('Create a package first');
+            if (packages.length<1) {
+                status.error('Please create a package');
                 return $location.path('/configuration/packages/new')
             }
 
-            ids.forEach(function(id) {
-                wiggle.packages.get({id: id},
-                                    function(pack) {
-                                        $scope.packages.push(pack)
-                                        if (!$scope.selectedPackage)
-                                            $scope.selectedPackage = pack
-                                    }
-                                   )
-            })
+            $scope.packages = packages;
+            $scope.selectedPackage = packages[0];
         })
 
-        wiggle.networks.list(function(ids) {
+        wiggle.networks.query(function(networks) {
 
-            if (ids.length<1) {
-                status.error('Please create a new network');
+            if (networks.length<1) {
+                status.error('Please create a network');
                 return $location.path('/configuration/networks/new')
             }
 
-            ids.forEach(function(id) {
-                wiggle.networks.get({id: id}, function(res) {
-
-                    //If no iprange is asosiated with the network, ignore it.
-                    if (!res.ipranges || res.ipranges.length < 1) return;
-                    
-                    $scope.networks.push(res)
-                    if (!$scope.selectedNetworks)
-                        $scope.selectedNetworks = [res]
-                })
+            networks.forEach(function(network) {
+                //If no iprange is asosiated with the network, ignore it.
+                if (!network.ipranges || network.ipranges.length < 1) return;
+                $scope.networks.push(network)
             })
+
+            if ($scope.networks.length < 1) {
+                status.error('Please setup a network with an iprange')
+                return $location.path('/configuration/networks')
+            }
+            $scope.selectedNetworks = [networks[0]]
+
         })
 
-        wiggle.hypervisors.list(function(ids) {
-            $scope.servers = ids.map(function(id) {
-                return wiggle.hypervisors.get({id: id})
-            })
-        })
+        $scope.servers = wiggle.hypervisors.query()
 
         $scope.$watch('alias', function(newVal, oldVal) {
             if (!$scope.hostname || $scope.hostname == oldVal)
