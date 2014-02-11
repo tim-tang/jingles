@@ -15,10 +15,8 @@
   <br/>
   <br/>
   <hr/>
-  <select id="add_iprange" ng-model='iprange'>
-    <option ng-repeat="iprange in ipranges | hash2array | orderBy: name" value="{{iprange.uuid}}">{{iprange.name}}</option>
-  </select>
-  <button ng-click="add_iprange()" translate>Add</button>
+  <select id="add_iprange" ng-model='iprange' ng-options="ipr.name for ipr in available_ipranges(ipranges) | orderBy: name"></select>
+  <button ng-click="add_iprange(iprange)" translate>Add</button>
   <table class='table table-condensed table-bordered'>
     <tr>
       <th translate>Name</th>
@@ -28,7 +26,7 @@
     <tr ng-repeat="iprange in network._ipranges">
       <td>{{iprange.name}}</td>
       <td>{{iprange.uuid}}</td>
-      <td><a ng-click="remove_iprange(iprange.uuid)" translate>delete</a></td>
+      <td><a ng-click="remove_iprange(iprange.uuid, $index)" translate>delete</a></td>
     </tr>
   </table>
 </div>

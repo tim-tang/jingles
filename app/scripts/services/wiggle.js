@@ -38,7 +38,10 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
         return true;
     }
 
-    var cacheObj = $cacheFactory('fifoCache');
+
+    //Initialize the caches.
+    $cacheFactory('datasets')
+    $cacheFactory('networks')
 
     var controller_layout = '/:id/:controller/:controller_id/:controller_id1/:controller_id2/:controller_id3';
     function setUpServices() {
@@ -146,15 +149,32 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                        controller_id: '@controller_id',
                                        controller_id1: '@controller_id1',
                                        controller_id2: '@controller_id2'},
-                                      {put: {method: 'PUT'},
+                                      {put: {method: 'PUT', 
+                                             interceptor: {
+                                                response: function(res) {
+                                                  $cacheFactory.get('networks').remove(endpoint + 'networks/' + res.resource.id)
+                                                }
+                                             }
+                                      },
                                        create: {method: 'POST'},
-                                       get: {method: 'GET', cache: true},
-                                       delete: {method: 'DELETE'},
+                                       get: {method: 'GET', cache: $cacheFactory.get('networks')},
+                                       delete: {method: 'DELETE', 
+                                          interceptor: {
+                                            response: function(res) {
+                                              //We dont know the id of the network that was deleted, so just delete the whole cache
+                                              $cacheFactory.get('networks').removeAll()
+                                            }
+                                          }
+                                       },
                                        query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
         services.datasets = $resource(endpoint + 'datasets/:id',
                                       {id: '@id'},
                                       {import: {method: 'POST'},
-                                       put: {method: 'PUT'},
+                                       put: {method: 'PUT', interceptor: {
+                                        response: function(res) {
+                                          $cacheFactory.get('datasets').remove(endpoint + 'datasets/' + res.resource.id)
+                                        }
+                                       }},
                                        query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
         services.packages = $resource(endpoint + 'packages/:id',
                                       {id: '@id'},
@@ -207,17 +227,14 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
 
         /* Gets with cache! */
 
-        services.datasets.clearCache = function(id) {
-            cacheObj.remove(endpoint + 'datasets/' + id)
-        }
         services.datasets.get = function(obj, success, error) {
-            return $http.get(endpoint + 'datasets/' + obj.id, {cache: cacheObj})
+            return $http.get(endpoint + 'datasets/' + obj.id, {cache: $cacheFactory.get('datasets')})
                 .success(function(res) {
-                    //If the dataset is not 100% ready, do not cache it.
                     success(res)
+                    //If the dataset is not 100% ready, do not cache it.
                     if (res.imported === 1)
                         return;
-                    services.datasets.clearCache(obj.id)
+                    $cacheFactory.get('datasets').remove(endpoint + 'datasets/' + obj.id)
                 })
                 .error(function(data) {
                     error && error(data)
