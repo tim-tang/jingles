@@ -43,7 +43,7 @@ fail_if_error $?
 openssl req \
     -new \
     -batch \
-    -subj "$(/opt/local/gnu/bin/echo -n "$SUBJ" | /opt/local/gnu/bin/tr "\n" "/")" \
+    -subj "$(/opt/local/bin/echo -n "$SUBJ" | /opt/local/bin/tr "\n" "/")" \
     -key $CERTDIR/$CERTPREFIX.key \
     -out $CERTDIR/$CERTPREFIX.csr \
     -passin env:PASSPHRASE
