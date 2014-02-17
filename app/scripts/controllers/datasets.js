@@ -12,18 +12,17 @@ angular.module('fifoApp')
         if (uuid)
             url = 'http://' + Config.datasets + '/datasets/' + uuid;
 
-        wiggle.datasets.import({},
-                               {url: url},
-                               function success(r) {
-                                    howl.join(uuid);
-                                    $scope.datasets[uuid] = r;
-                                    status.info('Importing ' + r.name + ' ' + r.version)
-                                    if ($scope.datasetsat[uuid])
-                                        $scope.datasetsat[uuid].imported = true;
-                               },
-                               function error(e) {
-                                    status.error('Could not import dataset')
-                               });
+        wiggle.datasets.import({}, {url: url},
+           function success(r) {
+                howl.join(uuid);
+                $scope.datasets[uuid] = r;
+                status.info('Importing ' + r.name + ' ' + r.version)
+                if ($scope.datasetsat[uuid])
+                    $scope.datasetsat[uuid].imported = true;
+           },
+           function error(e) {
+                status.error('Could not import dataset')
+           });
     };
 
     $scope.delete = function(dataset) {

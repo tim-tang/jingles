@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fifoApp')
-  .controller('HeaderCtrl', function ($scope, breadcrumbs, $location, $route, $rootScope, $http, gettextCatalog, auth, howl, wiggle) {
+  .controller('HeaderCtrl', function ($scope, breadcrumbs, $location, $route, $rootScope, $http, gettextCatalog, auth, howl, wiggle, $cookies) {
 
   	$scope.breadcrumbs = breadcrumbs;
 
@@ -43,12 +43,32 @@ angular.module('fifoApp')
     
     $scope.languages = langs.sort();
 
-    //Datacenters
-    $scope.backends = Config.backends || [{name: 'This', endpoint: ''}];
-    $scope.selected_backend = $scope.backends[0];
-    $scope.changeBackend = function(back) {
+    //Backend selector
+    $scope.changeBackend = function(back, idx) {
       wiggle.setEndpoint(back.endpoint)
       $route.reload();
+      $cookies.backend = JSON.stringify(back)
+    }
+
+    $scope.backends = Config.backends || [{name: 'This', endpoint: ''}];
+    $scope.selected_backend = $scope.backends[0];
+
+    //Read the backend selector from the cookie.
+    try {
+      if ($cookies.backend) {
+        var back = JSON.parse($cookies.backend)
+
+        $scope.changeBackend(back)
+
+        //Change the selector
+        $scope.backends.forEach(function(b) {
+          if (b.endpoint == back.endpoint)
+            return $scope.selected_backend = b
+        })
+      }
+    } catch(e) {
+      console.error('Invalid backend cookie:', e)
+      delete $cookies.backend
     }
 
   });

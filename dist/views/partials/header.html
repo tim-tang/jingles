@@ -12,7 +12,7 @@
             <a class="navbar-brand" href="#"><img src="images/fifo.svg" class="img-responsive" ></a>
         </div>
 
-        <nav class="collapse navbar-collapse menu-one" role='navigation' style='position: relative;'>
+        <nav class="collapse navbar-collapse menu-one" role='navigation'>
 
             <ul class="nav navbar-nav">
                 <li ng-class="{active: isActive('machines')}"><a href="#/machines" translate permission="['cloud','vms','list']">Machines</a></li>
@@ -42,6 +42,15 @@
 
             <ul class="nav navbar-nav navbar-right">
 
+                <li class='dtopdown'>
+                     <form class="navbar-form navbar-right" ng-show='backends.length > 1' style="margin-top: 10px;">
+                    <select 
+                        ng-model='selected_backend' 
+                        ng-change='changeBackend(this.selected_backend)'
+                        ng-options="b.name for b in backends">
+                    </select>
+                </form>
+                </li>
                 <li class='dropdown'>
                     <a class="dropdown-toggle" data-toggle='dropdown'>
                         <i class='flag-icon {{lang}}'></i>
@@ -70,20 +79,10 @@
                         <li><a ng-click='auth.logout()' translate>Logout</a></li>
                     </ul>
                 </li>
+
             </ul>
 
-            <form class="navbar-form navbar-right" ng-show='backends.length > 1'>
-                <select 
-                    style="box-sizing:border-box; max-width: 100px; position: absolute; top: 11px; right: 150px"
-                    ng-model='selected_backend' 
-                    ng-change='changeBackend(this.selected_backend)'
-                    ng-options="b.name for b in backends">
-                </select>
-            </form>
-
         </nav>
-
-
 
     </div>
 
