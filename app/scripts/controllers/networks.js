@@ -3,10 +3,7 @@
 angular.module('fifoApp')
   .controller('NetworksCtrl', function ($scope, wiggle, status) {
 
-    $scope.networks = {}
-
-    $scope.delete = function(el) {
-
+    $scope.delete = function(el, idx) {
         $scope.modal = {
             btnClass: 'btn-danger',
             confirm: 'Delete',
@@ -15,7 +12,8 @@ angular.module('fifoApp')
                 el.name +"(" + el.uuid + ")</b> Are you 100% sure you really want to do this?</p>",
             ok: function() {
                 wiggle.networks.delete({id: el.uuid}, function success(data, h) {
-                    delete $scope.networks[el.uuid]
+                    var idx = $scope.networks.indexOf(el)
+                    $scope.networks.splice(idx, 1)
                     status.success(el.name + ' deleted')
                 }, function error(data) {
                     console.error('Delete network error:', data)
@@ -25,13 +23,5 @@ angular.module('fifoApp')
         }
     }
 
-    $scope.show = function() {
-        wiggle.networks.query(function (networks) {
-          networks.forEach(function(net) {
-            $scope.networks[net.uuid] = net
-          })
-        })
-    }
-
-    $scope.show()
+    $scope.networks = wiggle.networks.queryFull()
   });

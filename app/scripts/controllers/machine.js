@@ -293,20 +293,8 @@ angular.module('fifoApp')
                 var _notes = $scope.vm.mdata('notes') && $scope.vm.mdata('notes').sort(function(a,b) { return a.created_at >= b.created_at; })
                 $scope.notes = _notes? _notes.reverse() : []
 
-                //Merge snapshots + backups  in 1 object. TODO: replace these loops with something more elegant...
-                $scope.snapshots = {}
-                $scope.backups = {}
-                var source;
-                for (var k in source = $scope.vm.backups || {}) {
-                    if (!source.hasOwnProperty(k)) return;
-                    source[k].type = 'backup'
-                    $scope.backups[k] = source[k]
-                }
-                for (var k in source = $scope.vm.snapshots || {}) {
-                    if (!source.hasOwnProperty(k)) return;
-                    source[k].type = 'snapshot';
-                    $scope.snapshots[k] = source[k];
-                }
+                $scope.snapshots = $scope.vm.snapshots || {}
+                $scope.backups = $scope.vm.backups || {}
 
                 cb && cb($scope.vm);
                 $scope.img_name = $scope.vm.config.alias;
@@ -600,19 +588,6 @@ angular.module('fifoApp')
 
         }
 
-        $scope.timelineAction = function(action, obj) {
-
-            switch (obj.type) {
-            case 'snapshot':
-                snapshotAction(action, obj)
-                break
-
-            case 'backup':
-                backupAction(action, obj)
-                break
-            }
-        }
-
         //Actions for backups
         var backupAction = function(action, obj) {
             switch (action) {
@@ -832,12 +807,7 @@ angular.module('fifoApp')
                 });
             });
 
-            $scope.orgs = {}
-            wiggle.orgs.query(function(res) {
-                res.forEach(function(org) {
-                    $scope.orgs[org.uuid] = org;
-                });
-            });
+            $scope.orgs = wiggle.orgs.query();
 
             //Check if S3 endpoint is configured, to enable the backup funcionality.
             wiggle.cloud.get(function(res) {

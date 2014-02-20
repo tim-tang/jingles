@@ -22,7 +22,7 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
     }
 
 
-    var is_empty = function is_empty(obj) {
+    var is_empty = function(obj) {
 
         // null and undefined are empty
         if (obj == null) return true;
@@ -38,6 +38,24 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
         return true;
     }
 
+    var hashFromArray = function(array) {
+      var h = {}
+
+      //All objects returned from wiggle, has 'uuid' as its id, except datasets.
+      array.forEach(function(o) {
+        h[o.uuid||o.dataset] = o
+      })
+
+      return h
+    }
+
+    //Interceptor that transform add hash object into an array
+    var toHash = {
+      response: function(res) {
+        res.resource.hash = hashFromArray(res.resource)
+        return res.resource;
+      }
+    }
 
     //Initialize the caches.
     $cacheFactory('datasets')
@@ -98,7 +116,25 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                     },
                                     revoke: {method: 'DELETE'},
                                     create: {method: 'POST'},
-                                    delete: {method: 'DELETE'}});
+                                    delete: {method: 'DELETE'},
+                                    query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                    queryFull: {method: 'GET', isArray: true, headers: {'x-full-list': true}, interceptor: {
+
+                                      response: function(res) {
+
+                                        res.resource.forEach(function(el) {
+                                          el._groups = el.groups.map(function(g) {return services.groups.get({id: g})})
+                                          el._orgs = el.orgs.map(function(o) {return services.orgs.get({id: o})})
+                                        })
+
+                                        // res.resource.hash = hashFromArray(res.resource)
+
+                                        return res.resource;
+                                      }
+
+                                    }},
+                                  });
+
         services.groups = $resource(endpoint + 'groups' + controller_layout,
                                     {id: '@id',
                                      controller: '@controller',
@@ -112,7 +148,8 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                      revoke: {method: 'DELETE'},
                                      create: {method: 'POST'},
                                      delete: {method: 'DELETE'},
-                                     query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
+                                     query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                   });
         services.orgs = $resource(endpoint + 'orgs' + controller_layout,
                                   {id: '@id',
                                    controller: '@controller',
@@ -126,13 +163,16 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                    revoke: {method: 'DELETE'},
                                    create: {method: 'POST'},
                                    delete: {method: 'DELETE'},
-                                   query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
+                                   query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}
+                                 });
         services.cloud = $resource(endpoint + 'cloud/:controller', {controller: '@controller'});
         services.hypervisors = $resource(endpoint + 'hypervisors/:id/:controller/:controller_id',
                                          {id: '@id', controller: '@controller', controller_id: '@controller_id'},
                                          {put: {method: 'PUT'},
                                           delete: {method: 'DELETE'},
-                                          query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
+                                          query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                          queryFull: {method: 'GET', isArray: true, headers: {'x-full-list': true}, interceptor: toHash}
+                                        });
         services.vms = $resource(endpoint + 'vms/:id/:controller/:controller_id',
                                  {id: '@id', controller: '@controller', controller_id: '@controller_id'},
                                  {put: {method: 'PUT'},
@@ -158,6 +198,12 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                       },
                                        create: {method: 'POST'},
                                        get: {method: 'GET', cache: $cacheFactory.get('networks')},
+                                       getFull: {method: 'GET', cache: $cacheFactory.get('networks'), interceptor: {
+                                        response: function(res) {
+                                          res.resource._ipranges = res.resource.ipranges.map(function(d) {return services.ipranges.get({id: d})})
+                                          return res.resource;
+                                        }
+                                       }},
                                        delete: {method: 'DELETE', 
                                           interceptor: {
                                             response: function(res) {
@@ -166,7 +212,9 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                             }
                                           }
                                        },
-                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
+                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                       queryFull: {method: 'GET', isArray: true, headers: {'x-full-list': true}, interceptor: toHash}
+                                     });
         services.datasets = $resource(endpoint + 'datasets/:id',
                                       {id: '@id'},
                                       {import: {method: 'POST'},
@@ -175,7 +223,8 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                           $cacheFactory.get('datasets').remove(endpoint + 'datasets/' + res.resource.id)
                                         }
                                        }},
-                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
+                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                     });
         services.packages = $resource(endpoint + 'packages/:id',
                                       {id: '@id'},
                                       {create: {method: 'POST'},
@@ -186,8 +235,8 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                     {id: '@id'},
                                     {create: {method: 'POST'},
                                      delete: {method: 'DELETE'},
-                                     query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
-
+                                     query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                   });
 
         /* Response with list of strings are not $resource friendly..
            https://groups.google.com/forum/#!msg/angular/QjhN9-UeBVM/UjSgc5CNDqMJ */

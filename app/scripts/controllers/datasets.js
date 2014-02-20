@@ -68,47 +68,36 @@ angular.module('fifoApp')
 
     $scope.show = function() {
 
-        wiggle.datasets.list(function (ids) {
+        wiggle.datasets.query(function(datasets) {
+            datasets.forEach(function(res) {
 
-            ids.forEach(function(id) {
-                howl.join(id);
+                var id = res.dataset;
+                howl.join(id)
 
-                $scope.datasets[id] = {}
-                wiggle.datasets.get({id: id},
-                                    function success(res) {
-                                        //Datasets imported with previouse fifo (i.e. prev than 20131212T153143Z) does not has the status field, artificially add one.
-                                        if (!res.status) {
-                                            if (res.imported === 1) 
-                                                res.status = 'imported'
-                                            else
-                                                res.status = 'pending'
-                                        }
-
-                                        if (res) $scope.datasets[id] = res
-                                    },
-                                    function error (res) {
-                                        //Maybe we should not even show the dataset?
-                                        $scope.datasets[id] = {dataset: id}
-                                    }
-                                   )
-
+                //Datasets imported with previouse fifo (i.e. prev than 20131212T153143Z) does not has the status field, artificially add one.
+                if (!res.status) {
+                    if (res.imported === 1) 
+                        res.status = 'imported'
+                    else
+                        res.status = 'pending'
+                }
+                $scope.datasets[id] = res
             })
-
-            if (!Config.datasets)
-                return status.error('Make sure your config has an URL for the remote datasets')
-
-            /* Get the available datasets */
-            datasetsat.datasets.list(function (data) {
-                data.forEach(function(e) {
-                    var localOne = $scope.datasets[e.uuid];
-                    e.imported = localOne && localOne.imported && localOne.imported > 0 || false
-                    $scope.datasetsat[e.uuid] = e
-                })
-            });
-
         })
-    }
+                                        
+        if (!Config.datasets)
+            return status.error('Make sure your config has an URL for the remote datasets')
 
+        /* Get the available datasets */
+        datasetsat.datasets.query(function (data) {
+            data.forEach(function(e) {
+                var localOne = $scope.datasets[e.uuid];
+                e.imported = localOne && localOne.imported && localOne.imported > 0 || false
+                $scope.datasetsat[e.uuid] = e
+            })
+        });
+
+    }
     $scope.show()
 
   });

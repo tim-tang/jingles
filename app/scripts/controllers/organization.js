@@ -24,35 +24,23 @@ function init_scope($scope, org) {
 angular.module('fifoApp')
   .controller('OrganizationCtrl', function ($scope, $routeParams, $location, wiggle, vmService, status, breadcrumbs) {
 
-    $scope.groups = {}
-    $scope.orgs = {}
     $scope.group = "";
     $scope.permission = "";
     $scope.grant_triggers = {};
     $scope.join_triggers = {};
     var uuid = $routeParams.uuid;
 
-    wiggle.groups.list(function(ids) {
-        ids.forEach(function(id) {
-            $scope.groups[id] = {
-                name: id,
-                uuid: id
-            };
-            wiggle.groups.get({id: id}, function(grp) {
-                $scope.groups[id] = grp;
-            });
+    $scope.groups = {}
+    wiggle.groups.query(function(grps) {
+        grps.forEach(function(grp) {
+            $scope.groups[grp.uuid] = grp;
         });
     });
 
-    wiggle.orgs.list(function(ids) {
-        ids.forEach(function(id) {
-            $scope.orgs[id] = {
-                name: id,
-                uuid: id
-            };
-            wiggle.orgs.get({id: id}, function(org) {
-                $scope.orgs[id] = org;
-            });
+    $scope.orgs = {}
+    wiggle.orgs.query(function(orgs) {
+        orgs.forEach(function(org) {
+            $scope.orgs[org.uuid] = org;
         });
     });
 

@@ -4,7 +4,6 @@ angular.module('fifoApp')
   .controller('NetworkCtrl', function ($scope, $routeParams, $location, wiggle, vmService, status, breadcrumbs) {
      var uuid = $routeParams.uuid;
 
-
     $scope.delete = function() {
       var name = $scope.network.name;
       var uuid = $scope.network.uuid;
@@ -52,21 +51,17 @@ angular.module('fifoApp')
     };
 
     $scope.available_ipranges = function(items) {
-      if ($scope.network)
-        return items.filter(function(item) {return $scope.network.ipranges.indexOf(item.uuid) < 0})
+      if (!$scope.network || !$scope.network.ipranges) return 
+      return items.filter(function(item) {return $scope.network.ipranges.indexOf(item.uuid) < 0})
     }
 
-    var init = function() {
-      wiggle.networks.get({id: uuid}, function(res) {
-          breadcrumbs.setLast(res.name)
-          res.ipranges = res.ipranges || [];
-          $scope.network = res;
-          $scope.network._ipranges = res.ipranges.map(function(uuid) {
-            return wiggle.ipranges.get({id: uuid})
-          })
-      });
-      $scope.ipranges = wiggle.ipranges.query()
-    }
+    $scope.ipranges = wiggle.ipranges.query();
+    $scope.network = wiggle.networks.getFull({id: uuid})
 
-    init();
+    $scope.network.$promise.then(function(n) {breadcrumbs.setLast(n.name)})
+
   });
+
+
+
+

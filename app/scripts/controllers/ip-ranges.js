@@ -4,7 +4,6 @@ angular.module('fifoApp')
   .controller('IpRangesCtrl', function ($scope, wiggle, status) {
  
 
-    $scope.ipranges = {}
 
     $scope.delete = function(el) {
         $scope.modal = {
@@ -25,30 +24,21 @@ angular.module('fifoApp')
         }
     }
 
-    $scope.show = function() {
+    $scope.ipranges = wiggle.ipranges.query()
 
-        wiggle.ipranges.list(function (ids) {
-
-            ids.forEach(function(uuid) {
-                $scope.ipranges[uuid] = {uuid: uuid}
-                wiggle.ipranges.get({id: uuid}, function(res) {
-                    var cur = res.current.split(/\./);
-                    var last = res.last.split(/\./);
-                    var c = 0;
-                    var l = 0;
-                    for (var x=0; x<4; x++){
-                        c += Math.pow(256, 3-x)*cur[x];
-                        l += Math.pow(256, 3-x)*last[x];
-                    };
-                    $scope.ipranges[uuid] = res
-                    $scope.ipranges[uuid].full = (c > l);
-                })
-
-            })
+    $scope.ipranges.$promise.then(function(ranges) {
+        ranges.forEach(function(range) {
+            var cur = range.current.split(/\./);
+            var last = range.last.split(/\./);
+            var c = 0;
+            var l = 0;
+            for (var x=0; x<4; x++){
+                c += Math.pow(256, 3-x)*cur[x];
+                l += Math.pow(256, 3-x)*last[x];
+            };
+            range.full = (c > l);
         })
-    }
-
-    $scope.show()
+    })
 
 
   });

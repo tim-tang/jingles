@@ -65,7 +65,7 @@
       <option ng-repeat="grp in groups | hash2array" value="{{grp.uuid}}">{{grp.name}}</option>
     </select>
     <button ng-click="add_group_join_trigger()" class='btn btn-default'>Add trigger</button></br>
-    Organisation: <select ng-model="join_org">
+    Organization: <select ng-model="join_org">
       <option ng-repeat="org in orgs | hash2array" value="{{org.uuid}}">{{org.name}}</option>
     </select>
     <button ng-click="add_org_join_trigger()" class='btn btn-default'>Add trigger</button></br>
