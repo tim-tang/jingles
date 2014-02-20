@@ -85,15 +85,13 @@ angular.module('fifoApp')
                        );
     }
 
-    /* Get all the available iprange tags to build the selector */
+    /* Get all the available network tags to build the selector */
     $scope.iprange_tags = []
-    wiggle.hypervisors.list(function(ids) {
-        ids.forEach(function(id) {
-            wiggle.hypervisors.get({id: id}, function(res) {
-                res.networks && res.networks.forEach(function(net) {
-                    if ($scope.iprange_tags.indexOf(net)<0)
-                        $scope.iprange_tags.push(net)
-                })
+    wiggle.hypervisors.query(function(hypers) {
+        hypers.forEach(function(hyper) {
+            hyper.networks && hyper.networks.forEach(function(net) {
+                if ($scope.iprange_tags.indexOf(net)<0)
+                    $scope.iprange_tags.push(net)
             })
         })
     })

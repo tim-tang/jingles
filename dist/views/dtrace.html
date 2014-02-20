@@ -56,7 +56,7 @@
               <div id="dtrace-target-hypervisors" class="accordion-body collapse in">
                 <div class="accordion-inner">
                   <select class="col-md-12" multiple="multiple" ng-model="sel_hyps">
-                    <option ng-repeat="(id, h) in hypervisors" value="{{id}}">{{h.alias}}</option>
+                    <option ng-repeat="h in hypervisors" value="{{h.uuid}}">{{h.alias}}</option>
                   </select>
                 </div>
               </div>
@@ -70,7 +70,7 @@
               <div id="dtrace-target-vms" class="accordion-body collapse">
                 <div class="accordion-inner">
                   <select class="col-md-12" multiple="multiple" ng-model="sel_vms">
-                    <option ng-repeat="(id, h) in vms" value="{{id}}">{{h.config.alias}}({{h.uuid}})</option>
+                    <option ng-repeat="h in vms" value="{{h.uuid}}">{{h.config.alias}}({{h.uuid}})</option>
                   </select>
                 </div>
               </div>

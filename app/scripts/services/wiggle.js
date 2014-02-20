@@ -21,8 +21,7 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
         Config.endpoint = endpoint;
     }
 
-
-    var is_empty = function is_empty(obj) {
+    var is_empty = function(obj) {
 
         // null and undefined are empty
         if (obj == null) return true;
@@ -38,168 +37,26 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
         return true;
     }
 
-
-    //Initialize the caches.
-    $cacheFactory('datasets')
-    $cacheFactory('networks')
-
-    var controller_layout = '/:id/:controller/:controller_id/:controller_id1/:controller_id2/:controller_id3';
-    function setUpServices() {
-        services.sessions = $resource(endpoint + 'sessions/:id',
-                                      {id: '@id'},
-                                      {get: {method: 'GET', interceptor: {response: userInterceptor}},
-                                       login: {method: 'POST', interceptor: {response: userInterceptor}}});
-        services.users = $resource(endpoint + 'users' + controller_layout,
-                                   {id: '@id',
-                                    controller: '@controller',
-                                    controller_id: '@controller_id',
-                                    controller_id1: '@controller_id1',
-                                    controller_id2: '@controller_id2',
-                                    controller_id3: '@controller_id3'},
-                                   {put: {method: 'PUT'},
-                                    grant: {method: 'PUT'},
-                                    getFull: {
-                                        method: 'GET', cache: true,
-                                        interceptor: {
-                                            response: function(res) {
-
-                                                var user = res.resource
-
-                                                //Additional calls
-                                                var groupCalls = user.groups.map(function(id) {
-                                                    return services.groups.get({id: id}).$promise;
-                                                });
-
-                                                var orgCalls = user.orgs.map(function(id) {
-                                                    return services.orgs.get({id: id}).$promise;
-                                                });
-
-                                                //Responses
-                                                var groups = $q.all(groupCalls).then(function(res) {
-                                                    //Put it in a hash, its more handy for using it later.
-                                                    user._groups = {};
-                                                    res.forEach(function(r) {user._groups[r.uuid] = r});
-                                                    return user;
-                                                });
-
-                                                var orgs = $q.all(orgCalls).then(function(res) {
-                                                    //Put it in a hash, its more handy for using it later.
-                                                    user._orgs = {};
-                                                    res.forEach(function(r) {user._orgs[r.uuid] = r});
-                                                    return user;
-                                                });
-
-                                                //Return a promise with user as the result.
-                                                return $q.all([groups, orgs]).then(function() {
-                                                    return user;
-                                                });
-                                            }
-                                        }
-                                    },
-                                    revoke: {method: 'DELETE'},
-                                    create: {method: 'POST'},
-                                    delete: {method: 'DELETE'}});
-        services.groups = $resource(endpoint + 'groups' + controller_layout,
-                                    {id: '@id',
-                                     controller: '@controller',
-                                     controller_id: '@controller_id',
-                                     controller_id1: '@controller_id1',
-                                     controller_id2: '@controller_id2',
-                                     controller_id3: '@controller_id3'},
-                                    {put: {method: 'PUT'},
-                                     get: {method: 'GET', cache: true},
-                                     grant: {method: 'PUT'},
-                                     revoke: {method: 'DELETE'},
-                                     create: {method: 'POST'},
-                                     delete: {method: 'DELETE'},
-                                     query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
-        services.orgs = $resource(endpoint + 'orgs' + controller_layout,
-                                  {id: '@id',
-                                   controller: '@controller',
-                                   controller_id: '@controller_id',
-                                   controller_id1: '@controller_id1',
-                                   controller_id2: '@controller_id2',
-                                   controller_id3: '@controller_id3'},
-                                  {put: {method: 'PUT'},
-                                   get: {method: 'GET', cache: true},
-                                   grant: {method: 'PUT'},
-                                   revoke: {method: 'DELETE'},
-                                   create: {method: 'POST'},
-                                   delete: {method: 'DELETE'},
-                                   query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
-        services.cloud = $resource(endpoint + 'cloud/:controller', {controller: '@controller'});
-        services.hypervisors = $resource(endpoint + 'hypervisors/:id/:controller/:controller_id',
-                                         {id: '@id', controller: '@controller', controller_id: '@controller_id'},
-                                         {put: {method: 'PUT'},
-                                          delete: {method: 'DELETE'},
-                                          query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
-        services.vms = $resource(endpoint + 'vms/:id/:controller/:controller_id',
-                                 {id: '@id', controller: '@controller', controller_id: '@controller_id'},
-                                 {put: {method: 'PUT'},
-                                  query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
-        services.ipranges = $resource(endpoint + 'ipranges/:id',
-                                      {id: '@id'},
-                                      {create: {method: 'POST'},
-                                       get: {method: 'GET', cache: true},
-                                       delete: {method: 'DELETE'},
-                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
-        services.networks = $resource(endpoint + 'networks' + controller_layout,
-                                      {id: '@id',
-                                       controller: '@controller',
-                                       controller_id: '@controller_id',
-                                       controller_id1: '@controller_id1',
-                                       controller_id2: '@controller_id2'},
-                                      {put: {method: 'PUT', 
-                                             interceptor: {
-                                                response: function(res) {
-                                                  $cacheFactory.get('networks').remove(endpoint + 'networks/' + res.resource.id)
-                                                }
-                                             }
-                                      },
-                                       create: {method: 'POST'},
-                                       get: {method: 'GET', cache: $cacheFactory.get('networks')},
-                                       delete: {method: 'DELETE', 
-                                          interceptor: {
-                                            response: function(res) {
-                                              //We dont know the id of the network that was deleted, so just delete the whole cache
-                                              $cacheFactory.get('networks').removeAll()
-                                            }
-                                          }
-                                       },
-                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
-        services.datasets = $resource(endpoint + 'datasets/:id',
-                                      {id: '@id'},
-                                      {import: {method: 'POST'},
-                                       put: {method: 'PUT', interceptor: {
-                                        response: function(res) {
-                                          $cacheFactory.get('datasets').remove(endpoint + 'datasets/' + res.resource.id)
-                                        }
-                                       }},
-                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
-        services.packages = $resource(endpoint + 'packages/:id',
-                                      {id: '@id'},
-                                      {create: {method: 'POST'},
-                                       get: {method: 'GET', cache: true},
-                                       delete: {method: 'DELETE'},
-                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
-        services.dtrace = $resource(endpoint + 'dtrace/:id',
-                                    {id: '@id'},
-                                    {create: {method: 'POST'},
-                                     delete: {method: 'DELETE'},
-                                     query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
-
-
+    var addListFunctions = function() {
         /* Response with list of strings are not $resource friendly..
-           https://groups.google.com/forum/#!msg/angular/QjhN9-UeBVM/UjSgc5CNDqMJ */
-        endpoint = endpoint.replace("\\", '');
+           https://groups.google.com/forum/#!msg/angular/QjhN9-UeBVM/UjSgc5CNDqMJ 
+           Only auth.js seems to be using this...
+        */
+        ['hypervisors', 'vms'].forEach(function(resource) {
+          services[resource].list = function(cb, error) {
+              return $http.get(endpoint + resource)
+                  .success(cb)
+                  .error(function(data) {
+                      error && error(data);
+                  })
+          };
+        })
+    }
+
+    /* Add metadata helpers in the resources */
+    var addMetadataFunctions = function() {
+        
         ['hypervisors', 'orgs', 'vms', 'networks', 'ipranges', 'datasets', 'packages', 'users', 'sessions', 'groups', 'dtrace'].forEach(function(resource) {
-            services[resource].list = function(cb, error) {
-                return $http.get(endpoint + resource)
-                    .success(cb)
-                    .error(function(data) {
-                        error && error(data);
-                    })
-            };
 
             /* Resources that has put may save metadata, i.e. PUT vms/metadata/jingles {locked: true} */
             if (services[resource].put) {
@@ -224,90 +81,208 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                 return m && m.jingles && m.jingles[key]
             }
         });
+    }
 
-        /* Gets with cache! */
+    /* Add additional vm data, like the dataset, package etc */
+    var additionalVmData = function(vm) {
 
-        services.datasets.get = function(obj, success, error) {
-            return $http.get(endpoint + 'datasets/' + obj.id, {cache: $cacheFactory.get('datasets')})
-                .success(function(res) {
-                    success(res)
-                    //If the dataset is not 100% ready, do not cache it.
-                    if (res.imported === 1)
-                        return;
-                    $cacheFactory.get('datasets').remove(endpoint + 'datasets/' + obj.id)
-                })
-                .error(function(data) {
-                    error && error(data)
-                })
-        }
+      /* No extra call if controller is pressent or no sane vm */
+      // if (obj.controller || !vm.config) { <-- controller?...
+      if (!vm.config) {
+          // vm.uuid = obj.id
+          return;
+      }
 
-        /* VM GET: include the asociated data. TODO: Use promises in here.. */
-        services.vms._get = services.vms.get;
-        services.vms.get = function(obj, returnCb, errorCb) {
+      if (vm.config.dataset)
+        vm.config._dataset = services.datasets.get({id: vm.config.dataset})
 
-            return services.vms._get(obj, function(res) {
+      if (vm.package)
+        vm._package = services.packages.get({id: vm.package})
 
-                /* No extra call if controller is pressent or no sane vm */
-                if (obj.controller || !res.config) {
-                    res.uuid = obj.id
-                    return returnCb(res)
-                }
+      if (vm.owner)
+        vm._owner = services.orgs.get({id: vm.owner})
 
-                var callsLeft = 4;
-                function checkIfReady() {
-                    callsLeft--;
-                    if (callsLeft < 1)
-                        return returnCb(res)
-                }
+      if (vm.hypervisor)
+        vm._hypervisor = services.hypervisors.get({id: vm.hypervisor})
 
-                // if (angular.isUndefined(res.config.dataset) || res.config.dataset === 1) {
-                if (angular.isUndefined(res.config.dataset)) {
-                    checkIfReady();
-                } else {
-                    services.datasets.get(
-                        {id: res.config.dataset},
-                        function (ds) {
-                            res.config._dataset = ds;
-                            checkIfReady();
-                        },
-                        function err(ds) {
-                            checkIfReady();
-                        }
-                    )
-                };
+      return vm;
+    }
 
-                if (angular.isUndefined(res.package)) {
-                    checkIfReady();
-                } else {
-                    services.packages.get(
-                        {id: res.package},
-                        function (p) {
-                            res._package = p;
-                            checkIfReady();
-                        },
-                        function err() {
-                            checkIfReady();
-                        }
-                    )
-                }
+    var hashFromArray = function(array) {
+      var h = {}
+      //All objects returned from wiggle, has 'uuid' as its id, except datasets.
+      array.forEach(function(o) {
+        h[o.uuid||o.dataset] = o
+      })
+      return h
+    }
 
-                if (angular.isUndefined(res.owner)) {
-                    checkIfReady();
-                } else {
-                    services.orgs.get({id: res.owner},
-                                      function(org) { res._owner = org; checkIfReady(); },
-                                      function err() {checkIfReady();})
-                }
+    //Interceptor that transform add hash object into an array
+    var toHash = {
+      response: function(res) {
+        res.resource.hash = hashFromArray(res.resource)
+        return res.resource;
+      }
+    }
 
-                if (angular.isUndefined(res.hypervisor)) {
-                    checkIfReady();
-                } else {
-                    services.hypervisors.get({id: res.hypervisor},
-                                             function(data) { res._hypervisor = data; checkIfReady(); },
-                                             function err() {checkIfReady();})
-                }
-            }, errorCb);
-        }
+    //Initialize the caches.
+    $cacheFactory('datasets')
+    $cacheFactory('networks')
+
+    var controller_layout = '/:id/:controller/:controller_id/:controller_id1/:controller_id2/:controller_id3';
+    function setUpServices() {
+        services.sessions = $resource(endpoint + 'sessions/:id',
+                                      {id: '@id'},
+                                      {get: {method: 'GET', interceptor: {response: userInterceptor}},
+                                       login: {method: 'POST', interceptor: {response: userInterceptor}}});
+        services.users = $resource(endpoint + 'users' + controller_layout,
+                                   {id: '@id',
+                                    controller: '@controller',
+                                    controller_id: '@controller_id',
+                                    controller_id1: '@controller_id1',
+                                    controller_id2: '@controller_id2',
+                                    controller_id3: '@controller_id3'},
+                                   {put: {method: 'PUT'},
+                                    grant: {method: 'PUT'},
+                                    revoke: {method: 'DELETE'},
+                                    create: {method: 'POST'},
+                                    delete: {method: 'DELETE'},
+                                    query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                    queryFull: {method: 'GET', isArray: true, headers: {'x-full-list': true}, interceptor: {
+
+                                      response: function(res) {
+
+                                        res.resource.forEach(function(el) {
+                                          el._groups = el.groups.map(function(g) {return services.groups.get({id: g})})
+                                          el._orgs = el.orgs.map(function(o) {return services.orgs.get({id: o})})
+                                        })
+
+                                        // res.resource.hash = hashFromArray(res.resource)
+
+                                        return res.resource;
+                                      }
+
+                                    }},
+                                  });
+        services.groups = $resource(endpoint + 'groups' + controller_layout,
+                                    {id: '@id',
+                                     controller: '@controller',
+                                     controller_id: '@controller_id',
+                                     controller_id1: '@controller_id1',
+                                     controller_id2: '@controller_id2',
+                                     controller_id3: '@controller_id3'},
+                                    {put: {method: 'PUT'},
+                                     get: {method: 'GET', cache: true},
+                                     grant: {method: 'PUT'},
+                                     revoke: {method: 'DELETE'},
+                                     create: {method: 'POST'},
+                                     delete: {method: 'DELETE'},
+                                     query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                   });
+        services.orgs = $resource(endpoint + 'orgs' + controller_layout,
+                                  {id: '@id',
+                                   controller: '@controller',
+                                   controller_id: '@controller_id',
+                                   controller_id1: '@controller_id1',
+                                   controller_id2: '@controller_id2',
+                                   controller_id3: '@controller_id3'},
+                                  {put: {method: 'PUT'},
+                                   get: {method: 'GET', cache: true},
+                                   grant: {method: 'PUT'},
+                                   revoke: {method: 'DELETE'},
+                                   create: {method: 'POST'},
+                                   delete: {method: 'DELETE'},
+                                   query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}
+                                 });
+        services.cloud = $resource(endpoint + 'cloud/:controller', {controller: '@controller'});
+        services.hypervisors = $resource(endpoint + 'hypervisors/:id/:controller/:controller_id',
+                                         {id: '@id', controller: '@controller', controller_id: '@controller_id'},
+                                         {put: {method: 'PUT'},
+                                          delete: {method: 'DELETE'},
+                                          query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                          queryFull: {method: 'GET', isArray: true, headers: {'x-full-list': true}, interceptor: toHash}
+                                        });
+        services.vms = $resource(endpoint + 'vms/:id/:controller/:controller_id',
+                                 {id: '@id', controller: '@controller', controller_id: '@controller_id'},
+                                 {put: {method: 'PUT'},
+                                  get: {method: 'GET', interceptor: {
+                                    response: function(res) {
+                                      return additionalVmData(res.resource)
+                                    }
+                                  }},
+                                  query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                  queryFull: {method: 'GET', isArray: true, headers: {'x-full-list': true}, interceptor: {
+                                    response: function(res) {
+                                      res.resource.forEach(additionalVmData)
+                                      res.resource.hash = hashFromArray(res.resource)
+                                      return res.resource;
+                                    }
+                                  }}
+                                });
+        services.ipranges = $resource(endpoint + 'ipranges/:id',
+                                      {id: '@id'},
+                                      {create: {method: 'POST'},
+                                       get: {method: 'GET', cache: true},
+                                       delete: {method: 'DELETE'},
+                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
+        services.networks = $resource(endpoint + 'networks' + controller_layout,
+                                      {id: '@id',
+                                       controller: '@controller',
+                                       controller_id: '@controller_id',
+                                       controller_id1: '@controller_id1',
+                                       controller_id2: '@controller_id2'},
+                                      {put: {method: 'PUT', 
+                                             interceptor: {
+                                                response: function(res) {
+                                                  $cacheFactory.get('networks').remove(endpoint + 'networks/' + res.resource.id)
+                                                }
+                                             }
+                                      },
+                                       create: {method: 'POST'},
+                                       get: {method: 'GET', cache: $cacheFactory.get('networks')},
+                                       getFull: {method: 'GET', cache: $cacheFactory.get('networks'), interceptor: {
+                                        response: function(res) {
+                                          res.resource._ipranges = res.resource.ipranges.map(function(d) {return services.ipranges.get({id: d})})
+                                          return res.resource;
+                                        }
+                                       }},
+                                       delete: {method: 'DELETE', 
+                                          interceptor: {
+                                            response: function(res) {
+                                              //We dont know the id of the network that was deleted, so just delete the whole cache
+                                              $cacheFactory.get('networks').removeAll()
+                                            }
+                                          }
+                                       },
+                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                       queryFull: {method: 'GET', isArray: true, headers: {'x-full-list': true}, interceptor: toHash}
+                                     });
+        services.datasets = $resource(endpoint + 'datasets/:id',
+                                      {id: '@id'},
+                                      {import: {method: 'POST'},
+                                       get: {method: 'GET', cache: $cacheFactory.get('datasets')},
+                                       put: {method: 'PUT', interceptor: {
+                                        response: function(res) {
+                                          $cacheFactory.get('datasets').remove(endpoint + 'datasets/' + res.resource.id)
+                                        }
+                                       }},
+                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                     });
+        services.packages = $resource(endpoint + 'packages/:id',
+                                      {id: '@id'},
+                                      {create: {method: 'POST'},
+                                       get: {method: 'GET', cache: true},
+                                       delete: {method: 'DELETE'},
+                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
+        services.dtrace = $resource(endpoint + 'dtrace/:id',
+                                    {id: '@id'},
+                                    {create: {method: 'POST'},
+                                     delete: {method: 'DELETE'},
+                                     query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                   });
+
+        addListFunctions();
+        addMetadataFunctions();
     }
 
     //About interceptor's:

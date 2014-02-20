@@ -17,13 +17,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="pack in packages | hash2array| orderBy: ['ram', 'name']">
+          <tr ng-repeat="pack in packages | orderBy: ['ram', 'name']">
             <td><a href="#/configuration/packages/{{pack.uuid}}">{{pack.name}}</a></td>
             <td>{{pack.ram | Mbytes}}</td>
             <td>{{pack.quota | Gbytes}}</td>
             <td>{{pack.cpu_cap}}</td>
             <td>
-              <i ng-click="delete(this)" jq-run='tooltip' title="Delete" class="glyphicon glyphicon-remove clickable" bs-modal="'views/partials/modal-confirm.html'"></i>
+              <i ng-click="delete(pack)" jq-run='tooltip' title="Delete" class="glyphicon glyphicon-remove clickable" bs-modal="'views/partials/modal-confirm.html'"></i>
             </td>
           </tr>
         </tbody>

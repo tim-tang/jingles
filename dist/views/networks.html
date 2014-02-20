@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="net in networks | hash2array | orderBy: 'name'">
+          <tr ng-repeat="net in networks | orderBy: 'name'">
             <td>
               <strong><a href="#/configuration/networks/{{net.uuid}}">{{net.name}}</a></strong>
               <i class="glyphicon glyphicon-exclamation-sign" ng-if='!net.ipranges || !net.ipranges.length' title='No IP Range assigned' jq-run='tooltip'></i>

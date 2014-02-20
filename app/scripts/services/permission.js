@@ -44,48 +44,38 @@ function mk_permission_fn(wiggle, $scope) {
                 break;
             case "channels":
                 $scope.p2 = {}
-                wiggle.hypervisors.list(function(ids) {
-                    ids.forEach(function(id) {
-                        wiggle.hypervisors.get({id: id}, function(res) {
-                            $scope.p2[res.uuid] = {id: res.uuid, name: 'Server ' + res.alias}
-                        })      
+                wiggle.hypervisors.query(function(hypers) {
+                    hypers.forEach(function(res) {
+                        $scope.p2[res.uuid] = {id: res.uuid, name: 'Server ' + res.alias}
                     })
                 })
-                wiggle.vms.list(function(ids) {
-                    ids.forEach(function(id) {
-                        wiggle.vms.get({id: id}, function(res) {
-                            $scope.p2[res.uuid] = {id: res.uuid, name: 'Machine ' + res.config.alias}
-                        })
+                wiggle.vms.query(function(vms) {
+                    vms.forEach(function(res) {
+                         $scope.p2[res.uuid] = {id: res.uuid, name: 'Machine ' + res.config.alias}
                     })
                 })
                 break;
             case "dtraces":
-                wiggle.dtrace.list(function(ids) {
-                    if (ids.length > 0)
+                wiggle.dtrace.query(function(dtraces) {
+                    if (dtraces.length > 0)
                         $scope.p2 = {
                             "...": {id: "...", name: "Everything"},
                             "_": {id: "_", name: "All Dtraces"},
                         };
-                    ids.forEach(function(id){
-                        $scope.p2[id] = {id: id, name: id};
-                        wiggle.dtrace.get({id: id}, function(dtrace) {
-                            $scope.p2[id].name = dtrace.name;
-                        })
+                    dtraces.forEach(function(dtrace){
+                        $scope.p2[dtrace.uuid] = {id: dtrace.uuid, name: dtrace.name};
                     })
                 });
                 break;
             case "users":
-                wiggle.users.list(function(ids) {
-                    if (ids.length > 0)
+                wiggle.users.query(function(users) {
+                    if (users.length > 0)
                         $scope.p2 = {
                             "...": {id: "...", name: "Everything"},
                             "_": {id: "_", name: "All Users"},
                         };
-                    ids.forEach(function(id){
-                        $scope.p2[id] = {id: id, name: id};
-                        wiggle.users.get({id: id}, function(user) {
-                            $scope.p2[id].name = user.name;
-                        })
+                    users.forEach(function(user){
+                        $scope.p2[user.uuid] = {id: user.uuid, name: user.name};
                     })
                 });
                 break;
@@ -101,108 +91,90 @@ function mk_permission_fn(wiggle, $scope) {
                 })
                 break;
             case "groups":
-                wiggle.groups.list(function(ids) {
-                    if (ids.length > 0)
+                wiggle.groups.query(function(groups) {
+                    if (groups.length > 0)
                         $scope.p2 = {
                             "...": {id: "...", name: "Everything"},
                             "_": {id: "_", name: "All Groups"},
                         };
-                    ids.forEach(function(id){
-                        $scope.p2[id] = {id: id, name: id};
-                        wiggle.groups.get({id: id}, function(group) {
-                            $scope.p2[id].name = group.name;
-                        })
+                    groups.forEach(function(group){
+                        $scope.p2[group.uuid] = {id: group.uuid, name: group.name};
                     })
                 });
                 break;
             case "hypervisors":
-                wiggle.hypervisors.list(function(ids) {
-                    if (ids.length > 0)
+                wiggle.hypervisors.query(function(hypers) {
+                    if (hypers.length > 0)
                         $scope.p2 = {
                             "...": {id: "...", name: "Everything"},
                             "_": {id: "_", name: "All Hypervisors"},
                         };
-                    ids.forEach(function(id){
-                        $scope.p2[id] = {id: id, name: id};
+                    hypers.forEach(function(hyper){
+                        $scope.p2[hyper.uuid] = {id: hyper.uuid, name: hyper.alias};
                     })
                 });
                 break;
             case "vms":
-                wiggle.vms.list(function(ids) {
-                    if (ids.length > 0)
+                wiggle.vms.query(function(vms) {
+                    if (vms.length > 0)
                         $scope.p2 = {
                             "...": {id: "...", name: "Everything"},
                             "_": {id: "_", name: "All Virtual Machines"},
                         };
-                    ids.forEach(function(id){
-                        $scope.p2[id] = {id: id, name: id};
-                        wiggle.vms.get({id: id}, function(vm) {
-                            var name = id;
-                            if (vm.config && vm.config.alias)
-                                name = name + " (" + vm.config.alias + ")";
-                            $scope.p2[id].name = name;
-                        })
+                    vms.forEach(function(vm){
+                        $scope.p2[vm.uuid] = {id: vm.uuid};
+                        var name = vm.uuid;
+                        if (vm.config && vm.config.alias)
+                            name = name + " (" + vm.config.alias + ")";
+                        $scope.p2[vm.uuid].name = name;
                     })
                 });
                 break;
             case "datasets":
-                wiggle.datasets.list(function(ids) {
-                    if (ids.length > 0)
+                wiggle.datasets.query(function(datasets) {
+                    if (datasets.length > 0)
                         $scope.p2 = {
                             "...": {id: "...", name: "Everything"},
                             "_": {id: "_", name: "All Datasets"},
                         };
-                    ids.forEach(function(id){
-                        $scope.p2[id] = {id: id, name: id};
-                        wiggle.datasets.get({id: id}, function(ds) {
-                            $scope.p2[id].name = ds.name + " " + ds.version;
-                        })
+                    datasets.forEach(function(ds){
+                        $scope.p2[ds.dataset] = {id: ds.dataset, name: ds.name + ' ' + ds.version};
                     })
                 });
                 break;
             case "packages":
-                wiggle.packages.list(function(ids) {
-                    if (ids.length > 0)
+                wiggle.packages.query(function(packages) {
+                    if (packages.length > 0)
                         $scope.p2 = {
                             "...": {id: "...", name: "Everything"},
                             "_": {id: "_", name: "All Packages"},
                         };
-                    ids.forEach(function(id){
-                        $scope.p2[id] = {id: id, name: id};
-                        wiggle.packages.get({id: id}, function(ipr) {
-                            $scope.p2[id].name = ipr.name + " (" + id + ")";
-                        });
-
+                    packages.forEach(function(pack){
+                        $scope.p2[pack.uuid] = {id: pack.uuid, name: pack.name + " (" + pack.uuid + ")"};
                     })
                 });
                 break;
             case "ipranges":
-                wiggle.ipranges.list(function(ids) {
-                    if (ids.length > 0)
+                wiggle.ipranges.query(function(ranges) {
+                    if (ranges.length > 0)
                         $scope.p2 = {
                             "...": {id: "...", name: "Everything"},
                             "_": {id: "_", name: "All Networks"},
                         };
-                    ids.forEach(function(id){
-                        $scope.p2[id] = {id: id, name: id};
-                        wiggle.ipranges.get({id: id}, function(ipr) {
-                            $scope.p2[id].name = ipr.name + " (" + id + ")";
-                        });
+                    ranges.forEach(function(ipr){
+                        $scope.p2[ipr.uuid] = {id: ipr.uuid, name: ipr.name + " (" + ipr.uuid + ")"};
                     })
                 });
                 break;
             case "networks":
-                wiggle.networks.list(function(ids) {
-                    if (ids.length > 0)
+                wiggle.networks.query(function(nets) {
+                    if (nets.length > 0)
                         $scope.p2 = {
                             "...": {id: "...", name: "Everything"},
                             "_": {id: "_", name: "All Networks"},
                         };
-                    ids.forEach(function(id){
-                        $scope.p2[id] = {id: id, name: id};
-                        wiggle.networks.get({id: id}, function(ipr) {
-                            $scope.p2[id].name = ipr.name + " (" + id + ")";
-                        });
+                    nets.forEach(function(net){
+                        $scope.p2[net.uuid] = {id: net.uuid, name: net.name + " (" + net.uuid + ")"};
                     })
                 });
                 break;

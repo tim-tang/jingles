@@ -107,7 +107,6 @@ angular.module('fifoApp')
             if (v['name'] != undefined && v['value'] != undefined )
                 config[v['name']] = v['value'];
         });
-        console.log(vars, config);
         var dtrace = new wiggle.dtrace({
             name: $scope.name,
             script: $scope.script,
@@ -126,23 +125,8 @@ angular.module('fifoApp')
                       );
     }
 
-
     $scope.init = function() {
         $scope.variables = [];
-
-        //It seems we neet to so this at the end of the work queue. not sure how to do that, but this works:
-        // setTimeout(function() {
-        //     CodeMirror.fromTextArea(document.getElementById("code"), {
-        //         lineNumbers: true,
-        //         theme: 'solarized light',
-        //         lineWrapping: true,
-        //         onKeyEvent: function(cm) {
-        //             $scope.script = cm.getValue()
-        //             $scope.$apply()
-        //         }
-        //     });
-        // });
-
     }
 
     $scope.init()

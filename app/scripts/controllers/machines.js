@@ -7,9 +7,9 @@ angular.module('fifoApp')
     $scope.auth = auth;
 
     $scope.infinitScroll = function() {
-      if ($scope.tableParams.count() >= $scope.vmsIds.length)
+      if ($scope.tableParams.count() >= $scope.vms.length)
         return;
-      $scope.tableParams.count($scope.tableParams.count() + 5);
+      $scope.tableParams.count($scope.tableParams.count() + 25);
     }
 
     $scope.start = function(vm) {
@@ -26,9 +26,7 @@ angular.module('fifoApp')
     var filterData = function() {
       var p = $scope.tableParams;
 
-      var dataArray = Object.keys($scope.vms).map(function(k) { return $scope.vms[k] })
-      var data = $scope.searchQuery ? $filter('filter')(dataArray, $scope.searchQuery) : dataArray;
-
+      var data = $scope.searchQuery ? $filter('filter')($scope.vms, $scope.searchQuery) : $scope.vms;
       data = p.sorting()? $filter('orderBy')(data, p.orderBy()) : data
 
       $scope.vmsFiltered = data.slice((p.page() - 1) * p.count(), p.page() * p.count());
@@ -37,7 +35,7 @@ angular.module('fifoApp')
     var listenEvents = function() {
 
       $scope.$on('state', function(e, msg) {
-          var vm = $scope.vms[msg.channel];
+          var vm = $scope.vms.hash[msg.channel];
           if (!vm) return;
           var failed = function(reason) {
               status.error("The creation of the VM " + vm.config.alias +
@@ -54,7 +52,7 @@ angular.module('fifoApp')
       $scope.$on('update', function(e, msg) {
 
         requestsPromise.then(function() {
-          var vm = $scope.vms[msg.channel];
+          var vm = $scope.vms.hash[msg.channel];
 
           vm.config = msg.message.data.config;
           vmService.updateCustomFields(vm);
@@ -67,7 +65,7 @@ angular.module('fifoApp')
               vm._package = pack
           })
           if (vm.owner)
-              wiggle.orgs.get({id: vm.config.package}, function(org) {
+              wiggle.orgs.get({id: vm.owner}, function(org) {
                   vm._owner = org
               })
 
@@ -79,7 +77,13 @@ angular.module('fifoApp')
 
         //Wait for the list to exists, before deleting an element of it.
         requestsPromise.then(function() {
-          delete $scope.vms[msg.channel]
+
+          for (var i=0; i < $scope.vms.length; i++) {
+            if ($scope.vm[i].uuid == msg.channel) {
+              $scope.vms.splice(i, 1);
+              break;
+            }
+          }
           filterData()
         })
       })
@@ -110,41 +114,23 @@ angular.module('fifoApp')
       }, true);
 
       $scope.$watch('searchQuery', function(val) {
-        filterData();
+        filterData()
 
         if (typeof val != 'undefined')
           auth.currentUser().mdata_set({vm_searchQuery: val})
       })
 
-      $scope.vmsIds = []
       $scope.vmsFiltered = []
-      $scope.vms = {}
 
-      wiggle.vms.list(function (ids) {
+      $scope.vms = wiggle.vms.queryFull()
 
-        defered.notify('VM ids loaded.')
-        $scope.vmsIds = ids;
-
-        //Count the responses, to we can show the first vm's: probably not workth, becouse datasets and packages request are enqueued at the last... and we need them...
-        var count = 0;
-
-        ids.forEach(function(id) {
-
-          wiggle.vms.get({id: id}, function success(res) {
-            $scope.vms[id] =  vmService.updateCustomFields(res)
-
-            count += 1
-            //Fire up showing the VM's when all data is loaded or the first bulk is¡ ready!
-            if (Object.keys($scope.vms).length == $scope.vmsIds.length || count  == $scope.tableParams.count - 1) {
-              defered.resolve()
-            }
-          })
-
-        })
-
+      $scope.vms.$promise.then(function(vms) {
+        vms.forEach(vmService.updateCustomFields)
+        defered.resolve()
       })
 
-      listenEvents();
+      listenEvents()
+
       return defered.promise
 
   }

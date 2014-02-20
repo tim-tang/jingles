@@ -25,26 +25,8 @@ angular.module('fifoApp')
         });
     }
 
-    $scope.hypervisors = {}
-    wiggle.hypervisors.list(function(ids){
-        ids.forEach(function(id) {
-            $scope.hypervisors[id] = {name: id};
-            wiggle.hypervisors.get({id: id}, function(e) {
-                $scope.hypervisors[id] = e
-            });
-        })
-    });
-
-    $scope.vms = {}
-    wiggle.vms.list(function(ids){
-        ids.forEach(function(id) {
-            $scope.vms[id] = {name: id};
-            wiggle.vms.get({id: id}, function(e) {
-                $scope.vms[id] = e
-            });
-
-        })
-    });
+    $scope.hypervisors = wiggle.hypervisors.query();
+    $scope.vms = wiggle.vms.query();
 
     wiggle.dtrace.get({id: uuid}, function(res) {
         res.cur_vars = [];
@@ -58,20 +40,6 @@ angular.module('fifoApp')
 
         $scope.script = res;
         breadcrumbs.setLast(res.name)
-
-        //It seems we neet to so this at the end of the work queue. not sure how to do that, but this works:
-        // setTimeout(function() {
-        //     CodeMirror.fromTextArea(document.getElementById("code"), {
-        //         lineNumbers: true,
-        //         theme: 'solarized light',
-        //         lineWrapping: true,
-        //         onKeyEvent: function(cm) {
-        //             $scope.script.script = cm.getValue()
-        //             $scope.$apply()
-        //         }
-        //     });
-        // });
-
     });
 
 

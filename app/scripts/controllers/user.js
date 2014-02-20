@@ -22,15 +22,11 @@ angular.module('fifoApp')
         }
     })();
 
-    $scope.orgs = {}
 
-    wiggle.orgs.list(function(ids) {
-        ids.forEach(function(id) {
-            $scope.orgs[id] = {uuid: id,
-                                name: id}
-            wiggle.orgs.get({id: id}, function(res) {
-                $scope.orgs[id] = res;
-            });
+    $scope.orgs = {}
+    wiggle.orgs.query(function(ids) {
+        ids.forEach(function(res) {
+                $scope.orgs[res.uuid] = res;
         });
     });
 
@@ -110,7 +106,6 @@ angular.module('fifoApp')
         res.groups = res.groups || [];
         $scope.user = res;
         breadcrumbs.setLast(res.name)
-        console.log(res);
         $scope.ssh_keys = $scope.user.mdata('ssh_keys')
         $scope.permissions = [];
         $scope.user._groups = {};
@@ -168,7 +163,6 @@ angular.module('fifoApp')
         }, function(d) {
             console.log("failed:", d);
         });
-        console.log($scope.permission);
     };
 
     $scope.perm_change = mk_permission_fn(wiggle, $scope);
@@ -200,7 +194,6 @@ angular.module('fifoApp')
     };
 
     $scope.add_otp = function() {
-        console.log($scope.user);
         var otp = $scope.otp;
         var keyid = otp.slice(0, -32);
         var keys = $scope.user.yubikeys || [];
@@ -245,7 +238,6 @@ angular.module('fifoApp')
     }
 
     $scope.leave_group = function(group) {
-        console.log("delete:", $scope.group);
         wiggle.users.delete({id: $scope.user.uuid,
                              controller: 'groups',
                              controller_id: group},
@@ -255,7 +247,6 @@ angular.module('fifoApp')
     };
 
     $scope.group_join = function() {
-        console.log("join:", $scope.group);
         wiggle.users.put({id: $scope.user.uuid,
                           controller: 'groups',
                           controller_id: $scope.group},
@@ -295,14 +286,12 @@ angular.module('fifoApp')
         $scope.pass1 = "";
         $scope.pass2 = "";
         $scope.groups = [];
-        wiggle.groups.list(function(ids) {
-            ids.forEach(function(gid) {
-                wiggle.groups.get({id: gid}, function(g) {
-                    $scope.groups[gid] = g;
-                    if ($scope.user._groups[gid]) {
-                        $scope.user._groups[gid] = g;
-                    }
-                });
+        wiggle.groups.query(function(ids) {
+            ids.forEach(function(g) {
+                $scope.groups[g.uuid] = g;
+                if ($scope.user._groups[g.uuid]) {
+                    $scope.user._groups[g.uuid] = g;
+                }
             });
         })
     };

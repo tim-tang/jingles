@@ -3,20 +3,22 @@
 angular.module('fifoApp')
   .controller('DtracesCtrl', function ($scope, wiggle, status) {
  
-    $scope.dtraces = {}
+    $scope.dtraces = wiggle.dtrace.query();
 
-    $scope.delete = function(el) {
+    $scope.delete = function(idx) {
+        var dtrace = $scope.dtraces[idx];
+
         $scope.modal = {
             btnClass: 'btn-danger',
             confirm: 'Delete',
             title: 'Confirm DTrace Deletion',
             body: '<p><font color="red">Warning!</font> you are about to delete the dtrace <b>' +
-                el.dt.name +"(" + el.dt.uuid + ")</b> Are you 100% sure you really want to do this?</p>", 
+                dtrace.name +" (" + dtrace.uuid + ") </b> Are you 100% sure you really want to do this?</p>", 
             ok: function() {
-                wiggle.dtrace.delete({id: el.dt.uuid},
+                wiggle.dtrace.delete({id: dtrace.uuid},
                                  function success (data, h) {
-                                     delete $scope.dtraces[el.dt.uuid];
-                                     status.success('Script ' + el.dt.name + ' deleted');
+                                     $scope.dtraces.splice(idx, 1);
+                                     status.success('Script ' + dtrace.name + ' deleted');
                                  },
                                  function error (data) {
                                      console.error('Delete dtrace error:', data);
@@ -26,19 +28,4 @@ angular.module('fifoApp')
         }
     }
 
-    $scope.show = function() {
-
-        wiggle.dtrace.list(function (ids) {
-
-            ids.forEach(function(uuid) {
-                $scope.dtraces[uuid] = {uuid: uuid}
-                wiggle.dtrace.get({id: uuid}, function(res) {
-                    $scope.dtraces[uuid] = res
-                })
-
-            })
-        })
-    }
-
-    $scope.show()
   });
