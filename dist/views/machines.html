@@ -24,7 +24,7 @@
 
     <tr ng-repeat='vm in vmsFiltered'>
       <td data-title="'Name' | translate" sortable="'config.alias'" class='nowrap' style="background-image: linear-gradient(to right, {{vm.mdata('color')}} 10%, transparent 40%);">
-        <a href="#/machines/{{vm.uuid}}">{{vm.config.alias || vm.uuid}}</a>
+        <a href="#/machines/{{vm.uuid}}">{{vm.config.alias || vm.uuid}}</a> <i ng-show='vm.metadata.jingles.notes.length' class='glyphicon glyphicon-envelope' title='Note' jq-run='tooltip'></i>
       </td>
       <td data-title="'Ip'" sortable="'_ips_normalized'">
         <small><a class='nocolor' target='_new' href='ssh://{{vm.config.networks[0].ip}}'>{{vm.config.networks[0].ip}}</a></small>
