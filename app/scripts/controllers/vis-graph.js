@@ -4,7 +4,7 @@ angular.module('fifoApp')
   .controller('VisGraphCtrl', function ($scope, wiggle, auth, $filter, status) {
 
     var redraw = function() {
-
+      //zoom is taking precedence over drag event. http://bl.ocks.org/mbostock/6123708
       $scope.zoomValue = d3.event.scale
       $scope.$digest()
 
@@ -51,8 +51,8 @@ angular.module('fifoApp')
 
         var canvas = d3.select(parentEl)
             .append('svg')
-              .attr('width',   '100%')
-              .attr('height',  '100%')
+              .attr('width',   opts.w)
+              .attr('height',  opts.h)
               //.attr('viewBox', '0 0 1024 768')
               //.attr('preserveAspectRatio', 'xMidYMid meet')
               .call(d3.behavior.zoom().on('zoom', redraw))
@@ -86,6 +86,7 @@ angular.module('fifoApp')
                   $scope.$digest()
                 })
                 .on('click', function(d) {
+                  if (d3.event.defaultPrevented) return;
                   window.open('#/machines/' + d.uuid, '_blank')
                 })
 
@@ -139,6 +140,7 @@ angular.module('fifoApp')
                   $scope.$digest()
                 })
                 .on('click', function(d) {
+                  if (d3.event.defaultPrevented) return;
                   window.open('#/servers/' + d.uuid, '_blank')
                 })
 
@@ -560,7 +562,8 @@ angular.module('fifoApp')
     var linkDistance = function(link) {
         return link.target.config ? $scope.distanceValue : 150
     }
-    var canvas = setup('#container'),
+
+    var canvas = setup('#container', {w: $('#container').width(), h: $('#container').height()}),
       forceLayout = d3.layout.force()
         //.charge(-220)
         .charge(layoutParticlesCharge)

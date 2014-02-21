@@ -17,9 +17,9 @@ angular.module('fifoApp')
   	$rootScope.$on('$routeChangeSuccess', function(event, current){
   		$scope.helpUrl = current.helpUrl || '';
 
-      //Hide the menu dropdown of the mobile version. This should match @grid-float-breakpoint
-      if ($(window).width() < 768)
-        angular.element('.navbar-toggle').click();
+      //Hide the menu dropdown of the mobile version. This should match @grid-float-breakpoint. Not working good. commenting it.
+      // if ($(window).width() < 768)
+      //   angular.element('.navbar-toggle').click();
 
       document.title = current.name ? gettextCatalog.getString(current.name) + ' - FiFo': 'FiFo Cloud';
   	})

@@ -11,6 +11,8 @@
 @import 'app/styles/custom/legacy.less';
 @import 'app/styles/custom/typeahead.less';
 
+
+
 .hide {
 	display: none !important;
 }
@@ -64,6 +66,12 @@ hr {
 /* Gauge.js canvas */
 canvas.gauge {
 	height: 80px;
+}
+
+@media (max-width: @screen-xs-min) {
+	canvas.gauge {
+		height: 40px;
+	}
 }
 
 
@@ -186,4 +194,10 @@ body {
 }
 .pane-nav > * {
     margin-right: 10px;
+}
+
+
+//Make browsers use 100% height... i.e. firefox on cloudview.. :P
+html, body, .container {
+	height: 100%;
 }
