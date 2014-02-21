@@ -392,7 +392,7 @@ h6,
 .h5,
 .h6 {
   font-family: 'Varela Round', sans-serif;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.1;
   color: inherit;
 }
@@ -8312,6 +8312,7 @@ img.oslogo {
 
 body {
   padding-top: 40px;
+  -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.5);
 }
 
 .navbar-header > a > img {
@@ -8366,21 +8367,21 @@ body,
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: local('Open Sans'), local('OpenSans'), url(../fonts/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+  src: local('Open Sans'), local('OpenSans'), url(../fonts/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/k3k702ZOKiLJc3WVjuplzKRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(../fonts/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Varela Round';
   font-style: normal;
   font-weight: 400;
-  src: local('Varela Round'), local('VarelaRound-Regular'), url(../fonts/APH4jr0uSos5wiut5cpjrqRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+  src: local('Varela Round'), local('VarelaRound-Regular'), url(../fonts/APH4jr0uSos5wiut5cpjrnhCUOGz7vYGh680lGh-uXM.woff) format('woff');
 }
 
 .tooltip-inner {
