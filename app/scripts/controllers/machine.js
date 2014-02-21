@@ -589,7 +589,7 @@ angular.module('fifoApp')
         }
 
         //Actions for backups
-        var backupAction = function(action, obj) {
+        $scope.backupAction = function(action, obj) {
             switch (action) {
 
             case 'create':
@@ -682,7 +682,7 @@ angular.module('fifoApp')
         }
 
         //Actions for snapshots
-        var snapshotAction = function(action, snap) {
+        $scope.snapshotAction = function(action, snap) {
             switch (action) {
 
             case 'create':
@@ -706,6 +706,7 @@ angular.module('fifoApp')
                     title: 'Confirm Snapshot Deletion',
                     body: '<p>Are you sure you want to delete snapshot <strong>' + snap.comment + '</strong> dated ' + new Date(snap.timestamp/1000) + '</p>',
                     ok: function() {
+                        console.log('-> CACHATE', snap)
                         wiggle.vms.delete({id: uuid, controller: 'snapshots', controller_id: snap._key},
                                           function success() {
                                               $scope.snapshots[snap._key].state = 'deleting'

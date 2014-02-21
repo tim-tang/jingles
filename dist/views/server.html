@@ -181,18 +181,13 @@
           </div>
         </div>
 
-        <div class="tab-pane" id="characteristics">
+        <div class="tab-pane table-responsive" id="characteristics">
           <p>
             Characteristics can be used when <a href="#/configuration/packages/new">creating packages</a>.
             <button class="btn btn-success pull-right" ng-click="add()">+</button>
           </p>
           <br/>
-          <table ng-hide="characteristics.length<1" class="table table-bordered">
-            <!--<tr>
-                <th>Name</th>
-                <th>Value</th>
-                <th style='width: 40px;'></th>
-            </tr>-->
+          <table ng-hide="characteristics.length<1" class="table table-condensed table-hover table-bordered">
             <tr ng-repeat='ch in characteristics'>
               <th>{{ch.name}}</th>
               <td><input type='text' class='form-control' ng-model='ch.value'/></td>

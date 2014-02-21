@@ -200,7 +200,7 @@
               <div class="header">
                 <span translate>Dataset</span>
                 <span ng-show='vm.config._dataset' class="badge badge-info">
-                  {{vm.config._dataset.name}} {{vm.config._dataset.version}}
+                  {{vm.config._dataset.name || 'unknow'}} {{vm.config._dataset.version}}
                 </span>
                 <img jq-run='tooltip' title="{{vm.config._dataset.os || 'unknown'}}"
                      ng-src="images/logos/{{vm.config._dataset.os || 'unknown'}}.png" class='oslogo'/>
@@ -209,8 +209,8 @@
               <dl class="dl-horizontal">
                 <dt>UUID</dt><dd><small>{{vm.config.dataset}}</small></dd>
                 <dt translate>Info</dt>
-                <dd ng-show='vm.config._dataset'>{{vm.config._dataset.description}}</dd>
-                <dd ng-hide='vm.config._dataset'><button ng-click='import_dataset()' class='btn btn-sm btn-default' title='Import dataset for more info' jq-run='tooltip'><i class='glyphicon glyphicon-download-alt'></i> Import</button></dd>
+                <dd ng-show='vm.config._dataset.name'>{{vm.config._dataset.description}}</dd>
+                <dd ng-hide='vm.config._dataset.name'><button ng-click='import_dataset()' class='btn btn-sm btn-default' title='Import dataset for more info' jq-run='tooltip'><i class='glyphicon glyphicon-download-alt'></i> Import</button></dd>
               </dl>
             </div>
 
@@ -325,11 +325,12 @@
             </button>
           </p>
 
-          <table class="table table-condensed table-hover pull-left">
+          <table class="table table-respo table-condensed table-hover pull-left">
             <tr ng-repeat="s in snapshots | hash2array | orderBy: '-timestamp' ">
               <td class='nowrap'> <i class='glyphicon' class="glyphicon-camera"></i></td>
               <td class='nowrap' style="width: 35%"><strong title='{{s.uuid}}' jq-run='tooltip'>{{s.comment}}</strong></td>
               <td class='nowrap light'><span ng-show='s.size'>{{s.size | bytes}}</span></td>
+              <td><span class='label label-default' ng-class='{ "label-success" : s.state == "completed" , "label-warning" : s.state == "deleting" || s.state=="uploading" || s.state=="pending", "label-danger" : s.state == "error" }'>{{s.state}}</span></td>
               <td class='nowrap light'><span title="{{s.timestamp/1000 | date:'medium'}}" jq-run='tooltip' jq-option="{placement: 'bottom'}" am-time-ago='s.timestamp/1000'></span> </td>
               <td class='nowrap'>
 
