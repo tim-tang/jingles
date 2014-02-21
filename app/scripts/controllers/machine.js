@@ -588,7 +588,6 @@ angular.module('fifoApp')
 
                 break;
             }
-
         }
 
         //Actions for backups
