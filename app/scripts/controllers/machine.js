@@ -569,9 +569,12 @@ angular.module('fifoApp')
             case 'create':
                 status.prompt('Enter your note:', function(txt) {
 
+                    $scope.notes.splice(0, 0, {text: txt, created_at: new Date()})
                     $scope.vm.mdata_set({notes: $scope.notes}, function() {
                         status.success('Note created')
-                        $scope.notes.splice(0, 0, {text: txt, created_at: new Date()})
+                    }, function err() {
+                        status.error('Could not save note')
+                        $scope.notes.splice(1)
                     })
 
                 })

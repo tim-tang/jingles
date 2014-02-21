@@ -8268,14 +8268,7 @@ hr {
 /* Gauge.js canvas */
 
 canvas.gauge {
-  height: 70px;
-}
-
-@media (max-width: 480px) {
-  canvas.gauge {
-    max-width: 50px;
-    max-height: 30px;
-  }
+  height: 80px;
 }
 
 .badge-info {
@@ -8354,12 +8347,6 @@ body {
 
 .pane-nav > * {
   margin-right: 10px;
-}
-
-html,
-body,
-.container {
-  height: 100%;
 }
 
 @font-face {
