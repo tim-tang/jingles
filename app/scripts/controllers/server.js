@@ -132,6 +132,36 @@ angular.module('fifoApp')
                                   )
         }
 
+
+        $scope.notes = []
+        $scope.note = function(action, idx) {
+
+            switch(action) {
+
+            case 'create':
+                status.prompt('Enter your note:', function(txt) {
+
+                    $scope.notes.splice(0, 0, {text: txt, created_at: new Date()})
+                    $scope.hyper.mdata_set({notes: $scope.notes}, function() {
+                        status.success('Note created')
+                    }, function err() {
+                        status.error('Could not save note')
+                        $scope.notes.splice(1)
+                    })
+
+                })
+                break;
+
+            case 'delete':
+                $scope.notes.splice(idx, 1)
+                $scope.hyper.mdata_set({notes: $scope.notes}, function() {
+                    status.success('Note deleted')
+                })
+
+                break;
+            }
+        }
+
         var init = function() {
             wiggle.hypervisors.get({id: uuid}, function(res) {
                 $scope.hyper = res;
@@ -142,6 +172,9 @@ angular.module('fifoApp')
                         $scope.characteristics.push({name: k, value: res.characteristics[k]})
                     })
                 }
+
+                var _notes = $scope.hyper.mdata('notes') && $scope.hyper.mdata('notes').sort(function(a,b) { return a.created_at >= b.created_at; })
+                $scope.notes = _notes? _notes.reverse() : []
 
             });
         }
