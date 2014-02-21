@@ -24,6 +24,7 @@
         <li class="active"><a href="#details" data-toggle="tab" translate>Details</a></li>
         <li><a href="#performance" data-toggle="tab" translate>Performance</a></li>
         <li><a href="#characteristics" data-toggle="tab" translate>Characteristics</a></li>
+        <li><a href="#notes" data-toggle="tab" translate>Notes</a></li>
       </ul>
 
       <div class="tab-content">
@@ -195,6 +196,17 @@
             </tr>
           </table>
         </div>
+
+        <div class="tab-pane" id="notes">
+          <button class="btn btn-success pull-right" ng-click="note('create')" permission=['hypevisors','{{hyper.uuid}}','edit']>+</button>
+          <div class='postit pull-left' ng-repeat='n in notes' jq-run='tooltip' title="{{n.created_at | date:'medium'}}">
+            <button class="btn btn-xs btn-default pull-right" style='margin-left: 10px' ng-click="note('delete', $index)" permission=['hypervisors','{{hyper.uuid}}','edit']>x</button>
+            {{n.text}}
+            <br/><small style='color: black' class='nowrap uuid' am-time-ago='n.created_at'></small>
+          </div>
+        </div>
+
+
       </div>
     </div>
     <div>

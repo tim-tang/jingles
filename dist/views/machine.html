@@ -325,7 +325,7 @@
             </button>
           </p>
 
-          <table class="table table-respo table-condensed table-hover pull-left">
+          <table class="table table-condensed table-hover pull-left">
             <tr ng-repeat="s in snapshots | hash2array | orderBy: '-timestamp' ">
               <td class='nowrap'> <i class='glyphicon' class="glyphicon-camera"></i></td>
               <td class='nowrap' style="width: 35%"><strong title='{{s.uuid}}' jq-run='tooltip'>{{s.comment}}</strong></td>
