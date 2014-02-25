@@ -89,7 +89,7 @@ var howl = {
         if (token)
             howl._token = token
 
-        howl.ws = new WebSocket(Config.howl, 'msgpack')
+        howl.ws = new WebSocket(Config.wsUrl + "/howl", 'msgpack')
         howl.ws.binaryType = "arraybuffer";
         howl.ws.onopen = howl._wsOpen
         howl.ws.onclose = howl._wsClose
