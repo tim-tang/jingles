@@ -32,7 +32,7 @@ angular.module('fifoApp')
         var perms = user.permissions || []
 
         //Add the groups permissions
-        user.groups.forEach(function(k) {
+        Object.keys(user._groups).forEach(function(k) {
           perms = perms.concat(user._groups[k].permissions)
         })
 

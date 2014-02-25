@@ -242,7 +242,7 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                        get: {method: 'GET', cache: $cacheFactory.get('networks')},
                                        getFull: {method: 'GET', cache: $cacheFactory.get('networks'), interceptor: {
                                         response: function(res) {
-                                          res.resource._ipranges = res.resource.ipranges.map(function(d) {return services.ipranges.get({id: d})})
+                                          res.resource._ipranges = res.resource.ipranges && res.resource.ipranges.map(function(d) {return services.ipranges.get({id: d})})
                                           return res.resource;
                                         }
                                        }},
@@ -303,10 +303,14 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
             return services.groups.get({id: id}).$promise;
         })
 
-        return $q.all(groupCalls).then(function(res) {
-            res.forEach(function(r) {user._groups[r.uuid] = r});
-            return user;
-        })
+        return $q.all(groupCalls)
+            .then(function(res) {
+                res.forEach(function(r) {user._groups[r.uuid] = r});
+                return user})
+            //Ignore error comming from GET on the groups. i.e. 403's...
+            .catch(function(res) {
+                return user;
+            })
     }
 
     var services = {}

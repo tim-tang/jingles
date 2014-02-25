@@ -44,21 +44,30 @@ angular.module('fifoApp')
         controller: 'ipranges',
         controller_id: iprange.uuid},
         function ok() {
-          $scope.network._ipranges.push(iprange)
           $scope.network.ipranges.push(iprange.uuid)
+          $scope.network._ipranges.push(iprange)
         }
       );
     };
 
     $scope.available_ipranges = function(items) {
-      if (!$scope.network || !$scope.network.ipranges) return 
+      if (!$scope.network || !$scope.network.ipranges) return items
+
       return items.filter(function(item) {return $scope.network.ipranges.indexOf(item.uuid) < 0})
     }
 
     $scope.ipranges = wiggle.ipranges.query();
     $scope.network = wiggle.networks.getFull({id: uuid})
 
-    $scope.network.$promise.then(function(n) {breadcrumbs.setLast(n.name)})
+    $scope.network.$promise.then(function(n) {
+      breadcrumbs.setLast(n.name)
+      
+      //Default empty array if network.iprange is undefined, so we can push to it later.
+      if (!$scope.network.ipranges) {
+        $scope.network.ipranges = []
+        $scope.network._ipranges = []
+      }
+    })
 
   });
 
