@@ -2,7 +2,6 @@
 
 This is the Web Control Panel of [FiFo](http://project-fifo.net/).
 
-
 ## Usage
 
 Jingles is a 'one page web site', wich interacts with wiggle and howl backends.
