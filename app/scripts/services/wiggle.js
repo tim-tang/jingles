@@ -16,9 +16,10 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
         setUpServices();
 
         //Howl endpoint.
-        var tmp = url || (window.location.protocol + '//' + window.location.host);
-        Config.howl = Config.howl || tmp.replace(/^http/, "ws") + "/howl";
         Config.endpoint = endpoint;
+        var tmp = url || (window.location.protocol + '//' + window.location.host);
+        Config.wsUrl = Config.wsUrl || tmp.replace(/^http/, "ws");
+        Config.apiPath = path;
     }
 
     var is_empty = function(obj) {

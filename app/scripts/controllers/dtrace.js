@@ -72,7 +72,7 @@ angular.module('fifoApp')
             WebSocket = MozWebSocket;
         }
 
-        var wsurl = Config.wiggle.replace(/^http/, "ws")+'dtrace/' + uuid + '/stream';
+        var wsurl = Config.wsUrl + Config.apiPath + '/dtrace/' + uuid + '/stream';
         socket = new WebSocket(wsurl, 'msgpack');
         socket.binaryType = "arraybuffer";
 
