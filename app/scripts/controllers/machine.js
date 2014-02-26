@@ -182,6 +182,9 @@ angular.module('fifoApp')
                 {'action': action, 'service': service},
                 function res(r) {
                     status.info(action + ' event sent to service ' + service.split('/').pop())
+                },
+                function err(r) {
+                    status.error('Could not send event ' + action + ' to service ' + service.split('/').pop())
                 });
         }
 
