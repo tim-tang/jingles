@@ -2,20 +2,7 @@
 
 angular.module('fifoApp')
     .controller('MachineCtrl', function($scope, $routeParams, $location, wiggle, vmService, status, breadcrumbs) {
-        var service_state_map = {
-            online: 'success',
-            legacy_run: 'success',
-            maintainance: 'danger',
-            degraded: 'danger'
-        };
-        var service_prio_map = {
-            maintainance: 4,
-            degraded: 3,
-            online: 2,
-            legacy_run: 1
-        };
 
-        // $scope.setTitle('Machine details')
         $scope.force = false;
         var uuid = $routeParams.uuid;
         var inc_version = function inc_version(v) {
@@ -189,39 +176,13 @@ angular.module('fifoApp')
             cpu_chart.add([data.usage, data.value]);
         });
 
-        var mk_services = function(srvs) {
-            for (var service in srvs) {
-                $scope.vm._services[service] = mk_service(service, srvs[service]);
-            }
-        };
-        var mk_service = function(service, state) {
-            var label = service_state_map[state] || 'default';
-            var prio = service_prio_map[state] || 0;
-            return {
-                'state': state,
-                'service': service,
-                'label': label,
-                'priority': prio
-            };
-        };
-        $scope.$on('services', function(e, msg) {
-            mk_services(msg.message.data);
-            $scope.$apply();
-        });
-
-
-        $scope.update_show_disabled = function() {
-            $scope.vm.mdata_set({show_disabled: !$scope.show_disabled});
-        }
-
-        $scope.service_action = function(vm, action, service) {
+        $scope.service_action = function(action, service) {
             wiggle.vms.put(
-                {id: vm, controller: 'services'},
+                {id: $scope.vm.uuid, controller: 'services'},
                 {'action': action, 'service': service},
                 function res(r) {
-                    console.log(res);
+                    status.info(action + ' event sent to service ' + service.split('/').pop())
                 });
-
         }
 
         $scope.confirm_freeze = function() {
@@ -263,10 +224,6 @@ angular.module('fifoApp')
             wiggle.vms.get({id: uuid}, function success(res) {
                 $scope.vm = vmService.updateCustomFields(res);
                 breadcrumbs.setLast($scope.vm._name)
-                $scope.show_disabled = $scope.vm.mdata('show_disabled') || false;
-                $scope.vm["services"] = $scope.vm["services"] || [];
-                $scope.vm._services = {};
-                mk_services($scope.vm["services"]);
                 var pkg =  "custom"
                 if ($scope.vm["package"]) {
                     pkg = $scope.vm["package"] + "";
@@ -293,6 +250,7 @@ angular.module('fifoApp')
                 var _notes = $scope.vm.mdata('notes') && $scope.vm.mdata('notes').sort(function(a,b) { return a.created_at >= b.created_at; })
                 $scope.notes = _notes? _notes.reverse() : []
 
+
                 $scope.snapshots = $scope.vm.snapshots || {}
                 $scope.backups = $scope.vm.backups || {}
 
@@ -301,6 +259,14 @@ angular.module('fifoApp')
                 $scope.img_version = inc_version($scope.vm.config._dataset && $scope.vm.config._dataset.version);
                 $scope.img_os = $scope.vm.config._dataset && $scope.vm.config._dataset.os;
                 $scope.img_desc = $scope.vm.config._dataset && $scope.vm.config._dataset.description;
+
+                //Services
+                $scope.show_disabled_services = $scope.vm.mdata('show_disabled_services') || false;
+                $scope.$watch('show_disabled_services', function(val) {
+                    $scope.vm.mdata_set({show_disabled_services: $scope.show_disabled_services
+                });
+
+        })
             }, function error() {
                 $scope.something_wrong = true;
             })
@@ -322,7 +288,6 @@ angular.module('fifoApp')
                                    status.error('Reboot on this machine is needed for resize to take effect')
                            });
         };
-
 
 
         $scope.$on('state', function(e, msg) {
@@ -708,7 +673,6 @@ angular.module('fifoApp')
                     title: 'Confirm Snapshot Deletion',
                     body: '<p>Are you sure you want to delete snapshot <strong>' + snap.comment + '</strong> dated ' + new Date(snap.timestamp/1000) + '</p>',
                     ok: function() {
-                        console.log('-> CACHATE', snap)
                         wiggle.vms.delete({id: uuid, controller: 'snapshots', controller_id: snap._key},
                                           function success() {
                                               $scope.snapshots[snap._key].state = 'deleting'
