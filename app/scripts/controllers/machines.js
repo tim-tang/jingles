@@ -83,7 +83,7 @@ angular.module('fifoApp')
         requestsPromise.then(function() {
 
           for (var i=0; i < $scope.vms.length; i++) {
-            if ($scope.vm[i].uuid == msg.channel) {
+            if ($scope.vms[i].uuid == msg.channel) {
               $scope.vms.splice(i, 1);
               break;
             }
