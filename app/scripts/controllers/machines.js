@@ -58,12 +58,16 @@ angular.module('fifoApp')
           vmService.updateCustomFields(vm);
 
           /* Get the extra data */
-          wiggle.datasets.get({id: vm.config.dataset}, function(ds) {
-              vm.config._dataset = ds;
-          })
-          wiggle.packages.get({id: vm.config.package}, function(pack) {
-              vm._package = pack
-          })
+          if (vm.config.dataset)
+            wiggle.datasets.get({id: vm.config.dataset}, function(ds) {
+                vm.config._dataset = ds;
+            })
+
+          if (vm.config.package)
+            wiggle.packages.get({id: vm.config.package}, function(pack) {
+                vm._package = pack
+            })
+
           if (vm.owner)
               wiggle.orgs.get({id: vm.owner}, function(org) {
                   vm._owner = org
