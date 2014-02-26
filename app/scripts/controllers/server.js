@@ -162,6 +162,19 @@ angular.module('fifoApp')
             }
         }
 
+        $scope.service_action = function(action, service) {
+            wiggle.hypervisors.put(
+                {id: $scope.hyper.uuid, controller: 'services'},
+                {'action': action, 'service': service},
+                function res(r) {
+                    status.info(action + ' event sent to service ' + service.split('/').pop())
+                },
+                function err(r) {
+                    status.error('Could not send event ' + action + ' to service ' + service.split('/').pop())
+                });
+        }
+
+
         var init = function() {
             wiggle.hypervisors.get({id: uuid}, function(res) {
                 $scope.hyper = res;
@@ -176,6 +189,11 @@ angular.module('fifoApp')
                 var _notes = $scope.hyper.mdata('notes') && $scope.hyper.mdata('notes').sort(function(a,b) { return a.created_at >= b.created_at; })
                 $scope.notes = _notes? _notes.reverse() : []
 
+                //Services
+                $scope.show_disabled_services = $scope.hyper.mdata('show_disabled_services') || false;
+                $scope.$watch('show_disabled_services', function(val) {
+                    $scope.hyper.mdata_set({show_disabled_services: $scope.show_disabled_services})
+                });
             });
         }
 

@@ -23,6 +23,7 @@
       <ul class="nav nav-tabs">
         <li class="active"><a href="#details" data-toggle="tab" translate>Details</a></li>
         <li><a href="#performance" data-toggle="tab" translate>Performance</a></li>
+        <li><a href="#services" data-toggle="tab" translate>Services</a></li>
         <li><a href="#characteristics" data-toggle="tab" translate>Characteristics</a></li>
         <li><a href="#notes" data-toggle="tab" translate>Notes</a></li>
       </ul>
@@ -180,6 +181,15 @@
               <div id="cpuusage" class="metric"></div>
             </div>
           </div>
+        </div>
+        
+        <div class="tab-pane" id='services'>
+          <services 
+            ng-model='hyper.services' 
+            show-disabled='show_disabled_services'
+            action='service_action(action, service)'
+            channel='hyper.uuid'>
+          </services>
         </div>
 
         <div class="tab-pane table-responsive" id="characteristics">
