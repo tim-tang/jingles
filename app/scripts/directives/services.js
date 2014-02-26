@@ -35,6 +35,8 @@ angular.module('fifoApp')
 
       link: function postLink(scope, element, attrs) {
 
+        scope.show_actions = attrs.action
+
         //Wait until we get the services data.
         scope.$watch('ngModel', function(model, old) {
             if (!model || model == old) return;
