@@ -53,13 +53,13 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
         //Check if use wants more than 1 vm:
         var match = $scope.alias.match(/\{(\d+)-(\d+)\}/)
         if (match) {
-            var from = match[1],
-                to = match[2]
+            var from = Math.min(match[1], match[2]),
+                to = Math.max(match[1], match[2])
 
             var calls = []
             for (var i=from; i<=to; i++) {
-                var vmResource = new wiggle.vms(vm)
-                vmResource.config.alias = vmResource.config.alias.replace(match[0], i)
+                var vmResource = new wiggle.vms(angular.copy(vm))
+                vmResource.config.alias = vm.config.alias.replace(match[0], i)
                 vmResource.config.hostname = vmResource.config.alias
                 calls.push(vmResource.$save())
             }
@@ -72,7 +72,7 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
                     $location.path('/machines')
                 },
                 function error(res) {
-                    console.error('Create VM error:', res)
+                    console.error('Create VMs error:', res)
                     status.error('There was an error creating your vms. See their logs or js console for details.')
                 })
         }
