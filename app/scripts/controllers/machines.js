@@ -52,28 +52,38 @@ angular.module('fifoApp')
       $scope.$on('update', function(e, msg) {
 
         requestsPromise.then(function() {
-          var vm = $scope.vms.hash[msg.channel];
+          var vm = $scope.vms.hash[msg.channel],
+            data = msg.message.data;
 
-          vm.config = msg.message.data.config;
+          vm.config = data.config;
           vmService.updateCustomFields(vm);
 
           /* Get the extra data */
-          if (vm.config.dataset)
-            wiggle.datasets.get({id: vm.config.dataset}, function(ds) {
-                vm.config._dataset = ds;
-            })
 
-          if (vm.config.package)
-            wiggle.packages.get({id: vm.config.package}, function(pack) {
-                vm._package = pack
-            })
+          var hyper = data.hypervisor
+          if (hyper) {
+            vm.hypervisor = hyper
+            vm._hypervisor = wiggle.hypervisors.get({id: hyper})
+          }
 
-          if (vm.owner)
-              wiggle.orgs.get({id: vm.owner}, function(org) {
-                  vm._owner = org
-              })
+          var owner = data.owner
+          if (owner) {
+            vm.owner = owner
+            vm._owner = wiggle.orgs.get({id: owner})
+          }
 
-          // $scope.$apply()
+          var pack = data.package
+          if (pack) {
+            vm.package = pack
+            vm._package = wiggle.packages.get({id: pack})
+          }
+
+          var set = data.config.dataset
+          if (set) {
+            vm.config.dataset = set
+            vm.config._dataset = wiggle.datasets.get({id: set})            
+          }
+
         })
       })
 
