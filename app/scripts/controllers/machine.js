@@ -426,17 +426,17 @@ angular.module('fifoApp')
                 return status.error('Resolvers are not valid. Cannot save config.')
 
             //Check if we need to change the owner.
-            // if ($scope.new_owner && $scope.new_owner.uuid != $scope.vm.owner)
-            wiggle.vms.put({id: $scope.vm.uuid, controller: 'owner'}, {org: $scope.new_owner && $scope.new_owner.uuid},
-                           function success() {
-                               status.info('Owner changed')
-                               $scope.vm._owner = $scope.new_owner
-                           },
-                           function error(err) {
-                               status.error('Could not change owner')
-                               console.error(err)
-                           }
-                          )
+            if ($scope.new_owner && $scope.new_owner.uuid)
+                wiggle.vms.put({id: $scope.vm.uuid, controller: 'owner'}, {org: $scope.new_owner && $scope.new_owner.uuid},
+                               function success() {
+                                   status.info('Owner changed')
+                                   $scope.vm._owner = $scope.new_owner
+                               },
+                               function error(err) {
+                                   status.error('Could not change owner')
+                                   console.error(err)
+                               }
+                              )
 
             wiggle.vms.put({id: $scope.vm.uuid}, {config: config},
                            function success() {
