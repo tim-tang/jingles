@@ -20,7 +20,7 @@
      class='table table-condensed table-hover'
      infinite-scroll='infinitScroll()'
      infinite-scroll-distance="1"
-     ng-table='tableParams' template-pagination='hide'>
+     ng-table='tableParams'>
 
     <tr ng-repeat='vm in vmsFiltered'>
       <td data-title="'Name' | translate" sortable="'config.alias'" class='nowrap' style="background-image: linear-gradient(to right, {{vm.mdata('color')}} 10%, transparent 40%);">
