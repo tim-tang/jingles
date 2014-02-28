@@ -183,7 +183,10 @@ angular.module('fifoApp',
     //$locationProvider.hashPrefix('!');
   })
 
-.run(function($rootScope, gettextCatalog, gettext, $window) {
+.run(function($rootScope, gettextCatalog, gettext, $window, $templateCache) {
+
+  //Empty ng-table template for pagination
+  $templateCache.put('ng-table/pager.html', '')
 
   var lang = window.navigator.userLanguage || window.navigator.language;
 
