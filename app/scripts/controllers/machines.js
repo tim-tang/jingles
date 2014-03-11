@@ -7,9 +7,7 @@ angular.module('fifoApp')
     $scope.auth = auth;
 
     $scope.infinitScroll = function() {
-      if ($scope.tableParams.count() >= $scope.vms.length)
-        return;
-      $scope.tableParams.count($scope.tableParams.count() + 25);
+      $scope.tableParams.count($scope.tableParams.count() + 15);
     }
 
     $scope.start = function(vm) {
@@ -21,6 +19,10 @@ angular.module('fifoApp')
         window.open('vnc.html?uuid=' + vm.uuid);
       else
         window.open('console.html?uuid=' + vm.uuid);
+    }
+
+    $scope.hasMore = function() {
+      return $scope.tableParams.count() < $scope.vms.length
     }
 
     var filterData = function() {
@@ -55,9 +57,6 @@ angular.module('fifoApp')
           var vm = $scope.vms.hash[msg.channel],
             data = msg.message.data;
 
-          vm.config = data.config;
-          vmService.updateCustomFields(vm);
-
           /* Get the extra data */
 
           var hyper = data.hypervisor
@@ -77,6 +76,11 @@ angular.module('fifoApp')
             vm.package = pack
             vm._package = wiggle.packages.get({id: pack})
           }
+
+          if (!data.config) return;
+
+          vm.config = data.config;
+          vmService.updateCustomFields(vm);
 
           var set = data.config.dataset
           if (set) {
@@ -109,7 +113,7 @@ angular.module('fifoApp')
 
       $scope.tableParams = new ngTableParams({
         page: 1,
-        count: 25,
+        count: 15,
         total: 0, //0=disable
         sorting: {
           'config.alias': 'desc' //Could save this in the user metadata.. :P
@@ -154,7 +158,6 @@ angular.module('fifoApp')
   requestsPromise.then(function() {
     $scope.searchQuery = auth.currentUser().mdata('vm_searchQuery');
     filterData()
-    $scope.infinitScroll()
   });
 
   });
