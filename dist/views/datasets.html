@@ -5,9 +5,10 @@
         <ul class="nav nav-tabs">
           <li class="active"><a href="#installed" data-toggle="tab" translate>Installed</a></li>
           <li><a href="#datasetsat" data-toggle="tab" translate>Remote datasets</a></li>
+          <!-- <li><a href="#upload" data-toggle="tab" translate>Upload</a></li> -->
         </ul>
         <div class="tab-content">
-          <div class="tab-pane active" id="installed">
+          <div class="tab-pane" id="installed">
             <div class="row-fluid table-responsive">
               <table class="table table-condensed table-hover">
                 <thead>
@@ -86,6 +87,76 @@
               </tbody>
             </table>
           </div>
+
+          <div class="tab-pane" id='upload'>
+
+            <style type="text/css">
+              .drop-zone { border: dotted 3px lightgray; }
+              .drop-zone.dragover { border: dotted 3px green; }
+            </style>
+            <h4 translate>Upload a new dataset by selecting a zvol and manifest file</h4>
+            <br/>
+
+            <div ng-show='dropSupported' class='container' ng-file-drop-available="dropSupported=true">
+              <div class='col-sm-4 well drop-zone' ng-file-drop='onFileSelect($files)'>Drop a manifest and a zvol files here</div>
+              <div class='col-sm-6' style='margin-top: 20px;'><input ng-file-select='onFileSelect($files)' type="file"/></div>
+            </div>
+
+            <pre style='white-space: pre-wrap' class='pre-scrollable' ng-if='manifest'>{{manifest}}</pre>   
+    
+            <div class='upload' ng-if='uploader.queue.length'>
+              <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th width="50%">Name</th>
+                        <th ng-show="uploader.isHTML5">Size</th>
+                        <th ng-show="uploader.isHTML5">Progress</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in uploader.queue">
+                        <td><strong>{{ item.file.name }}</strong></td>
+                        <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                        <td ng-show="uploader.isHTML5">
+                            <div class="progress" style="margin-bottom: 0;">
+                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                            <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                            <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                        </td>
+                        <td nowrap>
+                              <span class="glyphicon glyphicon-trash" title='Remove' jq-run='tooltip' ng-click="item.remove()"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div>
+                <div class='pull-right'>
+                  <button type="button" class="btn btn-default btn-s" 
+                    ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                      <span class="glyphicon glyphicon-upload"></span> Upload
+                  </button>
+                  <button type="button" class="btn btn-default btn-s" 
+                    ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                      <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                  </button>
+                  <button type="button" class="btn btn-default btn-s" 
+                    ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                      <span class="glyphicon glyphicon-trash"></span> Clear
+                  </button>
+                </div>
+            </div>
+          </div>
+
+
+          </div>
+
         </div>
       </div>
     </div>

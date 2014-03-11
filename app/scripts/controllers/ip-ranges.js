@@ -14,7 +14,8 @@ angular.module('fifoApp')
                 el.name +"(" + el.uuid + ")</b> Are you 100% sure you really want to do this?</p>",
             ok: function() {
                 wiggle.ipranges.delete({id: el.uuid}, function success (data, h) {
-                    delete $scope.ipranges[el.uuid]
+                    var idx = $scope.ipranges.indexOf(el)
+                    $scope.ipranges.splice(idx, 1)
                     status.success(el.name + ' deleted')
                 }, function error(data) {
                     console.error('Delete iprange error:', data)

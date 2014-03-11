@@ -8,7 +8,7 @@ var wait = {
 
 angular.module('fifoApp',
   ['ngRoute', 'ngAnimate', 'ngResource','services.breadcrumbs', 
-  'gettext', 'infinite-scroll', 'ngTable', 'angularMoment', 'ngSanitize', 'ngCookies'])
+  'gettext', 'infinite-scroll', 'ngTable', 'angularMoment', 'ngSanitize', 'ngCookies', 'angularFileUpload'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

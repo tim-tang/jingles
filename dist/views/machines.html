@@ -19,7 +19,8 @@
   <table
      class='table table-condensed table-hover'
      infinite-scroll='infinitScroll()'
-     infinite-scroll-distance="1"
+     infinite-scroll-disabled='!hasMore()'
+     infinite-scroll-immediate-check='false'
      ng-table='tableParams'>
 
     <tr ng-repeat='vm in vmsFiltered'>
@@ -36,8 +37,10 @@
         {{vm._package.name}}
       </td>
       <td ng-show="auth.canAccess(['cloud','datasets','list'])" jq-options="{container: 'body'}" sortable="'config._dataset.name'" class='fifo-hidden-xs nowrap'>
-        <img ng-src="images/logos/{{vm.config._dataset.os || 'unknown'}}.svg" class='oslogo'>
-        {{vm.config._dataset.name || ('Unknown' | translate)}}
+        <span ng-show='vm.config.dataset'>
+          <img ng-src="images/logos/{{vm.config._dataset.os || 'unknown'}}.svg" class='oslogo'>
+          {{vm.config._dataset.name || ('Unknown' | translate)}}
+        </span>
       </td>
       <td ng-show="auth.canAccess(['cloud','hypervisors','list'])" data-title="'Server'|translate" sortable="'hypervisor'" class='fifo-visible-lg fifo-visible-md'>
         <a class='nocolor' href="#/servers/{{vm.hypervisor}}">{{vm._hypervisor.alias}}</a>
@@ -59,3 +62,5 @@
     </tr>
   </table>
 </div>
+
+<div ng-show='hasMore()' class='text-center text-muted small'>Scroll to load more vms</div>

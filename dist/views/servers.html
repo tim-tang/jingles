@@ -10,6 +10,7 @@
             <th class='nowrap' translate>Agent ver</th>
             <th class='' translate>Ram</th>
             <th class='' translate>Free</th>
+            <th class='' translate>Reserved</th>
             <th translate>Networks</th>
             <th translate>Capabilities</th>
           </tr>
@@ -22,6 +23,7 @@
             <td class='nowrap'><small>{{hyper['version'].split(',')[0]}}</small></td>
             <td class='mono'>{{hyper.resources['total-memory']}} MB</td>
             <td class='mono'>{{hyper.resources['free-memory']}} MB</td>
+            <td class='mono'>{{hyper.resources['reserved-memory'] || 0}} MB</td>
             <td>{{hyper.networks.sort().join(', ')}}</td>
             <td>{{hyper.virtualisation.join(', ')}}</td>
           </tr>

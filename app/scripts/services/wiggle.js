@@ -103,7 +103,7 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
       if (vm.owner)
         vm._owner = services.orgs.get({id: vm.owner})
 
-      if (vm.hypervisor)
+      if (vm.hypervisor && vm.hypervisor != 'pooled')
         vm._hypervisor = services.hypervisors.get({id: vm.hypervisor})
 
       return vm;
