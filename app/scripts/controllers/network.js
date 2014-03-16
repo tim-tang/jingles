@@ -28,10 +28,11 @@ angular.module('fifoApp')
     };
 
     $scope.remove_iprange = function(iprange, idx) {
+      var uuid = $scope.network.ipranges[idx]
       wiggle.networks.delete({
         id: $scope.network.uuid,
         controller: 'ipranges',
-        controller_id: iprange},
+        controller_id: uuid},
        function ok(){
           $scope.network._ipranges.splice(idx, 1)
           $scope.network.ipranges.splice(idx, 1)

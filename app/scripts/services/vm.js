@@ -49,6 +49,11 @@ angular.module('fifoApp')
             vm._name = (vm.config && vm.config.alias) || vm.uuid && vm.uuid.split('-')[0]
 
             switch (vm.state) {
+            case 'failed':
+                vm.state_description = "Could not create the VM with vmadm.";
+                vm.state = 'failed';
+                vm._state_label = 'danger';
+                break;
             case 'failed-get_ips':
                 vm.state_description = "No IP address for the machine could be obtained.";
                 vm.state = 'failed';
