@@ -69,9 +69,12 @@ angular.module('fifoApp')
             user.keys = user.keys || []
             user.groups = user.groups || []
 
+            // console.log('seteando el cookie...', $cookies, res)
+
+            //We dont want cookies, becouse pointing to a different datacenter requires to change the endpoint, cannot save cookies on different endpoints.
+            //But we will use it anyway to read the value and store it on wiggle headers calls. Localstorage would work also...
             $cookies["x-snarl-token"] = res.session
-            //Wiggle see to read the cookie, now so setting the header is not neccesary anymore.
-            //$http.defaults.headers.common['x-snarl-token'] = res.session || 'test_Session';
+
             $rootScope.$broadcast('auth:login_ok', user, res.session)
             $location.path('/')
           },
@@ -108,6 +111,7 @@ angular.module('fifoApp')
         user = new wiggle.users({status: 'waiting for login validation'})
 
         var token = $cookies["x-snarl-token"]
+        // console.log('checkIfLogged', token)
         if (!token)
           return $rootScope.$broadcast('auth:login_needed')
 
@@ -139,6 +143,7 @@ angular.module('fifoApp')
     $rootScope.$on('auth:login_ok', function() {
 
       userLoggedDefer.resolve(user)
+      wiggle.setUp(); //Setup the token in the headers.
 
       /* Pass the token to autenticate, and a list of vms to monitor */
       if ('WebSocket' in window) {

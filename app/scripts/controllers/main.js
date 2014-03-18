@@ -38,8 +38,6 @@ angular.module('fifoApp')
 
     }
 
-    // $cookies["x-snarl-token"] && $scope.show()
-
     /* Update data on memory change */
     $scope.$on('memorychange', $scope.show);
     
