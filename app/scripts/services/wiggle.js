@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFactory, $q) {
+angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFactory, $q, $cookies) {
 
     var endpoint;
     function setEndpoint(url) {
@@ -132,9 +132,20 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
 
     var controller_layout = '/:id/:controller/:controller_id/:controller_id1/:controller_id2/:controller_id3';
     function setUpServices() {
+
+        var token = $cookies["x-snarl-token"];
+        // console.log('--> setupservices', token)
+
+        //merge other headers with the token one.
+        function withToken(h) {
+          h = h || {}
+          return angular.extend({'x-snarl-token': token}, h)
+        }
+
+
         services.sessions = $resource(endpoint + 'sessions/:id',
                                       {id: '@id'},
-                                      {get: {method: 'GET', interceptor: {response: userInterceptor}},
+                                      {get: {method: 'GET', interceptor: {response: userInterceptor}, headers: withToken()},
                                        login: {method: 'POST', interceptor: {response: userInterceptor}}});
         services.users = $resource(endpoint + 'users' + controller_layout,
                                    {id: '@id',
@@ -143,13 +154,13 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                     controller_id1: '@controller_id1',
                                     controller_id2: '@controller_id2',
                                     controller_id3: '@controller_id3'},
-                                   {put: {method: 'PUT'},
-                                    grant: {method: 'PUT'},
-                                    revoke: {method: 'DELETE'},
-                                    create: {method: 'POST'},
-                                    delete: {method: 'DELETE'},
-                                    query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
-                                    queryFull: {method: 'GET', isArray: true, headers: {'x-full-list': true}, interceptor: {
+                                   {put: {method: 'PUT', headers: withToken()},
+                                    grant: {method: 'PUT', headers: withToken()},
+                                    revoke: {method: 'DELETE', headers: withToken()},
+                                    create: {method: 'POST', headers: withToken()},
+                                    delete: {method: 'DELETE', headers: withToken()},
+                                    query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})},
+                                    queryFull: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true}), interceptor: {
 
                                       response: function(res) {
 
@@ -172,13 +183,13 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                      controller_id1: '@controller_id1',
                                      controller_id2: '@controller_id2',
                                      controller_id3: '@controller_id3'},
-                                    {put: {method: 'PUT'},
-                                     get: {method: 'GET', cache: true},
-                                     grant: {method: 'PUT'},
-                                     revoke: {method: 'DELETE'},
-                                     create: {method: 'POST'},
-                                     delete: {method: 'DELETE'},
-                                     query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                    {put: {method: 'PUT', headers: withToken()},
+                                     get: {method: 'GET', cache: true, headers: withToken()},
+                                     grant: {method: 'PUT', headers: withToken()},
+                                     revoke: {method: 'DELETE', headers: withToken()},
+                                     create: {method: 'POST', headers: withToken()},
+                                     delete: {method: 'DELETE', headers: withToken()},
+                                     query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})},
                                    });
         services.orgs = $resource(endpoint + 'orgs' + controller_layout,
                                   {id: '@id',
@@ -187,32 +198,32 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                    controller_id1: '@controller_id1',
                                    controller_id2: '@controller_id2',
                                    controller_id3: '@controller_id3'},
-                                  {put: {method: 'PUT'},
-                                   get: {method: 'GET', cache: true},
-                                   grant: {method: 'PUT'},
-                                   revoke: {method: 'DELETE'},
-                                   create: {method: 'POST'},
-                                   delete: {method: 'DELETE'},
-                                   query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}
+                                  {put: {method: 'PUT', headers: withToken()},
+                                   get: {method: 'GET', cache: true, headers: withToken()},
+                                   grant: {method: 'PUT', headers: withToken()},
+                                   revoke: {method: 'DELETE', headers: withToken()},
+                                   create: {method: 'POST', headers: withToken()},
+                                   delete: {method: 'DELETE', headers: withToken()},
+                                   query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})}
                                  });
-        services.cloud = $resource(endpoint + 'cloud/:controller', {controller: '@controller'});
+        services.cloud = $resource(endpoint + 'cloud/:controller', {controller: '@controller'}, {get: {method: 'GET', headers: withToken()}});
         services.hypervisors = $resource(endpoint + 'hypervisors/:id/:controller/:controller_id',
                                          {id: '@id', controller: '@controller', controller_id: '@controller_id'},
-                                         {put: {method: 'PUT'},
-                                          delete: {method: 'DELETE'},
-                                          query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
-                                          queryFull: {method: 'GET', isArray: true, headers: {'x-full-list': true}, interceptor: toHash}
+                                         {put: {method: 'PUT', headers: withToken()},
+                                          delete: {method: 'DELETE', headers: withToken()},
+                                          query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})},
+                                          queryFull: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true}), interceptor: toHash}
                                         });
         services.vms = $resource(endpoint + 'vms/:id/:controller/:controller_id',
                                  {id: '@id', controller: '@controller', controller_id: '@controller_id'},
-                                 {put: {method: 'PUT'},
-                                  get: {method: 'GET', interceptor: {
+                                 {put: {method: 'PUT', headers: withToken()},
+                                  get: {method: 'GET', headers: withToken(), interceptor: {
                                     response: function(res) {
                                       return additionalVmData(res.resource)
                                     }
                                   }},
-                                  query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
-                                  queryFull: {method: 'GET', isArray: true, headers: {'x-full-list': true}, interceptor: {
+                                  query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})},
+                                  queryFull: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true}), interceptor: {
                                     response: function(res) {
                                       res.resource.forEach(additionalVmData)
                                       res.resource.hash = hashFromArray(res.resource)
@@ -222,32 +233,32 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                 });
         services.ipranges = $resource(endpoint + 'ipranges/:id',
                                       {id: '@id'},
-                                      {create: {method: 'POST'},
-                                       get: {method: 'GET', cache: true},
-                                       delete: {method: 'DELETE'},
-                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
+                                      {create: {method: 'POST', headers: withToken()},
+                                       get: {method: 'GET', cache: true, headers: withToken()},
+                                       delete: {method: 'DELETE', headers: withToken()},
+                                       query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})}});
         services.networks = $resource(endpoint + 'networks' + controller_layout,
                                       {id: '@id',
                                        controller: '@controller',
                                        controller_id: '@controller_id',
                                        controller_id1: '@controller_id1',
                                        controller_id2: '@controller_id2'},
-                                      {put: {method: 'PUT', 
+                                      {put: {method: 'PUT', headers: withToken(),
                                              interceptor: {
                                                 response: function(res) {
                                                   $cacheFactory.get('networks').remove(endpoint + 'networks/' + res.resource.id)
                                                 }
                                              }
                                       },
-                                       create: {method: 'POST'},
-                                       get: {method: 'GET', cache: $cacheFactory.get('networks')},
-                                       getFull: {method: 'GET', cache: $cacheFactory.get('networks'), interceptor: {
+                                       create: {method: 'POST', headers: withToken()},
+                                       get: {method: 'GET', cache: $cacheFactory.get('networks'), headers: withToken()},
+                                       getFull: {method: 'GET', cache: $cacheFactory.get('networks'), headers: withToken(), interceptor: {
                                         response: function(res) {
                                           res.resource._ipranges = res.resource.ipranges && res.resource.ipranges.map(function(d) {return services.ipranges.get({id: d})})
                                           return res.resource;
                                         }
                                        }},
-                                       delete: {method: 'DELETE', 
+                                       delete: {method: 'DELETE', headers: withToken(),
                                           interceptor: {
                                             response: function(res) {
                                               //We dont know the id of the network that was deleted, so just delete the whole cache
@@ -255,31 +266,32 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                             }
                                           }
                                        },
-                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
-                                       queryFull: {method: 'GET', isArray: true, headers: {'x-full-list': true}, interceptor: toHash}
+                                       query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})},
+                                       queryFull: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true}), interceptor: toHash}
                                      });
         services.datasets = $resource(endpoint + 'datasets/:id',
                                       {id: '@id'},
-                                      {import: {method: 'POST'},
-                                       get: {method: 'GET', cache: $cacheFactory.get('datasets')},
-                                       put: {method: 'PUT', interceptor: {
+                                      {import: {method: 'POST', headers: withToken()},
+                                       get: {method: 'GET', cache: $cacheFactory.get('datasets'), headers: withToken()},
+                                       put: {method: 'PUT', headers: withToken(), interceptor: {
                                         response: function(res) {
                                           $cacheFactory.get('datasets').remove(endpoint + 'datasets/' + res.resource.id)
                                         }
                                        }},
-                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                       query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})},
                                      });
         services.packages = $resource(endpoint + 'packages/:id',
                                       {id: '@id'},
-                                      {create: {method: 'POST'},
-                                       get: {method: 'GET', cache: true},
-                                       delete: {method: 'DELETE'},
-                                       query: {method: 'GET', isArray: true, headers: {'x-full-list': true}}});
+                                      {create: {method: 'POST', headers: withToken()},
+                                       get: {method: 'GET', cache: true, headers: withToken()},
+                                       delete: {method: 'DELETE', headers: withToken()},
+                                       query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})}});
         services.dtrace = $resource(endpoint + 'dtrace/:id',
                                     {id: '@id'},
-                                    {create: {method: 'POST'},
-                                     delete: {method: 'DELETE'},
-                                     query: {method: 'GET', isArray: true, headers: {'x-full-list': true}},
+                                    {create: {method: 'POST', headers: withToken()},
+                                     get: {method: 'GET', headers: withToken()},
+                                     delete: {method: 'DELETE', headers: withToken()},
+                                     query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})},
                                    });
 
         addListFunctions();
@@ -315,12 +327,17 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
     }
 
     var services = {}
-    if (Config.backends && Config.backends[0] && Config.backends[0].endpoint) {
-        setEndpoint(Config.backends[0].endpoint);
-    } else {
-        setEndpoint(''); //start pointing to current backend
-    };
+
     services.setEndpoint = setEndpoint;
+
+    services.setUp = function() {
+      if (Config.backends && Config.backends[0] && Config.backends[0].endpoint) {
+          setEndpoint(Config.backends[0].endpoint);
+      } else {
+          setEndpoint(''); //start pointing to current backend
+      };
+    }
+    services.setUp();
 
     return services;
 });

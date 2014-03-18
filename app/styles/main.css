@@ -7311,29 +7311,6 @@ td.visible-print {
   opacity: 0;
 }
 
-/* Table anims :P */
-
-tr.ng-enter,
-tr.ng-leave {
-  -webkit-transition: 150ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-     -moz-transition: 150ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-      -ms-transition: 150ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-       -o-transition: 150ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-          transition: 150ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
-}
-
-tr.ng-leave.ng-leave-active,
-tr.ng-enter {
-  height: 0;
-  opacity: 0;
-}
-
-tr.ng-enter.ng-enter-active,
-tr.ng-leave {
-  height: 30px;
-  opacity: 1;
-}
-
 @keyframes spin {
   from {
     transform: rotate(0deg);

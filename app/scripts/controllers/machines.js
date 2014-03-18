@@ -7,7 +7,7 @@ angular.module('fifoApp')
     $scope.auth = auth;
 
     $scope.infinitScroll = function() {
-      $scope.tableParams.count($scope.tableParams.count() + 15);
+      $scope.tableParams.count($scope.tableParams.count() + 20);
     }
 
     $scope.start = function(vm) {
@@ -105,6 +105,14 @@ angular.module('fifoApp')
           filterData()
         })
       })
+
+      $scope.$watch('searchQuery', function(val) {
+        filterData()
+
+        if (typeof val != 'undefined')
+          auth.currentUser().mdata_set({vm_searchQuery: val})
+      })
+
     }
 
     var startRequests = function() {
@@ -113,7 +121,7 @@ angular.module('fifoApp')
 
       $scope.tableParams = new ngTableParams({
         page: 1,
-        count: 15,
+        count: 30,
         total: 0, //0=disable
         sorting: {
           'config.alias': 'desc' //Could save this in the user metadata.. :P
@@ -126,18 +134,6 @@ angular.module('fifoApp')
         }
       })
 
-      //When something on the table changes, i.e. infinit scroll detected.
-      $scope.$watch('tableParams', function() {
-        filterData()
-      }, true);
-
-      $scope.$watch('searchQuery', function(val) {
-        filterData()
-
-        if (typeof val != 'undefined')
-          auth.currentUser().mdata_set({vm_searchQuery: val})
-      })
-
       $scope.vmsFiltered = []
 
       $scope.vms = wiggle.vms.queryFull()
@@ -145,19 +141,15 @@ angular.module('fifoApp')
       $scope.vms.$promise.then(function(vms) {
         vms.forEach(vmService.updateCustomFields)
         defered.resolve()
+        listenEvents()
       })
 
-      listenEvents()
-
       return defered.promise
-
   }
 
   var requestsPromise = startRequests()
   
-  requestsPromise.then(function() {
+  auth.userPromise().then(function() {
     $scope.searchQuery = auth.currentUser().mdata('vm_searchQuery');
-    filterData()
-  });
-
+  })
   });
