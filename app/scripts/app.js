@@ -185,6 +185,7 @@ angular.module('fifoApp',
 
 .run(function($rootScope, gettextCatalog, gettext, $window, $templateCache) {
 
+
   //Empty ng-table template for pagination
   $templateCache.put('ng-table/pager.html', '')
 
@@ -218,3 +219,9 @@ angular.module('fifoApp',
   })
 
 })
+
+
+//Turn off ngTable logs, (while waiting for https://github.com/esvit/ng-table/issues/134)
+angular.module('fifoApp').config(function($logProvider) {
+  $logProvider.debugEnabled(false);
+});

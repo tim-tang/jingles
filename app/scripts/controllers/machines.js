@@ -121,7 +121,7 @@ angular.module('fifoApp')
 
       $scope.tableParams = new ngTableParams({
         page: 1,
-        count: 20,
+        count: 30,
         total: 0, //0=disable
         sorting: {
           'config.alias': 'desc' //Could save this in the user metadata.. :P
