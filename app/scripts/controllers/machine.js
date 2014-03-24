@@ -565,7 +565,7 @@ angular.module('fifoApp')
             case 'create':
                 status.prompt('Write a comment for the new backup:', function(comment) {
                     var body = {comment: comment};
-                    if (obj.parent) {
+                    if (obj && obj['parent']) {
                         body.parent = obj.parent
                         body['delete'] = true
                     }
