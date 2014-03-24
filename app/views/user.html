@@ -112,7 +112,7 @@
             <th translate>Actions</th>
           </tr>
           <tr ng-repeat="group in user._groups">
-            <td>{{group.name}}</td>
+            <td><span ng-class="{deleted: group.deleted}">{{group.name}}</span></td>
             <td>{{group.uuid}}</td>
             <td><a ng-click="leave_group(group.uuid)" translate>delete</a></td>
           </tr>
@@ -130,10 +130,10 @@
             <th translate>UUID</th>
             <th translate>Actions</th>
           </tr>
-          <tr ng-repeat="org in user.orgs">
-            <td>{{orgs[org].name}}</td>
-            <td>{{orgs[org].uuid}}</td>
-            <td><a ng-click="org_leave(orgs[org].uuid)" translate>delete</a></td>
+          <tr ng-repeat="org in user._orgs">
+            <td><span ng-class="{deleted: org.deleted}">{{org.name}}</span></td>
+            <td>{{org.uuid}}</td>
+            <td><a ng-click="org_leave(org.uuid)" translate>delete</a></td>
           </tr>
         </table>
       </div>
