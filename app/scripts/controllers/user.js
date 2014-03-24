@@ -14,21 +14,30 @@ angular.module('fifoApp')
             if (c[entity][e]) {
                 callback(c[entity][e]);
             } else {
-                wiggle[entity].get({id: e}, function(elem) {
+                // wiggle[entity].get(
+                //     {id: e},
+                //     {
+                //         success: function(elem) {
+                //             c[entity][e] = elem;
+                //             callback(elem);
+                //         },
+                //         failure: function(err,status){
+                //             c[entity][e] = {id: e, alias: "DELETED"};
+                //             console.log("Err",err,status);
+                //         }
+                //     });
+                wiggle[entity].get({id: e}, function success(elem) {
+                    console.log("Got", entity, e);
                     c[entity][e] = elem;
                     callback(elem);
+                }, function failure(err,status){
+                    c[entity][e] = {id: e, alias: "<b>DELETED</b>"};
+                    console.log("Err",err,status);
                 })
+
             }
         }
     })();
-
-
-    $scope.orgs = {}
-    wiggle.orgs.query(function(ids) {
-        ids.forEach(function(res) {
-                $scope.orgs[res.uuid] = res;
-        });
-    });
 
     $scope.org_join = function () {
         var org = $scope.org_to_join;
@@ -109,6 +118,7 @@ angular.module('fifoApp')
         $scope.ssh_keys = $scope.user.mdata('ssh_keys')
         $scope.permissions = [];
         $scope.user._groups = {};
+        $scope.user._orgs = {};
         if ($scope.user.keys.length == 0) {
             $scope.user.keys = {};
         };
@@ -120,9 +130,17 @@ angular.module('fifoApp')
             if ($scope.groups[gid]) {
                 $scope.user._groups[gid] = $scope.groups[gid];
             } else {
-                $scope.user._groups[gid] = {uuid: gid};
+                $scope.user._groups[gid] = {uuid: gid, name: "DELETED", deleted:true};
             }
         });
+        $scope.user.orgs.map(function (gid){
+            if ($scope.orgs[gid]) {
+                $scope.user._orgs[gid] = $scope.orgs[gid];
+            } else {
+                $scope.user._orgs[gid] = {uuid: gid, name: "DELETED", deleted:true};
+            }
+        });
+
         $scope.permissions = res.permissions.map(update_permission);
     });
 
@@ -285,12 +303,22 @@ angular.module('fifoApp')
     $scope.init = function() {
         $scope.pass1 = "";
         $scope.pass2 = "";
-        $scope.groups = [];
-        wiggle.groups.query(function(ids) {
-            ids.forEach(function(g) {
-                $scope.groups[g.uuid] = g;
+        $scope.groups = {};
+        $scope.orgs = {};
+        wiggle.groups.query(function(gs) {
+            $scope.groups = gs;
+            gs.forEach(function(g) {
                 if ($scope.user._groups[g.uuid]) {
                     $scope.user._groups[g.uuid] = g;
+                }
+            });
+        })
+        wiggle.orgs.query(function(o) {
+            $scope.orgs = os;
+            os.forEach(function(o) {
+
+                if ($scope.user._orgs[o.uuid]) {
+                    $scope.user._orgs[o.uuid] = o;
                 }
             });
         })

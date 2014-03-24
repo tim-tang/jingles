@@ -8365,3 +8365,8 @@ body,
   max-width: 300px;
   white-space: pre-wrap;
 }
+
+.deleted {
+    color: red;
+    font-weight: bold;
+}

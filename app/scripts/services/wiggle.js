@@ -40,7 +40,7 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
 
     var addListFunctions = function() {
         /* Response with list of strings are not $resource friendly..
-           https://groups.google.com/forum/#!msg/angular/QjhN9-UeBVM/UjSgc5CNDqMJ 
+           https://groups.google.com/forum/#!msg/angular/QjhN9-UeBVM/UjSgc5CNDqMJ
            Only auth.js seems to be using this...
         */
         ['hypervisors', 'vms'].forEach(function(resource) {
@@ -56,7 +56,7 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
 
     /* Add metadata helpers in the resources */
     var addMetadataFunctions = function() {
-        
+
         ['hypervisors', 'orgs', 'vms', 'networks', 'ipranges', 'datasets', 'packages', 'users', 'sessions', 'groups', 'dtrace'].forEach(function(resource) {
 
             /* Resources that has put may save metadata, i.e. PUT vms/metadata/jingles {locked: true} */
@@ -165,8 +165,19 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                       response: function(res) {
 
                                         res.resource.forEach(function(el) {
-                                          el._groups = el.groups.map(function(g) {return services.groups.get({id: g})})
-                                          el._orgs = el.orgs.map(function(o) {return services.orgs.get({id: o})})
+                                            el._groups = el.groups.map(function(e){
+                                                return {uuid: e, name:"DELETED", deleted:true}
+                                            });
+                                            el.groups.map(function(uuid) {
+                                                services.groups.get({id: uuid}, function(g) {
+                                                    console.log(g);
+                                                    el._groups[uuid] = g;
+                                                });
+                                            })
+                                            el._orgs = el.orgs.map(function(e){
+                                                return {uuid: e, name:"DELETED", deleted:true}
+                                            });
+                                            el._orgs = el.orgs.map(function(o) {return services.orgs.get({id: o})})
                                         })
 
                                         // res.resource.hash = hashFromArray(res.resource)
