@@ -58,6 +58,7 @@ angular.module('fifoApp')
             $scope.user.orgs = $scope.user.orgs.filter(function(o) {
                 return o != org;
             });
+            delete $scope.user.orgs[org];
         });
     };
 
@@ -249,6 +250,9 @@ angular.module('fifoApp')
                              controller: 'groups',
                              controller_id: group},
                             function(){
+                                $scope.user.groups = $scope.user.groups.filter(function(g) {
+                                    return g != groups;
+                                });
                                 delete $scope.user._groups[group];
                             });
     };
