@@ -14,18 +14,6 @@ angular.module('fifoApp')
             if (c[entity][e]) {
                 callback(c[entity][e]);
             } else {
-                // wiggle[entity].get(
-                //     {id: e},
-                //     {
-                //         success: function(elem) {
-                //             c[entity][e] = elem;
-                //             callback(elem);
-                //         },
-                //         failure: function(err,status){
-                //             c[entity][e] = {id: e, alias: "DELETED"};
-                //             console.log("Err",err,status);
-                //         }
-                //     });
                 wiggle[entity].get({id: e}, function success(elem) {
                     console.log("Got", entity, e);
                     c[entity][e] = elem;
@@ -313,8 +301,9 @@ angular.module('fifoApp')
                 }
             });
         })
-        wiggle.orgs.query(function(o) {
+        wiggle.orgs.query(function(os) {
             $scope.orgs = os;
+            console.log($scope.orgs)
             os.forEach(function(o) {
 
                 if ($scope.user._orgs[o.uuid]) {
