@@ -69,13 +69,13 @@ angular.module('fifoApp',
       .when('/configuration/users', {
         templateUrl: 'views/users.html',
         controller: 'UsersCtrl',
-        helpUrl:  help_url('user', 'list'),
+        helpUrl:  help_url('usermanagement', 'user-list'),
         name: 'Users'
       })
       .when('/configuration/groups', {
         templateUrl: 'views/groups.html',
         controller: 'GroupsCtrl',
-        helpUrl:  help_url('group', 'list'),
+        helpUrl:  help_url('usermanagement', 'group-list'),
         name: 'Groups'
       })
       .when('/configuration/organizations', {
@@ -127,13 +127,13 @@ angular.module('fifoApp',
       })
       .when('/configuration/users/new', {
         templateUrl: 'views/user-new.html',
-        helpUrl:  help_url('user', 'create'),
+        helpUrl:  help_url('usermanagement', 'user-new'),
         controller: 'UserNewCtrl'
       })
       .when('/configuration/users/:uuid', {
         templateUrl: 'views/user.html',
         controller: 'UserCtrl',
-        helpUrl:  help_url('user', 'details')
+        helpUrl:  help_url('usermanagement', 'user-details')
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -142,12 +142,12 @@ angular.module('fifoApp',
       })
       .when('/configuration/groups/new', {
         templateUrl: 'views/group-new.html',
-        helpUrl:  help_url('group', 'create'),
+        helpUrl:  help_url('usermanagement', 'group-new'),
         controller: 'GroupNewCtrl'
       })
       .when('/configuration/groups/:uuid', {
         templateUrl: 'views/group.html',
-        helpUrl:  help_url('group', 'details'),
+        helpUrl:  help_url('usermanagement', 'group-details'),
         controller: 'GroupCtrl'
       })
       .when('/configuration/organizations/new', {
