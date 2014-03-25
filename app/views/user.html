@@ -45,7 +45,7 @@
             <dt translate>Active Organisation</dt>
             <dd>
               <select ng-model="user.org" ng-change="org_select()"
-                      ng-options="org as orgs[org].name for org in user.orgs">
+                      ng-options="org.uuid as org.name for org in user._orgs | hash2array">
               </select>
             </dd>
 

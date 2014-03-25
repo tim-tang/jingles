@@ -35,7 +35,8 @@ angular.module('fifoApp')
             controller_id: org
         }, {}, function(e) {
             if ($scope.user.orgs.indexOf(org) == -1)
-                $scope.user.orgs.push(org)
+                $scope.user.orgs.push(org);
+                $scope.user._orgs[org] = _orgs[org];
         });
     }
 
@@ -257,6 +258,7 @@ angular.module('fifoApp')
                           controller: 'groups',
                           controller_id: $scope.group},
                          function() {
+                             $scope.user.groups.push($scope.group);
                              $scope.user._groups[$scope.group] = $scope.groups[$scope.group];
                          }
                         );
@@ -303,13 +305,12 @@ angular.module('fifoApp')
         })
         wiggle.orgs.query(function(os) {
             $scope.orgs = os;
-            console.log($scope.orgs)
             os.forEach(function(o) {
-
                 if ($scope.user._orgs[o.uuid]) {
                     $scope.user._orgs[o.uuid] = o;
                 }
             });
+            console.log($scope.user._orgs, $scope.user.org);
         })
     };
     $scope.init();
