@@ -28,7 +28,10 @@ angular.module('fifoApp')
     var filterData = function() {
       var p = $scope.tableParams;
 
-      var data = $scope.searchQuery ? $filter('filter')($scope.vms, $scope.searchQuery) : $scope.vms;
+      var data = $scope.searchQuery && $scope.searchQuery.length >= (Config.minCharsSearch || 3)
+        ? $filter('filter')($scope.vms, $scope.searchQuery)
+        : $scope.vms;
+
       data = p.sorting()? $filter('orderBy')(data, p.orderBy()) : data
 
       $scope.vmsFiltered = data.slice((p.page() - 1) * p.count(), p.page() * p.count());
@@ -121,7 +124,7 @@ angular.module('fifoApp')
 
       $scope.tableParams = new ngTableParams({
         page: 1,
-        count: 30,
+        count: 25,
         total: 0, //0=disable
         sorting: {
           'config.alias': 'desc' //Could save this in the user metadata.. :P

@@ -80,6 +80,8 @@ angular.module('fifoApp')
                 .on('mouseover', function(h) {
                   $scope.vm = h
                   $scope.$digest()
+                  angular.element('#popover_vm').css('left', (210 + h.x) + 'px')
+                  angular.element('#popover_vm').css('top', (-30 + h.y) + 'px')
                 })
                 .on('mouseout', function() {
                   $scope.vm = undefined
@@ -134,6 +136,8 @@ angular.module('fifoApp')
                 .on('mouseover', function(h) {
                   $scope.hyper = h
                   $scope.$digest()
+                  angular.element('#popover_hyper').css('left', (210 + h.x) + 'px')
+                  angular.element('#popover_hyper').css('top', (-30 + h.y) + 'px')
                 })
                 .on('mouseout', function() {
                   $scope.hyper = undefined
