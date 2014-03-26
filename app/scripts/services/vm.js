@@ -51,8 +51,11 @@ angular.module('fifoApp')
             switch (vm.state) {
             case 'failed':
                 vm.state_description = "Could not create the VM with vmadm.";
-                vm.state = 'failed';
                 vm._state_label = 'danger';
+                break;
+            case 'pooled':
+                vm.state_description = "Enqueued to be created on a server.";
+                vm._state_label = 'default';
                 break;
             case 'failed-get_ips':
                 vm.state_description = "No IP address for the machine could be obtained.";

@@ -234,7 +234,7 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                     }
                                   }},
                                   query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})},
-                                  queryFull: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true}), interceptor: {
+                                  queryFull: {method: 'GET', isArray: true, headers: withToken({'x-full-list': "true", 'x-full-list-fields': 'uuid,datset,package,config,hypervisor,owner,metadata,state'}), interceptor: {
                                     response: function(res) {
                                       res.resource.forEach(additionalVmData)
                                       res.resource.hash = hashFromArray(res.resource)
