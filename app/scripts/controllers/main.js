@@ -18,6 +18,16 @@ angular.module('fifoApp')
             $scope.activeOrg = wiggle.orgs.get({id: $scope.user.org})
 
         wiggle.cloud.get(function res (data) {
+
+            //Add action link
+            data.warnings.forEach(function(w) {
+                switch (w.category) {
+                    case 'chunter':
+                        w.link = '#/servers/' + w.element
+                        break;
+                }
+            })
+
             $scope.metrics = data.metrics
             $scope.versions = data.versions
             $scope.messages = Config.evaluate_cloud(data.metrics).concat(data.warnings)

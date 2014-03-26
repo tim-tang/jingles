@@ -74,11 +74,13 @@
 				<th translate>Category</th>
 				<th translate>Element</th>
 				<th translate>Message</th>
+				<th></th>
 			</tr>
 			<tr class='{{msgTrClass(msg.type)}}' ng-repeat='msg in messages | filter:{ok: !true}'>
 				<td>{{msg.category}}</td>
 				<td>{{msg.element}}</td>
 				<td>{{msg.message}}</td>
+				<td><a ng-href='{{msg.link}}' ng-if='msg.link'><i class='glyphicon glyphicon-search'></i></a></td>
 			</tr>
 		</table>
 	</div>
