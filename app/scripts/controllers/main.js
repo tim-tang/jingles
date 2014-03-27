@@ -17,10 +17,10 @@ angular.module('fifoApp')
         if ($scope.user.org)
             $scope.activeOrg = wiggle.orgs.get({id: $scope.user.org})
 
-        wiggle.cloud.get(function res (data) {
+        wiggle.cloud.get(function res(data) {
 
             //Add action link
-            data.warnings.forEach(function(w) {
+            angular.forEach(data.warnings, function(w) {
                 switch (w.category) {
                     case 'chunter':
                         w.link = '#/servers/' + w.element
@@ -44,6 +44,12 @@ angular.module('fifoApp')
             if ($scope.no_servers)
                 $scope.cloud_ok = false
 
+        }, function err(err) {
+
+            // if (err.status === 403)
+            //     return auth.logout();
+
+            console.error('Error while getting cloud status', err)
         })
 
     }
