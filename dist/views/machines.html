@@ -50,7 +50,7 @@
       </td>
       <td data-title="'Created' | translate" class='text-muted visible-lg' sortable="'config.created_at'" am-time-ago="vm.config.created_at" title="{{vm.config.created_at | date:'mediumDate'}}"></td>
 
-      <td>
+      <td sortable="'state'" data-title="'State' | translate">
         <span class='label label-{{vm._state_label}} capitalize' jq-run='tooltip' jq-options="{container: 'body'}" title="{{vm.state_description}}">{{vm.state}}</span>
       </td>
 
