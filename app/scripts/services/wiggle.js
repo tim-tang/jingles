@@ -129,6 +129,7 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
     //Initialize the caches.
     $cacheFactory('datasets')
     $cacheFactory('networks')
+    $cacheFactory('hypervisors')
 
     var controller_layout = '/:id/:controller/:controller_id/:controller_id1/:controller_id2/:controller_id3';
     function setUpServices() {
@@ -237,6 +238,18 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                          {id: '@id', controller: '@controller', controller_id: '@controller_id'},
                                          {put: {method: 'PUT', headers: withToken()},
                                           delete: {method: 'DELETE', headers: withToken()},
+                                          get: {method: 'GET', cache:  $cacheFactory.get('hypervisors'), headers: withToken(), interceptor: {
+                                            response: function(res) {
+                                              //Caching hypervisors call speeds up the vms list. But we need to clean the cache.
+                                              var c = $cacheFactory.get('hypervisors');
+                                              if (c.info().size > 0)
+                                                setTimeout(function() {
+                                                  if (c.info().size < 1) return;
+                                                  c.removeAll()
+                                                }, 4*1000)
+                                              return res.resource;
+                                            }
+                                          }},
                                           query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})},
                                           queryFull: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true}), interceptor: toHash}
                                         });
