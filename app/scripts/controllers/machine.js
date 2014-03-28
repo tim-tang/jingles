@@ -745,7 +745,6 @@ angular.module('fifoApp')
                     status.info('Creating ' + r.name + ' ' + r.version);
                     updateVm();
                 });
-            console.log(vm + "@" + snap, config);
         }
 
         var init = function() {

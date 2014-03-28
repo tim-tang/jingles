@@ -165,23 +165,38 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                       response: function(res) {
 
                                         res.resource.forEach(function(el) {
-                                            el._groups = el.groups.map(function(e){
-                                                return {uuid: e, name:"DELETED", deleted:true}
-                                            });
-                                            el.groups.map(function(uuid) {
-                                                services.groups.get({id: uuid}, function(g) {
-                                                    console.log(g);
-                                                    el._groups[uuid] = g;
-                                                });
+
+                                          el._groups = el.groups.map(function(g) {
+
+                                            var _g = services.groups.get({id: g})
+
+                                            //If != 200, at least put the uuid and a name to better manage it on the UI.
+                                            //TODO: maybe there is a way to make this more generic?
+                                            _g.$promise.catch(function(err) {
+                                              _g.name = '?'
+                                              _g.uuid = g
+                                              _g.deleted = true
                                             })
-                                            el._orgs = el.orgs.map(function(e){
-                                                return {uuid: e, name:"DELETED", deleted:true}
-                                            });
-                                            el._orgs = el.orgs.map(function(o) {return services.orgs.get({id: o})})
+
+                                            return _g
+                                          })
+
+                                          el._orgs = el.orgs.map(function(o) {
+                                            var _o = services.orgs.get({id: o})
+
+                                            _o.$promise.catch(function(err) {
+                                              _o.name = '?'
+                                              _o.uuid = o
+                                              _o.deleted = true
+                                            })
+
+                                            return _o
+                                          })
+
+
                                         })
 
                                         // res.resource.hash = hashFromArray(res.resource)
-
                                         return res.resource;
                                       }
 
