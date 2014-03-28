@@ -80,7 +80,6 @@ angular.module('fifoApp')
            on connection. */
         socket.onmessage = function(message){
             var message = msgpack.unpack(new Uint8Array(message.data));
-            console.log(message)
             if (message.config) {
                 switch (message.config.type) {
                 case "heatmap":

@@ -16,13 +16,13 @@
           <tr ng-repeat='u in users'>
             <td><a href="#/configuration/users/{{u.uuid}}">{{u.name}}</a></td>
             <td>
-              <a class='nocolor' ng-repeat='g in u._groups' href="#/configuration/groups/{{g.uuid}}">
-                <span style='margin-right: 5px' ng-class="{'deleted': g.deleted}">{{g.name}}</span>
+              <a style='padding-right: 5px' class='nocolor' ng-repeat='g in u._groups' href="#/configuration/groups/{{g.uuid}}">
+                <span ng-class="{'text-danger': g.deleted}">{{g.name}}</span>
               </a>
             </td>
             <td>
-              <a class='nocolor' ng-repeat='o in u._orgs' href="#/configuration/organizations/{{o.uuid}}">
-                <span style='margin-right: 5px' ng-class="{'strong': o.uuid == u.org, 'deleted': o.deleted}">{{o.name}}</span>
+              <a style='padding-right: 5px' class='nocolor' ng-repeat='o in u._orgs' href="#/configuration/organizations/{{o.uuid}}">
+                <span ng-class="{'strong': o.uuid == u.org, 'text-danger': o.deleted}">{{o.name}}</span>
               </a>
             </td>
           </tr>

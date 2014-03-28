@@ -10,14 +10,11 @@ function init_scope($scope, org) {
         var a = t.action;
         t.uuid = k;
         if (a == "group_grant" || a == "user_grant") {
-            console.log(t);
             $scope.grant_triggers[k]= t;
         } else if (a == "join_org" || a == "join_group") {
-            console.log(t);
             $scope.join_triggers[k]= t;
         }
     };
-    console.log("join: ", $scope.join_triggers);
     return $scope;
 };
 
@@ -93,7 +90,6 @@ angular.module('fifoApp')
 
 
     $scope.add_group_join_trigger = function() {
-        console.log($scope.join_group)
         wiggle.orgs.create({
             id: uuid,
             controller: "triggers",
@@ -121,7 +117,6 @@ angular.module('fifoApp')
     };
 
     $scope.delete_join_trigger = function(trigger) {
-        console.log(trigger);
         wiggle.orgs.delete({
             id: $scope.org.uuid,
             controller: "triggers",
