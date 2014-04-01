@@ -34,8 +34,8 @@
   
 </div>
 
-<div class="popover right" 
-  style="display: {{vm && 'block' || 'none'}}; position: absolute; top: {{vm.y}}px; left: {{vm.x+210}}px;">
+<div id='popover_vm' class="popover right" 
+  style="display: {{vm && 'block' || 'none'}}; position: absolute;">
   <div class="arrow"></div>
   <div class="popover-inner">
     <h3 class="popover-title">
@@ -54,8 +54,8 @@
   </div>
 </div>
 
-<div class="popover right" 
-  style="display: {{hyper && 'block' || 'none'}}; position: absolute; top: {{hyper.y-10}}px; left: {{hyper.x+210}}px;">
+<div id='popover_hyper' class="popover right" 
+  style="display: {{hyper && 'block' || 'none'}}; position: absolute;">
   <div class="arrow"></div>
   <div class="popover-inner">
     <h3 class="popover-title">

@@ -14,9 +14,8 @@
         			<span ng-switch-when="true" >{{bread.name | translate}}</span>
         			<span ng-switch-default><a href='#{{bread.path}}'>{{bread.name | translate}}</a></span>
         		</ng-switch>
-        		
         	</li>
-            <div class='pull-right' ng-show="helpUrl"><a target="_new" ng-href="{{helpUrl}}"><i class="glyphicon glyphicon-info-sign"></i> <span translate>Help</span></a>
+            <div class='pull-right' ng-show="helpUrl"><a target="_new" ng-href="{{helpUrl}}"><i class="glyphicon glyphicon-question-sign"></i> <span translate>Help</span></a>
             </div>
             <div class="pull-right spinner" ng-show='loading'>
                 <i class='glyphicon glyphicon-refresh'></i>

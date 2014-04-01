@@ -69,8 +69,8 @@
             ng-click='click_network(n)'
             ng-class="selectedNetworks.indexOf(n)>-1 && 'success'">
           <td><strong>{{n.name}}</strong></td>
-          <td ng-show='selectedNetworks.indexOf(n) > -1'>
-            <span class='badge'>{{selectedNetworks.indexOf(n) + 1}}: {{selectedDataset.networks[selectedNetworks.indexOf(n)].description}}</span>
+          <td>
+            <span ng-show='selectedNetworks.indexOf(n) > -1' class='badge'>{{selectedNetworks.indexOf(n) + 1}}: {{selectedDataset.networks[selectedNetworks.indexOf(n)].description}}</span>
           </td>
         </tr>
       </table>
