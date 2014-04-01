@@ -44,7 +44,7 @@ angular.module('fifoApp')
             if ($scope.no_servers)
                 $scope.cloud_ok = false
 
-        }, function err(err) {
+        }, function nk(err) {
 
             // if (err.status === 403)
             //     return auth.logout();
