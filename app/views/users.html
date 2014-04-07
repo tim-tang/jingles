@@ -8,7 +8,7 @@
         <thead>
           <tr>
             <th translate>Name</th>
-            <th translate>Groups</th>
+            <th translate>Roles</th>
             <th translate>Organizations</th>
           </tr>
         </thead>
@@ -16,7 +16,7 @@
           <tr ng-repeat='u in users'>
             <td><a href="#/configuration/users/{{u.uuid}}">{{u.name}}</a></td>
             <td>
-              <a style='padding-right: 5px' class='nocolor' ng-repeat='g in u._groups' href="#/configuration/groups/{{g.uuid}}">
+              <a style='padding-right: 5px' class='nocolor' ng-repeat='g in u._roles' href="#/configuration/roles/{{g.uuid}}">
                 <span ng-class="{'text-danger': g.deleted}">{{g.name}}</span>
               </a>
             </td>

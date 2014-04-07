@@ -1,7 +1,7 @@
-<div class="tab-pane" id="groups">
+<div class="tab-pane" id="roles">
   <div class="pane-nav">
-    <a href="#/configuration/groups/new" class="btn btn-primary" permission=['cloud','groups','create']>
-      <span translate>New Group</span>
+    <a href="#/configuration/roles/new" class="btn btn-primary" permission=['cloud','roles','create']>
+      <span translate>New Role</span>
     </a>
   </div>
   <div class="row-fluid">
@@ -13,8 +13,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="g in groups">
-            <td><a ng-href="#/configuration/groups/{{g.uuid}}">{{g.name}}</a></td>
+          <tr ng-repeat="g in roles">
+            <td><a ng-href="#/configuration/roles/{{g.uuid}}">{{g.name}}</a></td>
           </tr>
         </tbody>
       </table>

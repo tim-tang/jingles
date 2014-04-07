@@ -9,9 +9,9 @@ function init_scope($scope, org) {
         var t = source[k];
         var a = t.action;
         t.uuid = k;
-        if (a == "group_grant" || a == "user_grant") {
+        if (a == "role_grant" || a == "user_grant") {
             $scope.grant_triggers[k]= t;
-        } else if (a == "join_org" || a == "join_group") {
+        } else if (a == "join_org" || a == "join_role") {
             $scope.join_triggers[k]= t;
         }
     };
@@ -21,16 +21,16 @@ function init_scope($scope, org) {
 angular.module('fifoApp')
   .controller('OrganizationCtrl', function ($scope, $routeParams, $location, wiggle, vmService, status, breadcrumbs) {
 
-    $scope.group = "";
+    $scope.role = "";
     $scope.permission = "";
     $scope.grant_triggers = {};
     $scope.join_triggers = {};
     var uuid = $routeParams.uuid;
 
-    $scope.groups = {}
-    wiggle.groups.query(function(grps) {
+    $scope.roles = {}
+    wiggle.roles.query(function(grps) {
         grps.forEach(function(grp) {
-            $scope.groups[grp.uuid] = grp;
+            $scope.roles[grp.uuid] = grp;
         });
     });
 
@@ -62,10 +62,10 @@ angular.module('fifoApp')
             controller: "triggers",
             controller_id: event
         }, {
-            action: "group_grant",
+            action: "role_grant",
             base: base,
             permission: [$scope.permission],
-            target: $scope.grant_group
+            target: $scope.grant_role
         }, function success(res) {
             init_scope($scope, res)
         });
@@ -73,7 +73,7 @@ angular.module('fifoApp')
 
     $scope.delete_grant_trigger = function(trigger) {
         var permission = trigger.permission.splice(0);
-        var group = trigger.target;
+        var role = trigger.target;
         var base = permission.shift();
         permission.shift();
         wiggle.orgs.delete({
@@ -89,14 +89,14 @@ angular.module('fifoApp')
     };
 
 
-    $scope.add_group_join_trigger = function() {
+    $scope.add_role_join_trigger = function() {
         wiggle.orgs.create({
             id: uuid,
             controller: "triggers",
             controller_id: "user_create"
         }, {
-            action: "join_group",
-            target: $scope.join_group
+            action: "join_role",
+            target: $scope.join_role
         }, function success(res) {
             init_scope($scope, res);
         });

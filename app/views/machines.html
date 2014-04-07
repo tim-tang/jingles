@@ -45,7 +45,7 @@
       <td ng-show="auth.canAccess(['cloud','hypervisors','list'])" data-title="'Server'|translate" sortable="'hypervisor'" class='fifo-visible-lg fifo-visible-md'>
         <a class='nocolor' href="#/servers/{{vm.hypervisor}}">{{vm._hypervisor.alias}}</a>
       </td>
-      <td ng-show="auth.canAccess(['cloud','groups','list'])" class='text-muted fifo-visible-lg fifo-visible-md' data-title="'Owner'|translate" sortable="'_owner.name'">
+      <td ng-show="auth.canAccess(['cloud','roles','list'])" class='text-muted fifo-visible-lg fifo-visible-md' data-title="'Owner'|translate" sortable="'_owner.name'">
         <a class="nocolor" href="#/configuration/organizations/{{vm.owner}}">{{vm._owner.name}}</a>
       </td>
       <td data-title="'Created' | translate" class='text-muted visible-lg' sortable="'config.created_at'" am-time-ago="vm.config.created_at" title="{{vm.config.created_at | date:'mediumDate'}}"></td>

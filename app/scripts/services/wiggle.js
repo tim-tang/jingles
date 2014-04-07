@@ -57,7 +57,7 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
     /* Add metadata helpers in the resources */
     var addMetadataFunctions = function() {
 
-        ['hypervisors', 'orgs', 'vms', 'networks', 'ipranges', 'datasets', 'packages', 'users', 'sessions', 'groups', 'dtrace'].forEach(function(resource) {
+        ['hypervisors', 'orgs', 'vms', 'networks', 'ipranges', 'datasets', 'packages', 'users', 'sessions', 'roles', 'dtrace'].forEach(function(resource) {
 
             /* Resources that has put may save metadata, i.e. PUT vms/metadata/jingles {locked: true} */
             if (services[resource].put) {
@@ -167,9 +167,9 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
 
                                         res.resource.forEach(function(el) {
 
-                                          el._groups = el.groups.map(function(g) {
+                                          el._roles = el.roles.map(function(g) {
 
-                                            var _g = services.groups.get({id: g})
+                                            var _g = services.roles.get({id: g})
 
                                             //If != 200, at least put the uuid and a name to better manage it on the UI.
                                             //TODO: maybe there is a way to make this more generic?
@@ -203,7 +203,7 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
 
                                     }},
                                   });
-        services.groups = $resource(endpoint + 'groups' + controller_layout,
+        services.roles = $resource(endpoint + 'roles' + controller_layout,
                                     {id: '@id',
                                      controller: '@controller',
                                      controller_id: '@controller_id',
@@ -343,23 +343,23 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
     //will return that promise instead of the original $resource. Ref: https://github.com/angular/angular.js/blob/master/src/ngResource/resource.js#L501
     //To make this explicit, and to make it not a surprise for dev's, will define getFull instead of overriding the default 'get'
 
-    //Add _group object to the user...
+    //Add _role object to the user...
     var userInterceptor = function(res) {
 
         var user = res.resource;
-        user._groups = {};
+        user._roles = {};
         // return user;
-        if (!user.groups) return user;
+        if (!user.roles) return user;
 
-        var groupCalls = user.groups.map(function(id) {
-            return services.groups.get({id: id}).$promise;
+        var roleCalls = user.roles.map(function(id) {
+            return services.roles.get({id: id}).$promise;
         })
 
-        return $q.all(groupCalls)
+        return $q.all(roleCalls)
             .then(function(res) {
-                res.forEach(function(r) {user._groups[r.uuid] = r});
+                res.forEach(function(r) {user._roles[r.uuid] = r});
                 return user})
-            //Ignore error comming from GET on the groups. i.e. 403's...
+            //Ignore error comming from GET on the roles. i.e. 403's...
             .catch(function(res) {
                 return user;
             })

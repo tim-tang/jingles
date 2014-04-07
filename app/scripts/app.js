@@ -72,11 +72,11 @@ angular.module('fifoApp',
         helpUrl:  help_url('usermanagement', 'user-list'),
         name: 'Users'
       })
-      .when('/configuration/groups', {
-        templateUrl: 'views/groups.html',
-        controller: 'GroupsCtrl',
-        helpUrl:  help_url('usermanagement', 'group-list'),
-        name: 'Groups'
+      .when('/configuration/roles', {
+        templateUrl: 'views/roles.html',
+        controller: 'RolesCtrl',
+        helpUrl:  help_url('usermanagement', 'role-list'),
+        name: 'Roles'
       })
       .when('/configuration/organizations', {
         templateUrl: 'views/organizations.html',
@@ -140,15 +140,15 @@ angular.module('fifoApp',
         helpUrl:  help_url('general', 'about'),
         controller: 'AboutCtrl'
       })
-      .when('/configuration/groups/new', {
-        templateUrl: 'views/group-new.html',
-        helpUrl:  help_url('usermanagement', 'group-new'),
-        controller: 'GroupNewCtrl'
+      .when('/configuration/roles/new', {
+        templateUrl: 'views/role-new.html',
+        helpUrl:  help_url('usermanagement', 'role-new'),
+        controller: 'RoleNewCtrl'
       })
-      .when('/configuration/groups/:uuid', {
-        templateUrl: 'views/group.html',
-        helpUrl:  help_url('usermanagement', 'group-details'),
-        controller: 'GroupCtrl'
+      .when('/configuration/roles/:uuid', {
+        templateUrl: 'views/role.html',
+        helpUrl:  help_url('usermanagement', 'role-details'),
+        controller: 'RoleCtrl'
       })
       .when('/configuration/organizations/new', {
         templateUrl: 'views/organization-new.html',

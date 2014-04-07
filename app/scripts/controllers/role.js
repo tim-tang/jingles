@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fifoApp')
-  .controller('GroupCtrl', function ($scope, $routeParams, $location, wiggle, vmService, status, breadcrumbs) {
+  .controller('RoleCtrl', function ($scope, $routeParams, $location, wiggle, vmService, status, breadcrumbs) {
 
     var uuid = $routeParams.uuid;
     $scope.p2 = false;
@@ -32,7 +32,7 @@ angular.module('fifoApp')
         if (p[1] && p[1] != "..." && p[1] != "_") {
             switch (p[0]) {
             case "users":
-            case "groups":
+            case "roles":
             case "packages":
             case "dtraces":
             case "ipranges":
@@ -62,15 +62,15 @@ angular.module('fifoApp')
         return res;
     };
 
-    wiggle.groups.get({id: uuid}, function(res) {
-        $scope.group = res;
+    wiggle.roles.get({id: uuid}, function(res) {
+        $scope.role = res;
         $scope.permissions = res.permissions.map(update_permission);
         breadcrumbs.setLast(res.name)
     });
 
     $scope.delete_permission = function(permission) {
         var p = {controller: "permissions",
-                 id: $scope.group.uuid};
+                 id: $scope.role.uuid};
         p.controller_id = permission[0];
         if (permission[1])
             p.controller_id1 = permission[1];
@@ -78,7 +78,7 @@ angular.module('fifoApp')
             p.controller_id2 = permission[2];
         if (permission[3])
             p.controller_id3 = permission[3];
-        wiggle.groups.revoke(p, function success(){
+        wiggle.roles.revoke(p, function success(){
             $scope.permissions = $scope.permissions.filter(function (pobj) {
                 return pobj.obj != permission;
             })
@@ -86,13 +86,13 @@ angular.module('fifoApp')
     };
 
     $scope.grant = function() {
-        $scope.permission.id = $scope.group.uuid;
+        $scope.permission.id = $scope.role.uuid;
         $scope.permission.controller = "permissions";
         if ($scope.show_text) {
             $scope.permission["controller_id3"] = $scope.perm_text
         }
 
-        wiggle.groups.grant($scope.permission, function () {
+        wiggle.roles.grant($scope.permission, function () {
             var p = [$scope.permission.controller_id];
             if ($scope.permission.controller_id1)
                 p.push($scope.permission.controller_id1);
@@ -110,22 +110,22 @@ angular.module('fifoApp')
 
 
     $scope.delete = function() {
-        var name = $scope.group.name;
-        var uuid = $scope.group.uuid;
+        var name = $scope.role.name;
+        var uuid = $scope.role.uuid;
         $scope.modal = {
             btnClass: 'btn-danger',
             confirm: 'Delete',
             title: 'Confirm VM Deletion',
-            body: '<p><font color="red">Warning!</font> you are about to delete the Group <b id="delete-uuid">' + name + " (" + uuid + ") </b> Are you 100% sure you really want to do this?</p><p>Clicking on Delete here will mean this Group is gone forever!</p>", 
+            body: '<p><font color="red">Warning!</font> you are about to delete the Role <b id="delete-uuid">' + name + " (" + uuid + ") </b> Are you 100% sure you really want to do this?</p><p>Clicking on Delete here will mean this Role is gone forever!</p>", 
             ok: function() {
-            	wiggle.groups.delete({id: uuid},
+            	wiggle.roles.delete({id: uuid},
                                  function success(data, h) {
                                      status.success(name + ' deleted');
-                                     $location.path('/configuration/groups')
+                                     $location.path('/configuration/roles')
                                  },
                                  function error(data) {
-                                     console.error('Delete Group error:', data);
-                                     status.error('There was an error deleting your group. See the javascript console.');
+                                     console.error('Delete Role error:', data);
+                                     status.error('There was an error deleting your role. See the javascript console.');
                                  });
             }
         }
