@@ -18,7 +18,7 @@ angular.module('fifoApp')
     $scope.import = function(uuid) {
         var url = $scope.url
         if (uuid)
-            url = 'http://' + Config.datasets + '/datasets/' + uuid;
+            url = datasetsat.endpoint + '/datasets/' + uuid;
 
         wiggle.datasets.import({}, {url: url},
            function success(r) {
@@ -30,6 +30,7 @@ angular.module('fifoApp')
            },
            function error(e) {
                 status.error('Could not import dataset')
+                console.error(e)
            });
     };
 
@@ -97,12 +98,18 @@ angular.module('fifoApp')
             return status.error('Make sure your config has an URL for the remote datasets')
 
         /* Get the available datasets */
-        datasetsat.datasets.query(function (data) {
+        $scope.loadingRemoteDatasets = true
+        datasetsat.datasets.query(function ok(data) {
             data.forEach(function(e) {
                 var localOne = $scope.datasets[e.uuid];
                 e.imported = localOne && localOne.imported && localOne.imported > 0 || false
                 $scope.datasetsat[e.uuid] = e
             })
+            $scope.loadingRemoteDatasets = false
+        }, function nk(res) {
+            status.error('Could not load remote datasets ' + res.status)
+            console.error(res)
+            $scope.loadingRemoteDatasets = false
         });
 
     }
