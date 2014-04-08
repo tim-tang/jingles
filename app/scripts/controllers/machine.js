@@ -253,9 +253,16 @@ angular.module('fifoApp')
                 var _notes = $scope.vm.mdata('notes') && $scope.vm.mdata('notes').sort(function(a,b) { return a.created_at >= b.created_at; })
                 $scope.notes = _notes? _notes.reverse() : []
 
-
                 $scope.snapshots = $scope.vm.snapshots || {}
                 $scope.backups = $scope.vm.backups || {}
+
+                //Build the routes object.
+                $scope.routes = []
+                var _r = $scope.vm.config.routes
+                if (_r)
+                    for (var k in _r) {
+                        routes.push({destination: k, gateway: _r[k]})
+                    }
 
                 cb && cb($scope.vm);
                 $scope.img_name = $scope.vm.config.alias;
@@ -471,6 +478,40 @@ angular.module('fifoApp')
                     console.log(data)
                 })
         };
+
+        $scope.delete_route = function(route) {
+
+            wiggle.vms.put({id: $scope.vm.uuid},
+                {config: {remove_routes: route.destination}},
+                function ok(data) {
+                    status.success('Route deleted')
+                    $scope.routes.splice($scope.routes.indexOf(route), 1)
+                },
+                function nk(data) {
+                    status.error('Could not delete route')
+                    console.error(data)
+                }
+            )
+        }
+        $scope.save_routes = function (routes) {
+
+            var obj = {}
+            routes.forEach(function(r) {
+                obj[r.destination] = r.gateway
+            })
+
+            wiggle.vms.put({id: $scope.vm.uuid},
+                {config: {set_routes: obj}},
+                function ok(data) {
+                    console.log('ok!', data)
+                    status.success('Routes changed')
+                },
+                function error(data) {
+                    status.error('Could not save routes')
+                    console.error(data)
+                }
+            )
+        }
 
         $scope.add_nic = function add_nic(vm, network) {
             wiggle.vms.save({id: vm.uuid, controller: 'nics'},
