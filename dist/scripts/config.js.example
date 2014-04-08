@@ -19,7 +19,7 @@ Config = {
      * The URL of the remote dataset repository
      *
     */
-    datasets: 'datasets.at',
+    datasets: 'https://datasets.at',
 
      /* Polling interval in seconds for checking if there is a new VM */
      newVmPolling: false,
