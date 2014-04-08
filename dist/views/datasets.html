@@ -50,7 +50,8 @@
             <div class='pane-nav'>
               Datasets are hosted and managed by <a href="http://{{endpoint}}">{{endpoint}}</a>
             </div>
-            <table class="table table-condensed table-hover">
+            <h4 ng-if='loadingRemoteDatasets' class='text-center text-muted'>Loading...</h4>
+            <table class="table table-condensed table-hover" ng-if='loadingRemoteDatasets == false'>
               <thead>
                 <tr>
                   <th></th>
