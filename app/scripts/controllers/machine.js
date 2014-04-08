@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fifoApp')
-    .controller('MachineCtrl', function($scope, $routeParams, $location, wiggle, vmService, status, breadcrumbs) {
+    .controller('MachineCtrl', function($scope, $routeParams, $location, wiggle, vmService, status, breadcrumbs, datasetsat) {
 
         $scope.force = false;
         var uuid = $routeParams.uuid;
@@ -715,14 +715,17 @@ angular.module('fifoApp')
         }
 
         $scope.import_dataset = function() {
-            var url = 'http://' + Config.datasets + '/datasets/' + $scope.vm.config.dataset;
+            var url = datasetsat.endpoint + '/datasets/' + $scope.vm.config.dataset;
             wiggle.datasets.import(
                 {},
                 {url: url},
-                function(r) {
+                function ok(r) {
                     howl.join(uuid);
                     status.info('Importing ' + r.name + ' ' + r.version);
                     updateVm();
+                }, function nk(res) {
+                    status.error('Could not import dataset ' + res.status)
+                    console.error(res)
                 });
         }
         $scope.mk_image = function mk_image(vm, snap) {
