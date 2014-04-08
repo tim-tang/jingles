@@ -479,6 +479,20 @@ angular.module('fifoApp')
                 })
         };
 
+        $scope.delete_route = function(route) {
+
+            wiggle.vms.put({id: $scope.vm.uuid},
+                {config: {remove_routes: route.destination}},
+                function ok(data) {
+                    status.success('Route deleted')
+                    $scope.routes.splice($scope.routes.indexOf(route), 1)
+                },
+                function nk(data) {
+                    status.error('Could not delete route')
+                    console.error(data)
+                }
+            )
+        }
         $scope.save_routes = function (routes) {
 
             var obj = {}
@@ -494,7 +508,7 @@ angular.module('fifoApp')
                 },
                 function error(data) {
                     status.error('Could not save routes')
-                    console.log(data)
+                    console.error(data)
                 }
             )
         }

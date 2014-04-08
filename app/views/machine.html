@@ -370,26 +370,31 @@
           </table>
         </div>
 
-        <div class="tab-pane" id='net'>
+        <div class="tab-pane" id='net' ng-init='newRoutes=[]'>
 
-          <h4 ng-show='routes.length>0' class='pull-left' translate>Routes</h4>
-          <h5 ng-hide='routes.length>0' class='pull-left' translate>There are no additonal rules</h5>
-          <button class='btn btn-default pull-right' ng-click='routes.push([])' translate>New Route</button>
+          <h4 ng-show='routes.length > 0 || newRoutes.length > 0' class='pull-left' translate>Routes</h4>
+          <h5 ng-hide='routes.length > 0 || newRoutes.length > 0' class='pull-left' translate>There are no additonal rules</h5>
+          <button class='btn btn-default pull-right' ng-click="newRoutes.push({})" translate>New Route</button>
 
-          <table ng-show='routes.length > 0' class='table table-condensed table-hover'>
+          <table ng-show='routes.length > 0 || newRoutes.length > 0' class='table table-condensed table-hover'>
             <tr class='small'>
               <th translate>Destination</th>
               <th translate>Gateway</th>
               <th></th>
             </tr>
             <tr ng-repeat='route in routes'>
+              <td>{{route.destination}}</td>
+              <td>{{route.gateway}}</td>
+              <td><i style='padding: 7px' class='glyphicon glyphicon-trash clickable' ng-click='delete_route(route)'></i></td>
+            </tr>
+            <tr ng-repeat='route in newRoutes'>
               <td><input class='form-control' ng-model='route.destination'/></td>
               <td><input class='form-control' ng-model='route.gateway'/> </td>
-              <td><i style='padding: 7px' class='glyphicon glyphicon-remove clickable' ng-click='routes.splice($index,1)'></i></td>
+              <td><i style='padding: 7px' class='glyphicon glyphicon-remove clickable' ng-click='newRoutes.splice($index,1)'></i></td>
             </tr>
           </table>
 
-          <button ng-show='routes.length > 0' class='btn btn-success pull-right' ng-click='save_routes(routes)' translate>Save</button>
+          <button ng-show='newRoutes.length > 0' class='btn btn-success pull-right' ng-click='save_routes(routes)' translate>Add rules</button>
 
           <!-- <h4 translate>Firewall</h4> -->
 
