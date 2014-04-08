@@ -110,6 +110,7 @@
         <li ng-show="vm.config.type == 'zone'"><a href="#services" data-toggle="tab" translate>Services</a></li>
         <li><a href="#snapshots" data-toggle="tab" translate>Snapshots</a></li>
         <li ng-show='has_s3'><a href="#versioning" data-toggle="tab" translate>Versioning</a></li>
+        <li><a href="#net" data-toggle="tab" translate>Networking</a></li>
         <li><a href="#imaging" data-toggle="tab" translate>Imaging</a></li>
         <li><a href="#resize" data-toggle="tab" translate>Change</a></li>
         <li><a href="#history" data-toggle="tab" translate>History</a></li>
@@ -368,6 +369,51 @@
             </tr>
           </table>
         </div>
+
+        <div class="tab-pane" id='net'>
+
+          <h4 ng-show='routes.length>0' class='pull-left' translate>Routes</h4>
+          <h5 ng-hide='routes.length>0' class='pull-left' translate>There are no additonal rules</h5>
+          <button class='btn btn-default pull-right' ng-click='routes.push([])' translate>New Route</button>
+
+          <table ng-show='routes.length > 0' class='table table-condensed table-hover'>
+            <tr class='small'>
+              <th translate>Destination</th>
+              <th translate>Gateway</th>
+              <th></th>
+            </tr>
+            <tr ng-repeat='route in routes'>
+              <td><input class='form-control' ng-model='route.destination'/></td>
+              <td><input class='form-control' ng-model='route.gateway'/> </td>
+              <td><i style='padding: 7px' class='glyphicon glyphicon-remove clickable' ng-click='routes.splice($index,1)'></i></td>
+            </tr>
+          </table>
+
+          <button ng-show='routes.length > 0' class='btn btn-success pull-right' ng-click='save_routes(routes)' translate>Save</button>
+
+          <!-- <h4 translate>Firewall</h4> -->
+
+          <br/>
+          <br/>
+          <hr/>
+          <div class="box col-md-4" style='clear: both;'>
+            <div class="header">
+              <span translate>Add Network Interface</span>
+            </div>
+            <select ng-model="new_net" class='form-control'
+                    ng-options="net.id as net.name for net in networks | hash2array | orderBy: ['name']">
+            </select>
+
+            <button style='margin-bottom: 10px;' class='btn btn-success'
+                    ng-disabled="vm.mdata('locked')"
+                    ng-show="vm.state == 'stopped' && networks[new_net]"
+                    ng-click="add_nic(vm, new_net)" translate>add</button>
+
+            <div ng-show="vm.state != 'stopped'" translate>Stop the machine to add a new network interface.</div>
+          </div>
+
+        </div>
+
         <div class="tab-pane" id="imaging">
           <div>
             <p>
@@ -440,19 +486,6 @@
                       ng-click="update()">change</button>
             </div>
             <package pkg='packages[new_pkg]'></package>
-          </div>
-          <div class="box col-md-4">
-            <div class="header">
-              <span translate>Add Network Interface</span>
-            </div>
-            <select ng-model="new_net" class='form-control'
-                    ng-options="net.id as net.name for net in networks | hash2array | orderBy: ['name']">
-            </select>
-
-            <button style='margin-bottom: 10px;' class='btn btn-success'
-                    ng-disabled="vm.mdata('locked')"
-                    ng-show="networks[new_net]"
-                    ng-click="add_nic(vm, new_net)" translate>add</button>
           </div>
         </div>
 
