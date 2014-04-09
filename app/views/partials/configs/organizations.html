@@ -10,11 +10,13 @@
         <thead>
           <tr>
             <th translate>Organization</th>
+            <th translate>Triggers</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="g in orgs | filter:searchQuery">
             <td><a href="#/configuration/organizations/{{g.uuid}}">{{g.name}}</a></td>
+            <td>{{g.triggers.length}}</a></td>
           </tr>
         </tbody>
       </table>
