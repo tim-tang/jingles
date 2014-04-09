@@ -10,7 +10,8 @@
         <thead>
           <tr>
             <th translate>Network</th>
-            <th class="span1" translate>Actions</th>
+            <th translate>Ranges</th>
+            <th class="span1"></th>
           </tr>
         </thead>
         <tbody>
@@ -18,6 +19,9 @@
             <td>
               <strong><a href="#/configuration/networks/{{net.uuid}}">{{net.name}}</a></strong>
               <i class="glyphicon glyphicon-exclamation-sign" ng-if='!net.ipranges || !net.ipranges.length' title='No IP Range assigned' jq-run='tooltip'></i>
+            </td>
+            <td>
+              <span style='padding-right: 5px' ng-repeat='ipr in net._ipranges'>{{ipr.name}}</span>
             </td>
             <td>
               <i ng-click="delete_network(net)" jq-run='tooltip' title="Delete" class="glyphicon glyphicon-remove clickable" bs-modal="'views/partials/modal-confirm.html'"></i>
@@ -57,7 +61,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="net in ipranges | filter:searchQuery | orderBy: 'name'">
-            <td><strong>{{net.name}}</strong></td>
+            <td><strong class='nowrap'>{{net.name}}</strong></td>
             <td>{{net.tag}}</td>
             <td>{{net.network}}</td>
             <td>{{net.netmask}}</td>

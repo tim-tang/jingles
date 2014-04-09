@@ -45,11 +45,13 @@
         <thead>
           <tr>
             <th translate>Role</th>
+            <th translate>Permissions</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="g in groups | filter:searchQuery">
             <td><a ng-href="#/configuration/groups/{{g.uuid}}">{{g.name}}</a></td>
+            <td>{{g.permissions.length}}</td>
           </tr>
         </tbody>
       </table>
