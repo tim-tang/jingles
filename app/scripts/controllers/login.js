@@ -4,6 +4,10 @@ angular.module('fifoApp')
   .controller('LoginCtrl', function ($scope, auth, $timeout, wiggle, $location) {
 
     $scope.submit = function() {
+
+        //https://github.com/angular/angular.js/issues/1072
+        $('form input').each(function() { $(this).trigger('input'); });
+
     	auth.login($scope.user, $scope.password, $scope.otp)
     }
 
