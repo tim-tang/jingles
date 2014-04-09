@@ -7,7 +7,7 @@ angular.module('fifoApp')
         var user = new wiggle.groups({name: $scope.name});
         user.$create({},
                      function() {
-                         $location.path('/configuration/groups');
+                         $location.path('/configuration/users_roles');
                      },
                      function() {
                          console.error('Create Package error:', data);

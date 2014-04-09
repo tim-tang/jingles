@@ -8340,6 +8340,15 @@ body,
   height: 100%;
 }
 
+.sidebar {
+  float: left;
+  max-width: 200px;
+}
+
+.sidebar-content {
+  padding-left: 150px;
+}
+
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;

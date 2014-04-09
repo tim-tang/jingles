@@ -40,55 +40,10 @@ angular.module('fifoApp',
         helpUrl: help_url('hypervisors', 'list'),
         name: 'Servers'
       })
-      .when('/configuration', {
-        redirectTo: '/configuration/packages'
-      })
-      .when('/configuration/packages', {
-        templateUrl: 'views/packages.html',
-        controller: 'PackagesCtrl',
-        helpUrl: help_url('packages', 'list'),
-        name: 'Packages'
-      })
       .when('/configuration/networks/new', {
         templateUrl: 'views/network-new.html',
         controller: 'NetworkNewCtrl',
         helpUrl: help_url('network', 'new')
-      })
-      .when('/configuration/networks', {
-        templateUrl: 'views/networks.html',
-        controller: 'NetworksCtrl',
-        helpUrl: help_url('network', 'list'),
-        name: 'Networks'
-      })
-      .when('/configuration/ip-ranges', {
-        templateUrl: 'views/ip-ranges.html',
-        controller: 'IpRangesCtrl',
-        helpUrl: help_url('ipranges', 'list'),
-        name: 'IP Ranges'
-      })
-      .when('/configuration/users', {
-        templateUrl: 'views/users.html',
-        controller: 'UsersCtrl',
-        helpUrl:  help_url('usermanagement', 'user-list'),
-        name: 'Users'
-      })
-      .when('/configuration/groups', {
-        templateUrl: 'views/groups.html',
-        controller: 'GroupsCtrl',
-        helpUrl:  help_url('usermanagement', 'group-list'),
-        name: 'Groups'
-      })
-      .when('/configuration/organizations', {
-        templateUrl: 'views/organizations.html',
-        controller: 'OrganizationsCtrl',
-        helpUrl:  help_url('orgs', 'list'),
-        name: 'Organizations'
-      })
-      .when('/configuration/dtraces', {
-        templateUrl: 'views/dtraces.html',
-        controller: 'DtracesCtrl',
-        name: 'Tracing',
-        helpUrl:  help_url('dtraces', 'list')
       })
       .when('/machines/new', {
         templateUrl: 'views/machine-new.html',
@@ -185,6 +140,28 @@ angular.module('fifoApp',
         helpUrl:  help_url('general', 'cloudview'),
         controller: 'VisGraphCtrl'
       })
+
+      //Links of the breadscumbs
+      .when('/configuration/users', {
+        redirectTo: '/configuration/users_roles'
+      })
+      .when('/configuration/groups', {
+        redirectTo: '/configuration/users_roles'
+      })
+      .when('/configuration/networks', {
+              redirectTo: '/configuration/networking'
+            })
+      .when('/configuration/ip-ranges', {
+              redirectTo: '/configuration/networking'
+            })
+
+
+      .when('/configuration/:target?', {
+        templateUrl: 'views/configurations.html',
+        controller: 'ConfigurationCtrl',
+        helpUrl: help_url('configuration', 'list')
+      })
+
       .otherwise({
         redirectTo: '/'
       });
