@@ -45,6 +45,7 @@ angular.module('fifoApp')
 
 			                        var idx = $scope.packages.indexOf(pack) 
 			                        $scope.packages.splice(idx, 1)
+                                    proccessData($scope.packages)
 			                    },
 			                    function error (data) {
 			                        console.error('Delete package error:', data);
@@ -122,6 +123,7 @@ angular.module('fifoApp')
                             wiggle.ipranges.delete({id: el.uuid}, function success (data, h) {
                                 var idx = $scope.ipranges.indexOf(el)
                                 $scope.ipranges.splice(idx, 1)
+                                proccessData($scope.ipranges)
                                 status.success(el.name + ' deleted')
                             }, function error(data) {
                                 console.error('Delete iprange error:', data)
