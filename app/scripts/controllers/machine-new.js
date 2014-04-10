@@ -6,7 +6,7 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
 
         if ($scope.selectedNetworks.length != $scope.selectedDataset.networks.length) {
             status.error('Your network selection is invalid. ' +
-                         'You have either too many or too fiew networks selected.');
+                         'You have either too many or too few networks selected.');
             return;
         };
 
@@ -73,7 +73,7 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
                 },
                 function error(res) {
                     console.error('Create VMs error:', res)
-                    status.error('There was an error creating your vms. See their logs or js console for details.')
+                    status.error('There was an error creating your VMs. See their logs or js console for details.')
                 })
         }
         else
