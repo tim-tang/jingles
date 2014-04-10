@@ -40,15 +40,6 @@ angular.module('fifoApp',
         helpUrl: help_url('hypervisors', 'list'),
         name: 'Servers'
       })
-      .when('/configuration', {
-        redirectTo: '/configuration/packages'
-      })
-      .when('/configuration/packages', {
-        templateUrl: 'views/packages.html',
-        controller: 'PackagesCtrl',
-        helpUrl: help_url('packages', 'list'),
-        name: 'Packages'
-      })
       .when('/configuration/networks/new', {
         templateUrl: 'views/network-new.html',
         controller: 'NetworkNewCtrl',
@@ -185,6 +176,28 @@ angular.module('fifoApp',
         helpUrl:  help_url('general', 'cloudview'),
         controller: 'VisGraphCtrl'
       })
+
+      //Links of the breadscumbs
+      .when('/configuration/users', {
+        redirectTo: '/configuration/users_roles'
+      })
+      .when('/configuration/groups', {
+        redirectTo: '/configuration/users_roles'
+      })
+      .when('/configuration/networks', {
+              redirectTo: '/configuration/networking'
+            })
+      .when('/configuration/ip-ranges', {
+              redirectTo: '/configuration/networking'
+            })
+
+
+      .when('/configuration/:target?', {
+        templateUrl: 'views/configurations.html',
+        controller: 'ConfigurationCtrl',
+        helpUrl: help_url('configuration', 'list')
+      })
+
       .otherwise({
         redirectTo: '/'
       });

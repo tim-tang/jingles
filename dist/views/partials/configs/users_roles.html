@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat='u in users'>
+          <tr ng-repeat='u in users | filter:searchQuery'>
             <td><a href="#/configuration/users/{{u.uuid}}">{{u.name}}</a></td>
             <td>
               <a style='padding-right: 5px' class='nocolor' ng-repeat='g in u._roles' href="#/configuration/roles/{{g.uuid}}">
@@ -25,6 +25,31 @@
                 <span ng-class="{'strong': o.uuid == u.org, 'text-danger': o.deleted}">{{o.name}}</span>
               </a>
             </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="tab-pane" id="groups">
+  <div class="pane-nav">
+    <a href="#/configuration/groups/new" class="btn btn-primary" permission=['cloud','groups','create']>
+      <span translate>New Group</span>
+    </a>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <table class="table table-condensed table-hover">
+        <thead>
+          <tr>
+            <th translate>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="g in groups | filter:searchQuery">
+            <td><a ng-href="#/configuration/groups/{{g.uuid}}">{{g.name}}</a></td>
           </tr>
         </tbody>
       </table>

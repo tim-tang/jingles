@@ -13,6 +13,22 @@ angular.module('fifoApp')
     //Login stuff: pass the auth object to the view, kinda handy i.e. for Logout click
     $scope.auth = auth
 
+    //Show the config button, if has permission to any of this config.
+    var configPerms = [
+      ['cloud','orgs','list'],
+      ['cloud','users','list'],
+      ['cloud','packages','list'],
+      ['cloud','networks','list'],
+      ['cloud','dtraces','list'],
+    ]
+    auth.userPromise().then(function(u) {
+      var can = false
+      configPerms.forEach(function(perm) {
+        if (auth.canAccess(perm)) can = true;
+      })
+      $scope.showConfig = can
+    })
+
     //Help url
   	$rootScope.$on('$routeChangeSuccess', function(event, current){
   		$scope.helpUrl = current.helpUrl || '';

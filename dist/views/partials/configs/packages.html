@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="pack in packages | orderBy: ['ram', 'name']">
+          <tr ng-repeat="pack in packages | filter:searchQuery | orderBy: ['ram', 'name']">
             <td><a href="#/configuration/packages/{{pack.uuid}}">{{pack.name}}</a></td>
             <td>{{pack.ram | Mbytes}}</td>
             <td>{{pack.quota | Gbytes}}</td>

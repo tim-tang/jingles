@@ -306,7 +306,15 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                           }
                                        },
                                        query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})},
-                                       queryFull: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true}), interceptor: toHash}
+                                       queryFull: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true}), interceptor: {
+                                        response: function(res) {
+                                          res.resource.hash = hashFromArray(res.resource)
+                                          res.resource.forEach(function(net) {
+                                            net._ipranges = net.ipranges && net.ipranges.map(function(d) {return services.ipranges.get({id: d})})
+                                          })
+                                          return res.resource;
+                                        }
+                                       }}
                                      });
         services.datasets = $resource(endpoint + 'datasets/:id',
                                       {id: '@id'},
