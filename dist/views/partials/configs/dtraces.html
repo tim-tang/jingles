@@ -15,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="dt in dtraces | filter:searchQuery">
+          <tr ng-repeat="dt in dtraces | filter:searchQuery | orderBy:'name'">
             <td><strong><a href="#/configuration/dtraces/{{dt.uuid}}">{{dt.name}}</a></strong></td>
             <td>{{dt.uuid}}</td>
             <td>
