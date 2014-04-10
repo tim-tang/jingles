@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('fifoApp')
-  .controller('ConfigurationCtrl', function ($scope, $routeParams, wiggle, status, breadcrumbs) {
-    
+  .controller('ConfigurationCtrl', function ($scope, $routeParams, wiggle, status, breadcrumbs, ngTableParams, $filter) {
+
     $scope.menus = [
     	{name: 'Organizations', target: 'organizations', permission: 'orgs'},
     	{name: 'Users and Roles', target: 'users_roles', permission: 'users'},
@@ -12,6 +12,20 @@ angular.module('fifoApp')
     ]
 
     $scope.target = $routeParams.target || 'index'
+
+    //Process the data for the ng-table's
+    var proccessData = function(source) {
+        var data = $scope.searchQuery
+            ? $filter('filter')(source, $scope.searchQuery)
+            : source
+
+        var order = $scope.tableParams.orderBy()
+        if (order)
+            data = $filter('orderBy')(data, order)
+
+        $scope.list = data
+        return data
+    }
 
     var initView = function(target) {
     	switch (target) {
@@ -41,6 +55,14 @@ angular.module('fifoApp')
 			        }
 
 			    }
+
+                $scope.$watch('searchQuery',  function() {proccessData($scope.packages)})
+                $scope.packages.$promise.then(function() {proccessData($scope.packages)})
+                $scope.tableParams = new ngTableParams({sorting: {ram: 'asc'}}, {
+                    getData: function($defer, params) {
+                        $defer.resolve(proccessData($scope.packages))
+                    }
+                })
     			break
 
     		case 'users_roles':
@@ -89,7 +111,6 @@ angular.module('fifoApp')
                         }
                     }
                 }
-
                 $scope.delete_iprange = function(el) {
                     $scope.modal = {
                         btnClass: 'btn-danger',
@@ -109,6 +130,14 @@ angular.module('fifoApp')
                         }
                     }
                 }
+
+                $scope.$watch('searchQuery',  function() {proccessData($scope.ipranges)})
+                $scope.ipranges.$promise.then(function() {proccessData($scope.ipranges)})
+                $scope.tableParams = new ngTableParams({sorting: {name: 'asc'}}, {
+                    getData: function($defer, params) {
+                        $defer.resolve(proccessData($scope.ipranges))
+                    }
+                })
                 break
 
                 case 'dtraces':

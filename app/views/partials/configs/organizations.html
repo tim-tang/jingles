@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="g in orgs | filter:searchQuery">
+          <tr ng-repeat="g in orgs | filter:searchQuery | orderBy:'name'">
             <td><a href="#/configuration/organizations/{{g.uuid}}">{{g.name}}</a></td>
             <td>{{g.triggers.length}}</a></td>
           </tr>
