@@ -170,7 +170,7 @@ angular.module('fifoApp',
     //$locationProvider.hashPrefix('!');
   })
 
-.run(function($rootScope, gettextCatalog, gettext, $window, $templateCache) {
+.run(function($rootScope, gettextCatalog, gettext, $window, $templateCache, $interval, wiggle) {
 
 
   //Empty ng-table template for pagination
@@ -205,6 +205,43 @@ angular.module('fifoApp',
     setTimeout(preventHrefs, 0)
   })
 
+
+  //Watch for warnings in the cloud, globally
+  $rootScope.cloudStatus = {}
+  function getCloudStatus() {
+    wiggle.cloud.get(function ok(data){
+
+      //Add action link
+      angular.forEach(data.warnings, function(w) {
+          switch (w.category) {
+              case 'chunter':
+                  w.link = '#/servers/' + w.element
+                  break;
+          }
+      })
+
+      $rootScope.cloudStatus.metrics = data.metrics
+      $rootScope.cloudStatus.messages = Config.evaluate_cloud(data.metrics).concat(data.warnings)
+      $rootScope.cloudStatus.no_servers = !data.metrics.hypervisors || data.metrics.hypervisors.length < 1
+      $rootScope.cloudStatus.cloud_ok = $rootScope.cloudStatus.messages.filter(function(i) {
+          /* Msg from the server has no ok attr, so set it. */
+          i.ok = !!i.ok;
+          return !i.ok;
+      }).length < 1
+
+      //If there is no chunter, the cloud is not ok.
+      if ($rootScope.cloudStatus.no_servers)
+        $rootScope.cloudStatus.cloud_ok = false
+
+    }, function nk(err) {
+      console.error('Cloud status error:', err)
+    })
+  }
+
+  $rootScope.$on('auth:login_ok', function() {
+    $interval(getCloudStatus, (Config.statusPolling || 10) * 1000)
+    getCloudStatus()
+  })
 })
 
 
