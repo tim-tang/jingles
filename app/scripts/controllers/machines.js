@@ -155,7 +155,6 @@ angular.module('fifoApp')
   var requestsPromise = startRequests()
 
   //Legend, how many vms in state x.
-  $scope.legend = []
   var buildLegend = function() {
     var hist = {}
     $scope.vms.forEach(function(vm) {
@@ -163,6 +162,7 @@ angular.module('fifoApp')
       hist[vm.state].count++
     })
 
+    $scope.legend = []
     for (var k in hist)
       $scope.legend.push({state: k, count: hist[k].count, _state_label: hist[k]._state_label})
   }
