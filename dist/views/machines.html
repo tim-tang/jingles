@@ -7,12 +7,18 @@
   </li>
 </ul>
 
-<span class='well-sm text-muted visible-lg visible-md' style='text-align: right; padding-bottom: 14px;'>
-  <span ng-show='searchQuery' translate>Showing </span>
-  <span ng-show='searchQuery'> {{ (vmsFiltered).length}} </span>
-  <span  ng-show='searchQuery'translate>of </span>
-  <span> {{vms.length}} </span>
-  <span translate>Machines</span>
+<span class='well-sm visible-lg visible-md' style='text-align: right; padding-bottom: 14px;'>
+  <span style='padding-right: 30px; text-align: left;' ng-if='legend.length > 1'>
+    <span ng-repeat="l in legend" class='capitalize label label-{{l._state_label}}' style='margin-right: 3px;'>{{l.count}} {{l.state}}</span>
+  </span>
+  <span class='text-muted'>
+    <span ng-show='searchQuery' translate>Showing </span>
+    <span ng-show='searchQuery'> {{ (vmsFiltered).length}} </span>
+    <span  ng-show='searchQuery'translate>of </span>
+    <span> {{vms.length}} </span>
+    <span translate>Machines</span>
+  </span>
+
 </span>
 
 <div class="table-responsive">
