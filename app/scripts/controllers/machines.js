@@ -51,6 +51,8 @@ angular.module('fifoApp')
           if (vm.state == 'failed') {
               failed(vm.state_description);
           };
+
+          buildLegend()
           $scope.$apply()
       })
 
@@ -151,7 +153,21 @@ angular.module('fifoApp')
   }
 
   var requestsPromise = startRequests()
-  
+
+  //Legend, how many vms in state x.
+  $scope.legend = []
+  var buildLegend = function() {
+    var hist = {}
+    $scope.vms.forEach(function(vm) {
+      if (!hist[vm.state]) hist[vm.state] = {count: 0, _state_label: vm._state_label}
+      hist[vm.state].count++
+    })
+
+    for (var k in hist)
+      $scope.legend.push({state: k, count: hist[k].count, _state_label: hist[k]._state_label})
+  }
+
+  requestsPromise.then(buildLegend)
   auth.userPromise().then(function() {
     $scope.searchQuery = auth.currentUser().mdata('vm_searchQuery');
   })

@@ -79,13 +79,13 @@
 
 			<div class="row">
 				<div class="widget big">
-					<h3 translate>Memory</h3> 
+					<h4 translate>Memory</h4>
 					<span>{{cloudStatus.messages[0].percent  || '0'}}%</span>
 					<gauge ng-model='cloudStatus.messages[0].percent'></gauge>
 					<div>{{cloudStatus.metrics['provisioned-memory'] | Mbytes}} of {{cloudStatus.metrics['total-memory'] | Mbytes}}</div>
 				</div>
 				<div class="widget big">
-					<h3 translate>Disk usage</h3> 
+					<h4 translate>Disk usage</h4>
 					<span>{{cloudStatus.messages[1].percent || '0'}}%</span>
 					<gauge ng-model='cloudStatus.messages[1].percent'></gauge>
 					<div>{{cloudStatus.metrics.used | Mbytes}} of {{cloudStatus.metrics.size | Mbytes}}</div>
@@ -94,22 +94,22 @@
 			<hr/>
 			<div class="widget">
 				<a href="#/machines" class='nocolor'>
-					<h4 translate>Machines</h4>
-					<div>{{cloudStatus.metrics.vms}}</div>
+					<h4>{{cloudStatus.metrics.vms}}</h4>
+					<div translate>Machines</div>
 				</a>
 			</div>
 
 			<div class="widget">
 				<a href="#/configuration/users" class='nocolor'>
-					<h4 translate>Users</h4>
-					<div>{{cloudStatus.metrics.users}}</div>
+					<h4>{{cloudStatus.metrics.users}}</h4>
+					<div translate>Users</div>
 				</a>
 			</div>
 
 			<div class="widget">
 				<a href="#/servers" class='nocolor'>
-					<h4 translate>Servers</h4>
-					<div>{{cloudStatus.metrics.hypervisors.length}}</div>
+					<h4>{{cloudStatus.metrics.hypervisors.length}}</h4>
+					<div translate>Servers</div>
 				</a>
 			</div>
 
