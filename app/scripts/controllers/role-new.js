@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('fifoApp')
-  .controller('GroupNewCtrl', function ($scope, $location, wiggle, status) {
+  .controller('RoleNewCtrl', function ($scope, $location, wiggle, status) {
 
-    $scope.create_group = function() {
-        var user = new wiggle.groups({name: $scope.name});
+    $scope.create_role = function() {
+        var user = new wiggle.roles({name: $scope.name});
         user.$create({},
                      function() {
-                         $location.path('/configuration/users_roles');
+                         $location.path('/configuration/roles');
                      },
                      function() {
                          console.error('Create Package error:', data);

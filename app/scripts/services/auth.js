@@ -31,9 +31,9 @@ angular.module('fifoApp')
         if (!user) return false
         var perms = user.permissions || []
 
-        //Add the groups permissions
-        Object.keys(user._groups).forEach(function(k) {
-          perms = perms.concat(user._groups[k].permissions)
+        //Add the roles permissions
+        Object.keys(user._roles).forEach(function(k) {
+          perms = perms.concat(user._roles[k].permissions)
         })
 
         for (var i=0; i<perms.length; i++) {
@@ -67,7 +67,7 @@ angular.module('fifoApp')
             /* Create a user object based on the sessionData, so later we can use loggedUser.mdata_set */
             user = new wiggle.users(res)
             user.keys = user.keys || []
-            user.groups = user.groups || []
+            user.roles = user.roles || []
 
             // console.log('seteando el cookie...', $cookies, res)
 

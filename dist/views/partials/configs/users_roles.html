@@ -7,7 +7,7 @@
       <table class="table table-condensed table-hover" ng-show='users.length'>
         <thead>
           <tr>
-            <th translate>User</th>
+            <th translate>Name</th>
             <th translate>Roles</th>
             <th translate>Organizations</th>
           </tr>
@@ -16,7 +16,7 @@
           <tr ng-repeat="u in users | filter:searchQuery | orderBy:'name'" ng-mouseover="$parent.highlight=u.groups">
             <td><a href="#/configuration/users/{{u.uuid}}">{{u.name}}</a></td>
             <td>
-              <a style='padding-right: 5px' class='nocolor' ng-repeat='g in u._groups' href="#/configuration/groups/{{g.uuid}}">
+              <a style='padding-right: 5px' class='nocolor' ng-repeat='g in u._roles' href="#/configuration/roles/{{g.uuid}}">
                 <span ng-class="{'text-danger': g.deleted}">{{g.name}}</span>
               </a>
             </td>

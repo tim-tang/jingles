@@ -45,6 +45,42 @@ angular.module('fifoApp',
         controller: 'NetworkNewCtrl',
         helpUrl: help_url('network', 'new')
       })
+      .when('/configuration/networks', {
+        templateUrl: 'views/networks.html',
+        controller: 'NetworksCtrl',
+        helpUrl: help_url('network', 'list'),
+        name: 'Networks'
+      })
+      .when('/configuration/ip-ranges', {
+        templateUrl: 'views/ip-ranges.html',
+        controller: 'IpRangesCtrl',
+        helpUrl: help_url('ipranges', 'list'),
+        name: 'IP Ranges'
+      })
+      .when('/configuration/users', {
+        templateUrl: 'views/users.html',
+        controller: 'UsersCtrl',
+        helpUrl:  help_url('usermanagement', 'user-list'),
+        name: 'Users'
+      })
+      .when('/configuration/roles', {
+        templateUrl: 'views/roles.html',
+        controller: 'RolesCtrl',
+        helpUrl:  help_url('usermanagement', 'role-list'),
+        name: 'Roles'
+      })
+      .when('/configuration/organizations', {
+        templateUrl: 'views/organizations.html',
+        controller: 'OrganizationsCtrl',
+        helpUrl:  help_url('orgs', 'list'),
+        name: 'Organizations'
+      })
+      .when('/configuration/dtraces', {
+        templateUrl: 'views/dtraces.html',
+        controller: 'DtracesCtrl',
+        name: 'Tracing',
+        helpUrl:  help_url('dtraces', 'list')
+      })
       .when('/machines/new', {
         templateUrl: 'views/machine-new.html',
         controller: 'MachineNewCtrl',
@@ -95,15 +131,15 @@ angular.module('fifoApp',
         helpUrl:  help_url('general', 'about'),
         controller: 'AboutCtrl'
       })
-      .when('/configuration/groups/new', {
-        templateUrl: 'views/group-new.html',
-        helpUrl:  help_url('usermanagement', 'group-new'),
-        controller: 'GroupNewCtrl'
+      .when('/configuration/roles/new', {
+        templateUrl: 'views/role-new.html',
+        helpUrl:  help_url('usermanagement', 'role-new'),
+        controller: 'RoleNewCtrl'
       })
-      .when('/configuration/groups/:uuid', {
-        templateUrl: 'views/group.html',
-        helpUrl:  help_url('usermanagement', 'group-details'),
-        controller: 'GroupCtrl'
+      .when('/configuration/roles/:uuid', {
+        templateUrl: 'views/role.html',
+        helpUrl:  help_url('usermanagement', 'role-details'),
+        controller: 'RoleCtrl'
       })
       .when('/configuration/organizations/new', {
         templateUrl: 'views/organization-new.html',
