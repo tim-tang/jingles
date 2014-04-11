@@ -43,7 +43,7 @@ angular.module('fifoApp')
 			                    function success (data, h) {
 			                        status.success(pack.name + ' deleted');
 
-			                        var idx = $scope.packages.indexOf(pack) 
+			                        var idx = $scope.packages.indexOf(pack)
 			                        $scope.packages.splice(idx, 1)
                                     proccessData($scope.packages)
 			                    },
@@ -69,7 +69,7 @@ angular.module('fifoApp')
     		case 'users_roles':
                 breadcrumbs.setLast('Users and Roles')
     			$scope.users = wiggle.users.queryFull()
-    			$scope.groups = wiggle.groups.query();
+    			$scope.roles = wiggle.roles.query();
     			break;
 
     		case 'organizations':

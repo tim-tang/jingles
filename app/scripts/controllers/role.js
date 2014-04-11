@@ -14,11 +14,13 @@ angular.module('fifoApp')
                 c[entity] = {};
             if (c[entity][e]) {
                 callback(c[entity][e]);
-            } else {
+            } else if(wiggle[entity]) {
                 wiggle[entity].get({id: e}, function(elem) {
                     c[entity][e] = elem;
                     callback(elem);
                 })
+            } else {
+                callback({uuid: e, name: e})
             }
         }
     })();
@@ -65,6 +67,7 @@ angular.module('fifoApp')
     wiggle.roles.get({id: uuid}, function(res) {
         $scope.role = res;
         $scope.permissions = res.permissions.map(update_permission);
+        console.log($scope.permissions);
         breadcrumbs.setLast(res.name)
     });
 
