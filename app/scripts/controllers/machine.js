@@ -261,7 +261,7 @@ angular.module('fifoApp')
                 var _r = $scope.vm.config.routes
                 if (_r)
                     for (var k in _r) {
-                        routes.push({destination: k, gateway: _r[k]})
+                        $scope.routes.push({destination: k, gateway: _r[k]})
                     }
 
                 cb && cb($scope.vm);
@@ -496,6 +496,7 @@ angular.module('fifoApp')
         $scope.save_routes = function (routes) {
 
             var obj = {}
+            console.log(routes);
             routes.forEach(function(r) {
                 obj[r.destination] = r.gateway
             })
