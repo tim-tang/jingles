@@ -108,6 +108,7 @@ angular.module('fifoApp')
             }
           }
           filterData()
+          buildLegend()
         })
       })
 
