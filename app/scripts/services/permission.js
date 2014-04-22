@@ -43,7 +43,10 @@ function mk_permission_fn(wiggle, $scope) {
                 };
                 break;
             case "channels":
-                $scope.p2 = {}
+                $scope.p2 = {
+                    "...": {id: "...", name: "Everything"},
+                    "_": {id: "_", name: "All Channels"},
+                }
                 wiggle.hypervisors.query(function(hypers) {
                     hypers.forEach(function(res) {
                         $scope.p2[res.uuid] = {id: res.uuid, name: 'Server ' + res.alias}
@@ -57,11 +60,10 @@ function mk_permission_fn(wiggle, $scope) {
                 break;
             case "dtraces":
                 wiggle.dtrace.query(function(dtraces) {
-                    if (dtraces.length > 0)
-                        $scope.p2 = {
-                            "...": {id: "...", name: "Everything"},
-                            "_": {id: "_", name: "All Dtraces"},
-                        };
+                    $scope.p2 = {
+                        "...": {id: "...", name: "Everything"},
+                        "_": {id: "_", name: "All Dtraces"},
+                    };
                     dtraces.forEach(function(dtrace){
                         $scope.p2[dtrace.uuid] = {id: dtrace.uuid, name: dtrace.name};
                     })
@@ -69,11 +71,10 @@ function mk_permission_fn(wiggle, $scope) {
                 break;
             case "users":
                 wiggle.users.query(function(users) {
-                    if (users.length > 0)
-                        $scope.p2 = {
-                            "...": {id: "...", name: "Everything"},
-                            "_": {id: "_", name: "All Users"},
-                        };
+                    $scope.p2 = {
+                        "...": {id: "...", name: "Everything"},
+                        "_": {id: "_", name: "All Users"},
+                    };
                     users.forEach(function(user){
                         $scope.p2[user.uuid] = {id: user.uuid, name: user.name};
                     })
@@ -92,11 +93,10 @@ function mk_permission_fn(wiggle, $scope) {
                 break;
             case "roles":
                 wiggle.roles.query(function(roles) {
-                    if (roles.length > 0)
-                        $scope.p2 = {
-                            "...": {id: "...", name: "Everything"},
-                            "_": {id: "_", name: "All Roles"},
-                        };
+                    $scope.p2 = {
+                        "...": {id: "...", name: "Everything"},
+                        "_": {id: "_", name: "All Roles"},
+                    };
                     roles.forEach(function(role){
                         $scope.p2[role.uuid] = {id: role.uuid, name: role.name};
                     })
@@ -104,11 +104,10 @@ function mk_permission_fn(wiggle, $scope) {
                 break;
             case "hypervisors":
                 wiggle.hypervisors.query(function(hypers) {
-                    if (hypers.length > 0)
-                        $scope.p2 = {
-                            "...": {id: "...", name: "Everything"},
-                            "_": {id: "_", name: "All Hypervisors"},
-                        };
+                    $scope.p2 = {
+                        "...": {id: "...", name: "Everything"},
+                        "_": {id: "_", name: "All Hypervisors"},
+                    };
                     hypers.forEach(function(hyper){
                         $scope.p2[hyper.uuid] = {id: hyper.uuid, name: hyper.alias};
                     })
@@ -116,27 +115,21 @@ function mk_permission_fn(wiggle, $scope) {
                 break;
             case "vms":
                 wiggle.vms.query(function(vms) {
-                    if (vms.length > 0)
-                        $scope.p2 = {
-                            "...": {id: "...", name: "Everything"},
-                            "_": {id: "_", name: "All Virtual Machines"},
-                        };
+                    $scope.p2 = {
+                        "...": {id: "...", name: "Everything"},
+                        "_": {id: "_", name: "All Virtual Machines"},
+                    };
                     vms.forEach(function(vm){
-                        $scope.p2[vm.uuid] = {id: vm.uuid};
-                        var name = vm.uuid;
-                        if (vm.config && vm.config.alias)
-                            name = name + " (" + vm.config.alias + ")";
-                        $scope.p2[vm.uuid].name = name;
+                        $scope.p2[vm.uuid] = {id: vm.uuid, name: vm.config.alias || vm.uuid};
                     })
                 });
                 break;
             case "datasets":
                 wiggle.datasets.query(function(datasets) {
-                    if (datasets.length > 0)
-                        $scope.p2 = {
-                            "...": {id: "...", name: "Everything"},
-                            "_": {id: "_", name: "All Datasets"},
-                        };
+                    $scope.p2 = {
+                        "...": {id: "...", name: "Everything"},
+                        "_": {id: "_", name: "All Datasets"},
+                    };
                     datasets.forEach(function(ds){
                         $scope.p2[ds.dataset] = {id: ds.dataset, name: ds.name + ' ' + ds.version};
                     })
@@ -150,7 +143,7 @@ function mk_permission_fn(wiggle, $scope) {
                             "_": {id: "_", name: "All Packages"},
                         };
                     packages.forEach(function(pack){
-                        $scope.p2[pack.uuid] = {id: pack.uuid, name: pack.name + " (" + pack.uuid + ")"};
+                        $scope.p2[pack.uuid] = {id: pack.uuid, name: pack.name};
                     })
                 });
                 break;
@@ -162,7 +155,7 @@ function mk_permission_fn(wiggle, $scope) {
                             "_": {id: "_", name: "All Networks"},
                         };
                     ranges.forEach(function(ipr){
-                        $scope.p2[ipr.uuid] = {id: ipr.uuid, name: ipr.name + " (" + ipr.uuid + ")"};
+                        $scope.p2[ipr.uuid] = {id: ipr.uuid, name: ipr.name};
                     })
                 });
                 break;
@@ -174,7 +167,7 @@ function mk_permission_fn(wiggle, $scope) {
                             "_": {id: "_", name: "All Networks"},
                         };
                     nets.forEach(function(net){
-                        $scope.p2[net.uuid] = {id: net.uuid, name: net.name + " (" + net.uuid + ")"};
+                        $scope.p2[net.uuid] = {id: net.uuid, name: net.name};
                     })
                 });
                 break;

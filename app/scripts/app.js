@@ -145,7 +145,7 @@ angular.module('fifoApp',
       .when('/configuration/users', {
         redirectTo: '/configuration/users_roles'
       })
-      .when('/configuration/groups', {
+      .when('/configuration/roles', {
         redirectTo: '/configuration/users_roles'
       })
       .when('/configuration/networks', {

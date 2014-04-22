@@ -324,7 +324,7 @@ angular.module('fifoApp')
             ids.forEach(function(id) {
                 wiggle.vms.get({id: id}, vmResponse, vmResponse)
             })
-          })    
+          })
       }
 
       var buildWorld = function() {
