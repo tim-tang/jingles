@@ -67,8 +67,10 @@ angular.module('fifoApp')
     wiggle.roles.get({id: uuid}, function(res) {
         $scope.role = res;
         $scope.permissions = res.permissions.map(update_permission);
-        console.log($scope.permissions);
         breadcrumbs.setLast(res.name)
+    }, function nk(data) {
+        status.error('Could not load Role: ' + data.statusText)
+        console.error(data)
     });
 
     $scope.delete_permission = function(permission) {
