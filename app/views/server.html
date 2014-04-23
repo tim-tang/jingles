@@ -203,7 +203,7 @@
           <br/>
           <table ng-hide="characteristics.length<1" class="table table-condensed table-hover table-bordered">
             <tr ng-repeat='ch in characteristics'>
-              <th>{{ch.name}}</th>
+              <td><strong>{{ch.name}}</strong></td>
               <td><input type='text' class='form-control' ng-model='ch.value'/></td>
               <td style='width: 40px;'><button class='btn btn-danger pull-right' ng-click='del(ch.name, $index)'>-</button></td>
             </tr>
