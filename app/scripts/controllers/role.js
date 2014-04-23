@@ -126,7 +126,7 @@ angular.module('fifoApp')
             	wiggle.roles.delete({id: uuid},
                                  function success(data, h) {
                                      status.success(name + ' deleted');
-                                     $location.path('/configuration/roles')
+                                     $location.path('/configuration/users_roles')
                                  },
                                  function error(data) {
                                      console.error('Delete Role error:', data);
