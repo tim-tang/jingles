@@ -71,8 +71,8 @@
 	<div class="panel {{cloudStatus.cloud_ok? 'panel-success': 'panel-danger'}}">
 		<div class="panel-heading">
 			<span class="panel-title"><i class="glyphicon glyphicon-cloud"></i> 
-				<span ng-show='cloud_ok' translate>Your cloud is fine!</span>
-				<span ng-hide='cloud_ok' translate>Your cloud needs some attention!</span>
+				<span ng-show='cloudStatus.cloud_ok' translate>Your cloud is fine!</span>
+				<span ng-hide='cloudStatus.cloud_ok' translate>Your cloud needs some attention!</span>
 			</span>
 		</div>
 		<div class="panel-body">
@@ -82,13 +82,13 @@
 					<h4 translate>Memory</h4>
 					<span>{{cloudStatus.messages[0].percent  || '0'}}%</span>
 					<gauge ng-model='cloudStatus.messages[0].percent'></gauge>
-					<div>{{cloudStatus.metrics['provisioned-memory'] | Mbytes}} of {{cloudStatus.metrics['total-memory'] | Mbytes}}</div>
+					<div>{{cloudStatus.metrics['provisioned-memory'] || 0 | Mbytes}} of {{cloudStatus.metrics['total-memory'] || 0 | Mbytes}}</div>
 				</div>
 				<div class="widget big">
 					<h4 translate>Disk usage</h4>
 					<span>{{cloudStatus.messages[1].percent || '0'}}%</span>
 					<gauge ng-model='cloudStatus.messages[1].percent'></gauge>
-					<div>{{cloudStatus.metrics.used | Mbytes}} of {{cloudStatus.metrics.size | Mbytes}}</div>
+					<div>{{cloudStatus.metrics.used || 0 | Mbytes}} of {{cloudStatus.metrics.size || 0 | Mbytes}}</div>
 				</div>
 			</div>
 			<hr/>
@@ -108,7 +108,7 @@
 
 			<div class="widget">
 				<a href="#/servers" class='nocolor'>
-					<h4>{{cloudStatus.metrics.hypervisors.length}}</h4>
+					<h4>{{cloudStatus.metrics.hypervisors.length || 0}}</h4>
 					<div translate>Servers</div>
 				</a>
 			</div>
