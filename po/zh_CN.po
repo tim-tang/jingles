@@ -573,7 +573,7 @@ msgstr "下一步"
 
 #: app/views/main.html
 msgid "No ssh keys found on your account. Dont forget to <a href=\"#/configuration/users/{{user.uuid}}\">add one</a>!"
-msgstr "No ssh keys found on your account. Dont forget to <a href=\"#/configuration/users/{{user.uuid}}\">add one</a>!"
+msgstr "账户中未找到ssh key. 请通过<a href=\"#/configuration/users/{{user.uuid}}\">这里添加</a>!"
 
 #: app/views/server.html
 msgid "Node name"
@@ -824,7 +824,7 @@ msgstr "The Team"
 
 #: app/views/main.html
 msgid "Tip: You can <a href=\"http://project-fifo.net/display/PF/LeoFS\">configure</a> Fifo to backup machine's into an S3 compatible service. Then, you will see a 'Versioning' tab on each machine page that lets you work with the backups."
-msgstr ""
+msgstr "Tip: 你可以通过<a href=\"http://project-fifo.net/display/PF/LeoFS\">配置</a>Fifo, 来备份云主机为S3兼容的服务. 之后, 你将可以在云主机页面中发现“版本”面板, 通过该面板即可以管理备份文件."
 
 #: app/views/machine.html
 msgid "To rollback, please stop the machine"
