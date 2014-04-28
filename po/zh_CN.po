@@ -20,11 +20,11 @@ msgstr "关于"
 #: app/views/packages.html
 #: app/views/user.html
 msgid "Actions"
-msgstr ""
+msgstr "动作"
 
 #: app/views/user.html
 msgid "Active Organisation"
-msgstr ""
+msgstr "所属组织"
 
 #: app/views/network.html
 #: app/views/user.html
@@ -37,11 +37,11 @@ msgstr "添加网卡"
 
 #: app/views/organization.html
 msgid "Add trigger"
-msgstr ""
+msgstr "添加触发器"
 
 #: app/views/machine-new.html
 msgid "Advanced rules"
-msgstr ""
+msgstr "高级规则"
 
 #: app/views/servers.html
 msgid "Agent ver"
@@ -65,7 +65,7 @@ msgstr "创建时自动授权"
 
 #: app/views/organization.html
 msgid "Automatic joins on user creation"
-msgstr ""
+msgstr "当创建用户时自动加入"
 
 #: app/views/machine.html
 msgid "Backup"
@@ -128,20 +128,20 @@ msgstr "变更为"
 #: app/views/group.html
 #: app/views/user.html
 msgid "Channels"
-msgstr ""
+msgstr "频道列表"
 
 #: app/views/server.html
 msgid "Characteristics"
-msgstr ""
+msgstr "特性列表"
 
 #: app/views/vis-graph.html
 msgid "Charge"
-msgstr ""
+msgstr "Charge"
 
 #: app/views/group.html
 #: app/views/user.html
 msgid "Cloud"
-msgstr ""
+msgstr "云"
 
 #: app/views/main.html
 msgid "Cloud View"
@@ -271,13 +271,13 @@ msgstr "编辑"
 
 #: app/views/main.html
 msgid "Element"
-msgstr ""
+msgstr "元素"
 
 #: app/views/group.html
 #: app/views/organization.html
 #: app/views/user.html
 msgid "Everything"
-msgstr ""
+msgstr "全部"
 
 #: app/views/main.html
 msgid "FiFo Home"
@@ -289,44 +289,44 @@ msgstr "过滤器"
 
 #: app/views/ip-ranges.html
 msgid "First"
-msgstr ""
+msgstr "起"
 
 #: app/views/machine.html
 msgid "Force"
-msgstr ""
+msgstr "强制"
 
 #: app/views/machine.html
 msgid "Form"
-msgstr ""
+msgstr "表单"
 
 #: app/views/server.html
 #: app/views/servers.html
 msgid "Free"
-msgstr ""
+msgstr "剩余"
 
 #: app/views/vis-graph.html
 msgid "Full Screen"
-msgstr ""
+msgstr "全屏幕"
 
 #: app/views/ip-ranges.html
 #: app/views/machine.html
 msgid "Gateway"
-msgstr ""
+msgstr "网关"
 
 #: app/views/group.html
 msgid "Grant"
-msgstr ""
+msgstr "授权"
 
 #: app/views/organization.html
 msgid "Group"
-msgstr ""
+msgstr "组"
 
 #: app/views/group.html
 #: app/views/user.html
 #: app/views/users.html
 #: app/views/partials/header.html
 msgid "Groups"
-msgstr ""
+msgstr "组列表"
 
 #: app/views/partials/breadcrumb.html
 msgid "Help"
@@ -365,7 +365,7 @@ msgstr "IPv4"
 
 #: app/views/machine.html
 msgid "Imaging"
-msgstr ""
+msgstr "制作镜像"
 
 #: app/views/datasets.html
 msgid "Import"
@@ -441,13 +441,13 @@ msgstr "Mac"
 
 #: app/views/machine.html
 msgid "Machine"
-msgstr ""
+msgstr "云主机"
 
 #: app/views/machines.html
 #: app/views/main.html
 #: app/views/partials/header.html
 msgid "Machines"
-msgstr ""
+msgstr "云主机列表"
 
 #: app/views/server.html
 msgid "Main IP"
@@ -485,7 +485,7 @@ msgstr "型号"
 
 #: app/views/partials/header.html
 msgid "My info"
-msgstr ""
+msgstr "我的信息"
 
 #: app/views/machine.html
 msgid "NIC"
@@ -516,15 +516,15 @@ msgstr "子网掩码"
 #: app/views/machine-new.html
 #: app/views/machine.html
 msgid "Network"
-msgstr ""
+msgstr "网络"
 
 #: app/views/server.html
 msgid "Network tags"
-msgstr ""
+msgstr "网络标记"
 
 #: app/views/partials/header.html
 msgid "Networking"
-msgstr ""
+msgstr "网络"
 
 #: app/views/group.html
 #: app/views/server.html
@@ -540,114 +540,114 @@ msgstr "新建用户组"
 
 #: app/views/ip-ranges.html
 msgid "New IP Range"
-msgstr ""
+msgstr "新建IP范围"
 
 #: app/views/machines.html
 #: app/views/main.html
 msgid "New Machine"
-msgstr ""
+msgstr "新建云主机"
 
 #: app/views/networks.html
 msgid "New Network"
-msgstr ""
+msgstr "新建网络"
 
 #: app/views/organizations.html
 msgid "New Organization"
-msgstr ""
+msgstr "新建组织"
 
 #: app/views/packages.html
 msgid "New Package"
-msgstr ""
+msgstr "新建配置包"
 
 #: app/views/dtraces.html
 msgid "New Trace"
-msgstr ""
+msgstr "新建Trace"
 
 #: app/views/users.html
 msgid "New User"
-msgstr ""
+msgstr "新建用户"
 
 #: app/views/ip-ranges.html
 msgid "Next"
-msgstr ""
+msgstr "下一步"
 
 #: app/views/main.html
 msgid "No ssh keys found on your account. Dont forget to <a href=\"#/configuration/users/{{user.uuid}}\">add one</a>!"
-msgstr ""
+msgstr "No ssh keys found on your account. Dont forget to <a href=\"#/configuration/users/{{user.uuid}}\">add one</a>!"
 
 #: app/views/server.html
 msgid "Node name"
-msgstr ""
+msgstr "节点名字"
 
 #: app/views/machine.html
 msgid "Notes"
-msgstr ""
+msgstr "笔记列表"
 
 #: app/views/dataset.html
 msgid "OS"
-msgstr ""
+msgstr "OS"
 
 #: app/views/organization.html
 msgid "Org/Group"
-msgstr ""
+msgstr "Org/Group"
 
 #: app/views/user.html
 msgid "Organization"
-msgstr ""
+msgstr "组织"
 
 #: app/views/group.html
 #: app/views/user.html
 #: app/views/users.html
 #: app/views/partials/header.html
 msgid "Organizations"
-msgstr ""
+msgstr "组织列表"
 
 #: app/views/machine.html
 msgid "Owner"
-msgstr ""
+msgstr "所有人"
 
 #: app/views/machine.html
 #: app/views/package.html
 msgid "Package"
-msgstr ""
+msgstr "配置包"
 
 #: app/views/group.html
 #: app/views/user.html
 #: app/views/partials/header.html
 msgid "Packages"
-msgstr ""
+msgstr "配置包列表"
 
 #: app/views/machine-new.html
 msgid "Parameters"
-msgstr ""
+msgstr "参数列表"
 
 #: app/views/machine-new.html
 msgid "Passwords"
-msgstr ""
+msgstr "密码列表"
 
 #: app/views/machine.html
 #: app/views/server.html
 msgid "Performance"
-msgstr ""
+msgstr "性能指标"
 
 #: app/views/group.html
 #: app/views/user.html
 msgid "Permission"
-msgstr ""
+msgstr "权限"
 
 #: app/views/group.html
 #: app/views/user.html
 #: app/views/partials/header.html
 msgid "Permissions"
-msgstr ""
+msgstr "权限列表"
 
 #: app/views/login.html
 msgid "Please identify yourself"
-msgstr ""
+msgstr "请通过身份认证"
 
 #: app/views/server.html
 msgid "Pool"
-msgstr ""
+msgstr "Pool"
 
 #: app/views/about.html
 msgid "Project FiFo"
@@ -664,7 +664,7 @@ msgstr "已发布"
 #: app/views/packages.html
 #: app/views/servers.html
 msgid "Ram"
-msgstr ""
+msgstr "内存"
 
 #: app/views/organization.html
 msgid "Reboot"
@@ -672,11 +672,11 @@ msgstr "重启"
 
 #: app/views/datasets.html
 msgid "Remote datasets"
-msgstr ""
+msgstr "远端Datasets"
 
 #: app/views/vis-graph.html
 msgid "Reset"
-msgstr ""
+msgstr "重置"
 
 #: app/views/machine-new.html
 msgid "Resolver 1"
@@ -692,11 +692,11 @@ msgstr "DNS解析服务"
 
 #: app/views/package-new.html
 msgid "Resources"
-msgstr ""
+msgstr "资源列表"
 
 #: app/views/ip-ranges.html
 msgid "Returned"
-msgstr ""
+msgstr "已返回"
 
 #: app/views/organization.html
 msgid "Rollback a Snapshot"
@@ -708,7 +708,7 @@ msgstr "规则列表"
 
 #: app/views/dtrace.html
 msgid "Run"
-msgstr ""
+msgstr "运行"
 
 #: app/views/machine-new.html
 #: app/views/user.html
@@ -744,7 +744,7 @@ msgstr "脚本列表"
 
 #: app/views/organization.html
 msgid "See"
-msgstr ""
+msgstr "查看"
 
 #: app/views/server.html
 msgid "Serial"
@@ -753,14 +753,14 @@ msgstr "序列号"
 #: app/views/machine-new.html
 #: app/views/machine.html
 msgid "Server"
-msgstr ""
+msgstr "服务器"
 
 #: app/views/dtrace.html
 #: app/views/group.html
 #: app/views/main.html
 #: app/views/partials/header.html
 msgid "Servers"
-msgstr ""
+msgstr "服务器列表"
 
 #: app/views/machine.html
 msgid "Services"
@@ -768,31 +768,31 @@ msgstr "服务列表"
 
 #: app/views/machines.html
 msgid "Showing"
-msgstr ""
+msgstr "Showing"
 
 #: app/views/datasets.html
 msgid "Size"
-msgstr ""
+msgstr "大小"
 
 #: app/views/server.html
 msgid "SmartOS ver"
-msgstr ""
+msgstr "SmartOS版本"
 
 #: app/views/machine.html
 msgid "Snapshot"
-msgstr ""
+msgstr "快照"
 
 #: app/views/machine.html
 msgid "Snapshots"
-msgstr ""
+msgstr "快照列表"
 
 #: app/views/machine.html
 msgid "Something is wrong with this machine."
-msgstr ""
+msgstr "Something is wrong with this machine."
 
 #: app/views/organization.html
 msgid "Start"
-msgstr ""
+msgstr "启动"
 
 #: app/views/datasets.html
 msgid "Status"
@@ -800,27 +800,27 @@ msgstr "状态"
 
 #: app/views/organization.html
 msgid "Stop"
-msgstr ""
+msgstr "关机"
 
 #: app/views/server.html
 msgid "Storage"
-msgstr ""
+msgstr "存储"
 
 #: app/views/machine.html
 msgid "Swap Usage"
-msgstr ""
+msgstr "Swap使用率"
 
 #: app/views/ip-ranges.html
 msgid "Tag"
-msgstr ""
+msgstr "标记"
 
 #: app/views/organization.html
 msgid "Template"
-msgstr ""
+msgstr "模板"
 
 #: app/views/about.html
 msgid "The Team"
-msgstr ""
+msgstr "The Team"
 
 #: app/views/main.html
 msgid "Tip: You can <a href=\"http://project-fifo.net/display/PF/LeoFS\">configure</a> Fifo to backup machine's into an S3 compatible service. Then, you will see a 'Versioning' tab on each machine page that lets you work with the backups."
@@ -828,136 +828,136 @@ msgstr ""
 
 #: app/views/machine.html
 msgid "To rollback, please stop the machine"
-msgstr ""
+msgstr "恢复前请先关机"
 
 #: app/views/server.html
 msgid "Total"
-msgstr ""
+msgstr "总计"
 
 #: app/views/dataset.html
 #: app/views/datasets.html
 #: app/views/machine.html
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #: app/views/group.html
 #: app/views/network.html
 #: app/views/organization.html
 #: app/views/user.html
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: app/views/user.html
 msgid "User UUID"
-msgstr ""
+msgstr "用户UUID"
 
 #: app/views/machine-new.html
 msgid "User script"
-msgstr ""
+msgstr "用户脚本"
 
 #: app/views/group.html
 #: app/views/main.html
 #: app/views/user.html
 #: app/views/partials/header.html
 msgid "Users"
-msgstr ""
+msgstr "用户列表"
 
 #: app/views/ip-ranges.html
 msgid "VLan"
-msgstr ""
+msgstr "VLan"
 
 #: app/views/organization.html
 msgid "VM"
-msgstr ""
+msgstr "云主机"
 
 #: app/views/dtrace-new.html
 #: app/views/dtrace.html
 msgid "Variables"
-msgstr ""
+msgstr "变量列表"
 
 #: app/views/machine-new.html
 msgid "Version"
-msgstr ""
+msgstr "版本"
 
 #: app/views/machine.html
 msgid "Versioning"
-msgstr ""
+msgstr "版本"
 
 #: app/views/group.html
 #: app/views/user.html
 msgid "Virtual Machines"
-msgstr ""
+msgstr "虚拟主机"
 
 #: app/views/login.html
 msgid "Web Panel"
-msgstr ""
+msgstr "Web面板"
 
 #: app/views/main.html
 msgid "Welcome {{user.name}}!"
-msgstr ""
+msgstr "欢迎, {{user.name}}!"
 
 #: app/views/main.html
 msgid "You are part of"
-msgstr ""
+msgstr "你属于"
 
 #: app/views/main.html
 msgid "You groups are"
-msgstr ""
+msgstr "你的组是"
 
 #: app/views/main.html
 msgid "Your cloud is fine!"
-msgstr ""
+msgstr "你的云一起正常!"
 
 #: app/views/main.html
 msgid "Your cloud needs some attention!"
-msgstr ""
+msgstr "你的云有问题需要关注!"
 
 #: app/views/user.html
 msgid "Yubikeys"
-msgstr ""
+msgstr "Yubikeys"
 
 #: app/views/server.html
 msgid "ZFS free"
-msgstr ""
+msgstr "ZFS空闲"
 
 #: app/views/server.html
 msgid "ZFS size"
-msgstr ""
+msgstr "ZFS大小"
 
 #: app/views/server.html
 msgid "ZFS used"
-msgstr ""
+msgstr "ZFS已使用"
 
 #: app/views/vis-graph.html
 msgid "Zoom"
-msgstr ""
+msgstr "放大"
 
 #: app/views/server.html
 msgid "Zpool profile"
-msgstr ""
+msgstr "Zpool profile"
 
 #: app/views/machine.html
 msgid "add"
-msgstr ""
+msgstr "添加"
 
 #: app/views/machine-new.html
 msgid "called"
-msgstr ""
+msgstr "已调用"
 
 #: app/views/group.html
 #: app/views/network.html
 #: app/views/user.html
 msgid "delete"
-msgstr ""
+msgstr "删除"
 
 #: app/views/machine.html
 msgid "local"
-msgstr ""
+msgstr "本地"
 
 #: app/views/machine-new.html
 msgid "machine"
-msgstr ""
+msgstr "云主机"
 
 #: app/views/machines.html
 msgid "of"
-msgstr ""
+msgstr "的"
