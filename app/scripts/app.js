@@ -176,17 +176,27 @@ angular.module('fifoApp',
   //Empty ng-table template for pagination
   $templateCache.put('ng-table/pager.html', '')
 
-  var lang = window.navigator.userLanguage || window.navigator.language;
+  function hasLang(lang) {
+    return Object.keys(gettextCatalog.strings).indexOf(lang) > -1
+  }
 
-  //Some browsers puts 'es-ES' on that vars, so just get the country...
-  if (lang.indexOf('-') > -1)
-    lang = lang.split('-')[0];
+  function getKownLanguage() {
+    var lang = window.navigator.userLanguage || window.navigator.language;
 
-  //default gb flag
-  if (Object.keys(gettextCatalog.strings).indexOf(lang) < 0)
-    lang = 'gb'
+    console.log( Object.keys(gettextCatalog.strings))
+    if (hasLang(lang)) return lang;
 
-  gettextCatalog.currentLanguage = lang;
+    //Some browsers puts 'es-ES' on that vars, some just 'es'
+    if (lang.indexOf('-') < 0)
+      return 'en'
+
+    lang = lang.split('-')
+    if (hasLang(lang[0])) return lang[0]
+    if (hasLang(lang[1])) return lang[1]
+    return 'en'
+  }
+
+  gettextCatalog.currentLanguage = getKownLanguage();
   // gettextCatalog.debug = true;
 
   //Let bootstrap markup do its job.

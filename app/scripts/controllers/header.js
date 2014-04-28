@@ -53,10 +53,10 @@ angular.module('fifoApp')
       $scope.lang = gettextCatalog.currentLanguage = lang;
     }
     var langs = Object.keys(gettextCatalog.strings);
-    
+
     //Put the default lang, the others are automatically added
-    if (langs.indexOf('gb')<1) langs.push('gb');
-    
+    if (langs.indexOf('en')<1) langs.push('en');
+
     $scope.languages = langs.sort();
 
     //Backend selector
