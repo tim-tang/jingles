@@ -9,7 +9,7 @@ msgstr ""
 
 #: app/views/partials/header.html
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 #: app/views/dtraces.html
 #: app/views/group.html
@@ -29,11 +29,11 @@ msgstr ""
 #: app/views/network.html
 #: app/views/user.html
 msgid "Add"
-msgstr ""
+msgstr "添加"
 
 #: app/views/machine.html
 msgid "Add Network Interface"
-msgstr ""
+msgstr "添加网卡"
 
 #: app/views/organization.html
 msgid "Add trigger"
@@ -45,23 +45,23 @@ msgstr ""
 
 #: app/views/servers.html
 msgid "Agent ver"
-msgstr ""
+msgstr "Agent版本"
 
 #: app/views/server.html
 msgid "Agent version"
-msgstr ""
+msgstr "Agent版本"
 
 #: app/views/machine.html
 msgid "Alias"
-msgstr ""
+msgstr "别名"
 
 #: app/views/machine-new.html
 msgid "Autoboot"
-msgstr ""
+msgstr "自动启动"
 
 #: app/views/organization.html
 msgid "Automatic grants on creation"
-msgstr ""
+msgstr "创建时自动授权"
 
 #: app/views/organization.html
 msgid "Automatic joins on user creation"
@@ -69,36 +69,36 @@ msgstr ""
 
 #: app/views/machine.html
 msgid "Backup"
-msgstr ""
+msgstr "备份"
 
 #: app/views/server.html
 #: app/views/servers.html
 msgid "Booted"
-msgstr ""
+msgstr "已启动"
 
 #: app/views/machine-new.html
 msgid "CPU"
-msgstr ""
+msgstr "CPU"
 
 #: app/views/server.html
 msgid "CPU / Mainboard"
-msgstr ""
+msgstr "CPU/主板"
 
 #: app/views/packages.html
 msgid "CPU Cap"
-msgstr ""
+msgstr "CPU限制"
 
 #: app/views/server.html
 msgid "CPU Load"
-msgstr ""
+msgstr "CPU负载"
 
 #: app/views/machine.html
 msgid "CPU Usage"
-msgstr ""
+msgstr "CPU使用率"
 
 #: app/views/server.html
 msgid "CPU type"
-msgstr ""
+msgstr "CPU类型"
 
 #: app/views/servers.html
 msgid "Capabilities"
@@ -106,24 +106,24 @@ msgstr ""
 
 #: app/views/server.html
 msgid "Capability"
-msgstr ""
+msgstr "容量"
 
 #: app/views/main.html
 msgid "Category"
-msgstr ""
+msgstr "类型"
 
 #: app/views/machine.html
 #: app/views/user.html
 msgid "Change"
-msgstr ""
+msgstr "变更"
 
 #: app/views/user.html
 msgid "Change Password"
-msgstr ""
+msgstr "变更密码"
 
 #: app/views/machine.html
 msgid "Change to"
-msgstr ""
+msgstr "变更为"
 
 #: app/views/group.html
 #: app/views/user.html
@@ -145,19 +145,19 @@ msgstr ""
 
 #: app/views/main.html
 msgid "Cloud View"
-msgstr ""
+msgstr "云视图"
 
 #: app/views/partials/header.html
 msgid "Config"
-msgstr ""
+msgstr "配置"
 
 #: app/views/organization.html
 msgid "Console/VNC"
-msgstr ""
+msgstr "控制台/VNC"
 
 #: app/views/server.html
 msgid "Cores"
-msgstr ""
+msgstr "Cores"
 
 #: app/views/dtrace-new.html
 #: app/views/ip-range-new.html
@@ -166,108 +166,108 @@ msgstr ""
 #: app/views/package-new.html
 #: app/views/user-new.html
 msgid "Create"
-msgstr ""
+msgstr "创建"
 
 #: app/views/machine-new.html
 msgid "Create a"
-msgstr ""
+msgstr "创建"
 
 #: app/views/organization.html
 msgid "Create a Snapshot"
-msgstr ""
+msgstr "创建快照"
 
 #: app/views/ip-range-new.html
 msgid "Create a iprange called:"
-msgstr ""
+msgstr "创建网段，名为"
 
 #: app/views/package-new.html
 msgid "Create a package called"
-msgstr ""
+msgstr "创建配置包，名为"
 
 #: app/views/machine.html
 msgid "Created"
-msgstr ""
+msgstr "已创建"
 
 #: app/views/datasets.html
 msgid "Creator"
-msgstr ""
+msgstr "创建者"
 
 #: app/views/machine.html
 msgid "Current package"
-msgstr ""
+msgstr "当前配置包"
 
 #: app/views/group.html
 #: app/views/user.html
 #: app/views/partials/header.html
 msgid "DTrace"
-msgstr ""
+msgstr "DTrace"
 
 #: app/views/dataset.html
 #: app/views/machine-new.html
 #: app/views/machine.html
 #: app/views/organization.html
 msgid "Dataset"
-msgstr ""
+msgstr "Dataset"
 
 #: app/views/group.html
 #: app/views/user.html
 #: app/views/partials/header.html
 msgid "Datasets"
-msgstr ""
+msgstr "Datasets"
 
 #: app/views/organization.html
 #: app/views/user.html
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 #: app/views/organization.html
 msgid "Delete a Snapshot"
-msgstr ""
+msgstr "删除快照"
 
 #: app/views/machine.html
 msgid "Describe"
-msgstr ""
+msgstr "描述"
 
 #: app/views/datasets.html
 #: app/views/machine.html
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 #: app/views/group.html
 #: app/views/machine.html
 #: app/views/server.html
 #: app/views/user.html
 msgid "Details"
-msgstr ""
+msgstr "详细信息"
 
 #: app/views/machine-new.html
 #: app/views/packages.html
 msgid "Disk"
-msgstr ""
+msgstr "磁盘"
 
 #: app/views/machine.html
 msgid "Disk IOPS"
-msgstr ""
+msgstr "磁盘 IOPS"
 
 #: app/views/machine.html
 msgid "Disk Throughput"
-msgstr ""
+msgstr "磁盘 吞吐量"
 
 #: app/views/main.html
 msgid "Disk usage"
-msgstr ""
+msgstr "磁盘 使用率"
 
 #: app/views/server.html
 msgid "Disks"
-msgstr ""
+msgstr "磁盘"
 
 #: app/views/vis-graph.html
 msgid "Distance"
-msgstr ""
+msgstr "距离"
 
 #: app/views/dtrace.html
 msgid "Edit"
-msgstr ""
+msgstr "编辑"
 
 #: app/views/main.html
 msgid "Element"
@@ -281,11 +281,11 @@ msgstr ""
 
 #: app/views/main.html
 msgid "FiFo Home"
-msgstr ""
+msgstr "FiFo项目主页"
 
 #: app/views/machines.html
 msgid "Filter"
-msgstr ""
+msgstr "过滤器"
 
 #: app/views/ip-ranges.html
 msgid "First"
@@ -330,38 +330,38 @@ msgstr ""
 
 #: app/views/partials/breadcrumb.html
 msgid "Help"
-msgstr ""
+msgstr "帮助"
 
 #: app/views/machine.html
 msgid "History"
-msgstr ""
+msgstr "历史记录"
 
 #: app/views/machine-new.html
 #: app/views/machine.html
 msgid "Hostname"
-msgstr ""
+msgstr "Hostname"
 
 #: app/views/user.html
 msgid "Hypervisors"
-msgstr ""
+msgstr "Hypervisors"
 
 #: app/views/dtraces.html
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: app/views/machine.html
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #: app/views/group.html
 #: app/views/user.html
 #: app/views/partials/header.html
 msgid "IP Ranges"
-msgstr ""
+msgstr "IP范围"
 
 #: app/views/servers.html
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 #: app/views/machine.html
 msgid "Imaging"
@@ -369,75 +369,75 @@ msgstr ""
 
 #: app/views/datasets.html
 msgid "Import"
-msgstr ""
+msgstr "导入"
 
 #: app/views/datasets.html
 msgid "Imported"
-msgstr ""
+msgstr "已导入"
 
 #: app/views/machine.html
 msgid "Info"
-msgstr ""
+msgstr "信息"
 
 #: app/views/server.html
 msgid "Information"
-msgstr ""
+msgstr "信息"
 
 #: app/views/datasets.html
 msgid "Installed"
-msgstr ""
+msgstr "已安装"
 
 #: app/views/ip-ranges.html
 msgid "Iprange"
-msgstr ""
+msgstr "IP范围"
 
 #: app/views/user.html
 msgid "Join"
-msgstr ""
+msgstr "加入"
 
 #: app/views/user.html
 msgid "Key"
-msgstr ""
+msgstr "关键字"
 
 #: app/views/user.html
 msgid "Key ID"
-msgstr ""
+msgstr "关键字ID"
 
 #: app/views/server.html
 msgid "L1 Arc hit %"
-msgstr ""
+msgstr "L1 Arc hit %"
 
 #: app/views/server.html
 msgid "L1 Size"
-msgstr ""
+msgstr "L1 Size"
 
 #: app/views/server.html
 msgid "L2 Arc hit %"
-msgstr ""
+msgstr "L2 Arc hit %"
 
 #: app/views/server.html
 msgid "L2 Size"
-msgstr ""
+msgstr "L2 Size"
 
 #: app/views/ip-ranges.html
 msgid "Last"
-msgstr ""
+msgstr "止"
 
 #: app/views/machine.html
 msgid "List Color"
-msgstr ""
+msgstr "列表颜色"
 
 #: app/views/partials/breadcrumb.html
 msgid "Loading"
-msgstr ""
+msgstr "载入中"
 
 #: app/views/partials/header.html
 msgid "Logout"
-msgstr ""
+msgstr "登出"
 
 #: app/views/machine.html
 msgid "Mac"
-msgstr ""
+msgstr "Mac"
 
 #: app/views/machine.html
 msgid "Machine"
@@ -451,37 +451,37 @@ msgstr ""
 
 #: app/views/server.html
 msgid "Main IP"
-msgstr ""
+msgstr "主IP"
 
 #: app/views/server.html
 msgid "Mainboard"
-msgstr ""
+msgstr "主板"
 
 #: app/views/server.html
 msgid "Manufacturer"
-msgstr ""
+msgstr "制造商"
 
 #: app/views/machine-new.html
 #: app/views/main.html
 #: app/views/server.html
 msgid "Memory"
-msgstr ""
+msgstr "内存"
 
 #: app/views/machine.html
 msgid "Memory Usage"
-msgstr ""
+msgstr "内存使用率"
 
 #: app/views/main.html
 msgid "Message"
-msgstr ""
+msgstr "消息"
 
 #: app/views/main.html
 msgid "Messages"
-msgstr ""
+msgstr "消息列表"
 
 #: app/views/machine.html
 msgid "Model"
-msgstr ""
+msgstr "型号"
 
 #: app/views/partials/header.html
 msgid "My info"
@@ -489,7 +489,7 @@ msgstr ""
 
 #: app/views/machine.html
 msgid "NIC"
-msgstr ""
+msgstr "网络适配器"
 
 #: app/views/datasets.html
 #: app/views/dtraces.html
@@ -506,12 +506,12 @@ msgstr ""
 #: app/views/user.html
 #: app/views/users.html
 msgid "Name"
-msgstr ""
+msgstr "名字"
 
 #: app/views/ip-ranges.html
 #: app/views/machine.html
 msgid "Netmask"
-msgstr ""
+msgstr "子网掩码"
 
 #: app/views/machine-new.html
 #: app/views/machine.html
@@ -532,11 +532,11 @@ msgstr ""
 #: app/views/user.html
 #: app/views/partials/header.html
 msgid "Networks"
-msgstr ""
+msgstr "网络列表"
 
 #: app/views/groups.html
 msgid "New Group"
-msgstr ""
+msgstr "新建用户组"
 
 #: app/views/ip-ranges.html
 msgid "New IP Range"
@@ -651,15 +651,15 @@ msgstr ""
 
 #: app/views/about.html
 msgid "Project FiFo"
-msgstr ""
+msgstr "Project FiFo"
 
 #: app/views/server.html
 msgid "Provisioned"
-msgstr ""
+msgstr "已生成"
 
 #: app/views/datasets.html
 msgid "Published"
-msgstr ""
+msgstr "已发布"
 
 #: app/views/packages.html
 #: app/views/servers.html
@@ -668,7 +668,7 @@ msgstr ""
 
 #: app/views/organization.html
 msgid "Reboot"
-msgstr ""
+msgstr "重启"
 
 #: app/views/datasets.html
 msgid "Remote datasets"
@@ -680,15 +680,15 @@ msgstr ""
 
 #: app/views/machine-new.html
 msgid "Resolver 1"
-msgstr ""
+msgstr "服务器1"
 
 #: app/views/machine-new.html
 msgid "Resolver 2"
-msgstr ""
+msgstr "服务器2"
 
 #: app/views/machine.html
 msgid "Resolvers"
-msgstr ""
+msgstr "DNS解析服务"
 
 #: app/views/package-new.html
 msgid "Resources"
@@ -700,11 +700,11 @@ msgstr ""
 
 #: app/views/organization.html
 msgid "Rollback a Snapshot"
-msgstr ""
+msgstr "从快照恢复"
 
 #: app/views/package.html
 msgid "Rules"
-msgstr ""
+msgstr "规则列表"
 
 #: app/views/dtrace.html
 msgid "Run"
@@ -713,32 +713,34 @@ msgstr ""
 #: app/views/machine-new.html
 #: app/views/user.html
 msgid "SSH Keys"
-msgstr ""
+msgstr "SSH Keys"
 
 #: app/views/user.html
 msgid ""
 "SSH Keys will be used when creating new KVM machines. They also will dynamically grant access"
 "              to SmartOS zones. Based on the console access to the zone."
 msgstr ""
+"SSH Keys will be used when creating new KVM machines. They also will dynamically grant access"
+"              to SmartOS zones. Based on the console access to the zone."
 
 #: app/views/main.html
 msgid "SSH keys configured: {{keys}}"
-msgstr ""
+msgstr "已配置SSH keys: {{keys}}"
 
 #: app/views/dataset.html
 #: app/views/machine.html
 #: app/views/server.html
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 #: app/views/dtrace-new.html
 #: app/views/dtrace.html
 msgid "Script"
-msgstr ""
+msgstr "脚本"
 
 #: app/views/partials/header.html
 msgid "Scripts"
-msgstr ""
+msgstr "脚本列表"
 
 #: app/views/organization.html
 msgid "See"
@@ -746,7 +748,7 @@ msgstr ""
 
 #: app/views/server.html
 msgid "Serial"
-msgstr ""
+msgstr "序列号"
 
 #: app/views/machine-new.html
 #: app/views/machine.html
@@ -762,7 +764,7 @@ msgstr ""
 
 #: app/views/machine.html
 msgid "Services"
-msgstr ""
+msgstr "服务列表"
 
 #: app/views/machines.html
 msgid "Showing"
@@ -794,7 +796,7 @@ msgstr ""
 
 #: app/views/datasets.html
 msgid "Status"
-msgstr ""
+msgstr "状态"
 
 #: app/views/organization.html
 msgid "Stop"
