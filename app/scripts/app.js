@@ -183,7 +183,6 @@ angular.module('fifoApp',
   function getKownLanguage() {
     var lang = window.navigator.userLanguage || window.navigator.language;
 
-    console.log( Object.keys(gettextCatalog.strings))
     if (hasLang(lang)) return lang;
 
     //Some browsers puts 'es-ES' on that vars, some just 'es'
