@@ -36,7 +36,7 @@ module.exports = function (grunt) {
         nggettext_extract: {
             extract: {
                 files: {
-                    'po/extracted.pot': ['<%= yeoman.app %>/views/*.html', '<%= yeoman.app %>/views/partials/*.html']
+                    'po/extracted.pot': ['<%= yeoman.app %>/views/*.html', '<%= yeoman.app %>/views/partials/*.html', '<%= yeoman.app %>/views/partials/configs/*.html']
                 }
             }
         },
@@ -118,6 +118,7 @@ module.exports = function (grunt) {
                     '<%= yeoman.app %>/*.html',
                     '<%= yeoman.app %>/views/*.html',
                     '<%= yeoman.app %>/views/partials/*.html',
+                    '<%= yeoman.app %>/views/partials/configs/*.html',
                     '.tmp/styles/{,*/}*.css',
                     '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
@@ -430,7 +431,7 @@ module.exports = function (grunt) {
                         'styles/*.png', //bloody famfam, includes the png in the same dir as the style. :P
                         'fonts/{,*/}*.*',
                         'scripts/config.js.example',
-                        '*.html', 'views/*.html', 'views/*/*.html' //copy the files while htmlmin is not in use.
+                        '*.html', 'views/*.html', 'views/*/*.html', 'views/*/*/*.html' //copy the files while htmlmin is not in use.
                     ]
                 }]
             },

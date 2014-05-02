@@ -1,0 +1,971 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FiFo\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: LI Yu\n"
+"Language-Team: \n"
+"Language: zh-TW\n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.6.2\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: app/views/machine-new.html
+msgid ""
+msgstr ""
+
+#: app/views/partials/header.html
+msgid "About"
+msgstr "關於"
+
+#: app/views/dtraces.html
+#: app/views/group.html
+#: app/views/ip-ranges.html
+#: app/views/network.html
+#: app/views/networks.html
+#: app/views/organization.html
+#: app/views/packages.html
+#: app/views/user.html
+msgid "Actions"
+msgstr "動作"
+
+#: app/views/user.html
+msgid "Active Organisation"
+msgstr "所屬組織"
+
+#: app/views/network.html
+#: app/views/user.html
+msgid "Add"
+msgstr "添加"
+
+#: app/views/machine.html
+msgid "Add Network Interface"
+msgstr "添加網卡"
+
+#: app/views/organization.html
+msgid "Add trigger"
+msgstr "添加觸發器"
+
+#: app/views/machine-new.html
+msgid "Advanced rules"
+msgstr "高級規則"
+
+#: app/views/servers.html
+msgid "Agent ver"
+msgstr "Agent版本"
+
+#: app/views/server.html
+msgid "Agent version"
+msgstr "Agent版本"
+
+#: app/views/machine.html
+msgid "Alias"
+msgstr "別名"
+
+#: app/views/machine-new.html
+msgid "Autoboot"
+msgstr "自動啟動"
+
+#: app/views/organization.html
+msgid "Automatic grants on creation"
+msgstr "創建時自動授權"
+
+#: app/views/organization.html
+msgid "Automatic joins on user creation"
+msgstr "當創建用戶時自動加入"
+
+#: app/views/machine.html
+msgid "Backup"
+msgstr "備份"
+
+#: app/views/server.html
+#: app/views/servers.html
+msgid "Booted"
+msgstr "已啟動"
+
+#: app/views/machine-new.html
+msgid "CPU"
+msgstr "CPU"
+
+#: app/views/server.html
+msgid "CPU / Mainboard"
+msgstr "CPU/主板"
+
+#: app/views/packages.html
+msgid "CPU Cap"
+msgstr "CPU限制"
+
+#: app/views/server.html
+msgid "CPU Load"
+msgstr "CPU負載"
+
+#: app/views/machine.html
+msgid "CPU Usage"
+msgstr "CPU使用率"
+
+#: app/views/server.html
+msgid "CPU type"
+msgstr "CPU類型"
+
+#: app/views/servers.html
+msgid "Capabilities"
+msgstr ""
+
+#: app/views/server.html
+msgid "Capability"
+msgstr "容量"
+
+#: app/views/main.html
+msgid "Category"
+msgstr "類型"
+
+#: app/views/machine.html
+#: app/views/user.html
+msgid "Change"
+msgstr "變更"
+
+#: app/views/user.html
+msgid "Change Password"
+msgstr "變更密碼"
+
+#: app/views/machine.html
+msgid "Change to"
+msgstr "變更為"
+
+#: app/views/group.html
+#: app/views/user.html
+msgid "Channels"
+msgstr "頻道列表"
+
+#: app/views/server.html
+msgid "Characteristics"
+msgstr "特性列表"
+
+#: app/views/vis-graph.html
+msgid "Charge"
+msgstr "Charge"
+
+#: app/views/group.html
+#: app/views/user.html
+msgid "Cloud"
+msgstr "雲"
+
+#: app/views/main.html
+msgid "Cloud View"
+msgstr "雲視圖"
+
+#: app/views/partials/header.html
+msgid "Config"
+msgstr "配置"
+
+#: app/views/organization.html
+msgid "Console/VNC"
+msgstr "控制臺/VNC"
+
+#: app/views/server.html
+msgid "Cores"
+msgstr "Cores"
+
+#: app/views/dtrace-new.html
+#: app/views/ip-range-new.html
+#: app/views/machine-new.html
+#: app/views/network-new.html
+#: app/views/package-new.html
+#: app/views/user-new.html
+msgid "Create"
+msgstr "創建"
+
+#: app/views/machine-new.html
+msgid "Create a"
+msgstr "創建"
+
+#: app/views/organization.html
+msgid "Create a Snapshot"
+msgstr "創建快照"
+
+#: app/views/ip-range-new.html
+msgid "Create a iprange called:"
+msgstr "創建網段，名為"
+
+#: app/views/package-new.html
+msgid "Create a package called"
+msgstr "創建配置包，名為"
+
+#: app/views/machine.html
+msgid "Created"
+msgstr "已創建"
+
+#: app/views/datasets.html
+msgid "Creator"
+msgstr "創建者"
+
+#: app/views/machine.html
+msgid "Current package"
+msgstr "當前配置包"
+
+#: app/views/group.html
+#: app/views/user.html
+#: app/views/partials/header.html
+msgid "DTrace"
+msgstr "DTrace"
+
+#: app/views/dataset.html
+#: app/views/machine-new.html
+#: app/views/machine.html
+#: app/views/organization.html
+msgid "Dataset"
+msgstr "Dataset"
+
+#: app/views/group.html
+#: app/views/user.html
+#: app/views/partials/header.html
+msgid "Datasets"
+msgstr "Datasets"
+
+#: app/views/organization.html
+#: app/views/user.html
+msgid "Delete"
+msgstr "刪除"
+
+#: app/views/organization.html
+msgid "Delete a Snapshot"
+msgstr "刪除快照"
+
+#: app/views/machine.html
+msgid "Describe"
+msgstr "描述"
+
+#: app/views/datasets.html
+#: app/views/machine.html
+msgid "Description"
+msgstr "描述"
+
+#: app/views/group.html
+#: app/views/machine.html
+#: app/views/server.html
+#: app/views/user.html
+msgid "Details"
+msgstr "詳細信息"
+
+#: app/views/machine-new.html
+#: app/views/packages.html
+msgid "Disk"
+msgstr "磁盤"
+
+#: app/views/machine.html
+msgid "Disk IOPS"
+msgstr "磁盤 IOPS"
+
+#: app/views/machine.html
+msgid "Disk Throughput"
+msgstr "磁盤 吞吐量"
+
+#: app/views/main.html
+msgid "Disk usage"
+msgstr "磁盤 使用率"
+
+#: app/views/server.html
+msgid "Disks"
+msgstr "磁盤"
+
+#: app/views/vis-graph.html
+msgid "Distance"
+msgstr "距離"
+
+#: app/views/dtrace.html
+msgid "Edit"
+msgstr "編輯"
+
+#: app/views/main.html
+msgid "Element"
+msgstr "元素"
+
+#: app/views/group.html
+#: app/views/organization.html
+#: app/views/user.html
+msgid "Everything"
+msgstr "全部"
+
+#: app/views/main.html
+msgid "FiFo Home"
+msgstr "FiFo項目主頁"
+
+#: app/views/machines.html
+msgid "Filter"
+msgstr "過濾器"
+
+#: app/views/ip-ranges.html
+msgid "First"
+msgstr "起"
+
+#: app/views/machine.html
+msgid "Force"
+msgstr "強制"
+
+#: app/views/machine.html
+msgid "Form"
+msgstr "表單"
+
+#: app/views/server.html
+#: app/views/servers.html
+msgid "Free"
+msgstr "剩余"
+
+#: app/views/vis-graph.html
+msgid "Full Screen"
+msgstr "全屏幕"
+
+#: app/views/ip-ranges.html
+#: app/views/machine.html
+msgid "Gateway"
+msgstr "網關"
+
+#: app/views/group.html
+msgid "Grant"
+msgstr "授權"
+
+#: app/views/organization.html
+msgid "Group"
+msgstr "組"
+
+#: app/views/group.html
+#: app/views/user.html
+#: app/views/users.html
+#: app/views/partials/header.html
+msgid "Groups"
+msgstr "組列表"
+
+#: app/views/partials/breadcrumb.html
+msgid "Help"
+msgstr "幫助"
+
+#: app/views/machine.html
+msgid "History"
+msgstr "歷史記錄"
+
+#: app/views/machine-new.html
+#: app/views/machine.html
+msgid "Hostname"
+msgstr "Hostname"
+
+#: app/views/user.html
+msgid "Hypervisors"
+msgstr "Hypervisors"
+
+#: app/views/dtraces.html
+msgid "ID"
+msgstr "ID"
+
+#: app/views/machine.html
+msgid "IP"
+msgstr "IP"
+
+#: app/views/group.html
+#: app/views/user.html
+#: app/views/partials/header.html
+msgid "IP Ranges"
+msgstr "IP範圍"
+
+#: app/views/servers.html
+msgid "IPv4"
+msgstr "IPv4"
+
+#: app/views/machine.html
+msgid "Imaging"
+msgstr "制作鏡像"
+
+#: app/views/datasets.html
+msgid "Import"
+msgstr "導入"
+
+#: app/views/datasets.html
+msgid "Imported"
+msgstr "已導入"
+
+#: app/views/machine.html
+msgid "Info"
+msgstr "信息"
+
+#: app/views/server.html
+msgid "Information"
+msgstr "信息"
+
+#: app/views/datasets.html
+msgid "Installed"
+msgstr "已安裝"
+
+#: app/views/ip-ranges.html
+msgid "Iprange"
+msgstr "IP範圍"
+
+#: app/views/user.html
+msgid "Join"
+msgstr "加入"
+
+#: app/views/user.html
+msgid "Key"
+msgstr "關鍵字"
+
+#: app/views/user.html
+msgid "Key ID"
+msgstr "關鍵字ID"
+
+#: app/views/server.html
+msgid "L1 Arc hit %"
+msgstr "L1 Arc hit %"
+
+#: app/views/server.html
+msgid "L1 Size"
+msgstr "L1 Size"
+
+#: app/views/server.html
+msgid "L2 Arc hit %"
+msgstr "L2 Arc hit %"
+
+#: app/views/server.html
+msgid "L2 Size"
+msgstr "L2 Size"
+
+#: app/views/ip-ranges.html
+msgid "Last"
+msgstr "止"
+
+#: app/views/machine.html
+msgid "List Color"
+msgstr "列表顏色"
+
+#: app/views/partials/breadcrumb.html
+msgid "Loading"
+msgstr "載入中"
+
+#: app/views/partials/header.html
+msgid "Logout"
+msgstr "登出"
+
+#: app/views/machine.html
+msgid "Mac"
+msgstr "Mac"
+
+#: app/views/machine.html
+msgid "Machine"
+msgstr "雲主機"
+
+#: app/views/machines.html
+#: app/views/main.html
+#: app/views/partials/header.html
+msgid "Machines"
+msgstr "雲主機列表"
+
+#: app/views/server.html
+msgid "Main IP"
+msgstr "主IP"
+
+#: app/views/server.html
+msgid "Mainboard"
+msgstr "主板"
+
+#: app/views/server.html
+msgid "Manufacturer"
+msgstr "制造商"
+
+#: app/views/machine-new.html
+#: app/views/main.html
+#: app/views/server.html
+msgid "Memory"
+msgstr "內存"
+
+#: app/views/machine.html
+msgid "Memory Usage"
+msgstr "內存使用率"
+
+#: app/views/main.html
+msgid "Message"
+msgstr "消息"
+
+#: app/views/main.html
+msgid "Messages"
+msgstr "消息列表"
+
+#: app/views/machine.html
+msgid "Model"
+msgstr "型號"
+
+#: app/views/partials/header.html
+msgid "My info"
+msgstr "我的信息"
+
+#: app/views/machine.html
+msgid "NIC"
+msgstr "網絡適配器"
+
+#: app/views/datasets.html
+#: app/views/dtraces.html
+#: app/views/group.html
+#: app/views/groups.html
+#: app/views/ip-ranges.html
+#: app/views/machine.html
+#: app/views/network.html
+#: app/views/networks.html
+#: app/views/organization.html
+#: app/views/organizations.html
+#: app/views/packages.html
+#: app/views/servers.html
+#: app/views/user.html
+#: app/views/users.html
+msgid "Name"
+msgstr "名字"
+
+#: app/views/ip-ranges.html
+#: app/views/machine.html
+msgid "Netmask"
+msgstr "子網掩碼"
+
+#: app/views/machine-new.html
+#: app/views/machine.html
+msgid "Network"
+msgstr "網絡"
+
+#: app/views/server.html
+msgid "Network tags"
+msgstr "網絡標記"
+
+#: app/views/partials/header.html
+msgid "Networking"
+msgstr "網絡"
+
+#: app/views/group.html
+#: app/views/server.html
+#: app/views/servers.html
+#: app/views/user.html
+#: app/views/partials/header.html
+msgid "Networks"
+msgstr "網絡列表"
+
+#: app/views/groups.html
+msgid "New Group"
+msgstr "新建用戶組"
+
+#: app/views/ip-ranges.html
+msgid "New IP Range"
+msgstr "新建IP範圍"
+
+#: app/views/machines.html
+#: app/views/main.html
+msgid "New Machine"
+msgstr "新建雲主機"
+
+#: app/views/networks.html
+msgid "New Network"
+msgstr "新建網絡"
+
+#: app/views/organizations.html
+msgid "New Organization"
+msgstr "新建組織"
+
+#: app/views/packages.html
+msgid "New Package"
+msgstr "新建配置包"
+
+#: app/views/dtraces.html
+msgid "New Trace"
+msgstr "新建Trace"
+
+#: app/views/users.html
+msgid "New User"
+msgstr "新建用戶"
+
+#: app/views/ip-ranges.html
+msgid "Next"
+msgstr "下一步"
+
+#: app/views/main.html
+msgid "No ssh keys found on your account. Dont forget to <a href=\"#/configuration/users/{{user.uuid}}\">add one</a>!"
+msgstr "賬戶中未找到ssh key. 請通過<a href=\"#/configuration/users/{{user.uuid}}\">這裏添加</a>!"
+
+#: app/views/server.html
+msgid "Node name"
+msgstr "節點名字"
+
+#: app/views/machine.html
+msgid "Notes"
+msgstr "筆記列表"
+
+#: app/views/dataset.html
+msgid "OS"
+msgstr "OS"
+
+#: app/views/organization.html
+msgid "Org/Group"
+msgstr "Org/Group"
+
+#: app/views/user.html
+msgid "Organization"
+msgstr "組織"
+
+#: app/views/group.html
+#: app/views/user.html
+#: app/views/users.html
+#: app/views/partials/header.html
+msgid "Organizations"
+msgstr "組織列表"
+
+#: app/views/machine.html
+msgid "Owner"
+msgstr "所有人"
+
+#: app/views/machine.html
+#: app/views/package.html
+msgid "Package"
+msgstr "配置包"
+
+#: app/views/group.html
+#: app/views/user.html
+#: app/views/partials/header.html
+msgid "Packages"
+msgstr "配置包列表"
+
+#: app/views/machine-new.html
+msgid "Parameters"
+msgstr "參數列表"
+
+#: app/views/machine-new.html
+msgid "Passwords"
+msgstr "密碼列表"
+
+#: app/views/machine.html
+#: app/views/server.html
+msgid "Performance"
+msgstr "性能指標"
+
+#: app/views/group.html
+#: app/views/user.html
+msgid "Permission"
+msgstr "權限"
+
+#: app/views/group.html
+#: app/views/user.html
+#: app/views/partials/header.html
+msgid "Permissions"
+msgstr "權限列表"
+
+#: app/views/login.html
+msgid "Please identify yourself"
+msgstr "請通過身份認證"
+
+#: app/views/server.html
+msgid "Pool"
+msgstr "Pool"
+
+#: app/views/about.html
+msgid "Project FiFo"
+msgstr "Project FiFo"
+
+#: app/views/server.html
+msgid "Provisioned"
+msgstr "已生成"
+
+#: app/views/datasets.html
+msgid "Published"
+msgstr "已發布"
+
+#: app/views/packages.html
+#: app/views/servers.html
+msgid "Ram"
+msgstr "內存"
+
+#: app/views/organization.html
+msgid "Reboot"
+msgstr "重啟"
+
+#: app/views/datasets.html
+msgid "Remote datasets"
+msgstr "遠端Datasets"
+
+#: app/views/vis-graph.html
+msgid "Reset"
+msgstr "重置"
+
+#: app/views/machine-new.html
+msgid "Resolver 1"
+msgstr "服務器1"
+
+#: app/views/machine-new.html
+msgid "Resolver 2"
+msgstr "服務器2"
+
+#: app/views/machine.html
+msgid "Resolvers"
+msgstr "DNS解析服務"
+
+#: app/views/package-new.html
+msgid "Resources"
+msgstr "資源列表"
+
+#: app/views/ip-ranges.html
+msgid "Returned"
+msgstr "已返回"
+
+#: app/views/organization.html
+msgid "Rollback a Snapshot"
+msgstr "從快照恢復"
+
+#: app/views/package.html
+msgid "Rules"
+msgstr "規則列表"
+
+#: app/views/dtrace.html
+msgid "Run"
+msgstr "運行"
+
+#: app/views/machine-new.html
+#: app/views/user.html
+msgid "SSH Keys"
+msgstr "SSH Keys"
+
+#: app/views/user.html
+msgid ""
+"SSH Keys will be used when creating new KVM machines. They also will dynamically grant access"
+"              to SmartOS zones. Based on the console access to the zone."
+msgstr ""
+"SSH Keys will be used when creating new KVM machines. They also will dynamically grant access"
+"              to SmartOS zones. Based on the console access to the zone."
+
+#: app/views/main.html
+msgid "SSH keys configured: {{keys}}"
+msgstr "已配置SSH keys: {{keys}}"
+
+#: app/views/dataset.html
+#: app/views/machine.html
+#: app/views/server.html
+msgid "Save"
+msgstr "保存"
+
+#: app/views/dtrace-new.html
+#: app/views/dtrace.html
+msgid "Script"
+msgstr "腳本"
+
+#: app/views/partials/header.html
+msgid "Scripts"
+msgstr "腳本列表"
+
+#: app/views/organization.html
+msgid "See"
+msgstr "查看"
+
+#: app/views/server.html
+msgid "Serial"
+msgstr "序列號"
+
+#: app/views/machine-new.html
+#: app/views/machine.html
+msgid "Server"
+msgstr "服務器"
+
+#: app/views/dtrace.html
+#: app/views/group.html
+#: app/views/main.html
+#: app/views/partials/header.html
+msgid "Servers"
+msgstr "服務器列表"
+
+#: app/views/machine.html
+msgid "Services"
+msgstr "服務列表"
+
+#: app/views/machines.html
+msgid "Showing"
+msgstr "Showing"
+
+#: app/views/datasets.html
+msgid "Size"
+msgstr "大小"
+
+#: app/views/server.html
+msgid "SmartOS ver"
+msgstr "SmartOS版本"
+
+#: app/views/machine.html
+msgid "Snapshot"
+msgstr "快照"
+
+#: app/views/machine.html
+msgid "Snapshots"
+msgstr "快照列表"
+
+#: app/views/machine.html
+msgid "Something is wrong with this machine."
+msgstr "Something is wrong with this machine."
+
+#: app/views/organization.html
+msgid "Start"
+msgstr "啟動"
+
+#: app/views/datasets.html
+msgid "Status"
+msgstr "狀態"
+
+#: app/views/organization.html
+msgid "Stop"
+msgstr "關機"
+
+#: app/views/server.html
+msgid "Storage"
+msgstr "存儲"
+
+#: app/views/machine.html
+msgid "Swap Usage"
+msgstr "Swap使用率"
+
+#: app/views/ip-ranges.html
+msgid "Tag"
+msgstr "標記"
+
+#: app/views/organization.html
+msgid "Template"
+msgstr "模板"
+
+#: app/views/about.html
+msgid "The Team"
+msgstr "The Team"
+
+#: app/views/main.html
+msgid "Tip: You can <a href=\"http://project-fifo.net/display/PF/LeoFS\">configure</a> Fifo to backup machine's into an S3 compatible service. Then, you will see a 'Versioning' tab on each machine page that lets you work with the backups."
+msgstr "Tip: 你可以通過<a href=\"http://project-fifo.net/display/PF/LeoFS\">配置</a>Fifo, 來備份雲主機為S3兼容的服務. 之後, 你將可以在雲主機頁面中發現“版本”面板, 通過該面板即可以管理備份文件."
+
+#: app/views/machine.html
+msgid "To rollback, please stop the machine"
+msgstr "恢復前請先關機"
+
+#: app/views/server.html
+msgid "Total"
+msgstr "總計"
+
+#: app/views/dataset.html
+#: app/views/datasets.html
+#: app/views/machine.html
+msgid "Type"
+msgstr "類型"
+
+#: app/views/group.html
+#: app/views/network.html
+#: app/views/organization.html
+#: app/views/user.html
+msgid "UUID"
+msgstr "UUID"
+
+#: app/views/user.html
+msgid "User UUID"
+msgstr "用戶UUID"
+
+#: app/views/machine-new.html
+msgid "User script"
+msgstr "用戶腳本"
+
+#: app/views/group.html
+#: app/views/main.html
+#: app/views/user.html
+#: app/views/partials/header.html
+msgid "Users"
+msgstr "用戶列表"
+
+#: app/views/ip-ranges.html
+msgid "VLan"
+msgstr "VLan"
+
+#: app/views/organization.html
+msgid "VM"
+msgstr "雲主機"
+
+#: app/views/dtrace-new.html
+#: app/views/dtrace.html
+msgid "Variables"
+msgstr "變量列表"
+
+#: app/views/machine-new.html
+msgid "Version"
+msgstr "版本"
+
+#: app/views/machine.html
+msgid "Versioning"
+msgstr "版本"
+
+#: app/views/group.html
+#: app/views/user.html
+msgid "Virtual Machines"
+msgstr "虛擬主機"
+
+#: app/views/login.html
+msgid "Web Panel"
+msgstr "Web面板"
+
+#: app/views/main.html
+msgid "Welcome {{user.name}}!"
+msgstr "歡迎, {{user.name}}!"
+
+#: app/views/main.html
+msgid "You are part of"
+msgstr "你屬於"
+
+#: app/views/main.html
+msgid "You groups are"
+msgstr "你的組是"
+
+#: app/views/main.html
+msgid "Your cloud is fine!"
+msgstr "你的雲一起正常!"
+
+#: app/views/main.html
+msgid "Your cloud needs some attention!"
+msgstr "你的雲有問題需要關註!"
+
+#: app/views/user.html
+msgid "Yubikeys"
+msgstr "Yubikeys"
+
+#: app/views/server.html
+msgid "ZFS free"
+msgstr "ZFS空閑"
+
+#: app/views/server.html
+msgid "ZFS size"
+msgstr "ZFS大小"
+
+#: app/views/server.html
+msgid "ZFS used"
+msgstr "ZFS已使用"
+
+#: app/views/vis-graph.html
+msgid "Zoom"
+msgstr "放大"
+
+#: app/views/server.html
+msgid "Zpool profile"
+msgstr "Zpool profile"
+
+#: app/views/machine.html
+msgid "add"
+msgstr "添加"
+
+#: app/views/machine-new.html
+msgid "called"
+msgstr "已調用"
+
+#: app/views/group.html
+#: app/views/network.html
+#: app/views/user.html
+msgid "delete"
+msgstr "刪除"
+
+#: app/views/machine.html
+msgid "local"
+msgstr "本地"
+
+#: app/views/machine-new.html
+msgid "machine"
+msgstr "雲主機"
+
+#: app/views/machines.html
+msgid "of"
+msgstr "的"

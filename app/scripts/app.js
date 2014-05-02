@@ -40,55 +40,10 @@ angular.module('fifoApp',
         helpUrl: help_url('hypervisors', 'list'),
         name: 'Servers'
       })
-      .when('/configuration', {
-        redirectTo: '/configuration/packages'
-      })
-      .when('/configuration/packages', {
-        templateUrl: 'views/packages.html',
-        controller: 'PackagesCtrl',
-        helpUrl: help_url('packages', 'list'),
-        name: 'Packages'
-      })
       .when('/configuration/networks/new', {
         templateUrl: 'views/network-new.html',
         controller: 'NetworkNewCtrl',
         helpUrl: help_url('network', 'new')
-      })
-      .when('/configuration/networks', {
-        templateUrl: 'views/networks.html',
-        controller: 'NetworksCtrl',
-        helpUrl: help_url('network', 'list'),
-        name: 'Networks'
-      })
-      .when('/configuration/ip-ranges', {
-        templateUrl: 'views/ip-ranges.html',
-        controller: 'IpRangesCtrl',
-        helpUrl: help_url('ipranges', 'list'),
-        name: 'IP Ranges'
-      })
-      .when('/configuration/users', {
-        templateUrl: 'views/users.html',
-        controller: 'UsersCtrl',
-        helpUrl:  help_url('usermanagement', 'user-list'),
-        name: 'Users'
-      })
-      .when('/configuration/groups', {
-        templateUrl: 'views/groups.html',
-        controller: 'GroupsCtrl',
-        helpUrl:  help_url('usermanagement', 'group-list'),
-        name: 'Groups'
-      })
-      .when('/configuration/organizations', {
-        templateUrl: 'views/organizations.html',
-        controller: 'OrganizationsCtrl',
-        helpUrl:  help_url('orgs', 'list'),
-        name: 'Organizations'
-      })
-      .when('/configuration/dtraces', {
-        templateUrl: 'views/dtraces.html',
-        controller: 'DtracesCtrl',
-        name: 'Tracing',
-        helpUrl:  help_url('dtraces', 'list')
       })
       .when('/machines/new', {
         templateUrl: 'views/machine-new.html',
@@ -140,15 +95,15 @@ angular.module('fifoApp',
         helpUrl:  help_url('general', 'about'),
         controller: 'AboutCtrl'
       })
-      .when('/configuration/groups/new', {
-        templateUrl: 'views/group-new.html',
-        helpUrl:  help_url('usermanagement', 'group-new'),
-        controller: 'GroupNewCtrl'
+      .when('/configuration/roles/new', {
+        templateUrl: 'views/role-new.html',
+        helpUrl:  help_url('usermanagement', 'role-new'),
+        controller: 'RoleNewCtrl'
       })
-      .when('/configuration/groups/:uuid', {
-        templateUrl: 'views/group.html',
-        helpUrl:  help_url('usermanagement', 'group-details'),
-        controller: 'GroupCtrl'
+      .when('/configuration/roles/:uuid', {
+        templateUrl: 'views/role.html',
+        helpUrl:  help_url('usermanagement', 'role-details'),
+        controller: 'RoleCtrl'
       })
       .when('/configuration/organizations/new', {
         templateUrl: 'views/organization-new.html',
@@ -185,6 +140,28 @@ angular.module('fifoApp',
         helpUrl:  help_url('general', 'cloudview'),
         controller: 'VisGraphCtrl'
       })
+
+      //Links of the breadscumbs
+      .when('/configuration/users', {
+        redirectTo: '/configuration/users_roles'
+      })
+      .when('/configuration/roles', {
+        redirectTo: '/configuration/users_roles'
+      })
+      .when('/configuration/networks', {
+              redirectTo: '/configuration/networking'
+            })
+      .when('/configuration/ip-ranges', {
+              redirectTo: '/configuration/networking'
+            })
+
+
+      .when('/configuration/:target?', {
+        templateUrl: 'views/configurations.html',
+        controller: 'ConfigurationCtrl',
+        helpUrl: help_url('configuration', 'list')
+      })
+
       .otherwise({
         redirectTo: '/'
       });
@@ -193,23 +170,32 @@ angular.module('fifoApp',
     //$locationProvider.hashPrefix('!');
   })
 
-.run(function($rootScope, gettextCatalog, gettext, $window, $templateCache) {
+.run(function($rootScope, gettextCatalog, gettext, $window, $templateCache, $interval, wiggle) {
 
 
   //Empty ng-table template for pagination
   $templateCache.put('ng-table/pager.html', '')
 
-  var lang = window.navigator.userLanguage || window.navigator.language;
+  function hasLang(lang) {
+    return Object.keys(gettextCatalog.strings).indexOf(lang) > -1
+  }
 
-  //Some browsers puts 'es-ES' on that vars, so just get the country...
-  if (lang.indexOf('-') > -1)
-    lang = lang.split('-')[0];
+  function getKownLanguage() {
+    var lang = window.navigator.userLanguage || window.navigator.language;
 
-  //default gb flag
-  if (Object.keys(gettextCatalog.strings).indexOf(lang) < 0)
-    lang = 'gb'
+    if (hasLang(lang)) return lang;
 
-  gettextCatalog.currentLanguage = lang;
+    //Some browsers puts 'es-ES' on that vars, some just 'es'
+    if (lang.indexOf('-') < 0)
+      return 'en'
+
+    lang = lang.split('-')
+    if (hasLang(lang[0])) return lang[0]
+    if (hasLang(lang[1])) return lang[1]
+    return 'en'
+  }
+
+  gettextCatalog.currentLanguage = getKownLanguage();
   // gettextCatalog.debug = true;
 
   //Let bootstrap markup do its job.
@@ -228,6 +214,43 @@ angular.module('fifoApp',
     setTimeout(preventHrefs, 0)
   })
 
+
+  //Watch for warnings in the cloud, globally
+  $rootScope.cloudStatus = {}
+  function getCloudStatus() {
+    wiggle.cloud.get(function ok(data){
+
+      //Add action link
+      angular.forEach(data.warnings, function(w) {
+          switch (w.category) {
+              case 'chunter':
+                  w.link = '#/servers/' + w.element
+                  break;
+          }
+      })
+
+      $rootScope.cloudStatus.metrics = data.metrics
+      $rootScope.cloudStatus.messages = Config.evaluate_cloud(data.metrics).concat(data.warnings)
+      $rootScope.cloudStatus.no_servers = !data.metrics.hypervisors || data.metrics.hypervisors.length < 1
+      $rootScope.cloudStatus.cloud_ok = $rootScope.cloudStatus.messages.filter(function(i) {
+          /* Msg from the server has no ok attr, so set it. */
+          i.ok = !!i.ok;
+          return !i.ok;
+      }).length < 1
+
+      //If there is no chunter, the cloud is not ok.
+      if ($rootScope.cloudStatus.no_servers)
+        $rootScope.cloudStatus.cloud_ok = false
+
+    }, function nk(err) {
+      console.error('Cloud status error:', err)
+    })
+  }
+
+  $rootScope.$on('auth:login_ok', function() {
+    $interval(getCloudStatus, (Config.statusPolling || 10) * 1000)
+    getCloudStatus()
+  })
 })
 
 

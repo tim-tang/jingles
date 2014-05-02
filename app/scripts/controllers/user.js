@@ -69,7 +69,7 @@ angular.module('fifoApp')
         if (p[1] && p[1] != "..." && p[1] != "_") {
             switch (p[0]) {
             case "users":
-            case "groups":
+            case "roles":
             case "packages":
             case "dtraces":
             case "ipranges":
@@ -152,7 +152,7 @@ angular.module('fifoApp')
 				wiggle.users.delete({id: uuid},
 	                function success(data, h) {
 	                    status.success(name + ' deleted');
-	                    $location.path('/configuration/users')
+	                    $location.path('/configuration/users_roles')
 	                },
 	                function error(data) {
 	                    console.error('Delete User error:', data);
@@ -210,25 +210,25 @@ angular.module('fifoApp')
         }
     }
 
-    $scope.leave_group = function(group) {
+    $scope.leave_role = function(role) {
         wiggle.users.delete({id: $scope.user.uuid,
-                             controller: 'groups',
-                             controller_id: group},
+                             controller: 'roles',
+                             controller_id: role},
                             function(){
-                                $scope.user.groups = $scope.user.groups.filter(function(g) {
-                                    return g != groups;
+                                $scope.user.roles = $scope.user.roles.filter(function(g) {
+                                    return g != roles;
                                 });
-                                delete $scope.user._groups[group];
+                                delete $scope.user._roles[role];
                             });
     };
 
-    $scope.group_join = function() {
+    $scope.role_join = function() {
         wiggle.users.put({id: $scope.user.uuid,
-                          controller: 'groups',
-                          controller_id: $scope.group},
+                          controller: 'roles',
+                          controller_id: $scope.role},
                          function() {
-                             $scope.user.groups.push($scope.group);
-                             $scope.user._groups[$scope.group] = $scope.groups[$scope.group];
+                             $scope.user.roles.push($scope.role);
+                             $scope.user._roles[$scope.role] = $scope.roles[$scope.role];
                          }
                         );
     };
@@ -268,13 +268,13 @@ angular.module('fifoApp')
     var load_additional_data = function() {
         $scope.pass1 = "";
         $scope.pass2 = "";
-        $scope.groups = {};
+        $scope.roles = {};
         $scope.orgs = {};
-        wiggle.groups.query(function(gs) {
+        wiggle.roles.query(function(gs) {
             gs.forEach(function(g) {
-                $scope.groups[g.uuid] = g
-                if ($scope.user._groups[g.uuid]) {
-                    $scope.user._groups[g.uuid] = g;
+                $scope.roles[g.uuid] = g
+                if ($scope.user._roles[g.uuid]) {
+                    $scope.user._roles[g.uuid] = g;
                 }
             });
         })
@@ -290,13 +290,13 @@ angular.module('fifoApp')
 
 
     wiggle.users.get({id: uuid}, function(res) {
-        res.groups = res.groups || [];
+        res.roles = res.roles || [];
         $scope.user = res;
         load_additional_data()
         breadcrumbs.setLast(res.name)
         $scope.ssh_keys = $scope.user.mdata('ssh_keys')
         $scope.permissions = [];
-        $scope.user._groups = {};
+        $scope.user._roles = {};
         $scope.user._orgs = {};
         if ($scope.user.keys.length == 0) {
             $scope.user.keys = {};
@@ -305,11 +305,11 @@ angular.module('fifoApp')
             $scope.user.yubikeys = []
         }
 
-        $scope.user.groups.map(function (gid){
-            if ($scope.groups[gid]) {
-                $scope.user._groups[gid] = $scope.groups[gid];
+        $scope.user.roles.map(function (gid){
+            if ($scope.roles[gid]) {
+                $scope.user._roles[gid] = $scope.roles[gid];
             } else {
-                $scope.user._groups[gid] = {uuid: gid, name: "DELETED", deleted:true};
+                $scope.user._roles[gid] = {uuid: gid, name: "DELETED", deleted:true};
             }
         });
         $scope.user.orgs.map(function (gid){

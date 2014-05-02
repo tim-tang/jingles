@@ -8,7 +8,7 @@ angular.module('fifoApp')
                                      password: $scope.pass1});
         user.$create({},
                     function() {
-                        $location.path('/configuration/users');
+                        $location.path('/configuration/users_roles');
                     },
                     function() {
                         console.error('Create Package error:', data);

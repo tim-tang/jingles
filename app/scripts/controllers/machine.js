@@ -261,14 +261,18 @@ angular.module('fifoApp')
                 var _r = $scope.vm.config.routes
                 if (_r)
                     for (var k in _r) {
-                        routes.push({destination: k, gateway: _r[k]})
+                        $scope.routes.push({destination: k, gateway: _r[k]})
                     }
 
                 cb && cb($scope.vm);
                 $scope.img_name = $scope.vm.config.alias;
-                $scope.img_version = inc_version($scope.vm.config._dataset && $scope.vm.config._dataset.version);
-                $scope.img_os = $scope.vm.config._dataset && $scope.vm.config._dataset.os;
-                $scope.img_desc = $scope.vm.config._dataset && $scope.vm.config._dataset.description;
+
+                //Wait for the dataset to load, to take its value for the snapshot fields..
+                $scope.vm.config._dataset && $scope.vm.config._dataset.$promise.then(function(data) {
+                    $scope.img_os = data.os
+                    $scope.img_desc = data.description
+                    $scope.img_version = data.version;
+                })
 
                 //Services
                 $scope.show_disabled_services = $scope.vm.mdata('show_disabled_services') || false;
@@ -496,6 +500,7 @@ angular.module('fifoApp')
         $scope.save_routes = function (routes) {
 
             var obj = {}
+            console.log(routes);
             routes.forEach(function(r) {
                 obj[r.destination] = r.gateway
             })

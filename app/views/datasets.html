@@ -28,7 +28,7 @@
                     <td><a href='#/datasets/{{data.dataset}}' title='{{data.dataset}}' jq-run='tooltip'>{{data.name}} {{data.version && '(' + data.version + ')'}}</a></td>
 
                     <td class='describe'>
-                      <a ng-href='{{data.homepage}}' ng-if='data.homepage' target=_blank><i class='glyphicon glyphicon-info-sign'></i></a> 
+                      <a ng-href='{{data.metadata.homepage}}' ng-if='data.metadata.homepage' target=_blank><i class='glyphicon glyphicon-info-sign'></i></a> 
                       <span>{{data.description}}</span>
                     </td>
 
