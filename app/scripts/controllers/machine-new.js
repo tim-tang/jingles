@@ -1,9 +1,15 @@
 'use strict';
 
 angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle, $location, status, auth, $q) {
-   
-    $scope.create_machine = function() {
+    wiggle.groupings.query(function(res) {
+        $scope.clusters = res.filter(function (e) {
+            // VM's can only join cluster groupings.
+            return e.type == "cluster";
+        });
+        console.log($scope.clusters);
+    });
 
+    $scope.create_machine = function() {
         if ($scope.selectedNetworks.length != $scope.selectedDataset.networks.length) {
             status.error('Your network selection is invalid. ' +
                          'You have either too many or too few networks selected.');
@@ -26,6 +32,10 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
                 requirements: $scope.rules,
                 autoboot: $scope.autoboot
             }
+        }
+
+        if ($scope.selectedCluster) {
+            vm.config.grouping = $scope.selectedCluster.uuid;
         }
 
         //Passwords
@@ -92,6 +102,14 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
 
     $scope.click_package = function(pkg) {
         $scope.selectedPackage = pkg
+    }
+
+    $scope.click_cluster = function(cluster) {
+        if ($scope.selectedCluster && cluster.uuid == $scope.selectedCluster.uuid) {
+            $scope.selectedCluster = null;
+        } else {
+            $scope.selectedCluster = cluster;
+        }
     }
 
     $scope.click_dataset = function(dataset) {

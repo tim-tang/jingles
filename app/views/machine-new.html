@@ -2,9 +2,9 @@
     <div class="alert alert-info">
       <span translate>Create a</span>
       <strong>{{selectedPackage.name}}</strong>
-      <span translate>machine</span> 
+      <span translate>machine</span>
       <strong>{{selectedDataset.name && ('with ' | translate) + selectedDataset.name}}</strong>
-      <span translate>called</span>: 
+      <span translate>called</span>:
       <input class='input-large' style='margin-left: 8px;' type=text ng-model='alias' autofocus>
         <button class='btn btn-success pull-right' ng-disabled='!(alias && selectedDataset && selectedPackage && rules !== false)' ng-click='create_machine()' translate>Create</button>
     </div>
@@ -53,6 +53,21 @@
           <td>{{p.cpu_cap}}</td>
           <td>{{p.ram | Mbytes}}</td>
           <td>{{p.quota | Gbytes}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="thumbnail">
+      <table class="table table-hover small">
+        <tr class='small'>
+          <th translate>Cluster</th>
+          <th translate>Elements</th>
+        </tr>
+        <tr class='clickable' ng-repeat="c in clusters | orderBy: 'name'" ng-click='click_cluster(c)' ng-class="selectedCluster.uuid==c.uuid && 'success'">
+          <td><strong>{{c.name}}</strong></td>
+          <td>{{c.elements.length}}</td>
         </tr>
       </table>
     </div>
