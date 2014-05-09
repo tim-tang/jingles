@@ -9,6 +9,20 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
         console.log($scope.clusters);
     });
 
+    $scope.add_cluster = function() {
+        var name;
+        if (name = window.prompt("Cluster name")) {
+            console.log(name);
+            new wiggle.groupings({name: name, type: "cluster"}).
+                $save().then(function ok(res) {
+                    $scope.clusters.push(res);
+                    $scope.selectedCluster = res;
+                }, function err(res) {
+                    console.log("err:", res);
+                })
+        }
+
+    }
     $scope.create_machine = function() {
         if ($scope.selectedNetworks.length != $scope.selectedDataset.networks.length) {
             status.error('Your network selection is invalid. ' +
