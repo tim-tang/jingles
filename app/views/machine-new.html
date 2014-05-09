@@ -60,6 +60,7 @@
 
   <div class="col-md-6">
     <div class="thumbnail">
+      <button class="btn btn-success pull-right small" ng-click="add_cluster()">+</button>
       <table class="table table-hover small">
         <tr class='small'>
           <th translate>Cluster</th>
@@ -97,10 +98,8 @@
       <div class="accordion-group">
 
         <a class="accordion-toggle" data-toggle='collapse' href='#togglePasswords' translate>Passwords</a>
-        
         <div id="togglePasswords">
           <div class="accordion-inner">
-          
             <span ng-hide='user.keys'>You dont have any SSH keys. <a href='#/configuration/users/{{user.uuid}}'>Add one</a> or specify the passwords below</span>
 
             <table class="table table-hover small">
