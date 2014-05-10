@@ -1,0 +1,42 @@
+
+<button class="btn btn-success pull-right small" ng-click="add_cluster()">New Cluster</button>
+<div class="table-responsive">
+  <table class="table table-condensed table-hover">
+    <thead>
+      <tr>
+        <th translate>Name</th>
+        <th translate>VMs</th>
+        <th translate>In Stacks</th>
+        <th translate>Action</th>
+      </tr>
+    </thead>
+    <tr ng-repeat="cluster in clusters | hash2array | orderBy: 'name'">
+      <td><a href="#/groupings/clusters/{{cluster.uuid}}">{{cluster.name}}</a></td>
+      <td>{{cluster.elements.length}}</td>
+      <td>{{cluster.groupings.length}}</td>
+      <td><i permission=['groupings','{{stack.uuid}}','delete'] ng-click="delete_grouping(cluster)" jq-run="tooltip" class="glyphicon glyphicon-remove-sign clickable" title="Delete" bs-modal="'views/partials/modal-confirm.html'"></i></td>
+
+    </tr>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+<button class="btn btn-success pull-right small" ng-click="add_stack()">New Stack</button>
+<div class="table-responsive">
+  <table class="table table-condensed table-hover">
+    <thead>
+      <tr>
+        <th translate>Name</th>
+        <th translate>Clusters</th>
+        <th translate>Action</th>
+      </tr>
+    </thead>
+    <tr ng-repeat="stack in stacks | hash2array | orderBy: 'name'">
+      <td><a href="#/groupings/stacks/{{stack.uuid}}">{{stack.name}}</a></td>
+      <td>{{stack.elements.length}}</td>
+      <td><i permission=['groupings','{{stack.uuid}}','delete'] ng-click="delete_grouping(stack)" jq-run="tooltip" class="glyphicon glyphicon-remove-sign clickable" title="Delete" bs-modal="'views/partials/modal-confirm.html'"></i></td>
+    </tr>
+    <tbody>
+    </tbody>
+  </table>
+</div>

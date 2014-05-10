@@ -16,6 +16,7 @@
 
             <ul class="nav navbar-nav">
                 <li ng-class="{active: isActive('machines')}"><a href="#/machines" translate permission="['cloud','vms','list']">Machines</a></li>
+                <li ng-class="{active: isActive('groupings')}"><a href="#/groupings" translate permission="['cloud','groupings','list']">Stacks &amp; Clusters</a></li>
                 <li ng-class="{active: isActive('datasets')}"><a href="#/datasets" translate permission=['cloud','datasets','list']>Datasets</a></li>
                 <li ng-class="{active: isActive('servers')}"><a href="#/servers" translate permission=['cloud','hypervisors','list']>Servers</a></li>
                 <li ng-class="{active: isActive('configuration')}" ng-show="showConfig"><a href="#/configuration" translate>Config</a></li>
@@ -24,8 +25,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class='dtopdown'>
                      <form class="navbar-form navbar-right" ng-show='backends.length > 1' style="margin-top: 10px;">
-                    <select 
-                        ng-model='selected_backend' 
+                    <select
+                        ng-model='selected_backend'
                         ng-change='changeBackend(this.selected_backend)'
                         ng-options="b.name for b in backends">
                     </select>
