@@ -28,6 +28,25 @@ angular.module('fifoApp',
         name: 'Machines',
         resolve: wait
       })
+      .when('/groupings', {
+        templateUrl: 'views/groupings.html',
+        controller: 'GroupingsCtrl',
+        helpUrl: help_url('groupings', 'list'),
+        name: 'Stacks & Clusters',
+        resolve: wait
+      })
+      .when('/groupings/clusters/:uuid', {
+        templateUrl: 'views/cluster.html',
+        controller: 'ClusterCtrl',
+        helpUrl: help_url('groupings', 'cluster'),
+        resolve: wait
+      })
+      .when('/groupings/stacks/:uuid', {
+        templateUrl: 'views/stack.html',
+        controller: 'StackCtrl',
+        helpUrl: help_url('groupings', 'stacks'),
+        resolve: wait
+      })
       .when('/datasets', {
         templateUrl: 'views/datasets.html',
         controller: 'DatasetsCtrl',
@@ -154,6 +173,12 @@ angular.module('fifoApp',
       .when('/configuration/ip-ranges', {
               redirectTo: '/configuration/networking'
             })
+      .when('/groupings/clusters', {
+          redirectTo: '/groupings'
+      })
+      .when('/groupings/stacks', {
+          redirectTo: '/stacs'
+      })
 
 
       .when('/configuration/:target?', {
