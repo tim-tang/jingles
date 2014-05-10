@@ -1,0 +1,20 @@
+<select ng-model='cluster'>
+  <option ng-repeat="cluster in clusters | hash2array | orderBy: 'name'" value="{{cluster.uuid}}">{{cluster.name}}</option>
+</select>
+<button ng-click="cluster_add()" class='btn btn-default'>Add</button>
+<div class="table-responsive">
+  <table class="table table-condensed table-hover">
+    <thead>
+      <tr>
+        <th translate>Name</th>
+        <th translate>Actions</th>
+      </tr>
+    </thead>
+    <tr ng-repeat="cluster in grouping._clusters | hash2array | orderBy: 'name'">
+      <td><a href="#/groupings/clusters/{{cluster.uuid}}">{{cluster.name}}</a></td>
+      <td><i ng-click="remove_cluster(cluster)" jq-run="tooltip" class="glyphicon glyphicon-remove-sign clickable" title="Delete"></i></td>
+    </tr>
+    <tbody>
+    </tbody>
+  </table>
+</div>
