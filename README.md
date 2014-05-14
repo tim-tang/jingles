@@ -1,6 +1,7 @@
 # Jingles
 
 This is the Web Control Panel of [FiFo](http://project-fifo.net/).
+The documentation is [here](http://docs.project-fifo.net/jingles/general.html).
 
 ## Usage
 
