@@ -44,7 +44,7 @@ angular.module('fifoApp',
       .when('/groupings/stacks/:uuid', {
         templateUrl: 'views/stack.html',
         controller: 'StackCtrl',
-        helpUrl: help_url('groupings', 'stacks'),
+        helpUrl: help_url('groupings', 'stack'),
         resolve: wait
       })
       .when('/datasets', {
