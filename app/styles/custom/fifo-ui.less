@@ -211,3 +211,37 @@ html, body, .container {
 .sidebar-content {
 	padding-left: 150px;
 }
+
+
+/* Servers topology */
+g.node text {
+	/*font-size: 10px;*/
+	fill: black;
+	font-weight: bold;
+	/*text-transform:capitalize;*/
+}
+g.node circle {
+	/*opacity: .8;*/
+	stroke: black;
+}
+
+text.zone {
+	font-size: 15px;
+	font-weight: bold;
+	fill: black;
+	text-shadow: #ccc 0.1em 0.1em 0.2em
+}
+
+
+/* disable text selection */
+svg *::selection {
+    background : transparent;
+}
+
+svg *::-moz-selection {
+    background:transparent;
+}
+
+svg *::-webkit-selection {
+    background:transparent;
+}
