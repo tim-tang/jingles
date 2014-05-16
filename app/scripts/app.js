@@ -61,7 +61,8 @@ angular.module('fifoApp',
       })
       .when('/servers/topology', {
         templateUrl: 'views/topology.html',
-        controller: 'TopologyCtrl'
+        controller: 'TopologyCtrl',
+        helpUrl: help_url('hypervisors', 'topology')
       })
       .when('/configuration/networks/new', {
         templateUrl: 'views/network-new.html',

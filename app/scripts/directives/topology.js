@@ -85,6 +85,9 @@ angular.module('fifoApp')
 
 				$scope.paintNodes = function(data) {
 
+					//Lazy enough: just wipe all the links and build them again, side effect: lines will be on top of the circles.. :S
+					$scope.svg.selectAll('line').remove()
+
 					var links = $scope.svg.selectAll('line')
 						.data(data.links)
 
@@ -95,133 +98,111 @@ angular.module('fifoApp')
 							return '#ccc'
 						})
 
-					var nodes = $scope.svg.selectAll('circle')
-						.data(data.nodes, function(d) {
-							return d.uuid
-						})
+					var nodes = $scope.svg.selectAll('g')
+						.data(data.nodes, function(d) { return d.uuid })
 
 					var newNode = nodes.enter()
 						.append('g')
-						.attr('class', function(d) {
-							return d.isServer ? 'node clickable' : 'node'
-						})
-						.attr('transform', function(d) {
-							return "translate(" + d.x + "," + d.y + ")"
-						})
+						.attr('class', function(d) { return d.isServer ? 'node clickable' : 'node' })
+						.attr('transform', function(d) { return "translate(" + d.x + "," + d.y + ")" })
 						.call($scope.force.drag)
 
 					newNode.append('circle')
-						.attr('r', function(d) {
-							return d.isServer ? 9 : 6
-						})
-						.attr('fill', function(d) {
-							return d.isServer ? 'blue' : 'orange'
-						})
+						.attr('r', function(d) { return d.isServer ? 9 : 6 })
+						.attr('fill', function(d) { return d.isServer ? 'blue' : 'orange' })
 						.call($scope.force.drag)
+
+					newNode.append('text')
+						.attr({
+							class: 'text',
+							dy: function(d) { return d.isServer? 20: -10},
+							'text-anchor': 'middle',
+							'font-size': function(d) { return d.isServer ? 12 : 10 }
+						})
+
+					//update the text's
+					$scope.svg.selectAll('text')
+						.data(data.nodes, function(d) {return d.uuid})
+						.text(function(d) {
+							if (d.isServer) return d.alias
+							var txt = d.name
+							if (typeof(d.cost)=='number') txt += ' (' + d.cost + ')'
+							return txt
+						})
 
 					nodes.exit()
 						.remove()
 
-					nodes.on('click', function(node) {
-						if (!node.isServer) return;
-
-						//Unselect all nodes
-						nodes.attr('stroke-width', '1px')
-						//The clicked node
-						var el = d3.select(this)
-							.transition()
-							.attr('stroke-width', '3px')
-
-						//Mark the nodes that are part of the path of the server
-						var nodesById = node.path.map(function(path) {
-							return path.uuid
-						}).filter(function(d) {
-							return d
-						})
-						var pathNodes = data.nodes.map(function(node) {
-							if (nodesById.indexOf(node.uuid) > -1)
-								return node
-						}).filter(function(d) {
-							return d
-						})
-
-						//Reset the color of all nodes
-						$scope.svg.selectAll('circle')
-							.attr('fill', function(d) {
-								return d.isServer ? 'blue' : 'orange'
-							})
-
-						//Color the node in the path of the hypervisor
-						$scope.svg.selectAll('circle')
-							.data(pathNodes, function(d) {
-								return d.uuid
-							})
-							.transition()
-							.attr('fill', 'yellow')
-
-						$scope.$apply(function() {
-							$scope.selected = node
-						})
-
-					})
+					nodes.on('click', $scope.onNodeClick)
 
 					$scope.force
 						.nodes(data.nodes)
 						.links(data.links)
 						.on('tick', function tick(e) {
 							// Push sources up and targets down to form a weak tree.
-							var k = 6 * e.alpha;
+							var k = 6 * e.alpha
 							data.links.forEach(function(d, i) {
-								d.source.y -= k;
-								d.target.y += k;
+								d.source.y -= k
+								d.target.y += k
 							});
 
 							nodes.attr('transform', function(d) {
 								return "translate(" + d.x + "," + d.y + ")"
 							})
 
-							links.attr("x1", function(d) {
-								return d.source.x;
-							})
-								.attr("y1", function(d) {
-									return d.source.y;
-								})
-								.attr("x2", function(d) {
-									return d.target.x;
-								})
-								.attr("y2", function(d) {
-									return d.target.y;
-								});
+							links.attr("x1", function(d) { return d.source.x; })
+								.attr("y1", function(d) { return d.source.y; })
+								.attr("x2", function(d) { return d.target.x; })
+								.attr("y2", function(d) { return d.target.y; })
 						})
 						.start()
 
 				},
 
-				$scope.togglelabels = function(data) {
-					$scope.showLabels = !$scope.showLabels
+				$scope.onNodeClick = function(node) {
+					if (!node.isServer) return;
 
-					var g = $scope.svg.selectAll('g.node')
-					if ($scope.showLabels) {
-						g.data(data.nodes)
-							.append('text')
-							.attr({
-								class: 'text',
-								dy: function(d) {
-									return d.isServer ? 20 : -10
-								},
-								// dx: function(d) {return 25},
-								'text-anchor': 'middle',
-								'font-size': function(d) {
-									return d.isServer ? 12 : 10
-								}
-							})
-							.text(function(d) {
-								return d.isServer ? d.alias : d.name + ' (' + d.cost + ')'
-							});
-					} else {
-						g.selectAll('text').remove()
-					}
-				},
+					var nodes = $scope.svg.selectAll('g')
+						.data($scope.treeData.nodes, function(d) { return d.uuid })
+
+					//Unselect all nodes
+					nodes.attr('stroke-width', '1px')
+					//The clicked node
+					var el = d3.select(this)
+						.transition()
+						.attr('stroke-width', '3px')
+
+					//Mark the nodes that are part of the path of the server
+					var nodesById = node.path.map(function(path) {
+						return path.uuid
+					}).filter(function(d) {
+						return d
+					})
+					var pathNodes = $scope.treeData.nodes.map(function(node) {
+						if (nodesById.indexOf(node.uuid) > -1)
+							return node
+					}).filter(function(d) {
+						return d
+					})
+
+					//Reset the color of all nodes
+					$scope.svg.selectAll('circle')
+						.attr('fill', function(d) {
+							return d.isServer ? 'blue' : 'orange'
+						})
+
+					//Color the node in the path of the hypervisor
+					$scope.svg.selectAll('circle')
+						.data(pathNodes, function(d) {
+							return d.uuid
+						})
+						.transition()
+						.attr('fill', 'yellow')
+
+					$scope.$apply(function() {
+						$scope.selected = node
+					})
+				}
 
 				//Dummy data
 				$scope.buildDataTreeNoop = function dummy() {
@@ -268,10 +249,20 @@ angular.module('fifoApp')
 					.charge(-170)
 					.linkDistance(40)
 
+				//First time wait for the servers data.
 				scope.servers.$promise.then(function(servers) {
-					var treeData = scope.buildDataTree(servers)
-					scope.paintNodes(treeData)
-					scope.togglelabels(treeData)
+					scope.treeData = scope.buildDataTree(servers)
+				})
+
+				//Update when the user changes the path of the hyper
+				scope.$watch('selected', function(val) {
+					scope.treeData = scope.buildDataTree(scope.servers)
+				}, true)
+
+				//When treeData changes, paint the nodes.
+				scope.$watch('treeData', function(val) {
+					if (!val) return;
+					scope.paintNodes(val)
 				})
 
 			}
