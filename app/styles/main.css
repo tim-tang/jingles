@@ -8349,6 +8349,40 @@ body,
   padding-left: 150px;
 }
 
+/* Servers topology */
+
+g.node text {
+  font-weight: bold;
+  fill: black;
+}
+
+g.node circle {
+  /*opacity: .8;*/
+
+  stroke: black;
+}
+
+text.zone {
+  font-size: 15px;
+  font-weight: bold;
+  text-shadow: #cccccc 0.1em 0.1em 0.2em;
+  fill: black;
+}
+
+/* disable text selection */
+
+svg *::selection {
+  background: transparent;
+}
+
+svg *::-moz-selection {
+  background: transparent;
+}
+
+svg *::-webkit-selection {
+  background: transparent;
+}
+
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;

@@ -59,6 +59,10 @@ angular.module('fifoApp',
         helpUrl: help_url('hypervisors', 'list'),
         name: 'Servers'
       })
+      .when('/servers/topology', {
+        templateUrl: 'views/topology.html',
+        controller: 'TopologyCtrl'
+      })
       .when('/configuration/networks/new', {
         templateUrl: 'views/network-new.html',
         controller: 'NetworkNewCtrl',
@@ -186,6 +190,7 @@ angular.module('fifoApp',
         controller: 'ConfigurationCtrl',
         helpUrl: help_url('configuration', 'list')
       })
+
 
       .otherwise({
         redirectTo: '/'
