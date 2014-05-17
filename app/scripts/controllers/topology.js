@@ -6,7 +6,14 @@ angular.module('fifoApp')
     	$scope.servers = wiggle.hypervisors.queryFull()
 
     	$scope.save = function(paths) {
-    		wiggle.hypervisors.put({id: $scope.selected.uuid, controller: 'config'}, {path: paths}, 
+            var data = paths.map(function(path) {
+                return {
+                    name: path.name,
+                    cost: path.cost
+                }
+            })
+
+			wiggle.hypervisors.put({id: $scope.selected.uuid, controller: 'config'}, {path: data}, 
     			function success(res) {
 		    		status.success('Paths saved')
     			},
