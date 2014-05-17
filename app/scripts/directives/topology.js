@@ -54,8 +54,8 @@ angular.module('fifoApp')
 								var connectionId = lastPath.name + path.name
 								if (!connectionsById[connectionId]) {
 									connections.push({
-										source: path.isServer === false ? path.name + path.cost : path.name,
-										target: lastPath.isServer === false ? lastPath.name + lastPath.cost : lastPath.name
+										target: path.isServer === false ? path.name + path.cost : path.name,
+										source: lastPath.isServer === false ? lastPath.name + lastPath.cost : lastPath.name
 									})
 									connectionsById[connectionId] = true
 								}

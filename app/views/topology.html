@@ -34,7 +34,7 @@
 <div class="panel panel-info" ng-if='selected'>
 	<div class="panel-heading">
 		<span translate>Path of server</span> {{selected.alias}}
-		<button class='btn btn-default btn-xs pull-right' ng-click="paths.push({name: 'path' + paths.length, cost: 1})" translate>New Path</button>
+		<button class='btn btn-default btn-xs pull-right' ng-click="paths.splice(0,0,{name: 'path' + paths.length, cost: 1})" translate>New Path</button>
 	</div>
 
 	<div class="panel-body">
@@ -49,7 +49,7 @@
 			<tr ng-repeat='path in paths'>
 				<td><input class='form-control' ng-model='path.name' /></td>
 				<td><input class='form-control' ng-model='path.cost' type='number' /></td>
-				<td><i class='glyphicon glyphicon-remove clickable' style='padding: 7px;' ng-click="paths.splice($index,1)" ng-if='$index>0'></i></td>
+				<td><i class='glyphicon glyphicon-remove clickable' style='padding: 7px;' ng-click="paths.splice($index,1)" ng-if='$index<paths.length - 1'></i></td>
 			</tr>
 
 		</table>
