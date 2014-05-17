@@ -6,10 +6,15 @@
       <strong>{{selectedDataset.name && ('with ' | translate) + selectedDataset.name}}</strong>
       <span translate>called</span>:
       <input class='input-large' style='margin-left: 8px;' type=text ng-model='alias' autofocus>
-      <span ng-show="working == 'good'">OK</span>
-      <span ng-show="working == 'bad'">Bad</span>
-      <span ng-show="working == 'pending'">Pending</span>
-      <button class='btn btn-success pull-right' ng-disabled='!(alias && selectedDataset && selectedPackage && rules !== false)' ng-click='create_machine()' translate>Create</button>
+
+      <div class='pull-right'>
+
+	      <!-- <span ng-show="working == 'good'" class="label label-success" title='Good to go' jq-run='tooltip'>Ok</span> -->
+	      <span ng-show="working == 'bad'" class="label label-danger" title='Creation cannot succeed' jq-run='tooltip'>Problem</span>
+	      <span ng-show="working == 'pending'" class="label label-default" title='Testing if creation can success' jq-run='tooltip'>Testing</span>
+
+		  <button class='btn btn-success' ng-disabled='!(alias && selectedDataset && selectedPackage && rules !== false)' ng-click='create_machine()' translate>Create</button>
+      </div>
     </div>
   </div>
 
