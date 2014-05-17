@@ -17,13 +17,15 @@
 			<dd>{{selected.sysinfo.Product}} - {{selected.sysinfo.Manufacturer}}</dd>
 		<dt translate>CPU</dt>
 			<dd>{{selected.sysinfo["CPU Physical Cores"]}} x {{selected.sysinfo['CPU Type']}} ({{selected.sysinfo["CPU Total Cores"]}} cores)</dd>
-			<dd>Can do {{selected.virtualisation.join(" and ")}}</dd>
 
         <dt translate>Memory</dt>
         	<dd>{{selected.resources["free-memory"] | Mbytes}} free of {{selected.resources["total-memory"] | Mbytes}} ({{(selected.resources["free-memory"]*100/selected.resources["total-memory"]).toFixed(2)}}%)</dd>
 
 		<dt translate>L1 ARC</dt>
 			<dd>{{selected.resources["l1size"] | Mbytes}} giving {{(selected.resources["l1hits"]*100/(selected.resources["l1hits"] + selected.resources["l1miss"])).toFixed(2)}}% hit rate</dd>
+
+		<dt translate>Main IP</dt>
+			<dd>{{selected.host}}</dd>
 
 	</div>
 
