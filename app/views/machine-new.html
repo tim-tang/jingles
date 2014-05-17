@@ -6,7 +6,10 @@
       <strong>{{selectedDataset.name && ('with ' | translate) + selectedDataset.name}}</strong>
       <span translate>called</span>:
       <input class='input-large' style='margin-left: 8px;' type=text ng-model='alias' autofocus>
-        <button class='btn btn-success pull-right' ng-disabled='!(alias && selectedDataset && selectedPackage && rules !== false)' ng-click='create_machine()' translate>Create</button>
+      <span ng-show="working == 'good'">OK</span>
+      <span ng-show="working == 'bad'">Bad</span>
+      <span ng-show="working == 'pending'">Pending</span>
+      <button class='btn btn-success pull-right' ng-disabled='!(alias && selectedDataset && selectedPackage && rules !== false)' ng-click='create_machine()' translate>Create</button>
     </div>
   </div>
 
