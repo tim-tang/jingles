@@ -30,7 +30,7 @@ function sendCtrlAltDel() {
 }
 
 $(function () {
-    var fifoApiEndpoint = 'api/' + (Config.apiVersion || '0.4.4');
+    var fifoApiEndpoint = 'api/' + (Config.apiVersion || '0.1.0');
     var path;
 
     $D('sendCtrlAltDelButton').style.display = "inline";
