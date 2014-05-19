@@ -5,7 +5,7 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
     var endpoint;
     function setEndpoint(url) {
 
-        var path = '/api/0.1.0/';
+        var path = '/api/' + (Config.apiVersion || '0.1.0') + '/';
 
         //The port : needs to be escaped to \\:
         if (url.split(':').length>2)
