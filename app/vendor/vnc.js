@@ -19,16 +19,18 @@ function updateState(rfb, state, oldstate, msg) {
     else                    { if (cad) cad.disabled = true; }
 
     if (typeof(msg) !== 'undefined' && sb && s) {
-        s.setAttribute("class", "col-md-9 alert alert-" + level);
+        s.setAttribute("class", "alert alert-" + level);
         s.innerHTML = msg;
     }
 }
+
 function sendCtrlAltDel() {
     rfb.sendCtrlAltDel();
     return false;
 }
 
 $(function () {
+    var fifoApiEndpoint = 'api/0.4.4';
     var path;
 
     $D('sendCtrlAltDelButton').style.display = "inline";
@@ -37,8 +39,8 @@ $(function () {
     // By default, use the host and port of server that served this file
 
     var uuid= $(document).getUrlParam("uuid");
-    var host = WebUtil.getQueryVar('host', window.location.hostname);
-    var port = WebUtil.getQueryVar('port', window.location.port);
+    var host = $(document).getUrlParam("host") || WebUtil.getQueryVar('host', window.location.hostname);
+    var port = $(document).getUrlParam("port") || WebUtil.getQueryVar('port', window.location.port);
     if (port == "") {
         if (window.location.protocol === "https:") {
             port = "443";
@@ -49,7 +51,7 @@ $(function () {
 
     document.title = "VNC - " + uuid;
 
-    path = "api/0.1.0/vms/" + uuid + "/vnc";
+    path = fifoApiEndpoint + "/vms/" + uuid + "/vnc";
     rfb = new RFB({'target':       $D('noVNC_canvas'),
                    'encrypt':      (window.location.protocol === "https:"),
                    'true_color':   true,
