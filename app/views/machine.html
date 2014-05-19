@@ -371,11 +371,11 @@
         </div>
 
         <div class="tab-pane" id='net' ng-init='newRoutes=[]'>
-
-          <h4 ng-show='routes.length > 0 || newRoutes.length > 0' class='pull-left' translate>Routes</h4>
-          <h5 ng-hide='routes.length > 0 || newRoutes.length > 0' class='pull-left' translate>There are no additonal rules</h5>
-          <button class='btn btn-default pull-right' ng-click="newRoutes.push({})" translate>New Route</button>
-
+          <div class="pane-nav">
+            <h5 ng-hide='routes.length > 0 || newRoutes.length > 0' class='pull-left' translate>There are no additonal rules</h5>
+            <h4 ng-show='routes.length > 0 || newRoutes.length > 0' class='pull-left' translate>Routes</h4>
+            <button class='btn btn-default' ng-click="newRoutes.push({})" translate>New Route</button>
+          </div>
           <table ng-show='routes.length > 0 || newRoutes.length > 0' class='table table-condensed table-hover'>
             <tr class='small'>
               <th translate>Destination</th>
