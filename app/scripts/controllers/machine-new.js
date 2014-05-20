@@ -77,6 +77,7 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
                 $save().then(function ok(res) {
                     $scope.clusters.push(res);
                     $scope.selectedCluster = res;
+                    check_creation();
                 }, function err(res) {
                     console.log("err:", res);
                 })
@@ -191,13 +192,13 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
 
     $scope.click_dataset = function(dataset) {
 
-      /* Put a default machine alias name */
-      if (!$scope.alias || ($scope.selectedDataset && $scope.alias == $scope.selectedDataset.name))
-        $scope.alias = dataset.name
+        /* Put a default machine alias name */
+        if (!$scope.alias || ($scope.selectedDataset && $scope.alias == $scope.selectedDataset.name))
+          $scope.alias = dataset.name
 
-      $scope.selectedDataset = dataset
+        $scope.selectedDataset = dataset
 
-      $scope.passwords = dataset.users || [{name: 'root'}, {name: 'admin'}]
+        $scope.passwords = dataset.users || [{name: 'root'}, {name: 'admin'}]
         check_creation();
 
     }
