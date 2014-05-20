@@ -69,7 +69,9 @@
 
       <div class='panel-body'>
 
-        <div class='text text-muted center' style='margin-bottom: 10px'>Used in {{cluster.groupings.length}} stack and {{cluster._vms.length}} vms:</div>
+        <div class='text text-muted center' style='margin-bottom: 10px'>
+          <span>Used in {{cluster.groupings.length || 'no'}} stacks and {{cluster._vms.length || 'no'}} vms</span>
+        </div>
 
         <div clasdds='alert alert-info' class='well well-sm' ng-repeat='vm in cluster._vms' style='margin-bottom: 4px;'>
           {{vm.config.alias || vm.uuid}}
