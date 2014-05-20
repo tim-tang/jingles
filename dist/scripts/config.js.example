@@ -9,7 +9,7 @@ Config = {
     /*
      * FiFo apiVersion to use
      */
-    apiVersion: "0.4.4",
+    apiVersion: "0.1.0",
 
     /*
      * An array of FiFo api backends.
