@@ -28,14 +28,13 @@
         <br/><br/>
       </div>
 
-      <div class='alert alert-warning' ng-repeat='c in stack._elements' style='padding: 10px'>
+      <div class='alert alert-warning' ng-repeat='c in stack._elements' style='padding: 10px; margin-bottom: 6px' >
         {{c.name}}
-        <span class='text text-muted' style='padding-left: 20px'>({{c.elements.length}} vm's)</span>
         <!-- <span>Present in {{c.groupings.length}} stacks</span> -->
         <i class='glyphicon glyphicon-remove clickable pull-right' jq-run='tooltip' title='Deassign this cluster' ng-click="deasociate_cluster(c, stack, $index)"></i>
       </div>
 
-      <div class="btn-group pull-right">
+      <div class="btn-group pull-right" style='margin-top: 5px'>
         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
           <span translate>Assign Cluster</span>
           <span class="caret"></span>
@@ -73,8 +72,9 @@
           <span>Used in {{cluster.groupings.length || 'no'}} stacks and {{cluster._vms.length || 'no'}} vms</span>
         </div>
 
-        <div clasdds='alert alert-info' class='well well-sm' ng-repeat='vm in cluster._vms' style='margin-bottom: 4px;'>
+        <div class='well well-sm' ng-repeat='vm in cluster._vms' style='margin-bottom: 6px;'>
           {{vm.config.alias || vm.uuid}}
+          <span class='text text-muted text-right pull-righthjj' ng-if="vm.state!='running'">({{vm.state}})</span>
           <i class='glyphicon glyphicon-remove clickable pull-right' jq-run='tooltip' title='Deassign this vm' ng-click="remove_vm(cluster, vm, $index)"></i>
         </div>
 
