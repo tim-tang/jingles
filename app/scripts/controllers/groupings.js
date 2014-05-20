@@ -14,6 +14,13 @@ angular.module('fifoApp').controller('GroupingsCtrl', function ($scope, wiggle, 
                 }
             })
 
+            //Add the vms in the clusters
+            Object.keys($scope.clusters).forEach(function(k){
+                $scope.clusters[k]._vms = $scope.clusters[k].elements.map(function(vmId) {
+                    return wiggle.vms.get({id: vmId})
+                })
+            })
+
             //Add the cluster object inside the stacks ones (cluster._elements = [{cluster1, cluster2, etc}])
             Object.keys($scope.stacks).forEach(function(k) {
                 //The cluster of the stacks, are in the propery 'elements'
@@ -22,7 +29,6 @@ angular.module('fifoApp').controller('GroupingsCtrl', function ($scope, wiggle, 
                 })
 
             })
-
 
         });
     }
@@ -37,9 +43,9 @@ angular.module('fifoApp').controller('GroupingsCtrl', function ($scope, wiggle, 
                     status.success(name + ' stack created')
                     res._elements = [] //Add empty array, so we can add cluster to it directly.
                     $scope.stacks[res.uuid] = res;
-                }, function err(res) {
-                    status.error('Could not create stack')
-                    console.log("err:", res);
+                }, function nk(res) {
+                    status.error('Could not create stack: ' + res.statusText)
+                    console.error(res);
                 })
         }
     };
@@ -52,9 +58,9 @@ angular.module('fifoApp').controller('GroupingsCtrl', function ($scope, wiggle, 
                 $save().then(function ok(res) {
                     $scope.clusters[res.uuid] = res;
                     status.success(name + ' cluster created')
-                }, function err(res) {
+                }, function nk(res) {
                     status.error('Could not create cluster')
-                    console.log("err:", res);
+                    console.error(res);
                 })
         }
     };
@@ -66,6 +72,9 @@ angular.module('fifoApp').controller('GroupingsCtrl', function ($scope, wiggle, 
                              {}, function() {
                                 stack.elements.push(cluster.uuid)
                                 stack._elements.push(cluster)
+                             }, function nk(res) {
+                                status.error('Could not asociate cluster: ' + res.statusText)
+                                console.error(res)
                              });
     }
 
@@ -73,10 +82,27 @@ angular.module('fifoApp').controller('GroupingsCtrl', function ($scope, wiggle, 
         wiggle.groupings.delete({id: stack.uuid,
                                  controller: "elements",
                                  controller_id: cluster.uuid},
-                                {}, function() {
+                                {}, function ok() {
                                     stack.elements.splice(index, 1)
                                     stack._elements.splice(index, 1)
+                             }, function nk(res){
+                                status.error('Could not remove cluster: ' + res.statusText)
+                                console.error(res)
                              });
+    }
+
+    $scope.remove_vm = function(cluster, vm, index) {
+        console.log('removin', cluster, vm, index)
+        wiggle.groupings.delete({id: cluster.uuid,
+                         controller: "elements",
+                         controller_id: vm.uuid},
+                        {}, function ok() {
+                            cluster._vms.splice(index, 1)
+                            cluster.elements.splice(index, 1)
+                        }, function nk(res) {
+                            status.error('Could not remove VM: ' + res.statusText)
+                            console.error(res)
+                        });
     }
 
     $scope.delete_grouping = function delete_grouping(grouping) {
@@ -98,6 +124,9 @@ angular.module('fifoApp').controller('GroupingsCtrl', function ($scope, wiggle, 
                         status.success('Stack removed')
                         delete $scope.stacks[uuid];
                     }
+                }, function nk(res) {
+                    status.error('Could not delete ' + grouping.type + ': ' + res.statusText)
+                    console.error(res)
                 });
             }
         };
