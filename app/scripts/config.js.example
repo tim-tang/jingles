@@ -6,7 +6,12 @@ Config = {
      */
     mode: "production",
 
-    /* 
+    /*
+     * FiFo apiVersion to use
+     */
+    apiVersion: "0.1.0",
+
+    /*
      * An array of FiFo api backends.
      * Add more endpoint to be able to connect to them.
      */

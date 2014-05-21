@@ -10,6 +10,19 @@ angular.module('fifoApp')
             return;
         }
 
+        if (!$scope.quota) {
+            status.error('Quota not set!');
+            return;
+        }
+
+        if (!$scope.ram) {
+            status.error('RAM not set!');
+            return;
+        }
+        if (!$scope.cpu_cap) {
+            status.error('CPU cap not set!');
+            return;
+        }
         var pkg = new wiggle.packages({
             name: $scope.name,
             quota: parseInt($scope.quota),
@@ -18,8 +31,21 @@ angular.module('fifoApp')
             requirements: $scope.rules
         })
 
-        var io = parseInt($scope.io, 10);
-        if (io) pkg.zfs_io_priority = io;
+        if ($scope.io) pkg.zfs_io_priority = $scope.io;
+
+        var block_size = $scope.block_size;
+        if (block_size) {
+            if (!(block_size == 0) && !(block_size & (block_size - 1))) {
+                pkg.block_size = block_size;
+            } else {
+                status.error('Block size needs to be a power of two.');
+                return;
+            }
+        }
+
+
+        if ($scope.compression && $scope.compression != "none")
+            pkg.compression = $scope.compression;
 
         pkg.$create({}, function success(data, headers) {
             $location.path('/configuration/packages');

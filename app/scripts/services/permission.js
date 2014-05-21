@@ -33,6 +33,7 @@ function mk_permission_fn(wiggle, $scope) {
                     "datasets": {id: "datasets", name: "Datasets"},
                     "dtraces": {id: "dtraces", name: "DTrace"},
                     "roles": {id: "roles", name: "Roles"},
+                    "groupings": {id: "groupings", name: "Groupings"},
                     "hypervisors": {id: "hypervisors", name: "Hypervisors"},
                     "ipranges": {id: "ipranges", name: "IP Ranges"},
                     "networks": {id: "networks", name: "Networks"},
@@ -99,6 +100,17 @@ function mk_permission_fn(wiggle, $scope) {
                     };
                     roles.forEach(function(role){
                         $scope.p2[role.uuid] = {id: role.uuid, name: role.name};
+                    })
+                });
+                break;
+            case "groupings":
+                wiggle.groupings.query(function(groupings) {
+                    $scope.p2 = {
+                        "...": {id: "...", name: "Everything"},
+                        "_": {id: "_", name: "All Goupings"},
+                    };
+                    groupings.forEach(function(grouping){
+                        $scope.p2[groupings.uuid] = {id: grouping.uuid, name: grouping.name};
                     })
                 });
                 break;
@@ -203,6 +215,7 @@ function mk_permission_fn(wiggle, $scope) {
                     case "dtraces":
                     case "ipranges":
                     case "networks":
+                    case "groupings":
                     case "orgs":
                         $scope.p3 = [
                             {id: "list", name: "List"},
@@ -287,6 +300,7 @@ function mk_permission_fn(wiggle, $scope) {
                         {id:"edit", name: "Edit Metadata"}
                     ];
                     break;
+                case "groupings":
                 case "networks":
                 case "ipranges":
                 case "packages":

@@ -110,7 +110,7 @@ msgstr "CPU類型"
 
 #: app/views/servers.html
 msgid "Capabilities"
-msgstr ""
+msgstr "能力表"
 
 #: app/views/server.html
 msgid "Capability"
@@ -597,7 +597,7 @@ msgstr "OS"
 
 #: app/views/organization.html
 msgid "Org/Group"
-msgstr "Org/Group"
+msgstr "組織/群組"
 
 #: app/views/user.html
 msgid "Organization"
@@ -728,8 +728,7 @@ msgid ""
 "SSH Keys will be used when creating new KVM machines. They also will dynamically grant access"
 "              to SmartOS zones. Based on the console access to the zone."
 msgstr ""
-"SSH Keys will be used when creating new KVM machines. They also will dynamically grant access"
-"              to SmartOS zones. Based on the console access to the zone."
+"SSH Keys將應用於新創建的KVM雲主機. 同時它也用於通過控制臺連接所對應的SmartOS zones. "
 
 #: app/views/main.html
 msgid "SSH keys configured: {{keys}}"
@@ -776,7 +775,7 @@ msgstr "服務列表"
 
 #: app/views/machines.html
 msgid "Showing"
-msgstr "Showing"
+msgstr "顯示中"
 
 #: app/views/datasets.html
 msgid "Size"
@@ -796,7 +795,7 @@ msgstr "快照列表"
 
 #: app/views/machine.html
 msgid "Something is wrong with this machine."
-msgstr "Something is wrong with this machine."
+msgstr "此雲主機出現了一些問題."
 
 #: app/views/organization.html
 msgid "Start"
@@ -828,7 +827,7 @@ msgstr "模板"
 
 #: app/views/about.html
 msgid "The Team"
-msgstr "The Team"
+msgstr "項目組"
 
 #: app/views/main.html
 msgid "Tip: You can <a href=\"http://project-fifo.net/display/PF/LeoFS\">configure</a> Fifo to backup machine's into an S3 compatible service. Then, you will see a 'Versioning' tab on each machine page that lets you work with the backups."
@@ -914,7 +913,7 @@ msgstr "你的組是"
 
 #: app/views/main.html
 msgid "Your cloud is fine!"
-msgstr "你的雲一起正常!"
+msgstr "你的雲一切正常!"
 
 #: app/views/main.html
 msgid "Your cloud needs some attention!"
@@ -942,7 +941,7 @@ msgstr "放大"
 
 #: app/views/server.html
 msgid "Zpool profile"
-msgstr "Zpool profile"
+msgstr "Zpool配置"
 
 #: app/views/machine.html
 msgid "add"

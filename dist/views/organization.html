@@ -24,9 +24,10 @@
     <div class="header" translate>Automatic grants on creation</div>
     <select ng-model="created_object">
       <option value="vm_create" translate>VM</option>
+      <option value="grouping_create" translate>Grouping</option>
       <option value="dataset_create" translate>Dataset</option>
     </select>
-      
+
     <select ng-model="grant_role">
       <option ng-repeat="role in roles | hash2array" value="{{role.uuid}}">{{role.name}}</option>
     </select>

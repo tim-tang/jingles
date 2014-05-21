@@ -3,7 +3,6 @@
 angular.module('fifoApp')
   .controller('DatasetsCtrl', function ($scope, wiggle, datasetsat, status, $upload) {
 
-    $scope.datasets = {}
     $scope.datasetsat = {}
     $scope.endpoint = Config.datasets
 
@@ -78,6 +77,7 @@ angular.module('fifoApp')
     $scope.show = function() {
 
         wiggle.datasets.query(function(datasets) {
+            $scope.datasets = {}
             datasets.forEach(function(res) {
 
                 var id = res.dataset;

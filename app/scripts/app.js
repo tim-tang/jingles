@@ -28,6 +28,13 @@ angular.module('fifoApp',
         name: 'Machines',
         resolve: wait
       })
+      .when('/groupings', {
+        templateUrl: 'views/groupings.html',
+        controller: 'GroupingsCtrl',
+        helpUrl: help_url('groupings', 'list'),
+        name: 'Stacks & Clusters',
+        resolve: wait
+      })
       .when('/datasets', {
         templateUrl: 'views/datasets.html',
         controller: 'DatasetsCtrl',
@@ -39,6 +46,11 @@ angular.module('fifoApp',
         controller: 'ServersCtrl',
         helpUrl: help_url('hypervisors', 'list'),
         name: 'Servers'
+      })
+      .when('/servers/topology', {
+        templateUrl: 'views/topology.html',
+        controller: 'TopologyCtrl',
+        helpUrl: help_url('hypervisors', 'topology')
       })
       .when('/configuration/networks/new', {
         templateUrl: 'views/network-new.html',
@@ -154,6 +166,12 @@ angular.module('fifoApp',
       .when('/configuration/ip-ranges', {
               redirectTo: '/configuration/networking'
             })
+      .when('/groupings/clusters', {
+          redirectTo: '/groupings'
+      })
+      .when('/groupings/stacks', {
+          redirectTo: '/stacs'
+      })
 
 
       .when('/configuration/:target?', {
@@ -161,6 +179,7 @@ angular.module('fifoApp',
         controller: 'ConfigurationCtrl',
         helpUrl: help_url('configuration', 'list')
       })
+
 
       .otherwise({
         redirectTo: '/'

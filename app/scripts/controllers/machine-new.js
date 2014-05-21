@@ -1,9 +1,91 @@
 'use strict';
 
 angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle, $location, status, auth, $q) {
-   
-    $scope.create_machine = function() {
+    $scope.working = false;
+    function check_creation() {
+        $scope.working = 'pending';
+        var Package = $scope.selectedPackage;
+        var Dataset = $scope.selectedDataset;
+        var Networks = $scope.selectedNetworks;
+        console.log("package:", Package);
+        console.log("datset:", Dataset);
+        console.log("network:", Networks);
+        if(! Package || ! Dataset || Networks.lenght == 0) {
+            console.log("early failure");
+            $scope.working = 'bad';
+            return;
+        }
+        if ($scope.selectedNetworks.length != $scope.selectedDataset.networks.length) {
+            $scope.working = false;
+            status.error('Your network selection is invalid. ' +
+                         'You have either too many or too few networks selected.');
+            console.log("failure");
+            $scope.working = 'bad';
+            return;
+        };
+        var rules = $scope.rules.slice(0);
+        if ($scope.server)
+            rules.push({weight: 'must', attribute: 'uuid', condition: '=:=', value: $scope.server.uuid})
 
+        var vm = {
+            package: $scope.selectedPackage.uuid,
+            dataset: $scope.selectedDataset.dataset,
+            config: {
+                networks: {},
+                metadata: {},
+                alias: $scope.alias,
+                hostname: $scope.hostname,
+                ssh_keys: $scope.ssh_keys,
+                requirements: $scope.rules,
+                autoboot: $scope.autoboot
+            }
+        }
+
+        if ($scope.selectedCluster) {
+            vm.config.grouping = $scope.selectedCluster.uuid;
+        }
+
+        for (var i=0; i<$scope.selectedNetworks.length; i++) {
+            vm.config.networks['net' + i] = $scope.selectedNetworks[i].uuid
+        }
+
+        console.log(vm);
+        wiggle.vms.put(
+            {id: "dry_run"}, vm, function success() {
+                $scope.working = 'good';
+                console.log("success");
+            }, function error(){
+                $scope.working = 'bad';
+                console.log("failure");
+            });
+
+    }
+
+    wiggle.groupings.query(function(res) {
+        $scope.clusters = res.filter(function (e) {
+            // VM's can only join cluster groupings.
+            return e.type == "cluster";
+        });
+        console.log($scope.clusters);
+    });
+
+    $scope.add_cluster = function() {
+        var name;
+        if (name = window.prompt("Cluster name")) {
+            console.log(name);
+            new wiggle.groupings({name: name, type: "cluster"}).
+                $save().then(function ok(res) {
+                    $scope.clusters.push(res);
+                    $scope.selectedCluster = res;
+                    check_creation();
+                }, function err(res) {
+                    console.log("err:", res);
+                })
+        }
+
+    }
+
+    $scope.create_machine = function() {
         if ($scope.selectedNetworks.length != $scope.selectedDataset.networks.length) {
             status.error('Your network selection is invalid. ' +
                          'You have either too many or too few networks selected.');
@@ -26,6 +108,10 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
                 requirements: $scope.rules,
                 autoboot: $scope.autoboot
             }
+        }
+
+        if ($scope.selectedCluster) {
+            vm.config.grouping = $scope.selectedCluster.uuid;
         }
 
         //Passwords
@@ -92,17 +178,28 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
 
     $scope.click_package = function(pkg) {
         $scope.selectedPackage = pkg
+        check_creation();
+    }
+
+    $scope.click_cluster = function(cluster) {
+        if ($scope.selectedCluster && cluster.uuid == $scope.selectedCluster.uuid) {
+            $scope.selectedCluster = null;
+        } else {
+            $scope.selectedCluster = cluster;
+        }
+        check_creation();
     }
 
     $scope.click_dataset = function(dataset) {
 
-      /* Put a default machine alias name */
-      if (!$scope.alias || ($scope.selectedDataset && $scope.alias == $scope.selectedDataset.name))
-        $scope.alias = dataset.name
+        /* Put a default machine alias name */
+        if (!$scope.alias || ($scope.selectedDataset && $scope.alias == $scope.selectedDataset.name))
+          $scope.alias = dataset.name
 
-      $scope.selectedDataset = dataset
+        $scope.selectedDataset = dataset
 
-      $scope.passwords = dataset.users || [{name: 'root'}, {name: 'admin'}]
+        $scope.passwords = dataset.users || [{name: 'root'}, {name: 'admin'}]
+        check_creation();
 
     }
 
@@ -118,6 +215,7 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
             $scope.selectedNetworks.splice(idx, 1)
 
         $scope.selectedNetworks.push(network)
+        check_creation();
     }
 
     $scope.metadata = []

@@ -5,7 +5,7 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
     var endpoint;
     function setEndpoint(url) {
 
-        var path = '/api/0.1.0/';
+        var path = '/api/' + (Config.apiVersion || '0.1.0') + '/';
 
         //The port : needs to be escaped to \\:
         if (url.split(':').length>2)
@@ -57,7 +57,7 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
     /* Add metadata helpers in the resources */
     var addMetadataFunctions = function() {
 
-        ['hypervisors', 'orgs', 'vms', 'networks', 'ipranges', 'datasets', 'packages', 'users', 'sessions', 'roles', 'dtrace'].forEach(function(resource) {
+        ['groupings', 'hypervisors', 'orgs', 'vms', 'networks', 'ipranges', 'datasets', 'packages', 'users', 'sessions', 'roles', 'dtrace'].forEach(function(resource) {
 
             /* Resources that has put may save metadata, i.e. PUT vms/metadata/jingles {locked: true} */
             if (services[resource].put) {
@@ -102,6 +102,9 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
 
       if (vm.owner)
         vm._owner = services.orgs.get({id: vm.owner})
+
+      if (vm.grouping)
+        vm._grouping = services.groupings.get({id: vm.grouping})
 
       if (vm.hypervisor && vm.hypervisor != 'pooled')
         vm._hypervisor = services.hypervisors.get({id: vm.hypervisor})
@@ -253,6 +256,20 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                           query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})},
                                           queryFull: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true}), interceptor: toHash}
                                         });
+
+        services.groupings = $resource(endpoint + 'groupings' + controller_layout,
+                                    {id: '@id',
+                                     controller: '@controller',
+                                     controller_id: '@controller_id',
+                                     controller_id1: '@controller_id1',
+                                     controller_id2: '@controller_id2',
+                                     controller_id3: '@controller_id3'},
+                                    {put: {method: 'PUT', headers: withToken()},
+                                     get: {method: 'GET', cache: true, headers: withToken()},
+                                     create: {method: 'POST', headers: withToken()},
+                                     delete: {method: 'DELETE', headers: withToken()},
+                                     query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})},
+                                   });
         services.vms = $resource(endpoint + 'vms/:id/:controller/:controller_id',
                                  {id: '@id', controller: '@controller', controller_id: '@controller_id'},
                                  {put: {method: 'PUT', headers: withToken()},
@@ -262,7 +279,7 @@ angular.module('fifoApp').factory('wiggle', function ($resource, $http, $cacheFa
                                     }
                                   }},
                                   query: {method: 'GET', isArray: true, headers: withToken({'x-full-list': true})},
-                                  queryFull: {method: 'GET', isArray: true, headers: withToken({'x-full-list': "true", 'x-full-list-fields': 'uuid,datset,package,config,hypervisor,owner,metadata,state'}), interceptor: {
+                                  queryFull: {method: 'GET', isArray: true, headers: withToken({'x-full-list': "true", 'x-full-list-fields': 'uuid,datset,package,config,hypervisor,owner,metadata,state,grouping'}), interceptor: {
                                     response: function(res) {
                                       res.resource.forEach(additionalVmData)
                                       res.resource.hash = hashFromArray(res.resource)

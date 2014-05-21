@@ -90,7 +90,7 @@ angular.module('fifoApp')
           var set = data.config.dataset
           if (set) {
             vm.config.dataset = set
-            vm.config._dataset = wiggle.datasets.get({id: set})            
+            vm.config._dataset = wiggle.datasets.get({id: set})
           }
 
         })
