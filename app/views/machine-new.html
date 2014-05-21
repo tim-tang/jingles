@@ -85,22 +85,6 @@
     </div>
   </div>
 
-  <div class="col-md-6">
-    <div class="thumbnail">
-      <button class="btn btn-success pull-right small" ng-click="add_cluster()">+</button>
-      <table class="table table-hover small">
-        <tr class='small'>
-          <th translate>Cluster</th>
-          <th translate>VMs</th>
-        </tr>
-        <tr class='clickable' ng-repeat="c in clusters | orderBy: 'name'" ng-click='click_cluster(c)' ng-class="selectedCluster.uuid==c.uuid && 'success'">
-          <td><strong>{{c.name}}</strong></td>
-          <td>{{c.elements.length}}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
   <div class="col-md-6 accordion" ng-show='passwords'>
   <div class="thumbnail">
       <div class="accordion-group">
@@ -121,6 +105,30 @@
         </div>
       </div>
   </div>
+  </div>
+
+  <div class="col-md-6 accordion">
+    <div class="thumbnail">
+      <div class="accordion-group">
+
+        <a class="accordion-toggle" data-toggle='collapse' href='#toggleClusters' translate>Clusters</a>
+        <div id="toggleClusters" class="collapse">
+          <div class="accordion-inner">
+            <button class="btn btn-success pull-right small" ng-click="add_cluster()">+</button>
+            <table class="table table-hover small">
+              <tr class='small'>
+                <th translate>Cluster</th>
+                <th translate>VMs</th>
+              </tr>
+              <tr class='clickable' ng-repeat="c in clusters | orderBy: 'name'" ng-click='click_cluster(c)' ng-class="selectedCluster.uuid==c.uuid && 'success'">
+                <td><strong>{{c.name}}</strong></td>
+                <td>{{c.elements.length}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="col-md-6">
