@@ -18,13 +18,13 @@
                 <li ng-class="{active: isActive('machines')}"><a href="#/machines" translate permission="['cloud','vms','list']">Machines</a></li>
                 <li ng-class="{active: isActive('datasets')}"><a href="#/datasets" translate permission=['cloud','datasets','list']>Datasets</a></li>
                 <li ng-class="{active: isActive('servers')}"><a href="#/servers" translate permission=['cloud','hypervisors','list']>Servers</a></li>
-                <li>
+                <li ng-if='showMore'>
                     <a class="dropdown-toggle" data-toggle="dropdown" translate>More <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li ng-class="{active: isActive('groupings')}"><a href="#/groupings" translate permission="['cloud','groupings','list']">Stacks &amp; Clusters</a></li>
-                        <li ng-class="{active: isActive('topology')}"><a href="#/servers/topology" translate>Servers topology</a></li>
-                        <li class="divider"></li>
-                        <li ng-class="{active: isActive('configuration')}"><a href="#/configuration" translate>Configuration</a></li>
+                        <li ng-class="{active: isActive('groupings')}"><a href="#/groupings" translate permission=['cloud','groupings','list']>Stacks &amp; Clusters</a></li>
+                        <li ng-class="{active: isActive('topology')}"><a href="#/servers/topology" translate permission=['cloud','hypervisors','list']>Servers topology</a></li>
+                        <li class="divider" ng-if='showConfig'></li>
+                        <li ng-class="{active: isActive('configuration')}" ng-if='showConfig'><a href="#/configuration" translate>Configuration</a></li>
                     </ul>
                 </li>
             </ul>

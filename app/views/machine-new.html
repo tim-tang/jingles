@@ -10,8 +10,8 @@
       <div class='pull-right'>
 
 	      <!-- <span ng-show="working == 'good'" class="label label-success" title='Good to go' jq-run='tooltip'>Ok</span> -->
-	      <span ng-show="working == 'bad'" class="label label-danger" title='Creation cannot succeed' jq-run='tooltip'>Problem</span>
-	      <span ng-show="working == 'pending'" class="label label-default" title='Testing if creation can success' jq-run='tooltip'>Testing</span>
+	      <span ng-show="working == 'bad'" class="label label-warning" title='Creation could fail' jq-run='tooltip'>Could fail</span>
+	      <span ng-show="working == 'pending'" class="label label-default" title='Searching for problems' jq-run='tooltip'>Testing</span>
 
 		  <button class='btn btn-success' ng-disabled='!(alias && selectedDataset && selectedPackage && rules !== false)' ng-click='create_machine()' translate>Create</button>
       </div>
@@ -66,22 +66,6 @@
     </div>
   </div>
 
-  <div class="col-md-6">
-    <div class="thumbnail">
-      <button class="btn btn-success pull-right small" ng-click="add_cluster()">+</button>
-      <table class="table table-hover small">
-        <tr class='small'>
-          <th translate>Cluster</th>
-          <th translate>Elements</th>
-        </tr>
-        <tr class='clickable' ng-repeat="c in clusters | orderBy: 'name'" ng-click='click_cluster(c)' ng-class="selectedCluster.uuid==c.uuid && 'success'">
-          <td><strong>{{c.name}}</strong></td>
-          <td>{{c.elements.length}}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
   <div class="col-md-6" ng-show='selectedDataset && networks.length>1'>
     <div class="thumbnail">
       <table class="table table-hover small">
@@ -96,6 +80,22 @@
           <td>
             <span ng-show='selectedNetworks.indexOf(n) > -1' class='badge'>{{selectedNetworks.indexOf(n) + 1}}: {{selectedDataset.networks[selectedNetworks.indexOf(n)].description}}</span>
           </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="thumbnail">
+      <button class="btn btn-success pull-right small" ng-click="add_cluster()">+</button>
+      <table class="table table-hover small">
+        <tr class='small'>
+          <th translate>Cluster</th>
+          <th translate>VMs</th>
+        </tr>
+        <tr class='clickable' ng-repeat="c in clusters | orderBy: 'name'" ng-click='click_cluster(c)' ng-class="selectedCluster.uuid==c.uuid && 'success'">
+          <td><strong>{{c.name}}</strong></td>
+          <td>{{c.elements.length}}</td>
         </tr>
       </table>
     </div>
