@@ -1,10 +1,7 @@
 
 
-<div class='pull-left' ng-if='(stacks|hash2array).length'>
-  <h3 translate>Stacks and Clusters</h3>
-</div>
-
 <div class="pane-nav" style='margin-top: 18px'>
+  <h3 class='pull-left' translate>Stacks and Clusters</h3>
   <button class="btn btn-default small" ng-click="add_stack()" permission=['cloud','groupings','create'] translate>New Stack</button>
   <button class="btn btn-default small" ng-click="add_cluster()" permission=['cloud','groupings','create'] translate>New Cluster</button>
 </div>
