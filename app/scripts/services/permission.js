@@ -104,10 +104,10 @@ function mk_permission_fn(wiggle, $scope) {
                 });
                 break;
             case "groupings":
-                wiggle.groupings.query(function(users) {
+                wiggle.groupings.query(function(groupings) {
                     $scope.p2 = {
                         "...": {id: "...", name: "Everything"},
-                        "_": {id: "_", name: "All Users"},
+                        "_": {id: "_", name: "All Goupings"},
                     };
                     groupings.forEach(function(grouping){
                         $scope.p2[groupings.uuid] = {id: grouping.uuid, name: grouping.name};

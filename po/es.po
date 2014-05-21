@@ -9,15 +9,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.2\n"
+"X-Generator: Poedit 1.6.5\n"
 
 #: app/views/partials/header.html
 msgid "About"
 msgstr "Acerca de"
 
-#: app/views/dtraces.html app/views/group.html app/views/ip-ranges.html
-#: app/views/network.html app/views/networks.html app/views/organization.html
-#: app/views/packages.html app/views/user.html
+#: app/views/network.html app/views/organization.html app/views/role.html
+#: app/views/user.html app/views/partials/configs/dtraces.html
 msgid "Actions"
 msgstr "Acciones"
 
@@ -54,6 +53,10 @@ msgstr "Versión agente"
 msgid "Alias"
 msgstr "Nombre"
 
+#: app/views/groupings.html
+msgid "Assign Cluster"
+msgstr "Asignar Cluster"
+
 #: app/views/machine-new.html
 msgid "Autoboot"
 msgstr ""
@@ -68,13 +71,17 @@ msgstr ""
 
 #: app/views/machine.html
 msgid "Backup"
-msgstr ""
+msgstr "Respaldo"
 
 #: app/views/server.html app/views/servers.html
 msgid "Booted"
 msgstr "Buteado"
 
-#: app/views/machine-new.html
+#: app/views/topology.html
+msgid "Brand"
+msgstr "Marca"
+
+#: app/views/machine-new.html app/views/topology.html
 msgid "CPU"
 msgstr "CPU"
 
@@ -82,7 +89,7 @@ msgstr "CPU"
 msgid "CPU / Mainboard"
 msgstr "CPU / Placa"
 
-#: app/views/packages.html
+#: app/views/partials/configs/packages.html
 msgid "CPU Cap"
 msgstr "CPU Cap"
 
@@ -110,7 +117,7 @@ msgstr "Capacidad"
 msgid "Category"
 msgstr "categoria"
 
-#: app/views/machine.html app/views/user.html
+#: app/views/machine.html
 msgid "Change"
 msgstr "Cambiar"
 
@@ -122,7 +129,7 @@ msgstr "Cambiar clave"
 msgid "Change to"
 msgstr "Cambiar a"
 
-#: app/views/group.html app/views/user.html
+#: app/views/role.html app/views/user.html
 msgid "Channels"
 msgstr "Canales"
 
@@ -134,7 +141,7 @@ msgstr "Características"
 msgid "Charge"
 msgstr "Carga"
 
-#: app/views/group.html app/views/user.html
+#: app/views/role.html app/views/user.html
 msgid "Cloud"
 msgstr "Nube"
 
@@ -142,9 +149,18 @@ msgstr "Nube"
 msgid "Cloud View"
 msgstr "Vision nube"
 
+#: app/views/machine-new.html app/views/machines.html
+msgid "Cluster"
+msgstr ""
+
+#: app/views/groupings.html
+msgid "Clusters and VMs"
+msgstr "Clusters y VMs"
+
 #: app/views/partials/header.html
-msgid "Config"
-msgstr "Config"
+#, fuzzy
+msgid "Configuration"
+msgstr "Confguración"
 
 #: app/views/organization.html
 msgid "Console/VNC"
@@ -153,6 +169,10 @@ msgstr "Consola/VNC"
 #: app/views/server.html
 msgid "Cores"
 msgstr "Núcleos"
+
+#: app/views/topology.html
+msgid "Cost"
+msgstr "Costo"
 
 #: app/views/dtrace-new.html app/views/ip-range-new.html
 #: app/views/machine-new.html app/views/network-new.html
@@ -170,14 +190,14 @@ msgstr "Crear un Snapshot"
 
 #: app/views/ip-range-new.html
 #, fuzzy
-msgid "Create a iprange called:"
+msgid "Create a network for a new IP Range called:"
 msgstr "Crear un nuevo rango que se llame:"
 
 #: app/views/package-new.html
 msgid "Create a package called"
 msgstr "Crear un paquete que se llame"
 
-#: app/views/machine.html
+#: app/views/machine.html app/views/machines.html
 msgid "Created"
 msgstr "Creado"
 
@@ -189,7 +209,7 @@ msgstr "Creador"
 msgid "Current package"
 msgstr "Paquete actual"
 
-#: app/views/group.html app/views/user.html app/views/partials/header.html
+#: app/views/role.html app/views/user.html
 msgid "DTrace"
 msgstr ""
 
@@ -198,7 +218,7 @@ msgstr ""
 msgid "Dataset"
 msgstr ""
 
-#: app/views/group.html app/views/user.html app/views/partials/header.html
+#: app/views/role.html app/views/user.html app/views/partials/header.html
 msgid "Datasets"
 msgstr "Datasets"
 
@@ -218,12 +238,16 @@ msgstr "Descripción"
 msgid "Description"
 msgstr "Descripción"
 
-#: app/views/group.html app/views/machine.html app/views/server.html
+#: app/views/machine.html
+msgid "Destination"
+msgstr "Destino"
+
+#: app/views/machine.html app/views/role.html app/views/server.html
 #: app/views/user.html
 msgid "Details"
 msgstr "Detalles"
 
-#: app/views/machine-new.html app/views/packages.html
+#: app/views/machine-new.html app/views/partials/configs/packages.html
 msgid "Disk"
 msgstr "Disco"
 
@@ -256,7 +280,7 @@ msgstr "Editar"
 msgid "Element"
 msgstr "Elemento"
 
-#: app/views/group.html app/views/organization.html app/views/user.html
+#: app/views/organization.html app/views/role.html app/views/user.html
 msgid "Everything"
 msgstr "Todo"
 
@@ -264,11 +288,11 @@ msgstr "Todo"
 msgid "FiFo Home"
 msgstr "FiFo Home"
 
-#: app/views/machines.html
+#: app/views/configurations.html app/views/machines.html
 msgid "Filter"
 msgstr "Filtro"
 
-#: app/views/ip-ranges.html
+#: app/views/partials/configs/networking.html
 msgid "First"
 msgstr "Primero"
 
@@ -288,22 +312,21 @@ msgstr "Libre"
 msgid "Full Screen"
 msgstr "Pantalla completa"
 
-#: app/views/ip-ranges.html app/views/machine.html
+#: app/views/machine.html app/views/partials/configs/networking.html
 msgid "Gateway"
 msgstr "Puerta enlace"
 
-#: app/views/group.html
+#: app/views/role.html
 msgid "Grant"
 msgstr "Autorizar"
 
 #: app/views/organization.html
-msgid "Group"
-msgstr "Grupo"
+msgid "Grouping"
+msgstr "Agrupación"
 
-#: app/views/group.html app/views/user.html app/views/users.html
-#: app/views/partials/header.html
-msgid "Groups"
-msgstr "Grupos"
+#: app/views/role.html app/views/user.html
+msgid "Groupings"
+msgstr "Agrupaciones"
 
 #: app/views/partials/breadcrumb.html
 msgid "Help"
@@ -317,11 +340,11 @@ msgstr "Historial"
 msgid "Hostname"
 msgstr ""
 
-#: app/views/user.html
+#: app/views/role.html app/views/user.html
 msgid "Hypervisors"
 msgstr "Hypervisores"
 
-#: app/views/dtraces.html
+#: app/views/partials/configs/dtraces.html
 msgid "ID"
 msgstr "ID"
 
@@ -329,7 +352,7 @@ msgstr "ID"
 msgid "IP"
 msgstr "IP"
 
-#: app/views/group.html app/views/user.html app/views/partials/header.html
+#: app/views/role.html app/views/user.html
 msgid "IP Ranges"
 msgstr "Rangos de IP"
 
@@ -339,7 +362,7 @@ msgstr ""
 
 #: app/views/machine.html
 msgid "Imaging"
-msgstr ""
+msgstr "Imagen"
 
 #: app/views/datasets.html
 msgid "Import"
@@ -361,10 +384,6 @@ msgstr "Información"
 msgid "Installed"
 msgstr "Instalado"
 
-#: app/views/ip-ranges.html
-msgid "Iprange"
-msgstr "rango IP"
-
 #: app/views/user.html
 msgid "Join"
 msgstr "Unir"
@@ -376,6 +395,10 @@ msgstr "Llave"
 #: app/views/user.html
 msgid "Key ID"
 msgstr "ID llave"
+
+#: app/views/topology.html
+msgid "L1 ARC"
+msgstr ""
 
 #: app/views/server.html
 msgid "L1 Arc hit %"
@@ -393,7 +416,7 @@ msgstr ""
 msgid "L2 Size"
 msgstr "Tamaño L2"
 
-#: app/views/ip-ranges.html
+#: app/views/partials/configs/networking.html
 msgid "Last"
 msgstr "Ultimo"
 
@@ -421,7 +444,7 @@ msgstr "Máquina"
 msgid "Machines"
 msgstr "Máquinas"
 
-#: app/views/server.html
+#: app/views/server.html app/views/topology.html
 msgid "Main IP"
 msgstr "IP principal"
 
@@ -433,7 +456,8 @@ msgstr "Placa"
 msgid "Manufacturer"
 msgstr "Fabricante"
 
-#: app/views/machine-new.html app/views/main.html app/views/server.html
+#: app/views/machine-new.html app/views/machines.html app/views/main.html
+#: app/views/server.html app/views/topology.html
 msgid "Memory"
 msgstr "Memoria"
 
@@ -454,6 +478,10 @@ msgid "Model"
 msgstr "Modelo"
 
 #: app/views/partials/header.html
+msgid "More"
+msgstr "Más"
+
+#: app/views/partials/header.html
 msgid "My info"
 msgstr "Mi info"
 
@@ -461,19 +489,20 @@ msgstr "Mi info"
 msgid "NIC"
 msgstr ""
 
-#: app/views/datasets.html app/views/dtraces.html app/views/group.html
-#: app/views/groups.html app/views/ip-ranges.html app/views/machine.html
-#: app/views/network.html app/views/networks.html app/views/organization.html
-#: app/views/organizations.html app/views/packages.html app/views/servers.html
-#: app/views/user.html app/views/users.html
+#: app/views/datasets.html app/views/machine.html app/views/machines.html
+#: app/views/network.html app/views/organization.html app/views/role.html
+#: app/views/servers.html app/views/topology.html app/views/user.html
+#: app/views/partials/configs/dtraces.html
+#: app/views/partials/configs/packages.html
 msgid "Name"
 msgstr "Nombre"
 
-#: app/views/ip-ranges.html app/views/machine.html
+#: app/views/machine.html app/views/partials/configs/networking.html
 msgid "Netmask"
 msgstr "Máscara"
 
 #: app/views/machine-new.html app/views/machine.html
+#: app/views/partials/configs/networking.html
 msgid "Network"
 msgstr "Red"
 
@@ -481,20 +510,20 @@ msgstr "Red"
 msgid "Network tags"
 msgstr "Tags de red"
 
-#: app/views/partials/header.html
+#: app/views/machine.html
 msgid "Networking"
 msgstr "Red"
 
-#: app/views/group.html app/views/server.html app/views/servers.html
-#: app/views/user.html app/views/partials/header.html
+#: app/views/role.html app/views/server.html app/views/servers.html
+#: app/views/user.html
 msgid "Networks"
 msgstr "Redes"
 
-#: app/views/groups.html
-msgid "New Group"
-msgstr "Nuevo grupo"
+#: app/views/groupings.html
+msgid "New Cluster"
+msgstr "Nuevo Cluster"
 
-#: app/views/ip-ranges.html
+#: app/views/partials/configs/networking.html
 #, fuzzy
 msgid "New IP Range"
 msgstr "Nuevo rango de IP"
@@ -503,42 +532,65 @@ msgstr "Nuevo rango de IP"
 msgid "New Machine"
 msgstr "Nueva máquina"
 
-#: app/views/networks.html
-#, fuzzy
+#: app/views/partials/configs/networking.html
 msgid "New Network"
-msgstr "Nueva red"
+msgstr "Nueva Red"
 
-#: app/views/organizations.html
+#: app/views/partials/configs/organizations.html
 #, fuzzy
 msgid "New Organization"
 msgstr "Nueva organización"
 
-#: app/views/packages.html
+#: app/views/partials/configs/packages.html
 #, fuzzy
 msgid "New Package"
 msgstr "Nuevo paquete"
 
-#: app/views/dtraces.html
+#: app/views/topology.html
+msgid "New Path"
+msgstr "Nuevo Path"
+
+#: app/views/partials/configs/users_roles.html
+msgid "New Role"
+msgstr "Nuevo Rol"
+
+#: app/views/machine.html
+msgid "New Route"
+msgstr "Nueva Ruta"
+
+#: app/views/groupings.html
+msgid "New Stack"
+msgstr "Nuevo Stack"
+
+#: app/views/partials/configs/dtraces.html
 msgid "New Trace"
 msgstr "Nueva traza"
 
-#: app/views/users.html
+#: app/views/partials/configs/users_roles.html
 msgid "New User"
 msgstr "Nuevo usuario"
 
-#: app/views/ip-ranges.html
+#: app/views/partials/configs/networking.html
 msgid "Next"
 msgstr "Siguiente"
 
+#: app/views/groupings.html
+msgid "No clusters in this stack"
+msgstr "No hay clusters en este stack"
+
 #: app/views/main.html
-msgid "No ssh keys found on your account. Dont forget to <a href=\"#/configuration/users/{{user.uuid}}\">add one</a>!"
-msgstr "No tienes ninguna llave ssh, no te olvides de <a href=\”#/configuration/users/{{user.uuid}}\”>agregar</a> una!"
+msgid ""
+"No ssh keys found on your account. Dont forget to <a href=\"#/configuration/"
+"users/{{user.uuid}}\">add one</a>!"
+msgstr ""
+"No tienes ninguna llave ssh, no te olvides de <a href='#/configuration/users/"
+"{{user.uuid}}'>agregar</a> una!"
 
 #: app/views/server.html
 msgid "Node name"
 msgstr "Nombre del nodo"
 
-#: app/views/machine.html
+#: app/views/machine.html app/views/server.html
 msgid "Notes"
 msgstr "Notas"
 
@@ -547,27 +599,28 @@ msgid "OS"
 msgstr "S.O."
 
 #: app/views/organization.html
-msgid "Org/Group"
+#, fuzzy
+msgid "Org/Role"
 msgstr "Organizaciones y grupos"
 
-#: app/views/user.html
+#: app/views/user.html app/views/partials/configs/organizations.html
 msgid "Organization"
 msgstr "Organización"
 
-#: app/views/group.html app/views/user.html app/views/users.html
-#: app/views/partials/header.html
+#: app/views/role.html app/views/user.html
+#: app/views/partials/configs/users_roles.html
 msgid "Organizations"
 msgstr "Organizaciones"
 
-#: app/views/machine.html
+#: app/views/machine.html app/views/machines.html
 msgid "Owner"
 msgstr "Dueño"
 
-#: app/views/machine.html app/views/package.html
+#: app/views/machine.html app/views/machines.html app/views/package.html
 msgid "Package"
 msgstr "Paquete"
 
-#: app/views/group.html app/views/user.html app/views/partials/header.html
+#: app/views/role.html app/views/user.html
 msgid "Packages"
 msgstr "Paquetes"
 
@@ -580,16 +633,21 @@ msgstr "Parámetros"
 msgid "Passwords"
 msgstr "Claves"
 
+#: app/views/topology.html
+msgid "Path of server"
+msgstr "Path del servidor"
+
 #: app/views/machine.html app/views/server.html
 msgid "Performance"
-msgstr ""
+msgstr "Rendimiento"
 
-#: app/views/group.html app/views/user.html
+#: app/views/role.html app/views/user.html
 #, fuzzy
 msgid "Permission"
 msgstr "Permisos"
 
-#: app/views/group.html app/views/user.html app/views/partials/header.html
+#: app/views/role.html app/views/user.html
+#: app/views/partials/configs/users_roles.html
 #, fuzzy
 msgid "Permissions"
 msgstr "Permisos"
@@ -597,6 +655,14 @@ msgstr "Permisos"
 #: app/views/login.html
 msgid "Please identify yourself"
 msgstr "Favor, identifícate"
+
+#: app/views/datasets.html
+msgid "Please import a dataset using the 'Remote datasets' tab."
+msgstr "Favor importar un dataset desde el tab 'Datasets remotos'"
+
+#: app/views/topology.html
+msgid "Please select a server to setup its topology"
+msgstr "Selecciona un servidor para configurar su topología"
 
 #: app/views/server.html
 msgid "Pool"
@@ -614,9 +680,18 @@ msgstr "Provisionado"
 msgid "Published"
 msgstr "Publicado"
 
-#: app/views/packages.html app/views/servers.html
+#: app/views/servers.html app/views/partials/configs/packages.html
 msgid "Ram"
 msgstr ""
+
+#: app/views/partials/configs/networking.html
+msgid "Range"
+msgstr "Rango de IP"
+
+#: app/views/partials/configs/networking.html
+#, fuzzy
+msgid "Ranges"
+msgstr "Rangos de IP"
 
 #: app/views/organization.html
 msgid "Reboot"
@@ -625,6 +700,10 @@ msgstr "Reiniciar"
 #: app/views/datasets.html
 msgid "Remote datasets"
 msgstr "Datasets remotos"
+
+#: app/views/server.html app/views/servers.html
+msgid "Reserved"
+msgstr "Reservado"
 
 #: app/views/vis-graph.html
 msgid "Reset"
@@ -646,13 +725,26 @@ msgstr ""
 msgid "Resources"
 msgstr "Recursos"
 
-#: app/views/ip-ranges.html
+#: app/views/partials/configs/networking.html
 msgid "Returned"
 msgstr "Retornados"
+
+#: app/views/organization.html app/views/partials/configs/users_roles.html
+msgid "Role"
+msgstr "Rol"
+
+#: app/views/role.html app/views/user.html
+#: app/views/partials/configs/users_roles.html
+msgid "Roles"
+msgstr ""
 
 #: app/views/organization.html
 msgid "Rollback a Snapshot"
 msgstr "Devolverse al snapshot"
+
+#: app/views/machine.html
+msgid "Routes"
+msgstr "Rutas"
 
 #: app/views/package.html
 msgid "Rules"
@@ -667,8 +759,13 @@ msgid "SSH Keys"
 msgstr "Llaves SSH"
 
 #: app/views/user.html
-msgid "SSH Keys will be used when creating new KVM machines. They also will dynamically grant access              to SmartOS zones. Based on the console access to the zone."
-msgstr "Las llaves SSH se usan a momento de crear nuevas máquinas KVM y también para autorizar dinámicamente a las zonas."
+msgid ""
+"SSH Keys will be used when creating new KVM machines. They also will "
+"dynamically grant access              to SmartOS zones. Based on the console "
+"access to the zone."
+msgstr ""
+"Las llaves SSH se usan a momento de crear nuevas máquinas KVM y también para "
+"autorizar dinámicamente a las zonas."
 
 #: app/views/main.html
 msgid "SSH keys configured: {{keys}}"
@@ -678,13 +775,13 @@ msgstr "Llaves SSH configuradas: {{keys}}"
 msgid "Save"
 msgstr "Guardar"
 
+#: app/views/machine.html
+msgid "Save new rules"
+msgstr "Guardar las nuevas reglas"
+
 #: app/views/dtrace-new.html app/views/dtrace.html
 msgid "Script"
 msgstr "Script"
-
-#: app/views/partials/header.html
-msgid "Scripts"
-msgstr ""
 
 #: app/views/organization.html
 msgid "See"
@@ -694,18 +791,30 @@ msgstr "Ver"
 msgid "Serial"
 msgstr ""
 
-#: app/views/machine-new.html app/views/machine.html
+#: app/views/machine-new.html app/views/machine.html app/views/machines.html
+#: app/views/topology.html
 msgid "Server"
 msgstr "Servidor"
 
-#: app/views/dtrace.html app/views/group.html app/views/main.html
-#: app/views/partials/header.html
+#: app/views/dtrace.html app/views/main.html app/views/partials/header.html
 msgid "Servers"
 msgstr "Servidores"
 
-#: app/views/machine.html
+#: app/views/main.html
+msgid "Servers Topology"
+msgstr "Topología servidores"
+
+#: app/views/partials/header.html
+msgid "Servers topology"
+msgstr "Topología de servidores"
+
+#: app/views/machine.html app/views/server.html
 msgid "Services"
 msgstr "Servicios"
+
+#: app/views/partials/services.html
+msgid "Show disabled services"
+msgstr "Mostrar servicios deshabitados"
 
 #: app/views/machines.html
 #, fuzzy
@@ -732,17 +841,29 @@ msgstr ""
 msgid "Something is wrong with this machine."
 msgstr "Hay algo malo con esta máquina"
 
+#: app/views/main.html app/views/partials/header.html
+msgid "Stacks & Clusters"
+msgstr ""
+
+#: app/views/groupings.html
+msgid "Stacks and Clusters"
+msgstr "Stacks y Clusters"
+
 #: app/views/organization.html
 msgid "Start"
 msgstr "Iniciar"
 
-#: app/views/datasets.html
-msgid "Status"
-msgstr ""
+#: app/views/machines.html
+msgid "State"
+msgstr "Estado"
 
 #: app/views/organization.html
 msgid "Stop"
 msgstr "Detener"
+
+#: app/views/machine.html
+msgid "Stop the machine to add a new network interface."
+msgstr "Para agregar una nueva red, detén la máquina."
 
 #: app/views/server.html
 msgid "Storage"
@@ -752,7 +873,7 @@ msgstr ""
 msgid "Swap Usage"
 msgstr "Uso de swap"
 
-#: app/views/ip-ranges.html
+#: app/views/partials/configs/networking.html
 msgid "Tag"
 msgstr ""
 
@@ -764,26 +885,53 @@ msgstr ""
 msgid "The Team"
 msgstr "El equipo"
 
+#: app/views/machine.html
+msgid "There are no additonal rules"
+msgstr "No hay reglas adicionales"
+
 #: app/views/main.html
-msgid "Tip: You can <a href=\"http://project-fifo.net/display/PF/LeoFS\">configure</a> Fifo to backup machine's into an S3 compatible service. Then, you will see a 'Versioning' tab on each machine page that lets you work with the backups."
-msgstr "Tip: You can <a href=\”http://project-fifo.net/display/PF/LeoFS\”>configure</a> Fifo to backup machine’s into an S3 compatible service. Then, you will see a ‘Versioning’ tab on each machine page that lets you work with the backups."
+msgid ""
+"Tip: You can <a href=\"https://project-fifo.net/display/PF/LeoFS"
+"\">configure</a> Fifo to backup machine's into an S3 compatible service. "
+"Then, you will see a 'Versioning' tab on each machine page that lets you "
+"work with the backups."
+msgstr ""
+"Tip: Puedes <a href=\"https://project-fifo.net/display/PF/LeoFS"
+"\">configurar</a> Fifo para guardar los backups en un service compatible con "
+"S3. Esto habilitará el tab 'Versionamiento' en la página de las máquinas."
 
 #: app/views/machine.html
 msgid "To rollback, please stop the machine"
 msgstr "Para hacer rollback, detén la máquina"
 
+#: app/views/servers.html
+msgid "Topology"
+msgstr "Topología"
+
 #: app/views/server.html
 msgid "Total"
 msgstr ""
+
+#: app/views/partials/configs/organizations.html
+msgid "Triggers"
+msgstr "Triggers"
 
 #: app/views/dataset.html app/views/datasets.html app/views/machine.html
 msgid "Type"
 msgstr "Tipo"
 
-#: app/views/group.html app/views/network.html app/views/organization.html
-#: app/views/user.html
+#: app/views/network.html app/views/organization.html app/views/role.html
+#: app/views/server.html app/views/user.html
 msgid "UUID"
 msgstr "UUID"
+
+#: app/views/datasets.html
+msgid "Upload a new dataset by selecting a zvol and manifest file"
+msgstr "Sube un nuevo dataset seleccionando un archivo zvol y manifiesto"
+
+#: app/views/partials/configs/users_roles.html
+msgid "User"
+msgstr "Usuario"
 
 #: app/views/user.html
 msgid "User UUID"
@@ -793,17 +941,20 @@ msgstr "UUID usuario"
 msgid "User script"
 msgstr "Script usuario"
 
-#: app/views/group.html app/views/main.html app/views/user.html
-#: app/views/partials/header.html
+#: app/views/main.html app/views/role.html app/views/user.html
 msgid "Users"
 msgstr "Usuarios"
 
-#: app/views/ip-ranges.html
+#: app/views/partials/configs/networking.html
 msgid "VLan"
 msgstr ""
 
 #: app/views/organization.html
 msgid "VM"
+msgstr ""
+
+#: app/views/machine-new.html
+msgid "VMs"
 msgstr ""
 
 #: app/views/dtrace-new.html app/views/dtrace.html
@@ -815,11 +966,10 @@ msgid "Version"
 msgstr "Versión"
 
 #: app/views/machine.html
-#, fuzzy
 msgid "Versioning"
-msgstr "Versión"
+msgstr "Versionamiento"
 
-#: app/views/group.html app/views/user.html
+#: app/views/role.html app/views/user.html
 #, fuzzy
 msgid "Virtual Machines"
 msgstr "Máquinas"
@@ -837,8 +987,9 @@ msgid "You are part of"
 msgstr "Eres parte de"
 
 #: app/views/main.html
-msgid "You groups are"
-msgstr "Tus grupos son"
+#, fuzzy
+msgid "You roles are"
+msgstr "Eres parte de"
 
 #: app/views/main.html
 msgid "Your cloud is fine!"
@@ -880,23 +1031,27 @@ msgstr "agregar"
 msgid "called"
 msgstr "llamada"
 
-#: app/views/group.html app/views/network.html app/views/user.html
+#: app/views/network.html app/views/role.html app/views/user.html
 msgid "delete"
 msgstr "borrar"
 
-#: app/views/machine.html
-msgid "local"
-msgstr ""
-
 #: app/views/machine-new.html
-#, fuzzy
 msgid "machine"
-msgstr "Máquina"
+msgstr "máquina"
 
 #: app/views/machines.html
 #, fuzzy
 msgid "of"
 msgstr "de"
+
+#~ msgid "Config"
+#~ msgstr "Config"
+
+#~ msgid "Iprange"
+#~ msgstr "rango IP"
+
+#~ msgid "Org/Group"
+#~ msgstr "Organizaciones y grupos"
 
 #~ msgid "Versions"
 #~ msgstr "Versiones"
