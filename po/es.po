@@ -802,11 +802,11 @@ msgstr "Servidores"
 
 #: app/views/main.html
 msgid "Servers Topology"
-msgstr "Topología de los servidores"
+msgstr "Topología servidores"
 
 #: app/views/partials/header.html
 msgid "Servers topology"
-msgstr "Topología de los servidores"
+msgstr "Topología de servidores"
 
 #: app/views/machine.html app/views/server.html
 msgid "Services"
@@ -814,7 +814,7 @@ msgstr "Servicios"
 
 #: app/views/partials/services.html
 msgid "Show disabled services"
-msgstr "Mostrar servicios deshabilitados"
+msgstr "Mostrar servicios deshabitados"
 
 #: app/views/machines.html
 #, fuzzy
