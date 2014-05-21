@@ -27,6 +27,7 @@ angular.module('fifoApp')
         if (auth.canAccess(perm)) can = true;
       })
       $scope.showConfig = can
+      $scope.showMore = $scope.showConfig || auth.canAccess(['cloud','groupings','list']) || auth.canAccess(['cloud','hypervisors','list'])
     })
 
     //Help url

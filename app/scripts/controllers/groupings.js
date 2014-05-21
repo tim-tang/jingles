@@ -37,7 +37,6 @@ angular.module('fifoApp').controller('GroupingsCtrl', function ($scope, wiggle, 
     $scope.add_stack = function add_stack() {
         var name;
         if (name = window.prompt("Stack name")) {
-            console.log(name);
             new wiggle.groupings({name: name, type: "stack"}).
                 $save().then(function ok(res) {
                     status.success(name + ' stack created')
@@ -53,7 +52,6 @@ angular.module('fifoApp').controller('GroupingsCtrl', function ($scope, wiggle, 
     $scope.add_cluster = function add_cluster() {
         var name;
         if (name = window.prompt("Cluster name")) {
-            console.log(name);
             new wiggle.groupings({name: name, type: "cluster"}).
                 $save().then(function ok(res) {
                     $scope.clusters[res.uuid] = res;
@@ -92,7 +90,6 @@ angular.module('fifoApp').controller('GroupingsCtrl', function ($scope, wiggle, 
     }
 
     $scope.remove_vm = function(cluster, vm, index) {
-        console.log('removin', cluster, vm, index)
         wiggle.groupings.delete({id: cluster.uuid,
                          controller: "elements",
                          controller_id: vm.uuid},
