@@ -19,16 +19,13 @@ msgstr ""
 msgid "About"
 msgstr "關於"
 
-#: app/views/dtraces.html
-#: app/views/group.html
-#: app/views/ip-ranges.html
 #: app/views/network.html
-#: app/views/networks.html
 #: app/views/organization.html
-#: app/views/packages.html
+#: app/views/role.html
 #: app/views/user.html
+#: app/views/partials/configs/dtraces.html
 msgid "Actions"
-msgstr "動作"
+msgstr "操作列表"
 
 #: app/views/user.html
 msgid "Active Organisation"
@@ -63,6 +60,10 @@ msgstr "Agent版本"
 msgid "Alias"
 msgstr "別名"
 
+#: app/views/groupings.html
+msgid "Assign Cluster"
+msgstr "指定集群"
+
 #: app/views/machine-new.html
 msgid "Autoboot"
 msgstr "自動啟動"
@@ -84,7 +85,12 @@ msgstr "備份"
 msgid "Booted"
 msgstr "已啟動"
 
+#: app/views/topology.html
+msgid "Brand"
+msgstr "廠標"
+
 #: app/views/machine-new.html
+#: app/views/topology.html
 msgid "CPU"
 msgstr "CPU"
 
@@ -92,7 +98,7 @@ msgstr "CPU"
 msgid "CPU / Mainboard"
 msgstr "CPU/主板"
 
-#: app/views/packages.html
+#: app/views/partials/configs/packages.html
 msgid "CPU Cap"
 msgstr "CPU限制"
 
@@ -121,7 +127,6 @@ msgid "Category"
 msgstr "類型"
 
 #: app/views/machine.html
-#: app/views/user.html
 msgid "Change"
 msgstr "變更"
 
@@ -133,7 +138,7 @@ msgstr "變更密碼"
 msgid "Change to"
 msgstr "變更為"
 
-#: app/views/group.html
+#: app/views/role.html
 #: app/views/user.html
 msgid "Channels"
 msgstr "頻道列表"
@@ -146,7 +151,7 @@ msgstr "特性列表"
 msgid "Charge"
 msgstr "Charge"
 
-#: app/views/group.html
+#: app/views/role.html
 #: app/views/user.html
 msgid "Cloud"
 msgstr "雲"
@@ -155,8 +160,17 @@ msgstr "雲"
 msgid "Cloud View"
 msgstr "雲視圖"
 
+#: app/views/machine-new.html
+#: app/views/machines.html
+msgid "Cluster"
+msgstr "集群"
+
+#: app/views/groupings.html
+msgid "Clusters and VMs"
+msgstr "集群與雲主機"
+
 #: app/views/partials/header.html
-msgid "Config"
+msgid "Configuration"
 msgstr "配置"
 
 #: app/views/organization.html
@@ -166,6 +180,10 @@ msgstr "控制臺/VNC"
 #: app/views/server.html
 msgid "Cores"
 msgstr "Cores"
+
+#: app/views/topology.html
+msgid "Cost"
+msgstr "代價"
 
 #: app/views/dtrace-new.html
 #: app/views/ip-range-new.html
@@ -185,14 +203,15 @@ msgid "Create a Snapshot"
 msgstr "創建快照"
 
 #: app/views/ip-range-new.html
-msgid "Create a iprange called:"
-msgstr "創建網段，名為"
+msgid "Create a network for a new IP Range called:"
+msgstr "創建新IP網段，名為"
 
 #: app/views/package-new.html
 msgid "Create a package called"
 msgstr "創建配置包，名為"
 
 #: app/views/machine.html
+#: app/views/machines.html
 msgid "Created"
 msgstr "已創建"
 
@@ -204,9 +223,8 @@ msgstr "創建者"
 msgid "Current package"
 msgstr "當前配置包"
 
-#: app/views/group.html
+#: app/views/role.html
 #: app/views/user.html
-#: app/views/partials/header.html
 msgid "DTrace"
 msgstr "DTrace"
 
@@ -217,7 +235,7 @@ msgstr "DTrace"
 msgid "Dataset"
 msgstr "Dataset"
 
-#: app/views/group.html
+#: app/views/role.html
 #: app/views/user.html
 #: app/views/partials/header.html
 msgid "Datasets"
@@ -241,15 +259,19 @@ msgstr "描述"
 msgid "Description"
 msgstr "描述"
 
-#: app/views/group.html
 #: app/views/machine.html
+msgid "Destination"
+msgstr ""
+
+#: app/views/machine.html
+#: app/views/role.html
 #: app/views/server.html
 #: app/views/user.html
 msgid "Details"
 msgstr "詳細信息"
 
 #: app/views/machine-new.html
-#: app/views/packages.html
+#: app/views/partials/configs/packages.html
 msgid "Disk"
 msgstr "磁盤"
 
@@ -281,8 +303,8 @@ msgstr "編輯"
 msgid "Element"
 msgstr "元素"
 
-#: app/views/group.html
 #: app/views/organization.html
+#: app/views/role.html
 #: app/views/user.html
 msgid "Everything"
 msgstr "全部"
@@ -291,11 +313,12 @@ msgstr "全部"
 msgid "FiFo Home"
 msgstr "FiFo項目主頁"
 
+#: app/views/configurations.html
 #: app/views/machines.html
 msgid "Filter"
 msgstr "過濾器"
 
-#: app/views/ip-ranges.html
+#: app/views/partials/configs/networking.html
 msgid "First"
 msgstr "起"
 
@@ -316,12 +339,12 @@ msgstr "剩余"
 msgid "Full Screen"
 msgstr "全屏幕"
 
-#: app/views/ip-ranges.html
 #: app/views/machine.html
+#: app/views/partials/configs/networking.html
 msgid "Gateway"
 msgstr "網關"
 
-#: app/views/group.html
+#: app/views/role.html
 msgid "Grant"
 msgstr "授權"
 
@@ -329,11 +352,9 @@ msgstr "授權"
 msgid "Group"
 msgstr "組"
 
-#: app/views/group.html
+#: app/views/role.html
 #: app/views/user.html
-#: app/views/users.html
-#: app/views/partials/header.html
-msgid "Groups"
+msgid "Groupings"
 msgstr "組列表"
 
 #: app/views/partials/breadcrumb.html
@@ -349,11 +370,12 @@ msgstr "歷史記錄"
 msgid "Hostname"
 msgstr "Hostname"
 
+#: app/views/role.html
 #: app/views/user.html
 msgid "Hypervisors"
 msgstr "Hypervisors"
 
-#: app/views/dtraces.html
+#: app/views/partials/configs/dtraces.html
 msgid "ID"
 msgstr "ID"
 
@@ -361,9 +383,8 @@ msgstr "ID"
 msgid "IP"
 msgstr "IP"
 
-#: app/views/group.html
+#: app/views/role.html
 #: app/views/user.html
-#: app/views/partials/header.html
 msgid "IP Ranges"
 msgstr "IP範圍"
 
@@ -395,10 +416,6 @@ msgstr "信息"
 msgid "Installed"
 msgstr "已安裝"
 
-#: app/views/ip-ranges.html
-msgid "Iprange"
-msgstr "IP範圍"
-
 #: app/views/user.html
 msgid "Join"
 msgstr "加入"
@@ -410,6 +427,10 @@ msgstr "關鍵字"
 #: app/views/user.html
 msgid "Key ID"
 msgstr "關鍵字ID"
+
+#: app/views/topology.html
+msgid "L1 ARC"
+msgstr "L1 ARC"
 
 #: app/views/server.html
 msgid "L1 Arc hit %"
@@ -427,7 +448,7 @@ msgstr "L2 Arc hit %"
 msgid "L2 Size"
 msgstr "L2 Size"
 
-#: app/views/ip-ranges.html
+#: app/views/partials/configs/networking.html
 msgid "Last"
 msgstr "止"
 
@@ -458,6 +479,7 @@ msgid "Machines"
 msgstr "雲主機列表"
 
 #: app/views/server.html
+#: app/views/topology.html
 msgid "Main IP"
 msgstr "主IP"
 
@@ -470,8 +492,10 @@ msgid "Manufacturer"
 msgstr "制造商"
 
 #: app/views/machine-new.html
+#: app/views/machines.html
 #: app/views/main.html
 #: app/views/server.html
+#: app/views/topology.html
 msgid "Memory"
 msgstr "內存"
 
@@ -492,6 +516,10 @@ msgid "Model"
 msgstr "型號"
 
 #: app/views/partials/header.html
+msgid "More"
+msgstr "更多"
+
+#: app/views/partials/header.html
 msgid "My info"
 msgstr "我的信息"
 
@@ -500,29 +528,27 @@ msgid "NIC"
 msgstr "網絡適配器"
 
 #: app/views/datasets.html
-#: app/views/dtraces.html
-#: app/views/group.html
-#: app/views/groups.html
-#: app/views/ip-ranges.html
 #: app/views/machine.html
+#: app/views/machines.html
 #: app/views/network.html
-#: app/views/networks.html
 #: app/views/organization.html
-#: app/views/organizations.html
-#: app/views/packages.html
+#: app/views/role.html
 #: app/views/servers.html
+#: app/views/topology.html
 #: app/views/user.html
-#: app/views/users.html
+#: app/views/partials/configs/dtraces.html
+#: app/views/partials/configs/packages.html
 msgid "Name"
 msgstr "名字"
 
-#: app/views/ip-ranges.html
 #: app/views/machine.html
+#: app/views/partials/configs/networking.html
 msgid "Netmask"
 msgstr "子網掩碼"
 
 #: app/views/machine-new.html
 #: app/views/machine.html
+#: app/views/partials/configs/networking.html
 msgid "Network"
 msgstr "網絡"
 
@@ -530,23 +556,22 @@ msgstr "網絡"
 msgid "Network tags"
 msgstr "網絡標記"
 
-#: app/views/partials/header.html
+#: app/views/machine.html
 msgid "Networking"
 msgstr "網絡"
 
-#: app/views/group.html
+#: app/views/role.html
 #: app/views/server.html
 #: app/views/servers.html
 #: app/views/user.html
-#: app/views/partials/header.html
 msgid "Networks"
 msgstr "網絡列表"
 
-#: app/views/groups.html
-msgid "New Group"
-msgstr "新建用戶組"
+#: app/views/groupings.html
+msgid "New Cluster"
+msgstr "新建集群"
 
-#: app/views/ip-ranges.html
+#: app/views/partials/configs/networking.html
 msgid "New IP Range"
 msgstr "新建IP範圍"
 
@@ -555,29 +580,49 @@ msgstr "新建IP範圍"
 msgid "New Machine"
 msgstr "新建雲主機"
 
-#: app/views/networks.html
+#: app/views/partials/configs/networking.html
 msgid "New Network"
 msgstr "新建網絡"
 
-#: app/views/organizations.html
+#: app/views/partials/configs/organizations.html
 msgid "New Organization"
 msgstr "新建組織"
 
-#: app/views/packages.html
+#: app/views/partials/configs/packages.html
 msgid "New Package"
 msgstr "新建配置包"
 
-#: app/views/dtraces.html
+#: app/views/topology.html
+msgid "New Path"
+msgstr "新建路徑"
+
+#: app/views/partials/configs/users_roles.html
+msgid "New Role"
+msgstr "新建角色"
+
+#: app/views/machine.html
+msgid "New Route"
+msgstr "新建路由表"
+
+#: app/views/groupings.html
+msgid "New Stack"
+msgstr "新建堆疊"
+
+#: app/views/partials/configs/dtraces.html
 msgid "New Trace"
 msgstr "新建Trace"
 
-#: app/views/users.html
+#: app/views/partials/configs/users_roles.html
 msgid "New User"
 msgstr "新建用戶"
 
-#: app/views/ip-ranges.html
+#: app/views/partials/configs/networking.html
 msgid "Next"
 msgstr "下一步"
+
+#: app/views/groupings.html
+msgid "No clusters in this stack"
+msgstr "此堆疊尚不包含任何集群"
 
 #: app/views/main.html
 msgid "No ssh keys found on your account. Dont forget to <a href=\"#/configuration/users/{{user.uuid}}\">add one</a>!"
@@ -588,6 +633,7 @@ msgid "Node name"
 msgstr "節點名字"
 
 #: app/views/machine.html
+#: app/views/server.html
 msgid "Notes"
 msgstr "筆記列表"
 
@@ -596,32 +642,33 @@ msgid "OS"
 msgstr "OS"
 
 #: app/views/organization.html
-msgid "Org/Group"
-msgstr "組織/群組"
+msgid "Org/Role"
+msgstr "組織/角色"
 
 #: app/views/user.html
+#: app/views/partials/configs/organizations.html
 msgid "Organization"
 msgstr "組織"
 
-#: app/views/group.html
+#: app/views/role.html
 #: app/views/user.html
-#: app/views/users.html
-#: app/views/partials/header.html
+#: app/views/partials/configs/users_roles.html
 msgid "Organizations"
 msgstr "組織列表"
 
 #: app/views/machine.html
+#: app/views/machines.html
 msgid "Owner"
-msgstr "所有人"
+msgstr "擁有者"
 
 #: app/views/machine.html
+#: app/views/machines.html
 #: app/views/package.html
 msgid "Package"
 msgstr "配置包"
 
-#: app/views/group.html
+#: app/views/role.html
 #: app/views/user.html
-#: app/views/partials/header.html
 msgid "Packages"
 msgstr "配置包列表"
 
@@ -633,25 +680,37 @@ msgstr "參數列表"
 msgid "Passwords"
 msgstr "密碼列表"
 
+#: app/views/topology.html
+msgid "Path of server"
+msgstr "服務器路徑"
+
 #: app/views/machine.html
 #: app/views/server.html
 msgid "Performance"
 msgstr "性能指標"
 
-#: app/views/group.html
+#: app/views/role.html
 #: app/views/user.html
 msgid "Permission"
 msgstr "權限"
 
-#: app/views/group.html
+#: app/views/role.html
 #: app/views/user.html
-#: app/views/partials/header.html
+#: app/views/partials/configs/users_roles.html
 msgid "Permissions"
 msgstr "權限列表"
 
 #: app/views/login.html
 msgid "Please identify yourself"
-msgstr "請通過身份認證"
+msgstr "請驗證身份"
+
+#: app/views/datasets.html
+msgid "Please import a dataset using the 'Remote datasets' tab."
+msgstr "請先使用'遠端Dataset'面板導入一個dataset"
+
+#: app/views/topology.html
+msgid "Please select a server to setup its topology"
+msgstr "請選擇一個服務器以配置其拓撲結構"
 
 #: app/views/server.html
 msgid "Pool"
@@ -669,10 +728,18 @@ msgstr "已生成"
 msgid "Published"
 msgstr "已發布"
 
-#: app/views/packages.html
 #: app/views/servers.html
+#: app/views/partials/configs/packages.html
 msgid "Ram"
 msgstr "內存"
+
+#: app/views/partials/configs/networking.html
+msgid "Range"
+msgstr "網段"
+
+#: app/views/partials/configs/networking.html
+msgid "Ranges"
+msgstr "網段列表"
 
 #: app/views/organization.html
 msgid "Reboot"
@@ -681,6 +748,11 @@ msgstr "重啟"
 #: app/views/datasets.html
 msgid "Remote datasets"
 msgstr "遠端Datasets"
+
+#: app/views/server.html
+#: app/views/servers.html
+msgid "Reserved"
+msgstr "已預留"
 
 #: app/views/vis-graph.html
 msgid "Reset"
@@ -702,13 +774,28 @@ msgstr "DNS解析服務"
 msgid "Resources"
 msgstr "資源列表"
 
-#: app/views/ip-ranges.html
+#: app/views/partials/configs/networking.html
 msgid "Returned"
 msgstr "已返回"
 
 #: app/views/organization.html
+#: app/views/partials/configs/users_roles.html
+msgid "Role"
+msgstr "角色"
+
+#: app/views/role.html
+#: app/views/user.html
+#: app/views/partials/configs/users_roles.html
+msgid "Roles"
+msgstr "角色列表"
+
+#: app/views/organization.html
 msgid "Rollback a Snapshot"
 msgstr "從快照恢復"
+
+#: app/views/machine.html
+msgid "Routes"
+msgstr "路由列表"
 
 #: app/views/package.html
 msgid "Rules"
@@ -727,8 +814,7 @@ msgstr "SSH Keys"
 msgid ""
 "SSH Keys will be used when creating new KVM machines. They also will dynamically grant access"
 "              to SmartOS zones. Based on the console access to the zone."
-msgstr ""
-"SSH Keys將應用於新創建的KVM雲主機. 同時它也用於通過控制臺連接所對應的SmartOS zones. "
+msgstr "SSH Keys將應用於新創建的KVM雲主機. 同時它也用於通過控制臺連接所對應的SmartOS zones. "
 
 #: app/views/main.html
 msgid "SSH keys configured: {{keys}}"
@@ -740,14 +826,14 @@ msgstr "已配置SSH keys: {{keys}}"
 msgid "Save"
 msgstr "保存"
 
+#: app/views/machine.html
+msgid "Save new rules"
+msgstr "另存為新規則"
+
 #: app/views/dtrace-new.html
 #: app/views/dtrace.html
 msgid "Script"
 msgstr "腳本"
-
-#: app/views/partials/header.html
-msgid "Scripts"
-msgstr "腳本列表"
 
 #: app/views/organization.html
 msgid "See"
@@ -759,19 +845,33 @@ msgstr "序列號"
 
 #: app/views/machine-new.html
 #: app/views/machine.html
+#: app/views/machines.html
+#: app/views/topology.html
 msgid "Server"
 msgstr "服務器"
 
 #: app/views/dtrace.html
-#: app/views/group.html
 #: app/views/main.html
 #: app/views/partials/header.html
 msgid "Servers"
 msgstr "服務器列表"
 
+#: app/views/main.html
+msgid "Servers Topology"
+msgstr "服務器拓撲"
+
+#: app/views/partials/header.html
+msgid "Servers topology"
+msgstr "服務器拓撲"
+
 #: app/views/machine.html
+#: app/views/server.html
 msgid "Services"
 msgstr "服務列表"
+
+#: app/views/partials/services.html
+msgid "Show disabled services"
+msgstr "顯示已禁用的服務"
 
 #: app/views/machines.html
 msgid "Showing"
@@ -797,6 +897,15 @@ msgstr "快照列表"
 msgid "Something is wrong with this machine."
 msgstr "此雲主機出現了一些問題."
 
+#: app/views/main.html
+#: app/views/partials/header.html
+msgid "Stacks & Clusters"
+msgstr "堆疊與集群"
+
+#: app/views/groupings.html
+msgid "Stacks and Clusters"
+msgstr "堆疊與集群"
+
 #: app/views/organization.html
 msgid "Start"
 msgstr "啟動"
@@ -809,6 +918,10 @@ msgstr "狀態"
 msgid "Stop"
 msgstr "關機"
 
+#: app/views/machine.html
+msgid "Stop the machine to add a new network interface."
+msgstr "要添加新網卡，先關閉此雲主機"
+
 #: app/views/server.html
 msgid "Storage"
 msgstr "存儲"
@@ -817,9 +930,9 @@ msgstr "存儲"
 msgid "Swap Usage"
 msgstr "Swap使用率"
 
-#: app/views/ip-ranges.html
+#: app/views/partials/configs/networking.html
 msgid "Tag"
-msgstr "標記"
+msgstr "標簽"
 
 #: app/views/organization.html
 msgid "Template"
@@ -829,17 +942,29 @@ msgstr "模板"
 msgid "The Team"
 msgstr "項目組"
 
+#: app/views/machine.html
+msgid "There are no additonal rules"
+msgstr "找不到更多規則"
+
 #: app/views/main.html
-msgid "Tip: You can <a href=\"http://project-fifo.net/display/PF/LeoFS\">configure</a> Fifo to backup machine's into an S3 compatible service. Then, you will see a 'Versioning' tab on each machine page that lets you work with the backups."
-msgstr "Tip: 你可以通過<a href=\"http://project-fifo.net/display/PF/LeoFS\">配置</a>Fifo, 來備份雲主機為S3兼容的服務. 之後, 你將可以在雲主機頁面中發現“版本”面板, 通過該面板即可以管理備份文件."
+msgid "Tip: You can <a href=\"https://project-fifo.net/display/PF/LeoFS\">configure</a> Fifo to backup machine's into an S3 compatible service. Then, you will see a 'Versioning' tab on each machine page that lets you work with the backups."
+msgstr "小貼士: 你可以通過<a href=\"http://project-fifo.net/display/PF/LeoFS\">配置</a>Fifo, 來備份雲主機為S3兼容的服務. 之後, 你將可以在雲主機頁面中發現“版本”面板, 通過該面板即可以管理備份文件."
 
 #: app/views/machine.html
 msgid "To rollback, please stop the machine"
 msgstr "恢復前請先關機"
 
+#: app/views/servers.html
+msgid "Topology"
+msgstr "拓撲圖"
+
 #: app/views/server.html
 msgid "Total"
 msgstr "總計"
+
+#: app/views/partials/configs/organizations.html
+msgid "Triggers"
+msgstr ""
 
 #: app/views/dataset.html
 #: app/views/datasets.html
@@ -847,12 +972,21 @@ msgstr "總計"
 msgid "Type"
 msgstr "類型"
 
-#: app/views/group.html
 #: app/views/network.html
 #: app/views/organization.html
+#: app/views/role.html
+#: app/views/server.html
 #: app/views/user.html
 msgid "UUID"
 msgstr "UUID"
+
+#: app/views/datasets.html
+msgid "Upload a new dataset by selecting a zvol and manifest file"
+msgstr ""
+
+#: app/views/partials/configs/users_roles.html
+msgid "User"
+msgstr ""
 
 #: app/views/user.html
 msgid "User UUID"
@@ -862,20 +996,23 @@ msgstr "用戶UUID"
 msgid "User script"
 msgstr "用戶腳本"
 
-#: app/views/group.html
 #: app/views/main.html
+#: app/views/role.html
 #: app/views/user.html
-#: app/views/partials/header.html
 msgid "Users"
 msgstr "用戶列表"
 
-#: app/views/ip-ranges.html
+#: app/views/partials/configs/networking.html
 msgid "VLan"
 msgstr "VLan"
 
 #: app/views/organization.html
 msgid "VM"
 msgstr "雲主機"
+
+#: app/views/machine-new.html
+msgid "VMs"
+msgstr "雲主機列表"
 
 #: app/views/dtrace-new.html
 #: app/views/dtrace.html
@@ -890,7 +1027,7 @@ msgstr "版本"
 msgid "Versioning"
 msgstr "版本"
 
-#: app/views/group.html
+#: app/views/role.html
 #: app/views/user.html
 msgid "Virtual Machines"
 msgstr "虛擬主機"
@@ -908,8 +1045,8 @@ msgid "You are part of"
 msgstr "你屬於"
 
 #: app/views/main.html
-msgid "You groups are"
-msgstr "你的組是"
+msgid "You roles are"
+msgstr "你的角色是"
 
 #: app/views/main.html
 msgid "Your cloud is fine!"
@@ -941,7 +1078,7 @@ msgstr "放大"
 
 #: app/views/server.html
 msgid "Zpool profile"
-msgstr "Zpool配置"
+msgstr "Zpool profile"
 
 #: app/views/machine.html
 msgid "add"
@@ -951,15 +1088,11 @@ msgstr "添加"
 msgid "called"
 msgstr "已調用"
 
-#: app/views/group.html
 #: app/views/network.html
+#: app/views/role.html
 #: app/views/user.html
 msgid "delete"
 msgstr "刪除"
-
-#: app/views/machine.html
-msgid "local"
-msgstr "本地"
 
 #: app/views/machine-new.html
 msgid "machine"
