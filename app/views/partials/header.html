@@ -52,7 +52,7 @@
                     </ul>
                 </li>
                 <li class='dropdown' title='Language'>
-                    <a class="dropdown-toggle capitalize" data-toggle='dropdown'>{{lang.name}}</a>
+                    <a class="dropdown-toggle capitalize" data-toggle='dropdown'><small class='text text-muted'>{{lang.name}}</small></a>
                     <ul class="dropdown-menu" role='menu'>
                         <li ng-repeat='lang in languages'>
                             <a ng-click="setLang(lang.locale)">
