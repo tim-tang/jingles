@@ -32,13 +32,12 @@ angular.module('fifoApp')
         ? $filter('filter')($scope.vms, $scope.searchQuery)
         : $scope.vms;
 
-      var sortingField = p.orderBy() || auth.currentUser().mdata('vms_orderBy') || ['config.alias']
-
-      data = sortingField? $filter('orderBy')(data, sortingField) : data
+      var orderByField = p.orderBy()
+      data = orderByField? $filter('orderBy')(data, orderByField) : data
 
       //Save the sorting info in the user metadata
       //wiggle doesnt like to save metadata with a hash inside. serialize it of this time.. :P
-      if (sortingField) auth.currentUser().mdata_set({vms_orderBy: JSON.stringify(p.sorting())})
+      if (orderByField) auth.currentUser().mdata_set({vms_orderBy: JSON.stringify(p.sorting())})
 
       $scope.vmsFiltered = data.slice((p.page() - 1) * p.count(), p.page() * p.count());
     }
