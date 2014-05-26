@@ -32,7 +32,13 @@ angular.module('fifoApp')
         ? $filter('filter')($scope.vms, $scope.searchQuery)
         : $scope.vms;
 
-      data = p.sorting()? $filter('orderBy')(data, p.orderBy()) : data
+      var sortingField = p.orderBy() || auth.currentUser().mdata('vms_orderBy') || ['config.alias']
+
+      data = sortingField? $filter('orderBy')(data, sortingField) : data
+
+      //Save the sorting info in the user metadata
+      //wiggle doesnt like to save metadata with a hash inside. serialize it of this time.. :P
+      if (sortingField) auth.currentUser().mdata_set({vms_orderBy: JSON.stringify(p.sorting())})
 
       $scope.vmsFiltered = data.slice((p.page() - 1) * p.count(), p.page() * p.count());
     }
@@ -125,20 +131,6 @@ angular.module('fifoApp')
 
       var defered = $q.defer();
 
-      $scope.tableParams = new ngTableParams({
-        page: 1,
-        count: 25,
-        total: 0, //0=disable
-        sorting: {
-          'config.alias': 'desc' //Could save this in the user metadata.. :P
-        },
-        counts: [] ,//[] = disable ngTable pagination buttons
-      }, {
-        getData: function($defer, params) {
-          filterData()
-          $defer.resolve($scope.vmsFiltered)
-        }
-      })
 
       $scope.vmsFiltered = []
 
@@ -152,6 +144,22 @@ angular.module('fifoApp')
 
       return defered.promise
   }
+
+  $scope.tableParams = new ngTableParams({
+    page: 1,
+    count: 25,
+    total: 0, //0=disable
+    // sorting: {
+    //   'config.alias': 'desc' //Could save this in the user metadata.. :P
+    // },
+    counts: [] ,//[] = disable ngTable pagination buttons
+  }, {
+    getData: function($defer, params) {
+      if ($scope.vms.length < 1) return; //Ignore data loading then length is 0...
+      filterData()
+      $defer.resolve($scope.vmsFiltered)
+    }
+  })
 
   var requestsPromise = startRequests()
 
@@ -170,6 +178,11 @@ angular.module('fifoApp')
 
   requestsPromise.then(buildLegend)
   auth.userPromise().then(function() {
+
+    var priorOrderBy = auth.currentUser().mdata('vms_orderBy'),
+        defaultOrder = priorOrderBy? JSON.parse(priorOrderBy): {'config.alias': 'desc'}
+
+    $scope.tableParams.sorting(defaultOrder)
     $scope.searchQuery = auth.currentUser().mdata('vm_searchQuery');
   })
   });
