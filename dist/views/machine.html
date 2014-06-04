@@ -256,6 +256,9 @@
         </div>
 
         <div class="tab-pane" id="performance">
+          <span ng_show="grafana">
+            <a target="_new" href="{{grafana}}/vm?VM={{vm.uuid.substr(0,30)}}">grafana</a></br>
+          </span>
           <div class="perfbox pull-left" ng-show="vm.config.type != 'kvm'">
             <div class="header">
               <span class="badge badge-info" translate>Disk IOPS</span>
