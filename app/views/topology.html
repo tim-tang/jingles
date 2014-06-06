@@ -49,8 +49,8 @@
 			</tr>
 
 			<tr ng-repeat='path in paths'>
-				<td><input class='form-control' ng-model='path.name' /></td>
-				<td><input class='form-control' ng-model='path.cost' type='number' /></td>
+				<td><input class='form-control' ng-model='path.name' ng-disabled='!($index<paths.length - 1)' /></td>
+				<td><input class='form-control' ng-model='path.cost' type='number' ng-disabled='!($index<paths.length - 1)' /></td>
 				<td><i class='glyphicon glyphicon-remove clickable' style='padding: 7px;' ng-click="paths.splice($index,1)" ng-if='$index<paths.length - 1'></i></td>
 			</tr>
 
