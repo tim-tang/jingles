@@ -10,11 +10,11 @@
     </div>
 
     <dl class="dl-horizontal">
-      <dt>UUID</dt><dd><small>{{dataset.dataset}}</small></dd>
+      <dt>UUID</dt><dd><small>{{dataset.uuid}}</small></dd>
       <dt>Info</dt><dd>{{dataset.description}}</dd>
       <dt ng-if='dataset.metadata.homepage'>Homepage</dt>
       <dd ng-if='dataset.metadata.homepage'>
-        <a ng-href='{{dataset.metadata.homepage}}' ng-if='dataset.metadata.homepage' target=_blank><i class='glyphicon glyphicon-info-sign'></i></a> 
+        <a ng-href='{{dataset.metadata.homepage}}' ng-if='dataset.metadata.homepage' target=_blank><i class='glyphicon glyphicon-info-sign'></i></a>
       </dd>
     </dl>
   </div>
