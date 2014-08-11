@@ -7,6 +7,10 @@
       </span>
       <img jq-run='tooltip' title="{{dataset.os || 'unknown'}}"
            ng-src="images/logos/{{dataset.os || 'unknown'}}.png" class='oslogo'/>
+      <a class="btn btn-sm btn-default" href="/api/0.1.0/datasets/{{dataset.uuid}}/dataset.gz">
+        <i class="glyphicon glyphicon-download-alt"></i>
+      </a>
+
     </div>
 
     <dl class="dl-horizontal">
@@ -15,8 +19,7 @@
       <dt ng-if='dataset.metadata.homepage'>Homepage</dt>
       <dd ng-if='dataset.metadata.homepage'>
         <a ng-href='{{dataset.metadata.homepage}}' ng-if='dataset.metadata.homepage' target=_blank><i class='glyphicon glyphicon-info-sign'></i></a>
-      </dd>
-      <dt><a href="/api/0.1.0/datasets/{{dataset.uuid}}/dataset.gz">Download</a></dt>
+      </dt>
     </dl>
   </div>
 
