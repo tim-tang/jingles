@@ -1,21 +1,22 @@
 <div class="row" ng-show='user'>
+  <div class="col-md-12" ng-nide="has_s3">
+    <div class="panel panel-danger">
+      Deprecation warning!<br/>
+      The internal image storage is deprecated! For this release there is no impact on opperations, however over the next couple of releases support for the internal storage will be slowly removed with the following plan (performed step marked in bod):<br/>
+      <ul>
+        <li>0.6.0 <b>Add deprecation warning</b></li>
+        <li>0.6.0 Provide LeoFS all in one dataset</li>
+        <li>0.6.1 Provide capability to convert from internal to LeoFS Storage.</li>
+        <li>0.6.1 Disable import of new datasets into interla store.</li>
+        <li>0.6.2 Remove internal daataset store.</li>
+      </ul>
+    </div>
+
+  </div>
   <div class="col-md-6">
 
     <div class="welcome">
       <h3 translate>Welcome {{user.name}}!</h3>
-
-      <p class='text-danger' ng-nide="has_s3">
-        Deprecation warning!<br/>
-        The internal image storage is deprecated! For this release there is no impact on opperations, however over the next couple of releases support for the internal storage will be slowly removed with the following plan (performed step marked in bod):<br/>
-        <ul>
-          <li>0.6.0 <b>Add deprecation warning</b></li>
-          <li>0.6.0 Provide LeoFS all in one dataset</li>
-          <li>0.6.1 Provide capability to convert from internal to LeoFS Storage.</li>
-          <li>0.6.1 Disable import of new datasets into interla store.</li>
-          <li>0.6.2 Remove internal daataset store.</li>
-        </ul>
-        Check out the <a href='https://project-fifo.net/display/PF/Problem+Checklist'>problem's checklist</a>.
-      </p>
 
       <p class='text-danger' ng-show='cloudStatus.no_servers === true'>
         No servers detected.<br/>
