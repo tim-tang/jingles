@@ -74,25 +74,22 @@ angular.module('fifoApp')
       });
     })
 
-    $scope.show = function() {
+    var processDataset = function(dataset) {
 
-      wiggle.datasets.query(function(datasets) {
-        $scope.datasets = {}
-        datasets.forEach(function(res) {
+      var id = dataset.uuid;
+      howl.join(id)
 
-          var id = res.uuid;
-          howl.join(id)
+      //Datasets imported with previouse fifo (i.e. prev than 20131212T153143Z) does not has the status field, artificially add one.
+      if (!dataset.status) {
+        if (dataset.imported === 1)
+          dataset.status = 'imported'
+        else
+          dataset.status = 'pending'
+      }
+      $scope.datasets[id] = dataset
+    }
 
-          //Datasets imported with previouse fifo (i.e. prev than 20131212T153143Z) does not has the status field, artificially add one.
-          if (!res.status) {
-            if (res.imported === 1)
-              res.status = 'imported'
-            else
-              res.status = 'pending'
-          }
-          $scope.datasets[id] = res
-        })
-      })
+    var loadRemoteDatasets = function() {
 
       if (!Config.datasets)
         return status.error('Make sure your config has an URL for the remote datasets')
@@ -113,7 +110,19 @@ angular.module('fifoApp')
       });
 
     }
-    $scope.show()
+
+
+    wiggle.datasets.query(function(datasets) {
+
+      $scope.datasets = {}
+      datasets.forEach(processDataset)
+
+      //Load the remote available datasets after the local ones are loaded
+      loadRemoteDatasets()
+
+    })
+
+
 
     // $scope.uploader = $fileUploader.create({
     //     url: 'unknown_url',
@@ -128,50 +137,50 @@ angular.module('fifoApp')
     // })
 
     // var uploader = $scope.uploader,
-    var uuid = _uuid()
+    // var uuid = _uuid()
 
-    uuid = 'cec0e6ff-a1ca-33e5-8d2f-9b3bb4ebf871'
+    // uuid = 'cec0e6ff-a1ca-33e5-8d2f-9b3bb4ebf871'
 
-    $scope.onFileSelect = function(files) {
-      var file = files[0]
+    // $scope.onFileSelect = function(files) {
+    //   var file = files[0]
 
-      //Read the file.
-      var fr = new FileReader();
+    //   //Read the file.
+    //   var fr = new FileReader();
 
-      fr.onprogress = function(ev) {
-        console.log(100 * ev.loaded / ev.total)
-      }
-      fr.onload = function() {
-        // $scope.manifest = fr.result
-        // $scope.$apply()
+    //   fr.onprogress = function(ev) {
+    //     console.log(100 * ev.loaded / ev.total)
+    //   }
+    //   fr.onload = function() {
+    //     // $scope.manifest = fr.result
+    //     // $scope.$apply()
 
-        console.log('ONLOAD!!')
-        //Upload
-        // var url = Config.endpoint + 'datasets/' + uuid
-        var url = Config.endpoint + 'datasets/' + uuid + '/datassetss.tar.gz'
-        // url = 'http://localhost:7777' + url
-        var prom = $upload.http({
-          url: url,
-          headers: {
-            'Content-Type': file.type
-          },
-          data: fr.result
-        })
+    //     console.log('ONLOAD!!')
+    //     //Upload
+    //     // var url = Config.endpoint + 'datasets/' + uuid
+    //     var url = Config.endpoint + 'datasets/' + uuid + '/datassetss.tar.gz'
+    //     // url = 'http://localhost:7777' + url
+    //     var prom = $upload.http({
+    //       url: url,
+    //       headers: {
+    //         'Content-Type': file.type
+    //       },
+    //       data: fr.result
+    //     })
 
-        prom.then(function(res) {
-          console.log('---> RES', res)
-        }, null, function(evt) {
-          console.log('--> EVT:', evt.loaded, evt.total, parseInt(100.0 * evt.loaded / evt.total))
-        })
+    //     prom.then(function(res) {
+    //       console.log('---> RES', res)
+    //     }, null, function(evt) {
+    //       console.log('--> EVT:', evt.loaded, evt.total, parseInt(100.0 * evt.loaded / evt.total))
+    //     })
 
-      }
-      // fr.readAsText(file)
-      fr.readAsArrayBuffer(file)
-      // fr.readAsBinaryString(file)
-      // readAsDataURL
-      console.log('subiendo esto...', file)
+    //   }
+    //   // fr.readAsText(file)
+    //   fr.readAsArrayBuffer(file)
+    //   // fr.readAsBinaryString(file)
+    //   // readAsDataURL
+    //   console.log('subiendo esto...', file)
 
-    }
+    // }
 
     // uploader.bind('afteraddingfile', function (event, item) {
     //     console.log('After adding file', item.file.type, item)
