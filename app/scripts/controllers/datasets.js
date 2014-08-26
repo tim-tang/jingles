@@ -3,8 +3,9 @@
 angular.module('fifoApp')
   .controller('DatasetsCtrl', function ($scope, wiggle, datasetsat, status, $upload) {
 
-    $scope.datasetsat = {}
-    $scope.endpoint = Config.datasets
+    $scope.datasetsat = {};
+    $scope.datasets = {};
+    $scope.endpoint = Config.datasets;
 
     var _uuid = function() {
       function _p8(s) {
