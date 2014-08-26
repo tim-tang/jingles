@@ -80,15 +80,12 @@
   <br/>
   <hr ng-show='vm.uuid'/>
 
-  <div ng-show="vm.state == 'stored' || vm.state == 'limbo'"
+  <div ng-if="vm.state == 'stored' || vm.state == 'limbo'"
        class="alert alert-danger">
-    Restore to hypervisor
+    Restore to hypervisor 
     <select ng-model="restore_target"
             ng-options="hv.alias for hv in hypervisors | hash2array | orderBy: 'name'">
-    </select>.
-    <p>
-      Please go to the <b>Versioning</b> tab and selec the snapshot to restore. We'd love to take you there automatically but angular refuse to cooperate so you will have to do it yourself. Pull requests welcome!
-    </p>
+    </select>
   </div>
   <div>
     <span ng-show='something_wrong'>

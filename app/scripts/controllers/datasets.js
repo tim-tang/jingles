@@ -115,7 +115,6 @@ angular.module('fifoApp')
 
     wiggle.datasets.query(function(datasets) {
 
-      $scope.datasets = {}
       datasets.forEach(processDataset)
 
       //Load the remote available datasets after the local ones are loaded

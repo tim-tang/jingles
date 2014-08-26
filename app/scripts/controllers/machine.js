@@ -281,6 +281,10 @@ angular.module('fifoApp')
                     $scope.vm.mdata_set({show_disabled_services: $scope.show_disabled_services
                 });
 
+                //Show the Versioning tab if the machine is not present but there is a backup for it
+                if ($scope.vm.state == 'stored' || $scope.vm.state == 'limbo')
+                    $('[href=#versioning]').click()
+
         })
             }, function error() {
                 $scope.something_wrong = true;
