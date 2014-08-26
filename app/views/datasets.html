@@ -40,7 +40,7 @@
                   </td>
                   <td class='light' width='1%'>{{data.type}}</td>
                   <td width='1%'>
-                    <i permission=['datasets','{{data.uuid}}','delete'] ng-show="data.status=='imported'" ng-click="delete(data)" jq-run="tooltip" class="glyphicon glyphicon-remove-sign clickable" title="Delete" bs-modal="'views/partials/modal-confirm.html'"></i>
+                    <i permission=['datasets','{{data.uuid}}','delete'] ng-show="data.status=='imported' || data.status=='failed'" ng-click="delete(data)" jq-run="tooltip" class="glyphicon glyphicon-remove-sign clickable" title="Delete" bs-modal="'views/partials/modal-confirm.html'"></i>
                   </td>
                 </tr>
               </tbody>
