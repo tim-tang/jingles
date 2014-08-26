@@ -1,4 +1,3 @@
-
 <div ng-show='vm.uuid' style='display: table;' class='col-md-12 col-lg-12 col-sm-12 col-xs-12'>
   <span class="pull-left">
     <h3 style='display: inline-block; margin-top: 0px;'>{{vm._name}}</h3>
@@ -87,6 +86,9 @@
     <select ng-model="restore_target"
             ng-options="hv.alias for hv in hypervisors | hash2array | orderBy: 'name'">
     </select>.
+    <p>
+      Please go to the <b>Versioning</b> tab and selec the snapshot to restore. We'd love to take you there automatically but angular refuse to cooperate so you will have to do it yourself. Pull requests welcome!
+    </p>
   </div>
   <div>
     <span ng-show='something_wrong'>
