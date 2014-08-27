@@ -3,10 +3,14 @@
 angular.module('fifoApp')
   .controller('AboutCtrl', function ($scope, wiggle, $http) {
 
-    var opts = {transformRequest: function(a,b){
+    function delete_token(a,b){
       delete b()["x-snarl-token"];
-    },
-                cache: fase};
+    };
+
+    var opts = {
+      transformRequest: delete_token,
+      cache: false
+    };
 
     var base = "http://release.project-fifo.net/pkg";
     var branch = "rel";
