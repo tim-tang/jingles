@@ -3,30 +3,31 @@
 angular.module('fifoApp')
   .controller('AboutCtrl', function ($scope, wiggle, $http) {
 
-    var opts = {transformRequest:function(a,b){
-        delete b()["x-snarl-token"];
-    }};
+    var opts = {transformRequest: function(a,b){
+      delete b()["x-snarl-token"];
+    },
+                cache: fase};
 
     var base = "http://release.project-fifo.net/pkg";
     var branch = "rel";
     $scope.latest = {};
 
     wiggle.cloud.get(function res (data) {
-        $scope.versions = data.versions
-        $scope.adjustMessage = Config.adjustMessage
-        $http.get('jingles.version').then(function(res){
-            $scope.versions.jingles = res.data.trim();
-            var this_branch = $scope.versions.jingles.substr(0,3);
-            if (this_branch == "dev" || this_branch == "tes") {
-                branch = "dev";
-            };
-            ['sniffle', 'snarl', 'howl', 'wiggle', 'jingles'].forEach(function(E) {
-                $http.get(base + '/' + branch + '/' + E + '.version', opts).
-                    success(function(res){
-                        $scope.latest[E] = res.trim();
-                    });
+      $scope.versions = data.versions
+      $scope.adjustMessage = Config.adjustMessage
+      $http.get('jingles.version').then(function(res){
+        $scope.versions.jingles = res.data.trim();
+        var this_branch = $scope.versions.jingles.substr(0,3);
+        if (this_branch == "dev" || this_branch == "tes") {
+          branch = "dev";
+        };
+        ['sniffle', 'snarl', 'howl', 'wiggle', 'jingles'].forEach(function(E) {
+          $http.get(base + '/' + branch + '/' + E + '.version', opts).
+            success(function(res){
+              $scope.latest[E] = res.trim();
             });
-        })
+        });
+      })
     })
 
     /* Twitter button */
