@@ -22,7 +22,7 @@ angular.module('fifoApp')
           branch = "dev";
         };
         ['sniffle', 'snarl', 'howl', 'wiggle', 'jingles'].forEach(function(E) {
-          $http.get(base + '/' + branch + '/' + E + '.version', opts).
+          $http.get(base + '/' + branch + '/' + E + '.version?t=' + Date.now(), opts).
             success(function(res){
               $scope.latest[E] = res.trim();
             });
