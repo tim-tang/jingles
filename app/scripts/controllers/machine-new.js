@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle, $location, status, auth, $q) {
-    $scope.working = false;
+    $scope.working = 'good';
     function check_creation() {
         $scope.working = 'pending';
         var Package = $scope.selectedPackage;
@@ -12,15 +12,14 @@ angular.module('fifoApp').controller('MachineNewCtrl', function ($scope, wiggle,
         console.log("network:", Networks);
         if(! Package || ! Dataset || Networks.lenght == 0) {
             console.log("early failure");
-            $scope.working = 'bad';
+            $scope.working = 'data-missing';
             return;
         }
         if ($scope.selectedNetworks.length != $scope.selectedDataset.networks.length) {
-            $scope.working = false;
             status.error('Your network selection is invalid. ' +
                          'You have either too many or too few networks selected.');
             console.log("failure");
-            $scope.working = 'bad';
+            $scope.working = 'data-missing';
             return;
         };
         var rules = $scope.rules.slice(0);
