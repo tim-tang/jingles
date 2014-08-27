@@ -11,6 +11,7 @@
 
 	      <!-- <span ng-show="working == 'good'" class="label label-success" title='Good to go' jq-run='tooltip'>Ok</span> -->
 	      <span ng-show="working == 'bad'" class="label label-warning" title='Creation could fail' jq-run='tooltip'>Could fail</span>
+	      <span ng-show="working == 'data-missing'" class="label label-warning" title='Some data is missing' jq-run='tooltip'>Data missing</span>
 	      <span ng-show="working == 'pending'" class="label label-default" title='Searching for problems' jq-run='tooltip'>Testing</span>
 
 		  <button class='btn btn-success' ng-disabled='!(alias && selectedDataset && selectedPackage && rules !== false)' ng-click='create_machine()' translate>Create</button>
