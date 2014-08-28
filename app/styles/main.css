@@ -7214,7 +7214,7 @@ td.visible-print {
   background-color: #eee;
   border: 1px solid #eee;
   border-radius: 2px;
-  box-shadow: inset 4px 6px 15px rgba(255, 255, 255, 0.2), 4px 4px 24px rgba(50, 50, 50, 0.2);
+  /* box-shadow: inset 4px 6px 15px rgba(255, 255, 255, 0.2), 4px 4px 24px rgba(50, 50, 50, 0.2); */
 }
 
 .link-boxes a i {
@@ -8284,7 +8284,7 @@ img.oslogo {
 }
 
 .navbar {
-  box-shadow: 0 4px 27px 0px gray;
+  /* box-shadow: 0 4px 27px 0px gray; */
 }
 
 body {
