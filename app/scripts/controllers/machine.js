@@ -3,6 +3,7 @@
 angular.module('fifoApp')
     .controller('MachineCtrl', function($scope, $routeParams, $location, wiggle, vmService, status, breadcrumbs, datasetsat) {
 
+        $scope.grafana = Config.grafana;
         $scope.force = false;
         var uuid = $routeParams.uuid;
         var inc_version = function inc_version(v) {
@@ -279,6 +280,10 @@ angular.module('fifoApp')
                 $scope.$watch('show_disabled_services', function(val) {
                     $scope.vm.mdata_set({show_disabled_services: $scope.show_disabled_services
                 });
+
+                //Show the Versioning tab if the machine is not present but there is a backup for it
+                if ($scope.vm.state == 'stored' || $scope.vm.state == 'limbo')
+                    $('[href=#versioning]').click()
 
         })
             }, function error() {

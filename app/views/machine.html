@@ -1,4 +1,3 @@
-
 <div ng-show='vm.uuid' style='display: table;' class='col-md-12 col-lg-12 col-sm-12 col-xs-12'>
   <span class="pull-left">
     <h3 style='display: inline-block; margin-top: 0px;'>{{vm._name}}</h3>
@@ -82,11 +81,11 @@
   <hr ng-show='vm.uuid'/>
 
   <div ng-show="vm.state == 'stored' || vm.state == 'limbo'"
-     class="alert alert-danger">
-    Restore to hypervisor
+       class="alert alert-danger">
+    Restore to hypervisor 
     <select ng-model="restore_target"
             ng-options="hv.alias for hv in hypervisors | hash2array | orderBy: 'name'">
-    </select>.
+    </select>
   </div>
   <div>
     <span ng-show='something_wrong'>
@@ -256,6 +255,9 @@
         </div>
 
         <div class="tab-pane" id="performance">
+          <span ng_show="grafana">
+            <a target="_new" href="{{grafana}}/vm?VM={{vm.uuid.substr(0,30)}}">grafana</a></br>
+          </span>
           <div class="perfbox pull-left" ng-show="vm.config.type != 'kvm'">
             <div class="header">
               <span class="badge badge-info" translate>Disk IOPS</span>
@@ -290,10 +292,10 @@
 
         <div class="tab-pane" id="services">
           <services
-            ng-model='vm.services'
-            show-disabled='show_disabled_services'
-            action='service_action(action, service)'
-            channel='vm.uuid'>
+             ng-model='vm.services'
+             show-disabled='show_disabled_services'
+             action='service_action(action, service)'
+             channel='vm.uuid'>
           </services>
         </div>
 
@@ -520,5 +522,4 @@
       </div>
     </div>
   </div>
-
 </div>

@@ -33,11 +33,12 @@ var howl = {
     _token: false,
     _join_channels_on_connect: [],
     decode: function(e) {
-        var r = msgpack.unpack(new Uint8Array(e));
+        //var r = msgpack.unpack(new Uint8Array(e));
+        var r = JSON.parse(e);
         return r;
     },
     encode: function(d) {
-        return (new Uint8Array(msgpack.pack(d))).buffer;
+        return JSON.stringify(d);
     },
     _wsOpen: function(e) {
 
@@ -89,8 +90,8 @@ var howl = {
         if (token)
             howl._token = token
 
-        howl.ws = new WebSocket(Config.wsUrl + "/howl", 'msgpack')
-        howl.ws.binaryType = "arraybuffer";
+        howl.ws = new WebSocket(Config.wsUrl + "/howl", 'json')
+        //howl.ws.binaryType = "arraybuffer";
         howl.ws.onopen = howl._wsOpen
         howl.ws.onclose = howl._wsClose
         howl.ws.onmessage = howl._wsMessage

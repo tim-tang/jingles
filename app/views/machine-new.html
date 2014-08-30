@@ -11,6 +11,7 @@
 
 	      <!-- <span ng-show="working == 'good'" class="label label-success" title='Good to go' jq-run='tooltip'>Ok</span> -->
 	      <span ng-show="working == 'bad'" class="label label-warning" title='Creation could fail' jq-run='tooltip'>Could fail</span>
+	      <span ng-show="working == 'data-missing'" class="label label-warning" title='Some data is missing' jq-run='tooltip'>Data missing</span>
 	      <span ng-show="working == 'pending'" class="label label-default" title='Searching for problems' jq-run='tooltip'>Testing</span>
 
 		  <button class='btn btn-success' ng-disabled='!(alias && selectedDataset && selectedPackage && rules !== false)' ng-click='create_machine()' translate>Create</button>
@@ -33,7 +34,7 @@
             ng-repeat="d in datasets | filter:{imported: 1} | orderBy: ['-os', 'name', '-version']"
             ng-click='click_dataset(d)'
             ng-show='showAllVersions || latestDatasets[d.name] == d.version'
-            ng-class="selectedDataset.dataset==d.dataset && 'success'">
+            ng-class="selectedDataset.uuid==d.uuid && 'success'">
           <td><img jq-run='tooltip' ng-src="images/logos/{{d.os || 'unknown'}}.png" class='oslogo' /></td>
           <td class="nowrap {{latestDatasets[d.name] == d.version && 'strong' || ''}}" title='{{d.description}}' jq-run='tooltip' jq-options="{container: 'body'}">{{d.name}}</td>
           <td>{{d.version}}</td>

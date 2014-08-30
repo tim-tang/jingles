@@ -15,9 +15,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr 
-            ng-repeat="net in networks | filter:searchQuery | orderBy: 'name'"
-            ng-mouseover="$parent.highlight=net.ipranges">
+          <tr
+             ng-repeat="net in networks | filter:searchQuery | orderBy: 'name'"
+             ng-mouseover="$parent.highlight=net.ipranges">
             <td>
               <strong><a href="#/configuration/networks/{{net.uuid}}">{{net.name}}</a></strong>
               <i class="glyphicon glyphicon-exclamation-sign" ng-if='!net.ipranges || !net.ipranges.length' title='No IP Range assigned' jq-run='tooltip'></i>
@@ -42,25 +42,22 @@
     </a>
   </div>
   <div class="row-fluid">
-      <table class="table table-condensed table-hover" ng-show='list.length' ng-table='tableParams'>
-          <tr
-            ng-repeat="net in list"
-            ng-class="{'warning': highlight.indexOf(net.uuid) > -1}">
-            <td data-title="'Range'|translate" sortable="'name'"><strong class='nowrap'>{{net.name}}</strong></td>
-            <td data-title="'Tag'|translate" sortable="'tag'">{{net.tag}}</td>
-            <td data-title="'Network'|translate" sortable="'network'">{{net.network}}</td>
-            <td data-title="'Netmask'|translate" sortable="'netmask'">{{net.netmask}}</td>
-            <td data-title="'Gateway'|translate" sortable="'gateway'">{{net.gateway}}</td>
-            <td data-title="'First'|translate" sortable="'first'">{{net.first}}</td>
-            <td data-title="'Last'|translate" sortable="'last'">{{net.last}}</td>
-            <td data-title="'Next'|translate" sortable="'current'" ng-show='net.full' class='text-danger'>full</td>
-            <td data-title="'Next'|translate" sortable="'current'" ng-hide='net.full'>{{net.current}}</td>
-            <td data-title="'VLan'|translate" sortable="'vlan'">{{net.vlan}}</td>
-            <td data-title="'Returned'|translate">{{net.free.length}}</td>
-            <td>
-              <i ng-click="delete_iprange(net)" jq-run='tooltip' title="Delete" class="glyphicon glyphicon-remove clickable" bs-modal="'views/partials/modal-confirm.html'"></i>
-            </td>
-          <tr>
-      </table>
+    <table class="table table-condensed table-hover" ng-show='list.length' ng-table='tableParams'>
+      <tr
+         ng-repeat="net in list"
+         ng-class="{'warning': highlight.indexOf(net.uuid) > -1}">
+        <td data-title="'Range'|translate" sortable="'name'"><strong class='nowrap'>{{net.name}}</strong></td>
+        <td data-title="'Tag'|translate" sortable="'tag'">{{net.tag}}</td>
+        <td data-title="'Network'|translate" sortable="'network'">{{net.network}}</td>
+        <td data-title="'Netmask'|translate" sortable="'netmask'">{{net.netmask}}</td>
+        <td data-title="'Gateway'|translate" sortable="'gateway'">{{net.gateway}}</td>
+        <td data-title="'Free'|translate" sortable="'free.length'" ng-class="{'text-danger': (net.free.length == 0)}"}>{{net.free.length}}</td>
+        <td data-title="'Used'|translate" sortable="'used.length'">{{net.used.length}}</td>
+        <td data-title="'VLan'|translate" sortable="'vlan'">{{net.vlan}}</td>
+        <td>
+          <i ng-click="delete_iprange(net)" jq-run='tooltip' title="Delete" class="glyphicon glyphicon-remove clickable" bs-modal="'views/partials/modal-confirm.html'"></i>
+        </td>
+      <tr>
+    </table>
   </div>
 </div>

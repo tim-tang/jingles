@@ -49,16 +49,21 @@ angular.module('fifoApp')
   	})
 
     //Language
-    $scope.lang = gettextCatalog.currentLanguage;
-    $scope.setLang = function(lang) {
-      $scope.lang = gettextCatalog.currentLanguage = lang;
+    var curLocale = gettextCatalog.currentLanguage;
+    $scope.lang = { name: langMap[curLocale.toLowerCase()], locale: curLocale };
+    $scope.setLang = function(locale) {
+      gettextCatalog.currentLanguage = locale;
+      $scope.lang = { name: langMap[locale.toLowerCase()], locale: locale };
     }
     var langs = Object.keys(gettextCatalog.strings);
 
     //Put the default lang, the others are automatically added
     if (langs.indexOf('en')<1) langs.push('en');
 
-    $scope.languages = langs.sort();
+    $scope.languages = [];
+    langs.sort().forEach(function(locale) {
+      $scope.languages.push({ name: langMap[locale.toLowerCase()] || locale, locale: locale });
+    });
 
     //Backend selector
     $scope.changeBackend = function(back, idx) {
