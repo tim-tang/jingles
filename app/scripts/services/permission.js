@@ -143,7 +143,7 @@ function mk_permission_fn(wiggle, $scope) {
                         "_": {id: "_", name: "All Datasets"},
                     };
                     datasets.forEach(function(ds){
-                        $scope.p2[ds.dataset] = {id: ds.dataset, name: ds.name + ' ' + ds.version};
+                        $scope.p2[ds.uuid] = {id: ds.uuid, name: ds.name + ' ' + ds.version};
                     })
                 });
                 break;

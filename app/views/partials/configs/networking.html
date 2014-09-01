@@ -51,7 +51,7 @@
         <td data-title="'Network'|translate" sortable="'network'">{{net.network}}</td>
         <td data-title="'Netmask'|translate" sortable="'netmask'">{{net.netmask}}</td>
         <td data-title="'Gateway'|translate" sortable="'gateway'">{{net.gateway}}</td>
-        <td data-title="'Free'|translate" sortable="'free.length'" ng-class="{'text-danger': (net.free.length == 0)}"}>{{net.free.length}}</td>
+        <td data-title="'Free'|translate" sortable="'free.length'" ng-class="{'text-danger': (net.free.length == 0)}"}><span title='{{net.free[0]}} &#8594; {{net.free[net.free.length-1]}}' jq-run='tooltip'>{{net.free.length}}</span></td>
         <td data-title="'Used'|translate" sortable="'used.length'">{{net.used.length}}</td>
         <td data-title="'VLan'|translate" sortable="'vlan'">{{net.vlan}}</td>
         <td>
