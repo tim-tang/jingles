@@ -795,6 +795,8 @@ angular.module('fifoApp')
                 {},
                 payload,
                 function(r) {
+                    //This howl.join is joining the vm uuid, i think the idea was to join the new-created-dataset uuid.
+                    //Will leave it for now.
                     howl.join(uuid);
                     status.info('Creating ' + r.name + ' ' + r.version);
                     updateVm();
