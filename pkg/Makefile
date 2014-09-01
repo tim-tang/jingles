@@ -1,4 +1,4 @@
-VERSION=0.6.1
+VERSION=0.6.0p1
 COMPONENT=fifo-jingles
 
 .PHONY: build_info package package_list
