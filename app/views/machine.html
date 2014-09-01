@@ -4,7 +4,7 @@
     <span style='margin: 0px 5px 5px 5px; vertical-align: top;'
           title='{{vm.state_description}}'
           jq-run='tooltip'
-          jq-options="{placement: 'bottom'}"
+          jq-options="{placement: 'bottom', container: 'body'}"
           class='label label-{{vm._state_label}}'>{{vm.state}}</span>
     <span class='light'>{{vm.mdata('description')}}</span>
   </span>
@@ -15,7 +15,7 @@
                 ng-disabled="vm.mdata('locked') ||
                              !(vm.state!='running'&&vm.state!='booting'&&vm.state!='shutting_down')"
                 class="btn btn-default" bs-modal="'views/partials/modal-confirm.html'"
-                title='Delete' jq-run='tooltip' jq-options="{placement: 'bottom'}"
+                title='Delete' jq-run='tooltip' jq-options="{placement: 'bottom', container: 'body'}"
                 permission=['vms','{{vm.uuid}}','delete']>
           <i class="glyphicon glyphicon-trash"></i>
         </button>
@@ -24,7 +24,7 @@
            ng-click="confirm_freeze(vm)"
            ng-disabled="prevent_freeze()"
            class="btn btn-default" bs-modal="'views/partials/modal-confirm.html'"
-           title="Freeze" jq-run="tooltip" jq-options="{placement: 'bottom'}"
+           title="Freeze" jq-run="tooltip" jq-options="{placement: 'bottom', container: 'body'}"
            permission=['vms','{{vm.uuid}}','delete']>
           <i class="glyphicon glyphicon-cloud-upload"></i>
         </button>
@@ -32,7 +32,7 @@
                 ng-enabled="vm.state=='running' && vm.config"
                 title="Console"
                 jq-run="tooltip"
-                jq-options="{placement: 'bottom'}"
+                jq-options="{placement: 'bottom', container: 'body'}"
                 class="btn btn-default"
                 permission="['vms','{{vm.uuid}}','console']">
           <i class='glyphicon glyphicon-sound-dolby'></i>
@@ -48,7 +48,7 @@
                 ng-disabled="vm.state.indexOf('stopped')<0 || vm.mdata('locked')"
                 title='Start'
                 jq-run='tooltip'
-                jq-options="{placement: 'bottom'}"
+                jq-options="{placement: 'bottom', container: 'body'}"
                 class="btn btn-default"
                 permission=['vms','{{vm.uuid}}','state']>
           <i class='glyphicon glyphicon-play'></i>
@@ -57,7 +57,7 @@
                 ng-disabled="vm.state!='running' || vm.mdata('locked')"
                 title='Reboot'
                 jq-run='tooltip'
-                jq-options="{placement: 'bottom'}"
+                jq-options="{placement: 'bottom', container: 'body'}"
                 class="btn btn-default"
                 permission=['vms','{{vm.uuid}}','state']>
           <i class='glyphicon glyphicon-refresh'></i>
