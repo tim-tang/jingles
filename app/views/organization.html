@@ -88,7 +88,9 @@
     <div ng-repeat="(uuid, res) in org.resources">
       <h4>{{uuid}}</h4>
       <table>
-        <tr ng-repeat="r in res | orderBy: 'time'"><td>{{r.time}}</td><td>{{r.action}}</td><tr>
+        <tr ng-repeat="r in res | orderBy: 'time'">
+          <td title="{{log.date/1000 | date:'medium'}}" jq-run="tooltip" am-time-ago="time/1000"></td>
+          <td>{{r.action}}</td><tr>
       </table>
       <hr/>
     </div>
