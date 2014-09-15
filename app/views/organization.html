@@ -89,7 +89,7 @@
       <h4>{{uuid}}</h4>
       <table>
         <tr ng-repeat="r in res | orderBy: 'time'">
-          <td title="{{log.date/1000 | date:'medium'}}" jq-run="tooltip">{{log.date/1000 | date:'medium'}}</td>
+          <td>{{time/1000 | date:'medium'}}</td>
           <td>{{r.action}}</td><tr>
       </table>
       <hr/>
