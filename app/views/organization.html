@@ -85,8 +85,12 @@
     </table>
   </div>
   <div class="box">
-    <table ng-repeat="res in org.resources | hash2array">
-      {{res}}
-    </table>
+    <div ng-repeat="(uuid, res) in org.resources">
+      <h4>{{uuid}}</h4>
+      <table>
+        <tr ng-repeat="r in res | orderBy: 'time'"><td>{{r.time}}</td><td>{{r.action}}</td><tr>
+      </table>
+      <hr/>
+    </div>
   </div>
 </div>
