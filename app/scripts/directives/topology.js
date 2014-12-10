@@ -181,7 +181,7 @@ angular.module('fifoApp')
                         })
 
                     node.append("circle")
-                        .attr("r", 4.5)
+                        .attr("r", function(d) { return d.isServer ? 6.5 : 4.5 })
                         .attr("class", function (d) {
                             return d.isServer ? "server" : "link"
                         })
@@ -208,7 +208,7 @@ angular.module('fifoApp')
 
                     $scope.centerNode(node)
 
-                    if (node.nodeRef.isServer) {
+                    if (node.nodeRef && node.nodeRef.isServer) {
                         $scope.$apply(function () {
                             $scope.selected = node.nodeRef
                         })
@@ -232,13 +232,23 @@ angular.module('fifoApp')
                     x = -source.x * scale + $scope.viewerHeight / 2
                     y = -source.y * scale + $scope.viewerWidth / 2
 
+                    $scope.moveCanvas({duration: 750, scale: 1.1, position: [y,x]})
+
+                },
+
+                $scope.moveCanvas = function(opts) {
+
+                    var scale = opts.scale || 1,
+                        position = opts.position || [100, 100],
+                        duration = opts.duration || 0
+
+
                     d3.select("g").transition()
-                        .duration(750)
-                        .attr("transform", "translate(" + y + "," + x + ")scale(" + scale + ")")
+                        .duration(duration)
+                        .attr("transform", "translate(" + position[0] + "," + position[1] + ")scale(" + scale + ")")
+
                     $scope.zoomListener.scale(scale)
-                    $scope.zoomListener.translate([y, x])
-
-
+                    $scope.zoomListener.translate(position)
                 }
 
             },
@@ -249,14 +259,12 @@ angular.module('fifoApp')
             },
 
 
-
             link: function postLink(scope, element, attrs) {
 
                 scope.viewerWidth = 500
                 scope.viewerHeight = 500
 
                 var margin = 100
-
 
                 // Because the layout is horizontal X and Y axis are switched
                 scope.cluster = d3.layout.cluster()
@@ -269,7 +277,7 @@ angular.module('fifoApp')
                     return [d.y, d.x]
                 })
 
-                scope.zoomListener = d3.behavior.zoom().scaleExtent([.5, 5]).on("zoom", function () {
+                scope.zoomListener = d3.behavior.zoom().scaleExtent([.5, 2]).on("zoom", function () {
 
                     var t = [],
                         s = d3.event.scale,
@@ -279,13 +287,8 @@ angular.module('fifoApp')
                     //Dont allow the graph to pan more than 85% off the display area
                     t[0] = Math.min(scope.viewerWidth * .85 * s, Math.max(scope.viewerWidth * -.85 * s, ty))
                     t[1] = Math.min(scope.viewerHeight * .85 * s, Math.max(scope.viewerHeight * -.85 * s, tx))
-                    scope.zoomListener.translate(t)
-                    scope.svg.attr("transform", "translate(" + t + ")" +
-                        " scale(" + d3.event.scale + ")")
-                    scope.zoomListener.scale(d3.event.scale)
 
-
-
+                    scope.moveCanvas({scale: d3.event.scale, position: t})
                 })
 
                 //Set image props
