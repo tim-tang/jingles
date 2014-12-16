@@ -22,7 +22,6 @@
     "danialfarid-angular-file-upload": "~1.2.8"
   },
   "resolutions": {
-    "jquery": "~2.0.3",
-    "angular": "~1.2.4"
+    "jquery": "~2.0.3"
   }
 }
